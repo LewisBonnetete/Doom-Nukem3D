@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom-nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/06 15:09:09 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/02/11 16:29:14 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,65 @@
 # define EAST				0
 
 typedef struct s_input	t_input;
-typedef struct s_mthrds	t_mthrds;
-typedef struct s_thrd	t_thrd;
 typedef	struct s_var	t_var;
 typedef	struct s_text	t_text;
+typedef	struct s_point	t_point;
+typedef	struct s_wall	t_wall;
+typedef	struct s_wall	t_portal;
+typedef	struct s_sector	t_sector;
+typedef	struct s_enemy	t_enemy;
+typedef	struct s_prop	t_prop;
+
+struct					s_point
+{
+	int				x;
+	int				y;
+	int				z;
+};
+
+struct 					s_wall
+{
+	t_point				a;
+	t_point				b;
+	t_point				c;
+	t_point				d;
+	t_text				text;
+	int					wall_id;
+};
+
+struct 					s_portal
+{
+	t_point				a;
+	t_point				b;
+	t_point				c;
+	t_point				d;
+	t_text				text;
+	int					textured;
+	t_text				fill;
+	int					sector_id;
+	int					sector_next;
+};
+
+struct 					s_sector
+{
+	t_wall				*walls;
+	t_portal			*portals;
+	t_wall				floor;
+	t_wall				celling;
+	int					light;
+	int					sector_id;
+};
+
+struct 					s_map
+{
+	t_sector			*sectors;
+	int					length;
+	int					width;
+	int					height;
+};
+
+
+
 
 struct					s_text
 {
@@ -56,39 +111,6 @@ struct					s_text
 	int					texwidth;
 	int					texheight;
 	Uint32				color;
-};
-
-struct					s_thrd
-{
-	int					id;
-	double				raydirx;
-	double				raydiry;
-	int					mapx;
-	int					mapy;
-	double				sidedistx;
-	double				sidedisty;
-	double				deltadistx;
-	double				deltadisty;
-	double				perpwalldist;
-	int					lineheight;
-	int					stepx;
-	int					stepy;
-	int					hit;
-	int					side;
-	int					x;
-	int					x1;
-	int					x2;
-	int					y1;
-	int					y2;
-	double				camerax;
-	t_var				*info;
-	t_text				text;
-};
-
-struct					s_mthrds
-{
-	pthread_t			threads[NB_THREADS_MAX];
-	t_thrd				thrd[NB_THREADS_MAX];
 };
 
 struct					s_var
@@ -127,17 +149,17 @@ struct					s_var
 	int					sprint;
 	int					x_dec;
 	int					y_dec;
-	t_mthrds			mthrds;
 };
 
 struct					s_input
 {
 	int					up;
 	int					down;
+	int 				shoot;
 	int					straf_left;
 	int					straf_right;
-	int					left;
-	int					right;
+	int					rot_left;
+	int					rot_right;
 	double				straffer_x;
 	double				straffer_y;
 	double				diag_x;
@@ -146,7 +168,7 @@ struct					s_input
 };
 
 //sdl func
-int		init_win1(t_var *info);
-int		init_win2(t_var *info);
+int						init_win1(t_var *info);
+int						init_win2(t_var *info);
 
 #endif
