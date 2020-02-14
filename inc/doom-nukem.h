@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/14 16:41:28 by lewis            ###   ########.fr       */
+/*   Updated: 2020/02/14 16:56:07 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,6 @@ int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 
 //init func
-void					init_map(t_map *map);
+void					init_box(t_map *map);
 
 #endif
