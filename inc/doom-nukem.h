@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/14 16:27:37 by lewis            ###   ########.fr       */
+/*   Updated: 2020/02/14 16:41:28 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # define WINDOW_W			1280
 # define WINDOW_H			720
 # define NB_THREADS_MAX		12
+# define RMASK				0
+# define GMASK				0
+# define BMASK				0
+# define AMASK				0
 
 typedef struct s_input	t_input;
 typedef	struct s_var	t_var;
