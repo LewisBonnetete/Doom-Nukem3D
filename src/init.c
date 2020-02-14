@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/14 16:27:18 by lewis            ###   ########.fr       */
+/*   Updated: 2020/02/14 16:47:18 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,27 @@
 
 void	init_map(t_map *map)
 {
+	int i;
+
+	i = -1;
 	map->box->nbr_walls = 4;
+	while(++i < 4)
+		map->box.walls[i].is_portal = 0;
+	i = -1;
+	while(++i < 4)
+		map->box.walls[i].is_textured = 1;
+	i = -1;
+	while(++i < 4)
+		map->box.walls[i].is_transparent = 0;
+	i = -1;
+	while(++i < 4)
+		map->box.walls[i].text_id = 0;
+	i = -1;
+	while(++i < 4)
+		map->box.walls[i].sector_id = 0;
+	i = -1;
+	while(++i < 4)
+		map->box.walls[i].wall_id = i;
 	//premier mur a:
 	map->box.walls[0].a.x = 0;
 	map->box.walls[0].a.y = 0;
