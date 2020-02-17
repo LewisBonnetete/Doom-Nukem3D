@@ -34,19 +34,29 @@ void			ft_clock(t_var *info)
 	info->frametime = (info->time - info->oldtime) / 1000.0;
 }
 
-int				main(int ac, char **av)
+int                main(int ac, char **av)
 {
-	t_var info;
+    t_var info;
 
-	(void)ac;
-	(void)av;
-	if (!(init_win1(&info)))
-		return (0);
-	if (!(init_win2(&info)))
-		return (0);
-	ft_init_pour_linstant(&info);
-	
-	SDL_DestroyWindow(info.window);
-	SDL_Quit();
-	return (0);
+    (void)ac;
+    (void)av;
+    if (!(init_win1(&info)))
+        return (0);
+    if (!(init_win2(&info)))
+        return (0);
+    ft_init_pour_linstant(&info);
+    start_doom(&info);
+    SDL_DestroyWindow(info.window);
+    SDL_Quit();
+    return (0);
+}
+
+int            start_doom(t_var *info)
+{
+    if (1)
+        editeur(info);
+    if (2)
+        play(info, str);
+    if (3);
+        leave(info);
 }
