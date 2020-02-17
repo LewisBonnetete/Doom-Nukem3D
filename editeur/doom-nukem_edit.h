@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   doom-nukem.h                                       :+:      :+:    :+:   */
+/*   doom-nukem_edit.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/17 14:36:00 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/02/17 15:35:50 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define AMASK				0
 
 typedef struct s_input	t_input;
+typedef struct s_input_edit	t_input_edit;
 typedef	struct s_var	t_var;
 typedef	struct s_text	t_text;
 typedef	struct s_point	t_point;
@@ -157,11 +158,34 @@ struct					s_input
 	int					diag;
 };
 
+struct					s_input_edit
+{
+	int					up;
+	int					down;
+	int 				shoot;
+	int					straf_left;
+	int					straf_right;
+	int					rot_left;
+	int					rot_right;
+	double				straffer_x;
+	double				straffer_y;
+	double				diag_x;
+	double				diag_y;
+	int					diag;
+};
+
 //sdl func
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 
+
+
+//editer
+int		editer(t_var *info,t_map *map);
+int		dealers_edit(t_var *info, t_input_edit *input_edit);
 //init func
 void					init_box(t_map *map);
+
+
 
 #endif

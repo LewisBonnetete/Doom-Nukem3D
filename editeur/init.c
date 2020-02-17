@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/14 16:56:01 by lewis            ###   ########.fr       */
+/*   Updated: 2020/02/17 14:45:01 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/doom-nukem.h"
+#include "doom-nukem_edit.h"
 
 
 void	init_box(t_map *map)
@@ -18,7 +18,7 @@ void	init_box(t_map *map)
 	int i;
 
 	i = -1;
-	map->box->nbr_walls = 4;
+	map->box.nbr_walls = 4;
 	while(++i < 4)
 		map->box.walls[i].is_portal = 0;
 	i = -1;
@@ -54,33 +54,33 @@ void	init_box(t_map *map)
 	map->box.walls[0].a.z = map->box.size;
 
 	//troisieme mur a:
-	map->box->walls[2].b.x = 0;
-	map->box->walls[2].b.y = map->box.size;
-	map->box->walls[2].b.z = 0;
+	map->box.walls[2].b.x = 0;
+	map->box.walls[2].b.y = map->box.size;
+	map->box.walls[2].b.z = 0;
 	//troisieme mur b:
-	map->box->walls[2].a.x = map->box.size;
-	map->box->walls[2].a.y = map->box.size;
-	map->box->walls[2].a.z = 0;
+	map->box.walls[2].a.x = map->box.size;
+	map->box.walls[2].a.y = map->box.size;
+	map->box.walls[2].a.z = 0;
 	//troisieme mur c:
-	map->box->walls[2].d.x = map->box.size;
-	map->box->walls[2].d.y = map->box.size;
-	map->box->walls[2].d.z = map->box.size;
+	map->box.walls[2].d.x = map->box.size;
+	map->box.walls[2].d.y = map->box.size;
+	map->box.walls[2].d.z = map->box.size;
 	//troisieme mur d:
-	map->box->walls[2].c.x = 0;
-	map->box->walls[2].c.y = map->box.size;
-	map->box->walls[2].c.z = map->box.size;
+	map->box.walls[2].c.x = 0;
+	map->box.walls[2].c.y = map->box.size;
+	map->box.walls[2].c.z = map->box.size;
 
 	//deuxieme mur
-	map->box->walls[1].a = map->box->wall[0].b;
-	map->box->walls[1].b = map->box->wall[2].a;
-	map->box->walls[1].c = map->box->wall[2].d;
-	map->box->walls[1].d = map->box->wall[0].c;
+	map->box.walls[1].a = map->box.walls[0].b;
+	map->box.walls[1].b = map->box.walls[2].a;
+	map->box.walls[1].c = map->box.walls[2].d;
+	map->box.walls[1].d = map->box.walls[0].c;
 
 	//quatrieme mur:
-	map->box->walls[3].a = map->box->wall[2].b;
-	map->box->walls[3].b = map->box->wall[0].a;
-	map->box->walls[3].c = map->box->wall[2].c;
-	map->box->wall[3].d = map->box->wall[0].d;
+	map->box.walls[3].a = map->box.walls[2].b;
+	map->box.walls[3].b = map->box.walls[0].a;
+	map->box.walls[3].c = map->box.walls[2].c;
+	map->box.walls[3].d = map->box.walls[0].d;
 
 	//floor:
 	map->box.floor.a = map->box.walls[0].d;
