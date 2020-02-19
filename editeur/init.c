@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/19 14:35:44 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:05:49 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,19 @@ void	init_box(t_map *map)
 	map->box.walls[0].b.y = 0;
 	map->box.walls[0].b.z = 0;
 	//premier mur c:
-	map->box.walls[0].a.x = map->box.size;
-	map->box.walls[0].a.y = 0;
-	map->box.walls[0].a.z = map->box.size;
+	map->box.walls[0].c.x = map->box.size;
+	map->box.walls[0].c.y = 0;
+	map->box.walls[0].c.z = map->box.size;
 	//premier mur d:
-	map->box.walls[0].a.x = 0;
-	map->box.walls[0].a.y = 0;
-	map->box.walls[0].a.z = map->box.size;
+	map->box.walls[0].d.x = 0;
+	map->box.walls[0].d.y = 0;
+	map->box.walls[0].d.z = map->box.size;
 
-	//troisieme mur a:
+	//troisieme mur b:
 	map->box.walls[2].b.x = 0;
 	map->box.walls[2].b.y = map->box.size;
 	map->box.walls[2].b.z = 0;
-	//troisieme mur b:
+	//troisieme mur a:
 	map->box.walls[2].a.x = map->box.size;
 	map->box.walls[2].a.y = map->box.size;
 	map->box.walls[2].a.z = 0;

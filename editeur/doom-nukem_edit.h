@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/19 14:36:51 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/02/19 15:44:03 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,18 +159,25 @@ struct					s_input
 
 struct					s_input_edit
 {
-	int					up;
-	int					down;
-	int 				shoot;
-	int					straf_left;
-	int					straf_right;
-	int					rot_left;
-	int					rot_right;
-	double				straffer_x;
-	double				straffer_y;
-	double				diag_x;
-	double				diag_y;
-	int					diag;
+	double				mouse_x;
+	double				mouse_y;
+	int					right_click;
+	int					left_click;
+	int 				del;
+	int					t_s;
+	int					t_p;
+	int					t_y;
+	int					t_n;
+	int					t_0;
+	int					t_1;
+	int					t_2;
+	int					t_3;
+	int					t_4;
+	int					t_5;
+	int					t_6;
+	int					t_7;
+	int					t_8;
+	int					t_9;
 };
 
 //sdl func
@@ -180,7 +187,7 @@ int						init_win2(t_var *info);
 
 
 //editer
-int		editer(t_var *info,t_map *map);
+int		editer(t_var *info);
 int		dealers_edit(t_var *info, t_input_edit *input_edit);
 //init func
 void					init_box(t_map *map);
