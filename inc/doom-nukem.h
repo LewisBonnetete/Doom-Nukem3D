@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/19 13:29:34 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/02/19 14:38:43 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ struct 					s_map
 	int					nbr_sectors;
 	int					size;
 	SDL_Surface			*text_tab[10];
+	t_point				spawn;
 };
 
 struct					s_text

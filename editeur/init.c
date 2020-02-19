@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/17 14:45:01 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/02/19 14:35:44 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void	init_box(t_map *map)
 	map->box.walls[2].a.y = map->box.size;
 	map->box.walls[2].a.z = 0;
 	//troisieme mur c:
-	map->box.walls[2].d.x = map->box.size;
-	map->box.walls[2].d.y = map->box.size;
-	map->box.walls[2].d.z = map->box.size;
-	//troisieme mur d:
 	map->box.walls[2].c.x = 0;
 	map->box.walls[2].c.y = map->box.size;
 	map->box.walls[2].c.z = map->box.size;
+	//troisieme mur d:
+	map->box.walls[2].d.x = map->box.size;
+	map->box.walls[2].d.y = map->box.size;
+	map->box.walls[2].d.z = map->box.size;
 
 	//deuxieme mur
 	map->box.walls[1].a = map->box.walls[0].b;
@@ -79,8 +79,8 @@ void	init_box(t_map *map)
 	//quatrieme mur:
 	map->box.walls[3].a = map->box.walls[2].b;
 	map->box.walls[3].b = map->box.walls[0].a;
-	map->box.walls[3].c = map->box.walls[2].c;
-	map->box.walls[3].d = map->box.walls[0].d;
+	map->box.walls[3].c = map->box.walls[0].d;
+	map->box.walls[3].d = map->box.walls[2].c;
 
 	//floor:
 	map->box.floor.a = map->box.walls[0].d;
