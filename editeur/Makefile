@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
+#    By: lewis <lewis@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/02/17 15:36:04 by lbonnete         ###   ########.fr        #
+#    Updated: 2020/02/20 15:28:52 by lewis            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,12 @@ SRC =	main.c\
 		init.c\
 		sdl_init.c\
 		editer.c\
-		dealers_edit.c
+		dealers_edit.c\
+		map_creator.c\
+		init_interact.c\
+		draw_map.c\
+		draw_interactions.c\
+		editer_tools.c
 
 INC = doom-nukem_edit.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))

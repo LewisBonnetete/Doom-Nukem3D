@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom-nukem_edit.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/19 15:44:03 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/02/20 15:30:58 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <SDL_image.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # define WINDOW_W			1280
 # define WINDOW_H			720
@@ -187,8 +188,14 @@ int						init_win2(t_var *info);
 
 
 //editer
-int		editer(t_var *info);
+int		editer(t_var *info, t_map *map);
 int		dealers_edit(t_var *info, t_input_edit *input_edit);
+void	dealers_init(t_input_edit *input_edit);
+void	dealers_tester(t_input_edit input_edit);
+int		open_package();
+int		get_map_size(t_input_edit *input_edit);
+void	draw_map(t_var *info, t_map *map);
+void	draw_interactions(t_var *info, t_map *map);
 //init func
 void					init_box(t_map *map);
 
