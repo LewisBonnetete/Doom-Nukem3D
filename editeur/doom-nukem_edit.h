@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/20 15:30:58 by lewis            ###   ########.fr       */
+/*   Updated: 2020/02/20 17:17:36 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define WINDOW_W			1280
 # define WINDOW_H			720
 # define NB_THREADS_MAX		12
+# define BLACK				0x000000
+# define WHITE				0xFFFFFF
 # define RMASK				0
 # define GMASK				0
 # define BMASK				0
@@ -39,6 +41,7 @@ typedef	struct s_box	t_box;
 typedef	struct s_map	t_map;
 typedef	struct s_enemy	t_enemy;
 typedef	struct s_prop	t_prop;
+typedef	struct s_line	t_line;
 
 struct					s_point
 {
@@ -181,6 +184,20 @@ struct					s_input_edit
 	int					t_9;
 };
 
+struct					s_line
+{
+	int			x1;
+	int			y1;
+	int			x2;
+	int			y2;
+	int			dx;
+	int			sx;
+	int			dy;
+	int			sy;
+	int			err;
+	int			e2;
+};
+
 //sdl func
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
@@ -194,11 +211,21 @@ void	dealers_init(t_input_edit *input_edit);
 void	dealers_tester(t_input_edit input_edit);
 int		open_package();
 int		get_map_size(t_input_edit *input_edit);
-void	draw_map(t_var *info, t_map *map);
-void	draw_interactions(t_var *info, t_map *map);
-//init func
-void					init_box(t_map *map);
 
+//init func
+void	init_box(t_map *map);
+void	init_map(t_map *map);
+
+void	init_artificial_map(t_map *map);
+
+//drawers
+void	draw_interactions_edit(t_var *info, t_map *map);
+void	draw_wall_edit(t_var *info, t_map *map, int sector_id, int wall_id);
+void	draw_sectors_edit(t_var *info, t_map *map);
+void	draw_grid(t_var *info, t_map *map);
+
+void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
+int		draw_line(t_var *info, t_line *line);
 
 
 #endif

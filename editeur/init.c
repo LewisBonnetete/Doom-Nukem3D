@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/19 15:05:49 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/02/20 17:24:09 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,124 @@ void	init_box(t_map *map)
 	map->box.celling.b = map->box.walls[1].a;
 	map->box.celling.c = map->box.walls[2].a;
 	map->box.celling.d = map->box.walls[3].a;
+}
+
+void	init_map(t_map *map)
+{
+	map->nbr_sectors = 0;
+	map->spawn.x = 0;
+	map->spawn.y = 0;
+	map->spawn.z = 0;
+}
+
+void	init_artificial_map(t_map *map)
+{
+	map->nbr_sectors = 1;
+	map->spawn.x = 2;
+	map->spawn.y = 2;
+	map->spawn.z = 1;
+	map->sectors = malloc(sizeof(t_sector) * map->nbr_sectors + 1);
+
+	map->sectors[1].nbr_walls = 4;
+	map->sectors[1].light = 0;
+	map->sectors[1].sector_id = 1;
+	map->sectors[1].walls = malloc(sizeof(t_map) * map->sectors[1].nbr_walls);
+
+	map->sectors[1].walls[0].a.x = 1;
+	map->sectors[1].walls[0].a.y = 1;
+	map->sectors[1].walls[0].a.z = 1;
+	map->sectors[1].walls[0].b.x = 4;
+	map->sectors[1].walls[0].b.y = 1;
+	map->sectors[1].walls[0].b.z = 1;
+	map->sectors[1].walls[0].c.x = 4;
+	map->sectors[1].walls[0].c.y = 1;
+	map->sectors[1].walls[0].c.z = 4;
+	map->sectors[1].walls[0].d.x = 1;
+	map->sectors[1].walls[0].d.y = 1;
+	map->sectors[1].walls[0].d.z = 4;
+	map->sectors[1].walls[0].text_id = 1;
+	map->sectors[1].walls[0].wall_id = 0;
+	map->sectors[1].walls[0].is_portal = 0;
+	map->sectors[1].walls[0].is_transparent = 0;
+	map->sectors[1].walls[0].is_textured = 1;
+	map->sectors[1].walls[0].fill_up = 0;
+	map->sectors[1].walls[0].fill_down = 0;
+	map->sectors[1].walls[0].sector_id = 1;
+	map->sectors[1].walls[0].sector_next = 0;
+
+	map->sectors[1].walls[1].a.x = 4;
+	map->sectors[1].walls[1].a.y = 1;
+	map->sectors[1].walls[1].a.z = 1;
+	map->sectors[1].walls[1].b.x = 1;
+	map->sectors[1].walls[1].b.y = 4;
+	map->sectors[1].walls[1].b.z = 1;
+	map->sectors[1].walls[1].c.x = 1;
+	map->sectors[1].walls[1].c.y = 4;
+	map->sectors[1].walls[1].c.z = 4;
+	map->sectors[1].walls[1].d.x = 4;
+	map->sectors[1].walls[1].d.y = 1;
+	map->sectors[1].walls[1].d.z = 4;
+	map->sectors[1].walls[1].text_id = 1;
+	map->sectors[1].walls[1].wall_id = 1;
+	map->sectors[1].walls[1].is_portal = 0;
+	map->sectors[1].walls[1].is_transparent = 0;
+	map->sectors[1].walls[1].is_textured = 1;
+	map->sectors[1].walls[1].fill_up = 0;
+	map->sectors[1].walls[1].fill_down = 0;
+	map->sectors[1].walls[1].sector_id = 1;
+	map->sectors[1].walls[1].sector_next = 0;
+
+	map->sectors[1].walls[2].a.x = 1;
+	map->sectors[1].walls[2].a.y = 4;
+	map->sectors[1].walls[2].a.z = 1;
+	map->sectors[1].walls[2].b.x = 4;
+	map->sectors[1].walls[2].b.y = 4;
+	map->sectors[1].walls[2].b.z = 1;
+	map->sectors[1].walls[2].c.x = 1;
+	map->sectors[1].walls[2].c.y = 4;
+	map->sectors[1].walls[2].c.z = 4;
+	map->sectors[1].walls[2].d.x = 4;
+	map->sectors[1].walls[2].d.y = 4;
+	map->sectors[1].walls[2].d.z = 4;
+	map->sectors[1].walls[2].text_id = 1;
+	map->sectors[1].walls[2].wall_id = 2;
+	map->sectors[1].walls[2].is_portal = 0;
+	map->sectors[1].walls[2].is_transparent = 0;
+	map->sectors[1].walls[2].is_textured = 1;
+	map->sectors[1].walls[2].fill_up = 0;
+	map->sectors[1].walls[2].fill_down = 0;
+	map->sectors[1].walls[2].sector_id = 1;
+	map->sectors[1].walls[2].sector_next = 0;
+	
+	map->sectors[1].walls[3].a.x = 4;
+	map->sectors[1].walls[3].a.y = 4;
+	map->sectors[1].walls[3].a.z = 1;
+	map->sectors[1].walls[3].b.x = 1;
+	map->sectors[1].walls[3].b.y = 1;
+	map->sectors[1].walls[3].b.z = 1;
+	map->sectors[1].walls[3].c.x = 1;
+	map->sectors[1].walls[3].c.y = 1;
+	map->sectors[1].walls[3].c.z = 4;
+	map->sectors[1].walls[3].d.x = 1;
+	map->sectors[1].walls[3].d.y = 4;
+	map->sectors[1].walls[3].d.z = 4;
+	map->sectors[1].walls[3].text_id = 1;
+	map->sectors[1].walls[3].wall_id = 3;
+	map->sectors[1].walls[3].is_portal = 0;
+	map->sectors[1].walls[3].is_transparent = 0;
+	map->sectors[1].walls[3].is_textured = 1;
+	map->sectors[1].walls[3].fill_up = 0;
+	map->sectors[1].walls[3].fill_down = 0;
+	map->sectors[1].walls[3].sector_id = 1;
+	map->sectors[1].walls[3].sector_next = 0;
+
+	map->box.floor.a = map->sectors[1].walls[0].d;
+	map->box.floor.b = map->sectors[1].walls[1].d;
+	map->box.floor.c = map->sectors[1].walls[2].d;
+	map->box.floor.d = map->sectors[1].walls[3].d;
+
+	map->box.celling.a = map->sectors[1].walls[0].a;
+	map->box.celling.b = map->sectors[1].walls[1].a;
+	map->box.celling.c = map->sectors[1].walls[2].a;
+	map->box.celling.d = map->sectors[1].walls[3].a;
 }
