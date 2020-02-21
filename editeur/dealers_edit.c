@@ -6,13 +6,13 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/20 14:54:56 by lewis            ###   ########.fr       */
+/*   Updated: 2020/02/21 15:10:40 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
 
-int		dealers_edit(t_var *info, t_input_edit *input_edit)
+int		dealers_edit(t_var *info,t_map *map, t_input_edit *input_edit)
 {
 	SDL_Event		event;
 
@@ -53,9 +53,7 @@ int		dealers_edit(t_var *info, t_input_edit *input_edit)
 		if (event.key.keysym.sym == SDLK_s)
 		{
 			if (event.key.state == SDL_PRESSED)
-				input_edit->t_s = 1;
-			else
-				input_edit->t_s = 0;
+				create_sector(info, map);
 		}
 		if (event.key.keysym.sym == SDLK_p)
 		{

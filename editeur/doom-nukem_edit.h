@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/20 17:17:36 by lewis            ###   ########.fr       */
+/*   Updated: 2020/02/21 16:08:36 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define NB_THREADS_MAX		12
 # define BLACK				0x000000
 # define WHITE				0xFFFFFF
+# define BLUE				0x1E90FF
 # define RMASK				0
 # define GMASK				0
 # define BMASK				0
@@ -76,6 +77,7 @@ struct 					s_sector
 	t_wall				celling;
 	int					light;
 	int					sector_id;
+	t_sector			*next_sector;
 };
 
 struct 					s_box
@@ -143,6 +145,7 @@ struct					s_var
 	int					sprint;
 	int					x_dec;
 	int					y_dec;
+	t_input_edit		*input_edit;
 };
 
 struct					s_input
@@ -206,11 +209,11 @@ int						init_win2(t_var *info);
 
 //editer
 int		editer(t_var *info, t_map *map);
-int		dealers_edit(t_var *info, t_input_edit *input_edit);
+int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit);
 void	dealers_init(t_input_edit *input_edit);
 void	dealers_tester(t_input_edit input_edit);
 int		open_package();
-int		get_map_size(t_input_edit *input_edit);
+int		get_map_size();
 
 //init func
 void	init_box(t_map *map);
@@ -220,12 +223,19 @@ void	init_artificial_map(t_map *map);
 
 //drawers
 void	draw_interactions_edit(t_var *info, t_map *map);
-void	draw_wall_edit(t_var *info, t_map *map, int sector_id, int wall_id);
+void	draw_wall_edit(t_var *info, t_map *map, t_sector *sector, int wall_id);
+void	draw_sector_edit(t_var *info, t_map *map, t_sector *sector);
 void	draw_sectors_edit(t_var *info, t_map *map);
 void	draw_grid(t_var *info, t_map *map);
+void	draw_map_edit(t_var *info, t_map *map);
+void	draw_cadre(t_var *info);
 
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
-int		draw_line(t_var *info, t_line *line);
+int		draw_line(t_var *info, t_line *line, Uint32 color);
 
+//creators
+int		create_sector(t_var *info, t_map *map);
 
+//destroyers
+int		exit_edit(t_var *info, t_map *map);
 #endif

@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/20 17:00:41 by lewis            ###   ########.fr       */
+/*   Updated: 2020/02/21 14:58:20 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		draw_line_condition(t_line *line)
 		&& line->y1 < WINDOW_H && line->x1 >= 0 && line->y1 >= 0);
 }
 
-int		draw_line(t_var *info, t_line *line)
+int		draw_line(t_var *info, t_line *line, Uint32 color)
 {
 	int		e2;
 
@@ -46,7 +46,7 @@ int		draw_line(t_var *info, t_line *line)
 	line->err = (line->dx > line->dy ? line->dx : -line->dy) / 2;
 	while (draw_line_condition(line))
 	{
-		put_pixel_to_suface(WHITE, line->x1, line->y1, info->image);
+		put_pixel_to_suface(color, line->x1, line->y1, info->image);
 		e2 = line->err;
 		if (e2 > -line->dx)
 		{

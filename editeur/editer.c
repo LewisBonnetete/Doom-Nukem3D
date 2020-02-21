@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/20 17:03:58 by lewis            ###   ########.fr       */
+/*   Updated: 2020/02/21 16:09:06 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ int		editer(t_var *info, t_map *map)
 	t_input_edit input_edit;
 	int fd;
 
-	(void)map;
+	info->input_edit = &input_edit;
 	dealers_init(&input_edit);
 	if (-1 == (fd = open_package()))
 	{
 		ft_putendl("Package error");
 		return (0);
 	}
-	map->size = get_map_size(&input_edit);
+	map->size = get_map_size();
 	init_map(map);
 	init_artificial_map(map);
-	while (dealers_edit(info, &input_edit))
+	while (dealers_edit(info, map, &input_edit))
 	{
 		//dealers_tester(input_edit);
 		draw_map_edit(info, map);
