@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   doom-nukem_edit.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/21 16:08:36 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/11 15:54:03 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOOM_NUKEM_H
 # define DOOM_NUKEM_H
+
+//changer gnl pour /dev/zero
 
 # include <SDL.h>
 # include <SDL_image.h>
@@ -26,7 +28,7 @@
 # define WHITE				0xFFFFFF
 # define BLUE				0x1E90FF
 # define RMASK				0
-# define GMASK				0
+# define GMASK				0`
 # define BMASK				0
 # define AMASK				0
 
