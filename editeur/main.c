@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/17 16:00:08 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/03/18 16:07:20 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int				main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
+	init_var(&info);
 	if (!(init_win1(&info)))
 		return (0);
 	if (!(init_win2(&info)))

@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/21 16:08:36 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/18 16:23:32 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ struct 					s_wall
 	int					fill_up;
 	int					fill_down;
 	int					sector_id;
-	int					sector_next;
+	t_sector			*sector_next;
 
 };
 
@@ -78,6 +78,7 @@ struct 					s_sector
 	int					light;
 	int					sector_id;
 	t_sector			*next_sector;
+	t_map				*map;
 };
 
 struct 					s_box
@@ -93,7 +94,6 @@ struct 					s_map
 {
 	t_box				box;
 	t_sector			*sectors;
-	int					nbr_sectors;
 	int					size;
 	SDL_Surface			*text_tab[10];
 	t_point				spawn;
@@ -146,6 +146,8 @@ struct					s_var
 	int					x_dec;
 	int					y_dec;
 	t_input_edit		*input_edit;
+	int					drawing_walls;
+	int					first_vertex_placed;
 };
 
 struct					s_input
@@ -218,11 +220,13 @@ int		get_map_size();
 //init func
 void	init_box(t_map *map);
 void	init_map(t_map *map);
+void	init_var(t_var *info);
 
 void	init_artificial_map(t_map *map);
 
 //drawers
 void	draw_interactions_edit(t_var *info, t_map *map);
+
 void	draw_wall_edit(t_var *info, t_map *map, t_sector *sector, int wall_id);
 void	draw_sector_edit(t_var *info, t_map *map, t_sector *sector);
 void	draw_sectors_edit(t_var *info, t_map *map);
@@ -238,4 +242,9 @@ int		create_sector(t_var *info, t_map *map);
 
 //destroyers
 int		exit_edit(t_var *info, t_map *map);
+
+//tools
+void		get_to_last_sector(t_sector *sector);
+int			nbr_of_sectors(t_map *map);
+t_sector	*get_a_sector_by_id(t_map *map, int id);
 #endif

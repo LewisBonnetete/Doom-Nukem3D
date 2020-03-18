@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/21 14:58:20 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/18 16:24:28 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,42 @@ int		draw_line(t_var *info, t_line *line, Uint32 color)
 		}
 	}
 	return (1);
+}
+
+void		get_to_last_sector(t_sector *sector)
+{
+	while(sector->next_sector)
+	{
+		sector = sector->next_sector;
+	}
+}
+
+int			nbr_of_sectors(t_map *map)
+{
+	t_sector	*sector;
+	int 		i;
+
+	sector = map->sectors;
+	i = 0;
+	while(sector->next_sector)
+	{
+		i++;
+		sector = sector->next_sector;
+	}
+	return (i);
+}
+
+t_sector	*get_a_sector_by_id(t_map *map, int id)
+{
+	t_sector	*sector;
+	int 		i;
+
+	i = 0;
+	sector = map->sectors;
+	while(i < id)
+	{
+		i++;
+		sector = sector->next_sector;
+	}
+	return (sector);
 }

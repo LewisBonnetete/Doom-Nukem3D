@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/21 15:48:39 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/18 16:10:01 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,21 @@ void	init_box(t_map *map)
 
 void	init_map(t_map *map)
 {
-	map->nbr_sectors = 0;
 	map->spawn.x = 0;
 	map->spawn.y = 0;
 	map->spawn.z = 0;
 }
 
+void	init_var(t_var *info)
+{
+	info->drawing_walls = 0;
+	info->first_vertex_placed = 0;;
+}
+
 void	init_artificial_map(t_map *map)
 {
 	t_sector	*sector2;
-	
-	map->nbr_sectors = 2;
+
 	map->spawn.x = 2;
 	map->spawn.y = 2;
 	map->spawn.z = 1;
