@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom-nukem_edit.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/03/18 16:23:32 by lewis            ###   ########.fr       */
-=======
-/*   Updated: 2020/03/11 15:54:03 by trabut           ###   ########.fr       */
->>>>>>> bffafc7fbe20dddbb73e2a25fda90d0fcba346bb
+/*   Updated: 2020/03/20 18:04:51 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +28,7 @@
 # define WHITE				0xFFFFFF
 # define BLUE				0x1E90FF
 # define RMASK				0
-# define GMASK				0`
+# define GMASK				0
 # define BMASK				0
 # define AMASK				0
 
@@ -85,6 +81,7 @@ struct 					s_sector
 	int					sector_id;
 	t_sector			*next_sector;
 	t_map				*map;
+	t_var				*info;
 };
 
 struct 					s_box
@@ -152,7 +149,6 @@ struct					s_var
 	int					x_dec;
 	int					y_dec;
 	t_input_edit		*input_edit;
-	int					drawing_walls;
 	int					first_vertex_placed;
 };
 
@@ -232,6 +228,7 @@ void	init_artificial_map(t_map *map);
 
 //drawers
 void	draw_interactions_edit(t_var *info, t_map *map);
+int		draw_state(t_sector *sector, int max_wall);
 
 void	draw_wall_edit(t_var *info, t_map *map, t_sector *sector, int wall_id);
 void	draw_sector_edit(t_var *info, t_map *map, t_sector *sector);
