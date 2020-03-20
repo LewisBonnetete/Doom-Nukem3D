@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/20 16:15:38 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/20 18:04:51 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ struct 					s_sector
 	int					sector_id;
 	t_sector			*next_sector;
 	t_map				*map;
+	t_var				*info;
 };
 
 struct 					s_box
@@ -227,6 +228,7 @@ void	init_artificial_map(t_map *map);
 
 //drawers
 void	draw_interactions_edit(t_var *info, t_map *map);
+int		draw_state(t_sector *sector, int max_wall);
 
 void	draw_wall_edit(t_var *info, t_map *map, t_sector *sector, int wall_id);
 void	draw_sector_edit(t_var *info, t_map *map, t_sector *sector);

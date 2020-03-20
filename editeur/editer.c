@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/20 15:46:52 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/20 16:38:42 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int		editer(t_var *info, t_map *map)
 	init_artificial_map(map);
 	while (dealers_edit(info, map, &input_edit))
 	{
-		//dealers_tester(input_edit);
 		draw_map_edit(info, map);
-		draw_interactions_edit(info, map);
 		if (!(info->texture = SDL_CreateTextureFromSurface(info->renderer, info->image)))
 		{
 			ft_putstr("Erreur CreateTextureFromSurface :\n");

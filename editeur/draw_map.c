@@ -6,11 +6,42 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/21 15:48:56 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/20 18:19:48 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
+
+int	draw_state(t_sector *sector, int max_wall)
+{
+	t_var *info;
+	t_map *map;
+
+	(void)max_wall;
+
+	info = sector->info;
+	map = sector->map;
+	draw_map_edit(info, map);
+	if (!(info->texture = SDL_CreateTextureFromSurface(info->renderer, info->image)))
+	{
+		ft_putstr("Erreur CreateTextureFromSurface :\n");
+		ft_putendl(SDL_GetError());
+		SDL_DestroyWindow(info->window);
+		SDL_Quit();
+		return (0);
+	}
+	if (SDL_RenderCopy(info->renderer, info->texture, NULL, NULL))
+	{
+		ft_putstr("Erreur RenderCopy :\n");
+		ft_putendl(SDL_GetError());
+		SDL_DestroyWindow(info->window);
+		SDL_Quit();
+		return (0);
+	}
+	SDL_RenderPresent(info->renderer);
+	SDL_DestroyTexture(info->texture);
+	return (1);
+}
 
 void	draw_grid(t_var *info, t_map *map)
 {
@@ -61,7 +92,6 @@ void	draw_cadre(t_var *info)
 void	draw_sectors_edit(t_var *info, t_map *map)
 {
 	t_sector *sector;
-
 	sector = map->sectors;
 	while(sector != NULL)
 	{
@@ -77,7 +107,8 @@ void	draw_sector_edit(t_var *info, t_map *map, t_sector *sector)
 	i = 0;
 	while (i < sector->nbr_walls)
 	{
-		draw_wall_edit(info, map, sector, i);
+		if (sector->walls[i].b.x >= 0)
+			draw_wall_edit(info, map, sector, i);
 		i++;
 	}	
 }

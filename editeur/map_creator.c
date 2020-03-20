@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/20 16:13:51 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/20 18:14:40 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,12 +166,18 @@ int		is_valid_wall(SDL_Event *event, t_sector *sector)
 
 int			create_first_wall_edit(t_sector *sector,int *height, int i, SDL_Event	event)
 {
+	float temp;
+
 	sector->walls[i].sector_id = sector->sector_id;
 	sector->walls[i].wall_id = i;
-	sector->walls[i].a.x = event.button.x;
-	sector->walls[i].d.x = event.button.x;
-	sector->walls[i].a.y = event.button.y;
-	sector->walls[i].d.y = event.button.y;
+	temp = (float)event.button.x / (float)WINDOW_H * sector->map->size;
+	temp = round(temp);
+	sector->walls[i].a.x = temp;
+	sector->walls[i].d.x = temp;
+	temp = (float)event.button.y / (float)WINDOW_H * sector->map->size;
+	temp = round(temp);
+	sector->walls[i].a.y = temp;
+	sector->walls[i].d.y = temp;
 	sector->walls[i].d.z = height[0];
 	sector->walls[i].a.z = height[1];
 	return (1);
@@ -181,25 +187,31 @@ void		wall_fusion(t_sector *sector, int i)
 {
 	sector->walls[i - 1].b.x = sector->walls[i].a.x;
 	sector->walls[i - 1].c.x = sector->walls[i].d.x;
-	sector->walls[i - 1].b.x = sector->walls[i].a.x;
-	sector->walls[i - 1].c.x = sector->walls[i].d.x;
-	sector->walls[i - 1].c.x = sector->walls[i].d.x;
-	sector->walls[i - 1].b.x = sector->walls[i].a.x;
+	sector->walls[i - 1].b.y = sector->walls[i].a.y;
+	sector->walls[i - 1].c.y = sector->walls[i].d.y;
+	sector->walls[i - 1].c.z = sector->walls[i].d.z;
+	sector->walls[i - 1].b.z = sector->walls[i].a.z;
 }
 
 int			create_wall_edit(t_sector *sector,int *height, int i, SDL_Event	event)
 {
+	float temp;
+	
 	sector->walls[i].sector_id = sector->sector_id;
 	sector->walls[i].wall_id = i;
-	sector->walls[i].a.x = event.button.x;
-	sector->walls[i].d.x = event.button.x;
-	sector->walls[i].a.y = event.button.y;
-	sector->walls[i].d.y = event.button.y;
+	temp = (float)event.button.x / (float)WINDOW_H * sector->map->size;
+	temp = round(temp);
+	sector->walls[i].a.x = temp;
+	sector->walls[i].d.x = temp;
+	temp = (float)event.button.y / (float)WINDOW_H * sector->map->size;
+	temp = round(temp);
+	sector->walls[i].a.y = temp;
+	sector->walls[i].d.y = temp;
 	sector->walls[i].d.z = height[0];
 	sector->walls[i].a.z = height[1];
 	wall_fusion(sector, i);
-	get_portal_info(&sector->walls[i], sector->map);
-	get_textures(&sector->walls[i]);
+	get_portal_info(&sector->walls[i - 1], sector->map);
+	get_textures(&sector->walls[i - 1]);
 	return (1);
 }
 
@@ -207,10 +219,10 @@ void	close_sector(t_sector *sector, int i)
 {
 	sector->walls[i].b.x = sector->walls[0].a.x;
 	sector->walls[i].c.x = sector->walls[0].d.x;
-	sector->walls[i].b.x = sector->walls[0].a.x;
-	sector->walls[i].c.x = sector->walls[0].d.x;
-	sector->walls[i].c.x = sector->walls[0].d.x;
-	sector->walls[i].b.x = sector->walls[0].a.x;
+	sector->walls[i].b.y = sector->walls[0].a.y;
+	sector->walls[i].c.y = sector->walls[0].d.y;
+	sector->walls[i].c.z = sector->walls[0].d.z;
+	sector->walls[i].b.z = sector->walls[0].a.z;
 	get_portal_info(&sector->walls[i], sector->map);
 	get_textures(&sector->walls[i]);
 }
@@ -220,11 +232,11 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 	SDL_Event	event;
 	int			i;
 	
-	i  = 0;
+	i = 0;
 	(void)info;
 	(void)map;
 	ft_putendl("place you walls");
-	while(i < 1)
+	while(i == 0)
 	{
 		SDL_WaitEvent(&event);
 		if(event.type == SDL_MOUSEBUTTONDOWN)
@@ -239,7 +251,7 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 				ft_putendl("Nope, try something else");
 		}
 	}
-	while(i < sector->nbr_walls - 1)
+	while(i < sector->nbr_walls)
 	{
 		SDL_WaitEvent(&event);
 		if(event.type == SDL_MOUSEBUTTONDOWN)
@@ -248,14 +260,39 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 			{
 				if (!create_wall_edit(sector, height, i, event))
 					return(0);
+				draw_state(sector, i);
 				i++;
 			}
 			else
 				ft_putendl("Nope, try something else");
 		}
 	}
-	close_sector(sector, i);
+	close_sector(sector, sector->nbr_walls - 1);
 	return (1);
+}
+
+void		init_wall(t_wall *walls, int nbr_walls)
+{
+	int i;
+
+	i = 0;
+
+	while (i < nbr_walls)
+	{
+		walls[i].a.x = -1;
+		walls[i].b.x = -1;
+		walls[i].c.x = -1;
+		walls[i].d.x = -1;
+		walls[i].a.y = -1;
+		walls[i].b.y = -1;
+		walls[i].d.y = -1;
+		walls[i].c.y = -1;
+		walls[i].a.z = -1;
+		walls[i].b.z = -1;
+		walls[i].d.z = -1;
+		walls[i].c.z = -1;
+		i++;
+	}
 }
 
 int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
@@ -264,8 +301,11 @@ int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
 
 	get_height_sector(map, height);
 	sector->nbr_walls = get_nbr_walls();
+	sector->map = map;
+	sector->info = info;
 	if(!(sector->walls = (t_wall*)malloc(sizeof(t_wall) * sector->nbr_walls)))
 		return (0);
+	init_wall(sector->walls, sector->nbr_walls);
 	if (!get_walls_sector(info, map, sector, height))
 		return (0);
 	sector->next_sector = NULL;
@@ -279,9 +319,8 @@ int		create_sector(t_var *info, t_map *map)
 	t_sector *sector;
 
 	sector = map->sectors;
-	sector->map = map;
 	get_to_last_sector(sector);
-	if (!(sector = (t_sector*)malloc(sizeof(t_sector))) || (init_new_sector(info, sector, map)))
+	if (!(sector->next_sector = (t_sector*)malloc(sizeof(t_sector))) || (init_new_sector(info, sector->next_sector, map)))
 		return (exit_edit(info, map));
 	return (1);
 }

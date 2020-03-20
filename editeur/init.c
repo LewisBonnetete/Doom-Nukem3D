@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/18 16:10:01 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/20 16:16:44 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,7 @@ void	init_map(t_map *map)
 
 void	init_var(t_var *info)
 {
-	info->drawing_walls = 0;
-	info->first_vertex_placed = 0;;
+	(void)info;
 }
 
 void	init_artificial_map(t_map *map)
