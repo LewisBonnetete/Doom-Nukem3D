@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/18 16:24:06 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/20 16:13:51 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ void	get_portal_info(t_wall *wall, t_map *map)
 		get_next_line(0, &line);
 		if ((line[0] == 'y' || line[0] == 'n') && line[1] == 0)
 		{
-			wall->is_portal = 1;
+			if (line[0] == 'y')
+				wall->is_portal = 1;
+			if (line[0] == 'n')
+				wall->is_portal = 0;
 			ok = 1;
 		}
 		else
@@ -79,7 +82,10 @@ void	get_portal_info(t_wall *wall, t_map *map)
 			get_next_line(0, &line);
 			if ((line[0] == 'y' || line[0] == 'n') && line[1] == 0)
 			{
-				wall->is_transparent = 1;
+				if (line[0] == 'y')
+					wall->is_transparent = 1;
+				if (line[0] == 'n')
+					wall->is_transparent = 0;
 				ok = 1;
 			}
 			else
@@ -92,7 +98,10 @@ void	get_portal_info(t_wall *wall, t_map *map)
 			get_next_line(0, &line);
 			if ((line[0] == 'y' || line[0] == 'n') && line[1] == 0)
 			{
-				wall->is_textured = 1;
+				if (line[0] == 'y')
+					wall->is_textured = 1;
+				if (line[0] == 'n')
+					wall->is_textured = 0;
 				ok = 1;
 			}
 			else
@@ -155,6 +164,29 @@ int		is_valid_wall(SDL_Event *event, t_sector *sector)
 	return (1);
 }
 
+int			create_first_wall_edit(t_sector *sector,int *height, int i, SDL_Event	event)
+{
+	sector->walls[i].sector_id = sector->sector_id;
+	sector->walls[i].wall_id = i;
+	sector->walls[i].a.x = event.button.x;
+	sector->walls[i].d.x = event.button.x;
+	sector->walls[i].a.y = event.button.y;
+	sector->walls[i].d.y = event.button.y;
+	sector->walls[i].d.z = height[0];
+	sector->walls[i].a.z = height[1];
+	return (1);
+}
+
+void		wall_fusion(t_sector *sector, int i)
+{
+	sector->walls[i - 1].b.x = sector->walls[i].a.x;
+	sector->walls[i - 1].c.x = sector->walls[i].d.x;
+	sector->walls[i - 1].b.x = sector->walls[i].a.x;
+	sector->walls[i - 1].c.x = sector->walls[i].d.x;
+	sector->walls[i - 1].c.x = sector->walls[i].d.x;
+	sector->walls[i - 1].b.x = sector->walls[i].a.x;
+}
+
 int			create_wall_edit(t_sector *sector,int *height, int i, SDL_Event	event)
 {
 	sector->walls[i].sector_id = sector->sector_id;
@@ -165,9 +197,22 @@ int			create_wall_edit(t_sector *sector,int *height, int i, SDL_Event	event)
 	sector->walls[i].d.y = event.button.y;
 	sector->walls[i].d.z = height[0];
 	sector->walls[i].a.z = height[1];
+	wall_fusion(sector, i);
 	get_portal_info(&sector->walls[i], sector->map);
 	get_textures(&sector->walls[i]);
 	return (1);
+}
+
+void	close_sector(t_sector *sector, int i)
+{
+	sector->walls[i].b.x = sector->walls[0].a.x;
+	sector->walls[i].c.x = sector->walls[0].d.x;
+	sector->walls[i].b.x = sector->walls[0].a.x;
+	sector->walls[i].c.x = sector->walls[0].d.x;
+	sector->walls[i].c.x = sector->walls[0].d.x;
+	sector->walls[i].b.x = sector->walls[0].a.x;
+	get_portal_info(&sector->walls[i], sector->map);
+	get_textures(&sector->walls[i]);
 }
 
 int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
@@ -179,6 +224,21 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 	(void)info;
 	(void)map;
 	ft_putendl("place you walls");
+	while(i < 1)
+	{
+		SDL_WaitEvent(&event);
+		if(event.type == SDL_MOUSEBUTTONDOWN)
+		{
+			if (is_valid_wall(&event, sector))
+			{
+				if (!create_first_wall_edit(sector, height, i, event))
+					return(0);
+				i++;
+			}
+			else
+				ft_putendl("Nope, try something else");
+		}
+	}
 	while(i < sector->nbr_walls - 1)
 	{
 		SDL_WaitEvent(&event);
@@ -194,6 +254,7 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 				ft_putendl("Nope, try something else");
 		}
 	}
+	close_sector(sector, i);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/20 15:43:31 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/20 16:15:38 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,6 @@ struct					s_var
 	int					x_dec;
 	int					y_dec;
 	t_input_edit		*input_edit;
-	int					drawing_walls;
 	int					first_vertex_placed;
 };
 
