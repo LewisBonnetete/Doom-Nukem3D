@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom-nukem_edit.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/03/18 16:23:32 by lewis            ###   ########.fr       */
-=======
-/*   Updated: 2020/03/11 15:54:03 by trabut           ###   ########.fr       */
->>>>>>> bffafc7fbe20dddbb73e2a25fda90d0fcba346bb
+/*   Updated: 2020/03/20 15:43:31 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +28,7 @@
 # define WHITE				0xFFFFFF
 # define BLUE				0x1E90FF
 # define RMASK				0
-# define GMASK				0`
+# define GMASK				0
 # define BMASK				0
 # define AMASK				0
 
