@@ -97,7 +97,7 @@ int		xy_in_ab(int x, int y, t_point a, t_point b)
 }
 
 int		intersect(t_ray ray, t_wall *wall)
-{
+{//rajouter des securites si on a des murs parallel aux axes des ordonnes ou des abscisses on peut avoir des divisions par 0
 	int wslope;//coef directeur de la droite du mur
 	int rslope;//coef directeur de la droite du ray
 	int wk;
@@ -109,6 +109,8 @@ int		intersect(t_ray ray, t_wall *wall)
 	wk = -1 * ((wslope * wall->a) - (wall->b));//on peut soustraire les coords du player pour avoir le ray en 0,0 si ca facilite les calculs?
 	x = wk / (wslope / rslope);
 	y = wall->a->y + (x - wall->a->x) * wslope;
+	if (rslope = wslope)
+		return (0);
 	//a ce stade on connait le point d intersection i de coord x,y
 	return (xy_in_ab(x, y, wall->a, wall->b))//on verifie que xy est bien dans inclus dans le mur
 	/*
