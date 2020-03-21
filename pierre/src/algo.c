@@ -56,8 +56,61 @@ void	draw_wall_textures(t_var *info, t_render *render)
 		/* verticalement : voir en fonction de la distance au mur et sa hauteur ? */
 }
 
+int		slopecalc(t_point a, t_point b)
+{
+	int res;
+
+	res = (b->y - a->y)/(b->x - a->x);
+	return (res);
+}
+
+int		rslopecalc(t_ray ray)
+{
+	/*
+	calculer le coefficient directeur en fonction de l angle ?
+	determiner l angle ?
+	probleme d optimisation dans l utilisation de la fonction tan.
+	moyen de contourner/calculer autrement ?
+	le calcul aurait cette tete :
+	*/
+	calculate angle;
+	return (tan(angle));
+}
+
+int		xy_in_ab(int x, int y, t_point a, t_point b)
+{
+	int xin;
+	int yin;
+
+	xin = 0;
+	yin = 0;
+	if (x => a->x && x <= b->x)
+	else if (x <= a->x && x >= b->x)
+		xin = 1;
+	if (y => a->y && y <= b->y)
+	else if (y <= a->y && y >= b->y)
+		yin = 1;
+	if (xin && yin)
+		return (1);
+	return (0);
+	//possible erreur?
+}
+
 int		intersect(t_ray ray, t_wall *wall)
 {
+	int wslope;//coef directeur de la droite du mur
+	int rslope;//coef directeur de la droite du ray
+	int wk;
+	int x;
+	int y;
+//[((Yb-Ya)/(Xb-Xa))-((Yd-Yc)/(Xd-Xc))] != 0 (sinon les droites sont parallèles).
+	wslope = slopecalc(wall->a, wall->b);
+	rslope = rslopecalc(ray);
+	wk = -1 * ((wslope * wall->a) - (wall->b));//on peut soustraire les coords du player pour avoir le ray en 0,0 si ca facilite les calculs?
+	x = wk / (wslope / rslope);
+	y = wall->a->y + (x - wall->a->x) * wslope;
+	//a ce stade on connait le point d intersection i de coord x,y
+	return (xy_in_ab(x, y, wall->a, wall->b))//on verifie que xy est bien dans inclus dans le mur
 	/*
 	renvoie 1 si le rayon croise le mur
 	ATTENTION dans le calcul
