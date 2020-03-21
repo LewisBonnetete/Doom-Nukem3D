@@ -103,7 +103,6 @@ int		intersect(t_ray ray, t_wall *wall)
 	int wk;
 	int x;
 	int y;
-//[((Yb-Ya)/(Xb-Xa))-((Yd-Yc)/(Xd-Xc))] != 0 (sinon les droites sont parallèles).
 	wslope = slopecalc(wall->a, wall->b);
 	rslope = rslopecalc(ray);
 	wk = -1 * ((wslope * wall->a) - (wall->b));//on peut soustraire les coords du player pour avoir le ray en 0,0 si ca facilite les calculs?
