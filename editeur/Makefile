@@ -6,7 +6,7 @@
 #    By: lewis <lewis@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/02/21 15:53:06 by lewis            ###   ########.fr        #
+#    Updated: 2020/03/24 15:58:51 by lewis            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRC =	main.c\
 		draw_interactions.c\
 		editer_tools.c\
 		parser.c\
-		exit_edit.c
+		exit_edit.c\
+		del_sector.c
 
 INC = doom-nukem_edit.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))

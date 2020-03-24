@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/20 18:14:40 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/24 17:04:10 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 			{
 				if (!create_wall_edit(sector, height, i, event))
 					return(0);
-				draw_state(sector, i);
+				draw_state(sector);
 				i++;
 			}
 			else
@@ -314,13 +314,20 @@ int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
 
 int		create_sector(t_var *info, t_map *map)
 {
-	(void)info;
-	(void)map;
 	t_sector *sector;
 
 	sector = map->sectors;
-	get_to_last_sector(sector);
-	if (!(sector->next_sector = (t_sector*)malloc(sizeof(t_sector))) || (init_new_sector(info, sector->next_sector, map)))
-		return (exit_edit(info, map));
+	if(sector)
+	{
+		get_to_last_sector(sector);
+		if (!(sector->next_sector = (t_sector*)malloc(sizeof(t_sector))) || (!init_new_sector(info, sector->next_sector, map)))
+			return (exit_edit(info, map));
+	}
+	else
+	{
+		if (!(sector = (t_sector*)malloc(sizeof(t_sector))) || (!init_new_sector(info, sector, map)))
+			return (exit_edit(info, map));
+		map->sectors = sector;
+	}
 	return (1);
 }

@@ -6,22 +6,22 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/20 18:19:48 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/24 17:01:31 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
 
-int	draw_state(t_sector *sector, int max_wall)
+int	draw_state(t_sector *sector)
 {
 	t_var *info;
 	t_map *map;
 
-	(void)max_wall;
 
 	info = sector->info;
 	map = sector->map;
 	draw_map_edit(info, map);
+	draw_sector_edit(info, map, sector);
 	if (!(info->texture = SDL_CreateTextureFromSurface(info->renderer, info->image)))
 	{
 		ft_putstr("Erreur CreateTextureFromSurface :\n");
@@ -48,6 +48,20 @@ void	draw_grid(t_var *info, t_map *map)
 	int x;
 	int y;
 
+	x = 0;
+	ft_putendl("0");
+	while(x < WINDOW_H)
+	{
+		y = 0;
+		while (y < WINDOW_H)
+		{
+			if(x > 0 && x < WINDOW_H && y > 0 && y < WINDOW_H)
+				put_pixel_to_suface(BLACK, x, y, info->image);
+			y += 1;
+		}
+		x += 1;
+	}
+	ft_putendl("1");
 	x = 0;
 	while(x < WINDOW_H)
 	{
@@ -92,11 +106,15 @@ void	draw_cadre(t_var *info)
 void	draw_sectors_edit(t_var *info, t_map *map)
 {
 	t_sector *sector;
-	sector = map->sectors;
-	while(sector != NULL)
+	
+	if (map->sectors)
 	{
-		draw_sector_edit(info, map, sector);
-		sector = sector->next_sector;
+		sector = map->sectors;
+		while(sector != NULL)
+		{
+			draw_sector_edit(info, map, sector);
+			sector = sector->next_sector;
+		}
 	}
 }
 
@@ -132,6 +150,5 @@ void	draw_wall_edit(t_var *info, t_map *map, t_sector *sector, int wall_id)
 
 void	draw_map_edit(t_var *info, t_map *map)
 {
-	draw_grid(info, map);
 	draw_sectors_edit(info, map);
 }

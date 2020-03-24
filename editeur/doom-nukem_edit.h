@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/20 18:04:51 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/24 17:07:04 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ void	init_artificial_map(t_map *map);
 
 //drawers
 void	draw_interactions_edit(t_var *info, t_map *map);
-int		draw_state(t_sector *sector, int max_wall);
+int		draw_state(t_sector *sector);
 
 void	draw_wall_edit(t_var *info, t_map *map, t_sector *sector, int wall_id);
 void	draw_sector_edit(t_var *info, t_map *map, t_sector *sector);
@@ -250,4 +250,5 @@ int		exit_edit(t_var *info, t_map *map);
 void		get_to_last_sector(t_sector *sector);
 int			nbr_of_sectors(t_map *map);
 t_sector	*get_a_sector_by_id(t_map *map, int id);
+void		del_sector(t_var *info, t_map *map);
 #endif

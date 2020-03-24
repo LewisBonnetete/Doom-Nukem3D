@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/20 16:38:42 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/24 16:53:54 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int		editer(t_var *info, t_map *map)
 	dealers_init(&input_edit);
 	map->size = get_map_size();
 	init_map(map);
-	init_artificial_map(map);
+	// init_artificial_map(map);
+	draw_grid(info, map);
 	while (dealers_edit(info, map, &input_edit))
 	{
 		draw_map_edit(info, map);

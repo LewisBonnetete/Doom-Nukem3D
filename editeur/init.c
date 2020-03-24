@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/20 16:16:44 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/24 16:15:19 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	init_map(t_map *map)
 	map->spawn.x = 0;
 	map->spawn.y = 0;
 	map->spawn.z = 0;
+	map->sectors = NULL;
 }
 
 void	init_var(t_var *info)
@@ -316,14 +317,4 @@ void	init_artificial_map(t_map *map)
 	sector2->walls[3].fill_down = 0;
 	sector2->walls[3].sector_id = 2;
 	sector2->walls[3].sector_next = 0;
-
-	map->box.floor.a = sector2->walls[0].d;
-	map->box.floor.b = sector2->walls[1].d;
-	map->box.floor.c = sector2->walls[2].d;
-	map->box.floor.d = sector2->walls[3].d;
-
-	map->box.celling.a = sector2->walls[0].a;
-	map->box.celling.b = sector2->walls[1].a;
-	map->box.celling.c = sector2->walls[2].a;
-	map->box.celling.d = sector2->walls[3].a;
 }
