@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/24 17:01:31 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/27 15:06:28 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	draw_grid(t_var *info, t_map *map)
 	int y;
 
 	x = 0;
-	ft_putendl("0");
 	while(x < WINDOW_H)
 	{
 		y = 0;
@@ -61,7 +60,6 @@ void	draw_grid(t_var *info, t_map *map)
 		}
 		x += 1;
 	}
-	ft_putendl("1");
 	x = 0;
 	while(x < WINDOW_H)
 	{
@@ -121,12 +119,19 @@ void	draw_sectors_edit(t_var *info, t_map *map)
 void	draw_sector_edit(t_var *info, t_map *map, t_sector *sector)
 {
 	int i;
+	int max;
 
 	i = 0;
-	while (i < sector->nbr_walls)
+	ft_putendl("");
+	ft_putstr("euh...   ");
+	max = sector->nbr_walls;
+	ft_putendl("la c'est bon");
+	while (i < max)
 	{
 		if (sector->walls[i].b.x >= 0)
+		{
 			draw_wall_edit(info, map, sector, i);
+		}
 		i++;
 	}	
 }

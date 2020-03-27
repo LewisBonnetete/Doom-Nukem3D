@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/24 17:07:04 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/27 13:48:55 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,7 @@ int		create_sector(t_var *info, t_map *map);
 int		exit_edit(t_var *info, t_map *map);
 
 //tools
-void		get_to_last_sector(t_sector *sector);
+t_sector	*get_to_last_sector(t_sector *sector);
 int			nbr_of_sectors(t_map *map);
 t_sector	*get_a_sector_by_id(t_map *map, int id);
 void		del_sector(t_var *info, t_map *map);

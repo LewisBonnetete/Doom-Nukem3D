@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/24 17:04:10 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/27 15:01:44 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ void	get_portal_info(t_wall *wall, t_map *map)
 			else
 				ft_putendl("What? try something else");
 		}
-		ft_putendl("What's the sector it leads to?(y/n)");
+		ft_putendl("What's the sector it leads to?(0 to lead outside)");
 		ok = -1;
-		while(ok < 0 || ok > nbr_of_sectors(map))
+		while(ok <= 0 || ok > nbr_of_sectors(map))
 		{
 			get_next_line(0, &line);
 			ok = ft_atoi(line);
@@ -148,11 +148,11 @@ void		get_height_sector(t_map *map, int *height)
 			ft_putendl("Wrong height, try something else");
 	}
 	ft_putendl("How high is you sector?");
-	while(height[1] < height[0] || height[1] > map->size - 1)
+	while(height[1] <= height[0] || height[1] > map->size - 1)
 	{
 		get_next_line(0, &line);
 		height[1] = ft_atoi(line);
-		if (height[1] < height[0] || height[1] > map->size - 1)
+		if (height[1] <= height[0] || height[1] > map->size - 1)
 			ft_putendl("Wrong height, try something else");
 	}
 }
@@ -196,7 +196,6 @@ void		wall_fusion(t_sector *sector, int i)
 int			create_wall_edit(t_sector *sector,int *height, int i, SDL_Event	event)
 {
 	float temp;
-	
 	sector->walls[i].sector_id = sector->sector_id;
 	sector->walls[i].wall_id = i;
 	temp = (float)event.button.x / (float)WINDOW_H * sector->map->size;
@@ -319,7 +318,7 @@ int		create_sector(t_var *info, t_map *map)
 	sector = map->sectors;
 	if(sector)
 	{
-		get_to_last_sector(sector);
+		sector = get_to_last_sector(map->sectors);
 		if (!(sector->next_sector = (t_sector*)malloc(sizeof(t_sector))) || (!init_new_sector(info, sector->next_sector, map)))
 			return (exit_edit(info, map));
 	}
