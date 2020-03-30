@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/27 13:48:55 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/30 17:53:00 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,10 @@ void	dealers_init(t_input_edit *input_edit);
 void	dealers_tester(t_input_edit input_edit);
 int		open_package();
 int		get_map_size();
+
+//checkers
+int		is_valid_wall(SDL_Event *event, t_sector *sector, int i);
+int		is_valid_first_wall(SDL_Event *event);
 
 //init func
 void	init_box(t_map *map);

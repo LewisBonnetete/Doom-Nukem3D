@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/27 15:01:44 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/30 18:14:18 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,13 +157,6 @@ void		get_height_sector(t_map *map, int *height)
 	}
 }
 
-int		is_valid_wall(SDL_Event *event, t_sector *sector)
-{
-	(void)event;
-	(void)sector;
-	return (1);
-}
-
 int			create_first_wall_edit(t_sector *sector,int *height, int i, SDL_Event	event)
 {
 	float temp;
@@ -240,7 +233,7 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 		SDL_WaitEvent(&event);
 		if(event.type == SDL_MOUSEBUTTONDOWN)
 		{
-			if (is_valid_wall(&event, sector))
+			if (is_valid_first_wall(&event))
 			{
 				if (!create_first_wall_edit(sector, height, i, event))
 					return(0);
@@ -255,7 +248,7 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 		SDL_WaitEvent(&event);
 		if(event.type == SDL_MOUSEBUTTONDOWN)
 		{
-			if (is_valid_wall(&event, sector))
+			if (is_valid_wall(&event, sector, i))
 			{
 				if (!create_wall_edit(sector, height, i, event))
 					return(0);
@@ -302,12 +295,12 @@ int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
 	sector->nbr_walls = get_nbr_walls();
 	sector->map = map;
 	sector->info = info;
+	sector->next_sector = NULL;
 	if(!(sector->walls = (t_wall*)malloc(sizeof(t_wall) * sector->nbr_walls)))
 		return (0);
 	init_wall(sector->walls, sector->nbr_walls);
 	if (!get_walls_sector(info, map, sector, height))
 		return (0);
-	sector->next_sector = NULL;
 	return (1);
 }
 
@@ -324,9 +317,8 @@ int		create_sector(t_var *info, t_map *map)
 	}
 	else
 	{
-		if (!(sector = (t_sector*)malloc(sizeof(t_sector))) || (!init_new_sector(info, sector, map)))
+		if (!(map->sectors = (t_sector*)malloc(sizeof(t_sector))) || (!init_new_sector(info, map->sectors, map)))
 			return (exit_edit(info, map));
-		map->sectors = sector;
 	}
 	return (1);
 }
