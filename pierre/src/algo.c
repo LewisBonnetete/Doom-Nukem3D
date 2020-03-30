@@ -19,7 +19,6 @@ void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 	render->next_render = NULL;
 }
 
-
 int		init_next_render(t_var *info, t_render *render)
 {
 	t_render	*tmp;
@@ -56,75 +55,74 @@ void	draw_wall_textures(t_var *info, t_render *render)
 		/* verticalement : voir en fonction de la distance au mur et sa hauteur ? */
 }
 
-int		slopecalc(t_point a, t_point b)
+void	calc_wall_spec(t_wall *wall)
 {
-	int res;
-
-	res = (b->y - a->y)/(b->x - a->x);
-	return (res);
+	if (b->x != a->x)
+	{
+		wall->eq_slope = (double)(b->y - a->y)/(b->x - a->x);
+		wall->eq_cste = (double)wall->a.y - wall->eq_slope * wall->a.x;
+	}
+	else
+	{
+		wall->eq_slope = 11111;
+		wall->eq_cste = 11111;
+	}
+	wall->height = (double)(wall->c.z - wall->a.z);
 }
 
-int		rslopecalc(t_ray ray)
+int		xy_in_ab(double x, double y, t_point a, t_point b)
 {
-	/*
-	calculer le coefficient directeur en fonction de l angle ?
-	determiner l angle ?
-	probleme d optimisation dans l utilisation de la fonction tan.
-	moyen de contourner/calculer autrement ?
-	le calcul aurait cette tete :
-	*/
-	calculate angle;
-	return (tan(angle));
+	return (((x => a.x && x <= b.x) || (x <= a.x && x >= b.x))
+		&& ((y => a.y && y <= b.y) || (y <= a.y && y >= b.y)));
 }
 
-int		xy_in_ab(int x, int y, t_point a, t_point b)
+int		xy_in_frontview(double x, double y, t_ray ray, t_var *info)
 {
-	int xin;
-	int yin;
-
-	xin = 0;
-	yin = 0;
-	if (x => a->x && x <= b->x)
-	else if (x <= a->x && x >= b->x)
-		xin = 1;
-	if (y => a->y && y <= b->y)
-	else if (y <= a->y && y >= b->y)
-		yin = 1;
-	if (xin && yin)
-		return (1);
-	return (0);
-	//possible erreur?
+	if ((ray.dx > 0 && (x <= ray.x)) || (ray.dy > 0 && (y <= ray.y)) ||
+	(ray.dx < 0 && (x >= ray.x)) || (ray.dy < 0 && (y >= ray.y)))
+		return (0);
+	return (1);
 }
 
 int		intersect(t_ray ray, t_wall *wall)
-{//rajouter des securites si on a des murs parallel aux axes des ordonnes ou des abscisses on peut avoir des divisions par 0
-	int wslope;//coef directeur de la droite du mur
-	int rslope;//coef directeur de la droite du ray
-	int wk;
-	int x;
-	int y;
-	wslope = slopecalc(wall->a, wall->b);
-	rslope = rslopecalc(ray);
-	wk = -1 * ((wslope * wall->a) - (wall->b));//on peut soustraire les coords du player pour avoir le ray en 0,0 si ca facilite les calculs?
-	x = wk / (wslope / rslope);
-	y = wall->a->y + (x - wall->a->x) * wslope;
-	if (rslope = wslope)
+{
+	calc_wall_spec(wall);	// a rajouter au moment du parsing ? plus rapide que pendant le rendering
+	if (ray.eq_slope == wall->eq_slope)
 		return (0);
-	//a ce stade on connait le point d intersection i de coord x,y
-	return (xy_in_ab(x, y, wall->a, wall->b))//on verifie que xy est bien dans inclus dans le mur
-	/*
-	renvoie 1 si le rayon croise le mur
-	ATTENTION dans le calcul
-	le secteur etant convexe, chaque rayon croisera les droites de 2murs
-	cf lien gamedev de Tom
-	-> regarder la direction (le sens > equationd de droite) du joueur/rayon
-	*/
+	if (wall->eq_slope == 11111)
+		ray.x2 = (double)wall->a.x;
+	else
+		ray.x2 = (wall->eq_cste - ray.eq_cste) / (ray.eq_slope - wall->eq_slope);
+	ray.y2 = ray.eq_slope * ray.x2 + ray.eq_cste;
+	if (xy_in_ab(ray.x2, ray.y2, wall->a, wall->b))
+		return (xy_is_frontview(ray.x2, ray.y2, ray));
+	return (0);
 }
 
 void	update_render(t_var *info, t_render *render)
 {
+	render->wall_sqdist =
+		((render->ray.y2 - render->ray.y) * (render->ray.y2 - render->ray.y))
+		+ (render->ray.x2 - render->ray.x) * (render->ray.x2 - render->ray.x));
+	render->wall_height = WALL_H / render->wall_sqdist;
+	render->wall_y0 = ??;
+		/* depend de :
+			-l'altitude du secteur du wall en question
+			-l'altitude du secteur dans lequel se trouve le joueur
+			-la distance
+			-la hauteur wall_height (!= la hauteur du secteur)
+		*/
+	render->wall_y1 = ??;
+		/* depend de :
+			-la hauteur du secteur du wall en question
+			-la hauteur du secteur dans lequel se trouve le joueur
+			-la distance
+			-la hauteur wall_height (!= la hauteur du secteur)
+		*/
+	render->next_x = render->wall->b.x
 	/*
-	wall_distance : calcul pour la colonne render->x de la distance du mur sur cette colonne au joueur/plane/fov whatever
+	wall_sqdist : calcul pour la colonne render->x le carré de la distance du mur au joueur/plane/fov whatever
+		on utilise le carré pour ne pas utiliser la fonction sqrt, on a juste beosin d'avoir un ordre de grandeuur euclidien
 	wall_y1 coordonnée du pixel en haut du mur
 	wall_y0 coordonnée du pixel en bas du mur
 	next_x coordonnée de la fin du mur (hypothétique car peut etre > a WINDOW_W)
@@ -133,10 +131,24 @@ void	update_render(t_var *info, t_render *render)
 	*/
 }
 
+void	update_ray(t_var *info, t_render *render)
+{
+	render->n = -1;
+	render->ray.x = info->player.posx;
+	render->ray.y = info->player.posy;
+	render->ray.z = info->player.posz;
+	render->ray.cam_x = 2 * render->x / (double)(WINDOW_W) - 1;
+	render->ray.dx = info->player.dx + info->player.planex * render->ray.cam_x;
+	render->ray.dy = info->player.dy + info->player.planey * render->ray.cam_x;
+	render->ray.eq_slope = ray.dy / ray.dx;
+	render->ray.eq_cste =  info->player.posy - render->ray.eq_slope * info->player.posx;
+}
+
 int     walls_and_portals_rendering(t_var *info, t_render *render)
 {
 	while(render->x < render->x1)
 	{
+		update_ray(render);
 		while(++render->n < render->s->nbr_walls && render->x < render->x1)
 		{
 			render->wall = render->s->walls[n];
@@ -153,7 +165,7 @@ int     walls_and_portals_rendering(t_var *info, t_render *render)
 				draw_wall_textures(info, render);	// affiche les textures du mur ou du portail
 				render->x = ft_min(render->next_x, render->x1); // incrément le x
 				// render->ray.hit_wall = 1;
-				// break;
+				break;
 			}
 		}
 	}

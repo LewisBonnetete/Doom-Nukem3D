@@ -25,6 +25,7 @@
 # define GMASK				0
 # define BMASK				0
 # define AMASK				0
+# define WALL_H				32
 
 typedef struct s_input		t_input;
 typedef	struct s_var		t_var;
@@ -52,6 +53,8 @@ struct 					s_wall
 {
 	t_point				a;
 	t_point				b;
+	t_point				c;
+	t_point				d;
 	int					text_id;
 	int					wall_id;
 	int					is_portal;
@@ -61,6 +64,9 @@ struct 					s_wall
 	int					fill_down;
 	int					sector_id;
 	int					sector_next;
+	double				height;
+	double				eq_slope;
+	double				eq_cste;
 };
 
 struct 					s_sector
@@ -115,7 +121,8 @@ struct					s_render
 	//	(dans le sens, est ce qu'ils seront toujours rectangulaires ? ca me parait bizarre, non, plus des trapezes ? sur un mur en diagonal par ex)
 	int					n;
 	int					sector_id;
-	double				wall_distance;
+	double				wall_sqdist;
+	double				wall_height;
 	int					wall_y0;
 	int					wall_y1;
 	t_ray				ray;
@@ -143,9 +150,17 @@ struct					s_ray
 	int					cam_x;
 	//int					hit_portal; inutile au final ?
 	//int					hit_wall; inutile au final ?
+	double				x;
+	double				y;
+	double				z;	//utile ??
+	double				x2;
+	double				y2;
+	double				z2;
 	double				dx;
 	double				dy;
 	double				dz;	// utile??
+	double				eq_slope;
+	double				eq_cste;
 };
 
 struct					s_var
