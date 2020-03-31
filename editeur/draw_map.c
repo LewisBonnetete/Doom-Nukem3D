@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/30 16:42:45 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/31 16:04:17 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	draw_state(t_sector *sector)
 
 	info = sector->info;
 	map = sector->map;
+	draw_grid(info, map);
 	draw_map_edit(info, map);
 	draw_sector_edit(info, map, sector);
 	if (!(info->texture = SDL_CreateTextureFromSurface(info->renderer, info->image)))

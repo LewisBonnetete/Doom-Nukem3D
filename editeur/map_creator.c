@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/30 18:14:18 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/31 16:20:14 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,43 +227,61 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 	i = 0;
 	(void)info;
 	(void)map;
-	ft_putendl("place you walls");
-	while(i == 0)
-	{
-		SDL_WaitEvent(&event);
-		if(event.type == SDL_MOUSEBUTTONDOWN)
-		{
-			if (is_valid_first_wall(&event))
-			{
-				if (!create_first_wall_edit(sector, height, i, event))
-					return(0);
-				i++;
-			}
-			else
-				ft_putendl("Nope, try something else");
-		}
-	}
+	ft_putendl("Place you walls, you'll have to put two vertex for your first wall\n \
+	Press 'd' to redraw your sector:)");
 	while(i < sector->nbr_walls)
 	{
 		SDL_WaitEvent(&event);
 		if(event.type == SDL_MOUSEBUTTONDOWN)
 		{
-			if (is_valid_wall(&event, sector, i))
+			if	(i == 0)
 			{
-				if (!create_wall_edit(sector, height, i, event))
-					return(0);
-				draw_state(sector);
-				i++;
+				if (is_valid_first_wall(&event))
+				{
+					create_first_wall_edit(sector, height, i, event);
+					i++;
+				}
+				else
+					ft_putendl("Nope, try something else");
 			}
-			else
-				ft_putendl("Nope, try something else");
+			else if (i < sector->nbr_walls - 1 && i > 0)
+			{
+				if (is_valid_wall(&event, sector, i))
+				{
+					create_wall_edit(sector, height, i, event);
+					draw_state(sector);
+					i++;
+				}
+				else
+					ft_putendl("Nope, try something else");
+			}
+			else if (i == sector->nbr_walls - 1)
+			{
+				if (is_valid_last_wall(&event, sector, i))
+				{
+					create_wall_edit(sector, height, i, event);
+					draw_state(sector);
+					i++;
+				}
+				else
+					ft_putendl("Nope, try something else");
+			}
+		}
+		else if(event.key.keysym.sym == SDLK_d)
+		{
+			i = 0;
+			init_walls(sector->walls, sector->nbr_walls);
+			ft_putendl("Sector reseted");
+			ft_putendl("Place you walls, you'll have to put two vertex for your first wall\n \
+	Press 'd' to redraw your sector:)");
+			draw_state(sector);
 		}
 	}
 	close_sector(sector, sector->nbr_walls - 1);
 	return (1);
 }
 
-void		init_wall(t_wall *walls, int nbr_walls)
+void		init_walls(t_wall *walls, int nbr_walls)
 {
 	int i;
 
@@ -298,7 +316,7 @@ int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
 	sector->next_sector = NULL;
 	if(!(sector->walls = (t_wall*)malloc(sizeof(t_wall) * sector->nbr_walls)))
 		return (0);
-	init_wall(sector->walls, sector->nbr_walls);
+	init_walls(sector->walls, sector->nbr_walls);
 	if (!get_walls_sector(info, map, sector, height))
 		return (0);
 	return (1);

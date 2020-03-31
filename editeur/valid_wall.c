@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/30 18:49:43 by lewis            ###   ########.fr       */
+/*   Updated: 2020/03/31 15:40:47 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int		check_wall_intersections(t_point new, t_point old, t_wall wall)
 {
 	t_point w1;
 	t_point w2;
-	int	a1;
-	int	a2;
-	int b1;
-	int b2;
-	float x;
-	float y;
+	float	a1;
+	float	a2;
+	float	b1;
+	float	b2;
+	float	x;
+	float	y;
 
 	x = 0.0;
 	y = 0.0;
@@ -66,6 +66,8 @@ int		check_wall_intersections(t_point new, t_point old, t_wall wall)
 			return (1);
 		if(w2.x == new.x && w1.x == old.x && w2.y == new.y && w1.y == old.y)
 			return (1);
+		if (w1.x != new.x)
+			return (1);
 		return (0);
 	}
 	else if (w1.y == w2.y && new.y == old.y)
@@ -74,14 +76,16 @@ int		check_wall_intersections(t_point new, t_point old, t_wall wall)
 			return (1);
 		if(w2.x == new.x && w1.x == old.x && w2.y == new.y && w1.y == old.y)
 			return (1);
+		if (w1.y != new.y)
+			return (1);
 		return (0);
 	}
 	else
 	{
-		a1 = (new.y - old.y) / (new.x - old.x);
-		a2 = (w2.y - w1.y) / (w2.x - w1.x);
-		b1 = old.y - (a1 * old.x);
-		b2 = w1.y - (a2 * w1.x);
+		a1 = (float)(new.y - old.y) / (float)(new.x - old.x);
+		a2 = (float)(w2.y - w1.y) / (float)(w2.x - w1.x);
+		b1 = (float)old.y - (a1 * (float)old.x);
+		b2 = (float)w1.y - (a2 * (float)w1.x);
 		if (a1 == a2)
 			return (1);
 		x = (b2-b1)/(a1-a2);
@@ -128,6 +132,32 @@ int		is_valid_wall(SDL_Event *event, t_sector *sector, int i)
 		return (0);
 	if (event->button.y <= 0 || event->button.y >= WINDOW_H)
 		return (0);
+	if (!verify_crossing(new, old, sector))
+		return(0);
+	return (1);
+}
+
+int		is_valid_last_wall(SDL_Event *event, t_sector *sector, int i)
+{
+	
+	float		temp;
+	t_point		new;
+	t_point		old;
+
+	temp = (float)event->button.x / (float)WINDOW_H * sector->map->size;
+	new.x = round(temp);
+	temp = (float)event->button.y / (float)WINDOW_H * sector->map->size;
+	new.y = round(temp);
+	old.x = sector->walls[i - 1].a.x;
+	old.y = sector->walls[i - 1].a.y;
+	if (event->button.x <= 0 || event->button.x >= WINDOW_H)
+		return (0);
+	if (event->button.y <= 0 || event->button.y >= WINDOW_H)
+		return (0);
+	if (!verify_crossing(new, old, sector))
+		return(0);
+	old.x = sector->walls[0].a.x;
+	old.y = sector->walls[0].a.y;
 	if (!verify_crossing(new, old, sector))
 		return(0);
 	return (1);
