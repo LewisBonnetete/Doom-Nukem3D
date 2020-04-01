@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/31 16:19:12 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/01 15:10:34 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,7 @@ int		get_map_size();
 
 //checkers
 int		is_valid_wall(SDL_Event *event, t_sector *sector, int i);
-int		is_valid_first_wall(SDL_Event *event);
+int		is_valid_first_wall(SDL_Event *event,t_map *map);
 int		is_valid_last_wall(SDL_Event *event, t_sector *sector, int i);
 int		check_wall_intersections(t_point new, t_point old, t_wall wall);
 

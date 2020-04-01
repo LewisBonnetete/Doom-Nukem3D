@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/31 15:40:47 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/01 16:23:08 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,11 +163,98 @@ int		is_valid_last_wall(SDL_Event *event, t_sector *sector, int i)
 	return (1);
 }
 
-int		is_valid_first_wall(SDL_Event *event)
+int		is_in_core_rectangle(t_point first,t_sector *sector)
 {
+	int minx;
+	int maxx;
+	int miny;
+	int maxy;
+	int i;
+
+	i = 0;
+	minx = WINDOW_H + 1;
+	miny = WINDOW_H + 1;
+	maxx = -1;
+	maxy = -1;
+	while(i < sector->nbr_walls)
+	{
+		if(sector->walls[i].a.x > maxx)
+			maxx = sector->walls[i].a.x;
+		if(sector->walls[i].a.y > maxy)
+			maxy = sector->walls[i].a.y;
+		if(sector->walls[i].a.x < minx)
+			minx = sector->walls[i].a.x;
+		if(sector->walls[i].a.y < miny)
+			miny = sector->walls[i].a.y;
+		if(sector->walls[i].b.x > maxx)
+			maxx = sector->walls[i].b.x;
+		if(sector->walls[i].b.y > maxy)
+			maxy = sector->walls[i].b.y;
+		if(sector->walls[i].b.x < minx)
+			minx = sector->walls[i].b.x;
+		if(sector->walls[i].b.y < miny)
+			miny = sector->walls[i].b.y;
+		i++;
+	}
+	if (first.x < minx || first.x > maxx || first.y < miny || first.y > maxy)
+		return (0);
+	return (1);
+	
+}
+
+int 	pnpoly(int nbr_walls, t_wall *walls, t_point first)
+{
+	int i;
+	int j;
+	int c;
+
+	i = 0;
+	j = nbr_walls - 1;
+	c = 0;
+	while (i < nbr_walls)
+	{
+		if (((walls[i].a.y > first.y) != (walls[j].a.y > first.y)) && (first.x < (walls[j].a.x - walls[i].a.x) * (first.y - walls[i].a.y) / (walls[j].a.y - walls[i].a.y) + walls[i].a.x))
+			c = !c;
+		j = i++;
+	}
+	return (c);
+}
+int		is_in_sector(t_point first,t_sector *sector)
+{
+	if(!is_in_core_rectangle(first, sector))
+		return (1);
+	if (pnpoly(sector->nbr_walls, sector->walls, first))
+		return(0);
+	return (1);
+}
+
+int		is_in_sectors(t_point first,t_map *map)
+{
+	t_sector *current_sector;
+
+	current_sector = map->sectors;
+	while (current_sector->next_sector)
+	{
+		if(!is_in_sector(first, current_sector))
+			return(0);
+		current_sector = current_sector->next_sector;
+	}
+	return (1);
+}
+
+int		is_valid_first_wall(SDL_Event *event,t_map *map)
+{
+	t_point first;
+	float	temp;
 	if (event->button.x <= 0 || event->button.x >= WINDOW_H)
 		return (0);
 	if (event->button.y <= 0 || event->button.y >= WINDOW_H)
+		return (0);
+	temp = (float)event->button.x / (float)WINDOW_H * map->size;
+	first.x = round(temp);
+	temp = (float)event->button.y / (float)WINDOW_H * map->size;
+	first.y = round(temp);
+	if (!is_in_sectors(first, map))
 		return (0);
 	return (1);
 }

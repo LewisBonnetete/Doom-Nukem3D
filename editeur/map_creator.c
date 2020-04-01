@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/31 16:20:14 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/01 15:11:12 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,7 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 		{
 			if	(i == 0)
 			{
-				if (is_valid_first_wall(&event))
+				if (is_valid_first_wall(&event, map))
 				{
 					create_first_wall_edit(sector, height, i, event);
 					i++;
