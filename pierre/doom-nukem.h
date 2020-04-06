@@ -109,20 +109,21 @@ struct					s_text
 	Uint32				color;
 };
 
+	/*
+	wall_sqdist : calcul pour la colonne render->x le carré de la distance du mur au joueur
+		ps : on utilise le carré pour ne pas utiliser la fonction sqrt,
+			on a juste beosin d'avoir un ordre de grandeuur euclidien ?
+	wall_y1 coordonnée du pixel en haut du mur
+	wall_y0 coordonnée du pixel en bas du mur
+	*/
 struct					s_render
 {
 	int					x;
-	int					next_x;
-	int					x0;	//(x0,y0) coin d'affichage au debut (0,0)
-	int					y0;
-	int					x1; //(x1,y1) coin d'affichage au debut (WINDOW_W,WINDOW_H)
-	int					y1;
-	// est-ce qu'on aurait pas besoin de 2 autres coins pour les pourtails?
-	//	(dans le sens, est ce qu'ils seront toujours rectangulaires ? ca me parait bizarre, non, plus des trapezes ? sur un mur en diagonal par ex)
 	int					n;
 	int					sector_id;
 	double				wall_sqdist;
 	double				wall_height;
+	double				wall_dist;
 	int					wall_y0;
 	int					wall_y1;
 	t_ray				ray;
