@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/31 16:04:17 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/06 16:42:12 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	draw_state(t_sector *sector)
 {
 	t_var *info;
 	t_map *map;
-
 
 	info = sector->info;
 	map = sector->map;
@@ -121,12 +120,14 @@ void	draw_sector_edit(t_var *info, t_map *map, t_sector *sector)
 {
 	int i;
 	int max;
+	int delete_me = 0;
 
 	i = 0;
-	ft_putendl("");
-	ft_putstr("euh...  (draw_map/draw_sector_edit)  ");
+	if(delete_me==1)
+		ft_putendl("euh...  (draw_map/draw_sector_edit)  ");
 	max = sector->nbr_walls;
-	ft_putendl("la c'est bon");
+	if(delete_me==1)
+		ft_putendl("la c'est bon");
 	while (i < max)
 	{
 		if (sector->walls[i].b.x >= 0)

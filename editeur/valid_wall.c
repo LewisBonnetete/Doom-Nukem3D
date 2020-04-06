@@ -6,26 +6,11 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/01 16:23:08 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/06 16:18:53 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
-
-int		is_between(float x, float a, float b)
-{
-	if (a > b)
-	{
-		if (x > b && x < a)
-			return (1);
-	}
-	else
-	{
-		if (x > a && x < b)
-			return (1);
-	}
-	return (0);
-}
 
 int		check_wall_intersections(t_point new, t_point old, t_wall wall)
 {
@@ -133,7 +118,7 @@ int		is_valid_wall(SDL_Event *event, t_sector *sector, int i)
 	if (event->button.y <= 0 || event->button.y >= WINDOW_H)
 		return (0);
 	if (!verify_crossing(new, old, sector))
-		return(0);
+		return (0);
 	return (1);
 }
 
