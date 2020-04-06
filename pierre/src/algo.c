@@ -107,12 +107,13 @@ void	update_render(t_var *info, t_render *render)
 	render->wall_height = WALL_H * render->wall->height / render->wall_sqdist;
 	https://www.codeproject.com/Articles/69941/Best-Square-Root-Method-Algorithm-Function-Precisi
 	*/
-	// render->wall_y0 = f(render->wall->a.z, info->player.posz, render->wall_dist);
-	// render->wall_y1 = f(render->wall->c.z, info->player.posz, render->wall_dist);
-	if (info->player.sector_id != render->sector_id && info->player.posz != render->wall->a.z)
+	render->wall_y0 = WINDOW_H / 2 - render->wall_height / 2;
+	render->wall_y1 = WINDOW_H / 2 + render->wall_height / 2;
+	//if (info->player.sector_id != render->sector_id && info->player.posz != render->wall->a.z)
+	if (info->player.posz != render->wall->a.z)
 	{
-		height_diff = render->wall->a.z - render->ray.z;
-		render->wall_sqdist += height_diff * height_diff;
+		render->wall_y0 += DECALLAGE * (render->wall->a.z - info->player.posz) /  render->wall_dist;
+		render->wall_y1 += DECALLAGE * (render->wall->a.z - info->player.posz) /  render->wall_dist;
 	}
 }
 
@@ -166,10 +167,7 @@ int     play(t_var *info, char *str)
 
 	check_input(info, str);		// se coordonner pour le fichier .map/editeur
 	init_var(info, str)			// rempli info
-	render.x0 = 0;
-	render.x1 = WINDOW_W;
-	render.y0 = 0;
-	render.y1 = WINDOW_H;
-	//floor_ceiling_rendering(info);
+	//floor_ceiling_rendering(info);  -> surement a placer dans draw_column,
+	//		ou meme dans draw_textures entre draw portal et draw_wall?
 	raycasting(info; &render);
 }
