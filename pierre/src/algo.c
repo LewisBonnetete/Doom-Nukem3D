@@ -8,7 +8,6 @@ t_var   init_var(char *str)
 void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 {
 	render->x = x0;
-	render->x0 = x0;
 	render->n = -1;
 	render->sector_id = sector_id;
 	render->s = info->map.sectors[sector_id];
@@ -28,13 +27,10 @@ int		init_next_render(t_var *info, t_render *render)
 		return (0);
 	init_render(info, tmp, render->x, render->wall->sector_next);
 	tmp->x1 = render->next_x;
-	// reste a calculer tmp->y0 et tmp->y1 (qui represente le sol et plafond du nouveau secteur dans l'ecran ? pas vraiment avec les angles et la perspective)
-	// ou
-	// les definir dans la structure wall (mieux je pense)
 	return (1);
 }
 
-void	draw_wall_textures(t_var *info, t_render *render)
+void	draw_textures(t_var *info, t_render *render)
 {
 	if(render->wall.is_portal)
 	{
@@ -50,7 +46,7 @@ void	draw_wall_textures(t_var *info, t_render *render)
 				sur les pixels au dessus et en dessous du rectangle de diagonale (x0,y0) et (x1,y1) */
 	}
 	else
-		draw_wall(info, render);
+		draw_wall_texture(info, render);
 		/* horizontalement : remplit, selon la texture, les pixels entre render->x et render->next_x */
 		/* verticalement : voir en fonction de la distance au mur et sa hauteur ? */
 }
@@ -103,32 +99,21 @@ void	update_render(t_var *info, t_render *render)
 {
 	render->wall_sqdist =
 		((render->ray.y2 - render->ray.y) * (render->ray.y2 - render->ray.y))
-		+ (render->ray.x2 - render->ray.x) * (render->ray.x2 - render->ray.x));
-	render->wall_height = WALL_H / render->wall_sqdist;
-	render->wall_y0 = ??;
-		/* depend de :
-			-l'altitude du secteur du wall en question
-			-l'altitude du secteur dans lequel se trouve le joueur
-			-la distance
-			-la hauteur wall_height (!= la hauteur du secteur)
-		*/
-	render->wall_y1 = ??;
-		/* depend de :
-			-la hauteur du secteur du wall en question
-			-la hauteur du secteur dans lequel se trouve le joueur
-			-la distance
-			-la hauteur wall_height (!= la hauteur du secteur)
-		*/
-	render->next_x = render->wall->b.x
-	/*
-	wall_sqdist : calcul pour la colonne render->x le carré de la distance du mur au joueur/plane/fov whatever
-		on utilise le carré pour ne pas utiliser la fonction sqrt, on a juste beosin d'avoir un ordre de grandeuur euclidien
-	wall_y1 coordonnée du pixel en haut du mur
-	wall_y0 coordonnée du pixel en bas du mur
-	next_x coordonnée de la fin du mur (hypothétique car peut etre > a WINDOW_W)
-		utile pour afficher le mur en entier d'un bloc sans verifier pour chaque colonne l'intersection
-		nécessaire dans le cas d'un portail pour définir la fin du next_render->x1 (=min(render->x1, next_x))
+		+ (render->ray.x2 - render->ray.x) * (render->ray.x2 - render->ray.x))
+		+ (render->wall->a.z - render->ray.z) * (render->wall->a.z - render->ray.z);
+	render->wall_dist = sqrt(render->wall_sqdist);
+	render->wall_height = WALL_H * (double)render->wall->height / (double)render->wall_dist;
+	/* optimisation : possible d'éviter la fnc sqrt ?
+	render->wall_height = WALL_H * render->wall->height / render->wall_sqdist;
+	https://www.codeproject.com/Articles/69941/Best-Square-Root-Method-Algorithm-Function-Precisi
 	*/
+	// render->wall_y0 = f(render->wall->a.z, info->player.posz, render->wall_dist);
+	// render->wall_y1 = f(render->wall->c.z, info->player.posz, render->wall_dist);
+	if (info->player.sector_id != render->sector_id && info->player.posz != render->wall->a.z)
+	{
+		height_diff = render->wall->a.z - render->ray.z;
+		render->wall_sqdist += height_diff * height_diff;
+	}
 }
 
 void	update_ray(t_var *info, t_render *render)
@@ -144,30 +129,34 @@ void	update_ray(t_var *info, t_render *render)
 	render->ray.eq_cste =  info->player.posy - render->ray.eq_slope * info->player.posx;
 }
 
-int     walls_and_portals_rendering(t_var *info, t_render *render)
+void	draw_column(t_var *info, t_render *render)
 {
-	while(render->x < render->x1)
+	while(++render->n < render->s->nbr_walls)
+	{
+		render->wall = render->s->walls[n];
+		if(intersect(render->ray, render->wall) == 1)
+		{
+			if(render->wall.is_portal)
+			{
+				init_next_render(info, render);
+				draw_column(info, render);
+				ft_memdel((void**)&(render->next_render));
+			}
+			update_render(info, render);		// manque wall_y0 et wall_y1
+			draw_textures(info, render);		// a faire quand on a wally0/y1
+			return;
+		}
+	}
+}
+
+int     raycasting(t_var *info, t_render *render)
+{
+	init_render(info, &render, 0, info->player.sector_id);
+	while(render->x < WINDOW_W)
 	{
 		update_ray(render);
-		while(++render->n < render->s->nbr_walls && render->x < render->x1)
-		{
-			render->wall = render->s->walls[n];
-			if(intersect(render->ray, render->wall) == 1)
-			{
-				update_render(info, render);	// wall_dist, wall_y0, wall_y1, (next_x ?)
-				if(render->wall.is_portal)
-				{
-					init_next_render(info, render);
-					walls_and_portals_rendering(info, render->next_render);	// récurssion
-					//render->x = render->next_render.x1;
-					ft_memdel((void**)&(render->next_render));	// free le malloc dans init_next_render
-				}
-				draw_wall_textures(info, render);	// affiche les textures du mur ou du portail
-				render->x = ft_min(render->next_x, render->x1); // incrément le x
-				// render->ray.hit_wall = 1;
-				break;
-			}
-		}
+		draw_column(info, render);
+		render->x++;
 	}
 }
 
@@ -181,7 +170,6 @@ int     play(t_var *info, char *str)
 	render.x1 = WINDOW_W;
 	render.y0 = 0;
 	render.y1 = WINDOW_H;
-	init_render(info, &render, 0, info->player.sector_id);
 	//floor_ceiling_rendering(info);
-	walls_and_portals_rendering(info; &render);
+	raycasting(info; &render);
 }
