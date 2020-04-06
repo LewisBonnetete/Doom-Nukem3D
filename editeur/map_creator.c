@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/01 15:11:12 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/06 16:31:45 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,8 +272,24 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 			i = 0;
 			init_walls(sector->walls, sector->nbr_walls);
 			ft_putendl("Sector reseted");
-			ft_putendl("Place you walls, you'll have to put two vertex for your first wall\n \
-	Press 'd' to redraw your sector:)");
+			ft_putendl("Place you walls, you'll have to put two vertex for your first wall\n\
+Press 'd' to redraw your sector :)");
+			draw_state(sector);
+		}
+		if (i == sector->nbr_walls && !check_convexity(sector))
+		{
+			i = 0;
+			init_walls(sector->walls, sector->nbr_walls);
+			ft_putendl("Sorry but your sector is not convex :(");
+			ft_putendl("Sector reseted");
+			draw_state(sector);
+		}
+		if (i == sector->nbr_walls && !check_self_intersection(sector))
+		{
+			i = 0;
+			init_walls(sector->walls, sector->nbr_walls);
+			ft_putendl("Sorry but your sector crosses itself :(");
+			ft_putendl("Sector reseted");
 			draw_state(sector);
 		}
 	}
@@ -314,6 +330,7 @@ int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
 	sector->map = map;
 	sector->info = info;
 	sector->next_sector = NULL;
+	sector->convexity = 0;
 	if(!(sector->walls = (t_wall*)malloc(sizeof(t_wall) * sector->nbr_walls)))
 		return (0);
 	init_walls(sector->walls, sector->nbr_walls);

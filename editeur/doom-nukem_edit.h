@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/01 15:10:34 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/06 16:23:33 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ struct 					s_sector
 	t_wall				celling;
 	int					light;
 	int					sector_id;
+	int					convexity;
 	t_sector			*next_sector;
 	t_map				*map;
 	t_var				*info;
@@ -149,7 +150,6 @@ struct					s_var
 	int					x_dec;
 	int					y_dec;
 	t_input_edit		*input_edit;
-	int					first_vertex_placed;
 };
 
 struct					s_input
@@ -209,7 +209,8 @@ struct					s_line
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 
-
+//calculators
+float		cross_product(t_point a, t_point b, t_point c);
 
 //editer
 int		editer(t_var *info, t_map *map);
@@ -224,6 +225,8 @@ int		is_valid_wall(SDL_Event *event, t_sector *sector, int i);
 int		is_valid_first_wall(SDL_Event *event,t_map *map);
 int		is_valid_last_wall(SDL_Event *event, t_sector *sector, int i);
 int		check_wall_intersections(t_point new, t_point old, t_wall wall);
+int		check_convexity(t_sector *sector);
+int		check_self_intersection(t_sector *sector);
 
 //init func
 void	init_box(t_map *map);

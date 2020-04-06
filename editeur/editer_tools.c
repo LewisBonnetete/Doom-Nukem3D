@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/31 16:18:11 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/06 16:17:22 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,33 @@ t_sector	*get_a_sector_by_id(t_map *map, int id)
 	if (id == 0)
 		return(NULL);
 	return (sector);
+}
+
+float		cross_product(t_point a, t_point b, t_point c)
+{
+	float bax;
+    float bay;
+    float bcx;
+    float bcy;
+
+	bax = a.x - b.x;
+    bay = a.y - b.y;
+    bcx = c.x - b.x;
+    bcy = c.y - b.y;
+	return (bax * bcy - bay * bcx);
+}
+
+int		is_between(float x, float a, float b)
+{
+	if (a > b)
+	{
+		if (x > b && x < a)
+			return (1);
+	}
+	else
+	{
+		if (x > a && x < b)
+			return (1);
+	}
+	return (0);
 }
