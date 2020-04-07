@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/06 16:23:33 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/07 17:03:49 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,10 @@ int						init_win2(t_var *info);
 
 //calculators
 float		cross_product(t_point a, t_point b, t_point c);
+int			is_both_inferior_x(t_point a, t_point b, t_point c, t_point d);
+int			is_both_superior_x(t_point a, t_point b, t_point c, t_point d);
+int			is_both_inferior_y(t_point a, t_point b, t_point c, t_point d);
+int			is_both_superior_y(t_point a, t_point b, t_point c, t_point d);
 
 //editer
 int		editer(t_var *info, t_map *map);
@@ -227,14 +231,14 @@ int		is_valid_last_wall(SDL_Event *event, t_sector *sector, int i);
 int		check_wall_intersections(t_point new, t_point old, t_wall wall);
 int		check_convexity(t_sector *sector);
 int		check_self_intersection(t_sector *sector);
+int		is_in_sectors(t_point first,t_map *map);
+int		is_in_sectors_float(float center_x, float center_y, t_map *map);
 
 //init func
 void	init_box(t_map *map);
 void	init_map(t_map *map);
 void	init_var(t_var *info);
 void	init_walls(t_wall *walls, int nbr_walls);
-
-void	init_artificial_map(t_map *map);
 
 //drawers
 void	draw_interactions_edit(t_var *info, t_map *map);

@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/06 16:25:18 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/07 16:55:13 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		check_self_intersection(t_sector *sector)
 		j = 0;
 		while (j < sector->nbr_walls)
 		{
-			if (j != i)
+			if (j != i && sector->walls[i].a.x > 0 && sector->walls[i].b.x > 0 && sector->walls[j].a.x > 0 && sector->walls[j].b.x > 0)
 			{
 				if(!check_wall_intersections(sector->walls[i].a, sector->walls[i].b, sector->walls[j]))
 					return (0);
@@ -64,6 +64,45 @@ int		check_self_intersection(t_sector *sector)
 			j++;
 		}
 		i++;
+	}
+	return (1);
+}
+
+int 	pnpoly(int nbr_walls, t_wall *walls, t_point first)
+{
+	int i;
+	int j;
+	int c;
+
+	i = 0;
+	j = nbr_walls - 1;
+	c = 0;
+	while (i < nbr_walls)
+	{
+		if (((walls[i].a.y > first.y) != (walls[j].a.y > first.y)) && (first.x < (walls[j].a.x - walls[i].a.x) * (first.y - walls[i].a.y) / (walls[j].a.y - walls[i].a.y) + walls[i].a.x))
+			c = !c;
+		j = i++;
+	}
+	return (c);
+}
+
+int		is_in_sector(t_point first,t_sector *sector)
+{
+	if (pnpoly(sector->nbr_walls, sector->walls, first))
+		return(0);
+	return (1);
+}
+
+int		is_in_sectors(t_point first,t_map *map)
+{
+	t_sector *current_sector;
+
+	current_sector = map->sectors;
+	while (current_sector->next_sector)
+	{
+		if(!is_in_sector(first, current_sector))
+			return(0);
+		current_sector = current_sector->next_sector;
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/06 16:31:45 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/07 16:28:27 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -313,10 +313,6 @@ void		init_walls(t_wall *walls, int nbr_walls)
 		walls[i].b.y = -1;
 		walls[i].d.y = -1;
 		walls[i].c.y = -1;
-		walls[i].a.z = -1;
-		walls[i].b.z = -1;
-		walls[i].d.z = -1;
-		walls[i].c.z = -1;
 		i++;
 	}
 }
