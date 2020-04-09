@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/07 16:28:27 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/09 17:25:16 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,11 +163,11 @@ int			create_first_wall_edit(t_sector *sector,int *height, int i, SDL_Event	even
 
 	sector->walls[i].sector_id = sector->sector_id;
 	sector->walls[i].wall_id = i;
-	temp = (float)event.button.x / (float)WINDOW_H * sector->map->size;
+	temp = (float)event.button.x / (float)(WINDOW_H - 50) * sector->map->size;
 	temp = round(temp);
 	sector->walls[i].a.x = temp;
 	sector->walls[i].d.x = temp;
-	temp = (float)event.button.y / (float)WINDOW_H * sector->map->size;
+	temp = (float)event.button.y / (float)(WINDOW_H - 50) * sector->map->size;
 	temp = round(temp);
 	sector->walls[i].a.y = temp;
 	sector->walls[i].d.y = temp;
@@ -191,11 +191,11 @@ int			create_wall_edit(t_sector *sector,int *height, int i, SDL_Event	event)
 	float temp;
 	sector->walls[i].sector_id = sector->sector_id;
 	sector->walls[i].wall_id = i;
-	temp = (float)event.button.x / (float)WINDOW_H * sector->map->size;
+	temp = (float)event.button.x / (float)(WINDOW_H - 50) * sector->map->size;
 	temp = round(temp);
 	sector->walls[i].a.x = temp;
 	sector->walls[i].d.x = temp;
-	temp = (float)event.button.y / (float)WINDOW_H * sector->map->size;
+	temp = (float)event.button.y / (float)(WINDOW_H - 50) * sector->map->size;
 	temp = round(temp);
 	sector->walls[i].a.y = temp;
 	sector->walls[i].d.y = temp;

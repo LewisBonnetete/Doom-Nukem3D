@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/06 16:42:12 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/09 17:21:15 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,28 @@ void	draw_grid(t_var *info, t_map *map)
 	int y;
 
 	x = 0;
-	while(x < WINDOW_H)
+	while(x < WINDOW_H - 50)
 	{
 		y = 0;
-		while (y < WINDOW_H)
+		while (y < WINDOW_H - 50)
 		{
-			if(x > 0 && x < WINDOW_H && y > 0 && y < WINDOW_H)
+			if(x > 0 && x < WINDOW_H - 50 && y > 0 && y < WINDOW_H - 50)
 				put_pixel_to_suface(BLACK, x, y, info->image);
 			y += 1;
 		}
 		x += 1;
 	}
 	x = 0;
-	while(x < WINDOW_H)
+	while(x < WINDOW_H - 50)
 	{
 		y = 0;
-		while (y < WINDOW_H)
+		while (y < WINDOW_H - 50)
 		{
-			if(x > 0 && x < WINDOW_H && y > 0 && y < WINDOW_H)
+			if(x > 0 && x < WINDOW_H - 50 && y > 0 && y < WINDOW_H - 50)
 				put_pixel_to_suface(WHITE, x, y, info->image);
-			y += WINDOW_H / map->size;
+			y += (WINDOW_H - 50) / map->size;
 		}
-		x += WINDOW_H / map->size;
+		x += (WINDOW_H - 50) / map->size;
 	}
 	draw_cadre(info);
 }
@@ -148,10 +148,10 @@ void	draw_wall_edit(t_var *info, t_map *map, t_sector *sector, int wall_id)
 	wall = sector->walls[wall_id];
 	if(wall.is_portal)
 		color = BLUE;
-	line.x1 = wall.a.x * (WINDOW_H / map->size);
-	line.x2 = wall.b.x * (WINDOW_H / map->size);
-	line.y1 = wall.a.y * (WINDOW_H / map->size);
-	line.y2 = wall.b.y * (WINDOW_H / map->size);
+	line.x1 = wall.a.x * ((WINDOW_H - 50)/ map->size);
+	line.x2 = wall.b.x * ((WINDOW_H - 50)/ map->size);
+	line.y1 = wall.a.y * ((WINDOW_H  - 50) / map->size);
+	line.y2 = wall.b.y * ((WINDOW_H - 50) / map->size);
 	draw_line(info, &line, color);
 }
 
