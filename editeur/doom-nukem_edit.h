@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/07 17:03:49 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/10 15:33:11 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,8 +176,6 @@ struct					s_input_edit
 	int					left_click;
 	int 				del;
 	int					t_s;
-	int					t_p;
-	int					t_y;
 	int					t_n;
 	int					t_0;
 	int					t_1;
@@ -218,6 +216,8 @@ int			is_both_superior_y(t_point a, t_point b, t_point c, t_point d);
 
 //editer
 int		editer(t_var *info, t_map *map);
+int		validate(t_map *map);
+void	set_spawn(t_map *map);
 int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit);
 void	dealers_init(t_input_edit *input_edit);
 void	dealers_tester(t_input_edit input_edit);
@@ -233,6 +233,7 @@ int		check_convexity(t_sector *sector);
 int		check_self_intersection(t_sector *sector);
 int		is_in_sectors(t_point first,t_map *map);
 int		is_in_sectors_float(float center_x, float center_y, t_map *map);
+int		is_new_point_in_sector(t_point new, t_wall *walls);
 
 //init func
 void	init_box(t_map *map);

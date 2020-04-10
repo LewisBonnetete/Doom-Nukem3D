@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/24 16:15:19 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/10 15:28:33 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ void	init_box(t_map *map)
 
 void	init_map(t_map *map)
 {
-	map->spawn.x = 0;
-	map->spawn.y = 0;
-	map->spawn.z = 0;
+	map->spawn.x = -1;
+	map->spawn.y = -1;
+	map->spawn.z = -1;
 	map->sectors = NULL;
 }
 

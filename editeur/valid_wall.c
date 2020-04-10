@@ -6,11 +6,25 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/09 16:05:48 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/10 15:21:50 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
+
+int		is_new_point_in_sector(t_point new, t_wall *walls)
+{
+	int i;
+
+	i = 0;
+	while(walls[i].a.x > 0)
+	{
+		if (new.x == walls[i].a.x && new.y == walls[i].a.y)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int		center_in_poly(t_point a, t_point b, t_sector *sector)
 {
@@ -152,6 +166,8 @@ int		is_valid_wall(SDL_Event *event, t_sector *sector, int i)
 		return (0);
 	if (event->button.y <= 0 || event->button.y >= WINDOW_H - 50)
 		return (0);
+	if(!is_new_point_in_sector(new, sector->walls))
+		return (0);
 	if (!verify_crossing(new, old, sector))
 		return (0);
 	if (!center_in_poly(new, old, sector))
@@ -175,6 +191,8 @@ int		is_valid_last_wall(SDL_Event *event, t_sector *sector, int i)
 	if (event->button.x <= 0 || event->button.x >= WINDOW_H - 50)
 		return (0);
 	if (event->button.y <= 0 || event->button.y >= WINDOW_H - 50)
+		return (0);
+	if (!is_new_point_in_sector(new, sector->walls))
 		return (0);
 	if (!verify_crossing(new, old, sector))
 		return(0);

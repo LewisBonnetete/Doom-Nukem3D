@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/07 16:55:13 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/10 15:57:00 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ int 	pnpoly(int nbr_walls, t_wall *walls, t_point first)
 int		is_in_sector(t_point first,t_sector *sector)
 {
 	if (pnpoly(sector->nbr_walls, sector->walls, first))
-		return(0);
+	{
+		sector->map->spawn.z = sector->walls[0].a.z;
+		return (0);
+	}
 	return (1);
 }
 
