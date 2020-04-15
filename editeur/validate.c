@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/10 16:11:36 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/15 17:33:58 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		validate(t_map *map)
 		ft_putendl ("Map is too small, create at least two sectors");
 		return (0);
 	}
-	set_spawn(map);
-	return (1);
+	if (set_spawn(map))
+		return (1);
+	return (0);
 }

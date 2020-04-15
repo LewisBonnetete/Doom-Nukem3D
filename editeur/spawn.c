@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/10 16:15:26 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/15 18:33:28 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,14 @@ int		is_new_point_in_sectors(t_point new, t_map *map)
 	return (1);
 }
 
-int		is_in_wall(t_point new, t_map *map)
-{
-	(void)new;
-	(void)map;
-	return (0);
-}
-
 int		spawn_checks(t_point new, t_map *map)
 {
-	if (!is_in_sectors(new, map))
+	if (!is_in_sectors_spawn(new, map))
 	{
-		ft_putendl("Spawn must be in a sector");
+		ft_putendl("Spawn must be in a sector or a bigger one");
 		return (0);
 	}
-	if (!is_new_point_in_sectors(new, map) || is_in_wall(new, map))
+	if (!is_new_point_in_sectors(new, map))
 	{
 		ft_putendl("Spawn can't be inside a wall");
 		return (0);
@@ -48,7 +41,7 @@ int		spawn_checks(t_point new, t_map *map)
 	return (1);
 }
 
-void	set_spawn(t_map *map)
+int		set_spawn(t_map *map)
 {
 	int ok;
 	t_point new;
@@ -60,16 +53,23 @@ void	set_spawn(t_map *map)
 	while(ok == 0)
 	{
 		SDL_WaitEvent(&event);
-		if(event.type == SDL_MOUSEBUTTONDOWN)
+		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
 			temp = (float)event.button.x / (float)(WINDOW_H - 50) * map->size;
 			new.x = round(temp);
 			temp = (float)event.button.y / (float)(WINDOW_H - 50) * map->size;
 			new.y = round(temp);
+			printf("spawn: %i | %i\n",new.x,new.y);
 			ok = spawn_checks(new, map);
+		}
+		else if (event.key.keysym.sym == SDLK_d)
+		{
+			ft_putendl("Back to creation");
+			return (0);
 		}
 	}
 	map->spawn.x = new.x;
 	map->spawn.y = new.y;
 	printf("spawn: %i | %i | %i\n",map->spawn.x,map->spawn.y,map->spawn.z);
+	return (1);
 }
