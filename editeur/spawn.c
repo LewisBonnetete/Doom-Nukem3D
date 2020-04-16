@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/15 18:33:28 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/16 16:06:09 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int		set_spawn(t_map *map)
 			new.x = round(temp);
 			temp = (float)event.button.y / (float)(WINDOW_H - 50) * map->size;
 			new.y = round(temp);
-			printf("spawn: %i | %i\n",new.x,new.y);
 			ok = spawn_checks(new, map);
 		}
 		else if (event.key.keysym.sym == SDLK_d)

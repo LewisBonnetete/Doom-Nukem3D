@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/15 18:25:47 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/16 16:29:43 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ int		center_in_poly(t_point a, t_point b, t_sector *sector)
 		return (0);
 	}
 	return (1);
-}
-
-int		is_same_point(t_point a, t_point b)
-{
-	if (a.x == b.x && a.y == b.y)
-		return (1);
-	return (0);
 }
 
 int		check_wall_intersections(t_point new, t_point old, t_wall wall)
@@ -162,8 +155,10 @@ int		is_valid_wall(SDL_Event *event, t_sector *sector, int i)
 	t_point		new;
 	t_point		old;
 
+	ft_putendl("1");
 	temp = (float)event->button.x / (float)(WINDOW_H - 50) * sector->map->size;
 	new.x = round(temp);
+	ft_putendl("2");
 	temp = (float)event->button.y / (float)(WINDOW_H - 50) * sector->map->size;
 	new.y = round(temp);
 	old.x = sector->walls[i - 1].a.x;

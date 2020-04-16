@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/15 17:42:06 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/16 16:17:45 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ struct 					s_sector
 	t_wall				celling;
 	int					light;
 	int					sector_id;
-	int					convexity;
 	t_sector			*next_sector;
 	t_map				*map;
 	t_var				*info;
@@ -218,10 +217,10 @@ int			is_both_superior_y(t_point a, t_point b, t_point c, t_point d);
 int		editer(t_var *info, t_map *map);
 int		validate(t_map *map);
 int		set_spawn(t_map *map);
+int 	portals(t_map *map);
 int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit);
 void	dealers_init(t_input_edit *input_edit);
 void	dealers_tester(t_input_edit input_edit);
-int		open_package();
 int		get_map_size();
 
 //checkers
@@ -235,6 +234,7 @@ int		is_in_sectors(t_point first,t_map *map);
 int		is_in_sectors_spawn(t_point first,t_map *map);
 int		is_in_sectors_float(float center_x, float center_y, t_map *map);
 int		is_new_point_in_sector(t_point new, t_wall *walls);
+int		is_same_point(t_point a, t_point b);
 
 //init func
 void	init_box(t_map *map);

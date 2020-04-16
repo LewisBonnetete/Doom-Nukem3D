@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/15 18:04:52 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/16 16:31:19 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,15 +106,6 @@ void	get_portal_info(t_wall *wall, t_map *map)
 			}
 			else
 				ft_putendl("What? try something else");
-		}
-		ft_putendl("What's the sector it leads to?(0 to lead outside)");
-		ok = -1;
-		while(ok <= 0 || ok > nbr_of_sectors(map))
-		{
-			get_next_line(0, &line);
-			ok = ft_atoi(line);
-			if (ok < 0 || ok > nbr_of_sectors(map))
-				ft_putendl("Wrong id, try something else");
 		}
 		wall->sector_next = get_a_sector_by_id(map, ok);
 	}	
@@ -246,10 +237,14 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 			}
 			else if (i < sector->nbr_walls - 1 && i > 0)
 			{
+				ft_putendl("a");
 				if (is_valid_wall(&event, sector, i))
 				{
+					ft_putendl("b");
 					create_wall_edit(sector, height, i, event);
+					ft_putendl("c");
 					draw_state(sector);
+					ft_putendl("d");
 					i++;
 				}
 				else
@@ -317,16 +312,36 @@ void		init_walls(t_wall *walls, int nbr_walls)
 	}
 }
 
-int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
+int		init_first_sector(t_var *info, t_sector *sector, t_map *map)
 {
 	int height[2];
 
+	sector->sector_id = 0;
 	get_height_sector(map, height);
 	sector->nbr_walls = get_nbr_walls();
 	sector->map = map;
 	sector->info = info;
 	sector->next_sector = NULL;
-	sector->convexity = 0;
+	if(!(sector->walls = (t_wall*)malloc(sizeof(t_wall) * sector->nbr_walls)))
+		return (0);
+	init_walls(sector->walls, sector->nbr_walls);
+	if (!get_walls_sector(info, map, sector, height))
+		return (0);
+	return (1);
+}
+
+int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
+{
+	int height[2];
+
+	sector->next_sector->sector_id = sector->sector_id + 1;
+	sector = sector->next_sector;
+	get_height_sector(map, height);
+	sector->nbr_walls = get_nbr_walls();
+	sector->map = map;
+	sector->info = info;
+	sector->next_sector = NULL;
+	sector->sector_id = sector->sector_id + 1;
 	if(!(sector->walls = (t_wall*)malloc(sizeof(t_wall) * sector->nbr_walls)))
 		return (0);
 	init_walls(sector->walls, sector->nbr_walls);
@@ -343,12 +358,12 @@ int		create_sector(t_var *info, t_map *map)
 	if(sector)
 	{
 		sector = get_to_last_sector(map->sectors);
-		if (!(sector->next_sector = (t_sector*)malloc(sizeof(t_sector))) || (!init_new_sector(info, sector->next_sector, map)))
+		if (!(sector->next_sector = (t_sector*)malloc(sizeof(t_sector))) || (!init_new_sector(info, sector, map)))
 			return (exit_edit(info, map));
 	}
 	else
 	{
-		if (!(map->sectors = (t_sector*)malloc(sizeof(t_sector))) || (!init_new_sector(info, map->sectors, map)))
+		if (!(map->sectors = (t_sector*)malloc(sizeof(t_sector))) || (!init_first_sector(info, map->sectors, map)))
 			return (exit_edit(info, map));
 	}
 	return (1);

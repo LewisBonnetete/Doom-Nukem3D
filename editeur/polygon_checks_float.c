@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/07 17:04:16 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/16 16:05:21 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int 	pnpoly_float(int nbr_walls, t_wall *walls, float center_x, float center_y)
 	c = 0;
 	while (i < nbr_walls)
 	{
-		if (((walls[i].a.y > center_y) != (walls[j].a.y > center_y)) && (center_x < (walls[j].a.x - walls[i].a.x) * (center_y - walls[i].a.y) / (walls[j].a.y - walls[i].a.y) + walls[i].a.x))
+		if (((walls[i].a.y >= center_y) != (walls[j].a.y >= center_y)) && (center_x < (walls[j].a.x - walls[i].a.x) * (center_y - walls[i].a.y) / (walls[j].a.y - walls[i].a.y) + walls[i].a.x))
 			c = !c;
 		j = i++;
 	}
