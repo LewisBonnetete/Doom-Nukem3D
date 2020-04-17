@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/10 15:28:33 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/17 15:10:46 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	init_artificial_map(t_map *map)
 	map->sectors->walls[0].fill_up = 0;
 	map->sectors->walls[0].fill_down = 0;
 	map->sectors->walls[0].sector_id = 1;
-	map->sectors->walls[0].sector_next = 0;
+	map->sectors->walls[0].sector_id_it_leads_to = 0;
 
 	map->sectors->walls[1].a.x = 4;
 	map->sectors->walls[1].a.y = 1;
@@ -172,7 +172,7 @@ void	init_artificial_map(t_map *map)
 	map->sectors->walls[1].fill_up = 0;
 	map->sectors->walls[1].fill_down = 0;
 	map->sectors->walls[1].sector_id = 1;
-	map->sectors->walls[1].sector_next = 0;
+	map->sectors->walls[1].sector_id_it_leads_to = 0;
 
 	map->sectors->walls[2].a.x = 4;
 	map->sectors->walls[2].a.y = 4;
@@ -194,7 +194,7 @@ void	init_artificial_map(t_map *map)
 	map->sectors->walls[2].fill_up = 0;
 	map->sectors->walls[2].fill_down = 0;
 	map->sectors->walls[2].sector_id = 1;
-	map->sectors->walls[2].sector_next = 0;
+	map->sectors->walls[2].sector_id_it_leads_to = 0;
 	
 	map->sectors->walls[3].a.x = 1;
 	map->sectors->walls[3].a.y = 4;
@@ -216,7 +216,7 @@ void	init_artificial_map(t_map *map)
 	map->sectors->walls[3].fill_up = 0;
 	map->sectors->walls[3].fill_down = 0;
 	map->sectors->walls[3].sector_id = 1;
-	map->sectors->walls[3].sector_next = 0;
+	map->sectors->walls[3].sector_id_it_leads_to = 0;
 
 	map->box.floor.a = map->sectors->walls[0].d;
 	map->box.floor.b = map->sectors->walls[1].d;
@@ -250,7 +250,7 @@ void	init_artificial_map(t_map *map)
 	sector2->walls[0].fill_up = 0;
 	sector2->walls[0].fill_down = 0;
 	sector2->walls[0].sector_id = 2;
-	sector2->walls[0].sector_next = 0;
+	sector2->walls[0].sector_id_it_leads_to = 0;
 
 	sector2->walls[1].a.x = 8;
 	sector2->walls[1].a.y = 5;
@@ -272,7 +272,7 @@ void	init_artificial_map(t_map *map)
 	sector2->walls[1].fill_up = 0;
 	sector2->walls[1].fill_down = 0;
 	sector2->walls[1].sector_id = 2;
-	sector2->walls[1].sector_next = 0;
+	sector2->walls[1].sector_id_it_leads_to = 0;
 
 	sector2->walls[2].a.x = 8;
 	sector2->walls[2].a.y = 8;
@@ -294,7 +294,7 @@ void	init_artificial_map(t_map *map)
 	sector2->walls[2].fill_up = 0;
 	sector2->walls[2].fill_down = 0;
 	sector2->walls[2].sector_id = 2;
-	sector2->walls[2].sector_next = 0;
+	sector2->walls[2].sector_id_it_leads_to = 0;
 	
 	sector2->walls[3].a.x = 5;
 	sector2->walls[3].a.y = 8;
@@ -316,5 +316,5 @@ void	init_artificial_map(t_map *map)
 	sector2->walls[3].fill_up = 0;
 	sector2->walls[3].fill_down = 0;
 	sector2->walls[3].sector_id = 2;
-	sector2->walls[3].sector_next = 0;
+	sector2->walls[3].sector_id_it_leads_to = 0;
 }

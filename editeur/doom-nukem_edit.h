@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/16 16:17:45 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/17 14:53:17 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ struct 					s_wall
 	int					fill_up;
 	int					fill_down;
 	int					sector_id;
-	t_sector			*sector_next;
+	int					sector_id_it_leads_to;
 
 };
 

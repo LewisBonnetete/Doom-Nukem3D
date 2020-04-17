@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/16 16:31:19 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/17 15:11:59 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	get_textures(t_wall *wall)
 	}
 }
 
-void	get_portal_info(t_wall *wall, t_map *map)
+void	get_portal_info(t_wall *wall)
 {
 	int ok;
 	char *line;
@@ -107,7 +107,6 @@ void	get_portal_info(t_wall *wall, t_map *map)
 			else
 				ft_putendl("What? try something else");
 		}
-		wall->sector_next = get_a_sector_by_id(map, ok);
 	}	
 }
 
@@ -193,7 +192,7 @@ int			create_wall_edit(t_sector *sector,int *height, int i, SDL_Event	event)
 	sector->walls[i].d.z = height[0];
 	sector->walls[i].a.z = height[1];
 	wall_fusion(sector, i);
-	get_portal_info(&sector->walls[i - 1], sector->map);
+	get_portal_info(&sector->walls[i - 1]);
 	get_textures(&sector->walls[i - 1]);
 	return (1);
 }
@@ -206,7 +205,7 @@ void	close_sector(t_sector *sector, int i)
 	sector->walls[i].c.y = sector->walls[0].d.y;
 	sector->walls[i].c.z = sector->walls[0].d.z;
 	sector->walls[i].b.z = sector->walls[0].a.z;
-	get_portal_info(&sector->walls[i], sector->map);
+	get_portal_info(&sector->walls[i]);
 	get_textures(&sector->walls[i]);
 }
 
@@ -316,7 +315,7 @@ int		init_first_sector(t_var *info, t_sector *sector, t_map *map)
 {
 	int height[2];
 
-	sector->sector_id = 0;
+	sector->sector_id = 1;
 	get_height_sector(map, height);
 	sector->nbr_walls = get_nbr_walls();
 	sector->map = map;
@@ -341,7 +340,7 @@ int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
 	sector->map = map;
 	sector->info = info;
 	sector->next_sector = NULL;
-	sector->sector_id = sector->sector_id + 1;
+	sector->sector_id = sector->sector_id;
 	if(!(sector->walls = (t_wall*)malloc(sizeof(t_wall) * sector->nbr_walls)))
 		return (0);
 	init_walls(sector->walls, sector->nbr_walls);
