@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/09 17:21:15 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/18 17:38:50 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	draw_state(t_sector *sector)
 	map = sector->map;
 	draw_grid(info, map);
 	draw_map_edit(info, map);
-	draw_sector_edit(info, map, sector);
 	if (!(info->texture = SDL_CreateTextureFromSurface(info->renderer, info->image)))
 	{
 		ft_putstr("Erreur CreateTextureFromSurface :\n");
@@ -110,19 +109,26 @@ void	draw_sectors_edit(t_var *info, t_map *map)
 		sector = map->sectors;
 		while(sector != NULL)
 		{
-			draw_sector_edit(info, map, sector);
+			draw_sector_wall_edit(info, map, sector);
+			sector = sector->next_sector;
+		}
+		sector = map->sectors;
+		while(sector != NULL)
+		{
+			draw_sector_portal_edit(info, map, sector);
 			sector = sector->next_sector;
 		}
 	}
 }
 
-void	draw_sector_edit(t_var *info, t_map *map, t_sector *sector)
+void	draw_sector_wall_edit(t_var *info, t_map *map, t_sector *sector)
 {
 	int i;
 	int max;
 	int delete_me = 0;
 
 	i = 0;
+	//delete
 	if(delete_me==1)
 		ft_putendl("euh...  (draw_map/draw_sector_edit)  ");
 	max = sector->nbr_walls;
@@ -138,21 +144,57 @@ void	draw_sector_edit(t_var *info, t_map *map, t_sector *sector)
 	}	
 }
 
+void	draw_sector_portal_edit(t_var *info, t_map *map, t_sector *sector)
+{
+	int i;
+	int max;
+	int delete_me = 0;
+
+	i = 0;
+	//delete
+	if(delete_me==1)
+		ft_putendl("euh...  (draw_map/draw_sector_edit)  ");
+	max = sector->nbr_walls;
+	if(delete_me==1)
+		ft_putendl("la c'est bon");
+	while (i < max)
+	{
+		if (sector->walls[i].b.x >= 0)
+		{
+			draw_portal_edit(info, map, sector, i);
+		}
+		i++;
+	}	
+}
+
 void	draw_wall_edit(t_var *info, t_map *map, t_sector *sector, int wall_id)
 {
 	t_line line;
 	t_wall wall;
-	Uint32 color;
-
-	color = WHITE;
 	wall = sector->walls[wall_id];
-	if(wall.is_portal)
-		color = BLUE;
-	line.x1 = wall.a.x * ((WINDOW_H - 50)/ map->size);
-	line.x2 = wall.b.x * ((WINDOW_H - 50)/ map->size);
-	line.y1 = wall.a.y * ((WINDOW_H  - 50) / map->size);
-	line.y2 = wall.b.y * ((WINDOW_H - 50) / map->size);
-	draw_line(info, &line, color);
+	if (wall.is_portal == 0)
+	{
+		line.x1 = wall.a.x * ((WINDOW_H - 50)/ map->size);
+		line.x2 = wall.b.x * ((WINDOW_H - 50)/ map->size);
+		line.y1 = wall.a.y * ((WINDOW_H  - 50) / map->size);
+		line.y2 = wall.b.y * ((WINDOW_H - 50) / map->size);
+		draw_line(info, &line, WHITE);
+	}
+}
+
+void	draw_portal_edit(t_var *info, t_map *map, t_sector *sector, int wall_id)
+{
+	t_line line;
+	t_wall wall;
+	wall = sector->walls[wall_id];
+	if (wall.is_portal == 1)
+	{
+		line.x1 = wall.a.x * ((WINDOW_H - 50)/ map->size);
+		line.x2 = wall.b.x * ((WINDOW_H - 50)/ map->size);
+		line.y1 = wall.a.y * ((WINDOW_H  - 50) / map->size);
+		line.y2 = wall.b.y * ((WINDOW_H - 50) / map->size);
+		draw_line(info, &line, BLUE);
+	}
 }
 
 void	draw_map_edit(t_var *info, t_map *map)

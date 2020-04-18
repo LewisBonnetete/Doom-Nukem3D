@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/17 14:53:17 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/18 17:39:18 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,9 +245,10 @@ void	init_walls(t_wall *walls, int nbr_walls);
 //drawers
 void	draw_interactions_edit(t_var *info, t_map *map);
 int		draw_state(t_sector *sector);
-
 void	draw_wall_edit(t_var *info, t_map *map, t_sector *sector, int wall_id);
-void	draw_sector_edit(t_var *info, t_map *map, t_sector *sector);
+void	draw_portal_edit(t_var *info, t_map *map, t_sector *sector, int wall_id);
+void	draw_sector_wall_edit(t_var *info, t_map *map, t_sector *sector);
+void	draw_sector_portal_edit(t_var *info, t_map *map, t_sector *sector);
 void	draw_sectors_edit(t_var *info, t_map *map);
 void	draw_grid(t_var *info, t_map *map);
 void	draw_map_edit(t_var *info, t_map *map);
