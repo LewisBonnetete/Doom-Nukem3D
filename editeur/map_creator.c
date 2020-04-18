@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/17 15:11:59 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/18 17:26:26 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	get_portal_info(t_wall *wall)
 	}	
 }
 
-int		get_nbr_walls()
+void		get_nbr_walls_sector_textures(t_sector *sector)
 {
 	char	*line;
 	int		size;
@@ -124,7 +124,27 @@ int		get_nbr_walls()
 		if (size < 3 || size > 25)
 			ft_putendl("Wrong number of walls, try something else");
 	}
-	return (size);
+	sector->nbr_walls = size;
+	ft_putendl("Texture id of the Floor?");
+	size = -1;
+	while(size < 0 || size > 10)
+	{
+		get_next_line(0, &line);
+		size = ft_atoi(line);
+		if (size < 0 || size > 10)
+			ft_putendl("Wrong number of walls, try something else");
+	}
+	sector->floor.text_id = size;
+	ft_putendl("Texture id of the Ceilling?");
+	size = -1;
+	while(size < 0 || size > 10)
+	{
+		get_next_line(0, &line);
+		size = ft_atoi(line);
+		if (size < 0 || size > 10)
+			ft_putendl("Wrong number of walls, try something else");
+	}
+	sector->celling.text_id = size;
 }
 void		get_height_sector(t_map *map, int *height)
 {
@@ -236,14 +256,10 @@ int		get_walls_sector(t_var *info, t_map *map, t_sector *sector,int *height)
 			}
 			else if (i < sector->nbr_walls - 1 && i > 0)
 			{
-				ft_putendl("a");
 				if (is_valid_wall(&event, sector, i))
 				{
-					ft_putendl("b");
 					create_wall_edit(sector, height, i, event);
-					ft_putendl("c");
 					draw_state(sector);
-					ft_putendl("d");
 					i++;
 				}
 				else
@@ -317,7 +333,7 @@ int		init_first_sector(t_var *info, t_sector *sector, t_map *map)
 
 	sector->sector_id = 1;
 	get_height_sector(map, height);
-	sector->nbr_walls = get_nbr_walls();
+	get_nbr_walls_sector_textures(sector);
 	sector->map = map;
 	sector->info = info;
 	sector->next_sector = NULL;
@@ -336,7 +352,7 @@ int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
 	sector->next_sector->sector_id = sector->sector_id + 1;
 	sector = sector->next_sector;
 	get_height_sector(map, height);
-	sector->nbr_walls = get_nbr_walls();
+	get_nbr_walls_sector_textures(sector);
 	sector->map = map;
 	sector->info = info;
 	sector->next_sector = NULL;

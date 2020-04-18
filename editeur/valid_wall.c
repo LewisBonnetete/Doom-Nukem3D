@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/16 16:29:43 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/18 17:27:55 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,10 +155,8 @@ int		is_valid_wall(SDL_Event *event, t_sector *sector, int i)
 	t_point		new;
 	t_point		old;
 
-	ft_putendl("1");
 	temp = (float)event->button.x / (float)(WINDOW_H - 50) * sector->map->size;
 	new.x = round(temp);
-	ft_putendl("2");
 	temp = (float)event->button.y / (float)(WINDOW_H - 50) * sector->map->size;
 	new.y = round(temp);
 	old.x = sector->walls[i - 1].a.x;

@@ -6,7 +6,7 @@
 #    By: lewis <lewis@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/04/16 15:47:54 by lewis            ###   ########.fr        #
+#    Updated: 2020/04/18 16:37:21 by lewis            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRC =	main.c\
 		init_interact.c\
 		draw_map.c\
 		editer_tools.c\
-		parser.c\
 		exit_edit.c\
 		del_sector.c\
 		valid_wall.c\

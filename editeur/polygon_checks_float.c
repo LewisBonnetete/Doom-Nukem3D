@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/16 16:05:21 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/18 17:27:27 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,19 @@ int 	pnpoly_float(int nbr_walls, t_wall *walls, float center_x, float center_y)
 	c = 0;
 	while (i < nbr_walls)
 	{
-		if (((walls[i].a.y >= center_y) != (walls[j].a.y >= center_y)) && (center_x < (walls[j].a.x - walls[i].a.x) * (center_y - walls[i].a.y) / (walls[j].a.y - walls[i].a.y) + walls[i].a.x))
-			c = !c;
+		if ((((float)walls[i].a.y > center_y) != ((float)walls[j].a.y > center_y)) && (center_x < ((float)walls[j].a.x - (float)walls[i].a.x) * (center_y - (float)walls[i].a.y) / ((float)walls[j].a.y - (float)walls[i].a.y) + (float)walls[i].a.x))
+			c++;
 		j = i++;
 	}
-	return (c);
+	return (c % 2);
 }
 
 int		is_in_sector_float(float center_x, float center_y,t_sector *sector)
 {
 	if (pnpoly_float(sector->nbr_walls, sector->walls, center_x, center_y))
-		return(0);
+	{
+		return (0);
+	}
 	return (1);
 }
 
