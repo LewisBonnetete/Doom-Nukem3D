@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/18 17:38:50 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/19 18:00:36 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ void	draw_grid(t_var *info, t_map *map)
 	int y;
 
 	x = 0;
-	while(x < WINDOW_H - 50)
+	while(x < WINDOW_H)
 	{
 		y = 0;
-		while (y < WINDOW_H - 50)
+		while (y < WINDOW_H)
 		{
-			if(x > 0 && x < WINDOW_H - 50 && y > 0 && y < WINDOW_H - 50)
+			if(x > 0 && x < WINDOW_H && y > 0 && y < WINDOW_H)
 				put_pixel_to_suface(BLACK, x, y, info->image);
 			y += 1;
 		}
@@ -200,4 +200,5 @@ void	draw_portal_edit(t_var *info, t_map *map, t_sector *sector, int wall_id)
 void	draw_map_edit(t_var *info, t_map *map)
 {
 	draw_sectors_edit(info, map);
+	hud(info);
 }

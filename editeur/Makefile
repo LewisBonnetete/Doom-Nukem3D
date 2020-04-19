@@ -6,7 +6,7 @@
 #    By: lewis <lewis@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/04/18 16:37:21 by lewis            ###   ########.fr        #
+#    Updated: 2020/04/19 17:34:33 by lewis            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,9 @@ SRC =	main.c\
 		points_comparator.c\
 		validate.c\
 		spawn.c\
-		portals.c
+		portals.c\
+		hud.c\
+		hud_tools.c
 
 INC = doom-nukem_edit.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))

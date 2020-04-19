@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/18 17:39:18 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/19 17:56:34 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@
 # define WINDOW_W			1280
 # define WINDOW_H			720
 # define NB_THREADS_MAX		12
-# define BLACK				0x000000
+# define BLACK				0x23272a
 # define WHITE				0xFFFFFF
 # define BLUE				0x1E90FF
+# define DARK				0x2C2F33
+# define GRAY				0x99AAB5
 # define RMASK				0
 # define GMASK				0
 # define BMASK				0
@@ -253,6 +255,7 @@ void	draw_sectors_edit(t_var *info, t_map *map);
 void	draw_grid(t_var *info, t_map *map);
 void	draw_map_edit(t_var *info, t_map *map);
 void	draw_cadre(t_var *info);
+void	draw_square(t_var *info, t_point a, t_point b, Uint32 color);
 
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
 int		draw_line(t_var *info, t_line *line, Uint32 color);
@@ -269,4 +272,8 @@ int			nbr_of_sectors(t_map *map);
 t_sector	*get_a_sector_by_id(t_map *map, int id);
 void		del_sector(t_var *info, t_map *map);
 int			is_between(float x, float a, float b);
+
+//Hud
+void	hud(t_var *info);
+
 #endif
