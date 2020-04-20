@@ -166,7 +166,7 @@ int     play(t_var *info, char *str)
 	t_render	render;
 
 	check_input(info, str);		// se coordonner pour le fichier .map/editeur
-	init_var(info, str)			// rempli info
+	init_var(info, str);		// rempli info
 	//floor_ceiling_rendering(info);  -> surement a placer dans draw_column,
 	//		ou meme dans draw_textures entre draw portal et draw_wall?
 	raycasting(info; &render);
