@@ -1,4 +1,4 @@
-#include "../pierre/doom-nukem.h"
+#include "doom-nukem.h"
 //#include <stdio.h>
 
 void	init_artificial_map(t_map *map)
