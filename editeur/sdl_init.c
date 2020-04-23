@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/doom-nukem.h"
+#include "doom-nukem_edit.h"
 
 int		init_win1(t_var *info)
 {
@@ -53,5 +53,18 @@ int		init_win2(t_var *info)
 		SDL_Quit();
 		return (0);
 	}
+	return (1);
+}
+
+int		init_win3(t_var *info)
+{
+	if (TTF_Init() == -1)
+	{
+    	ft_putstr("Erreur TTF_init :\n");
+		SDL_DestroyWindow(info->window);
+		SDL_Quit();
+		return (0);
+	}
+	info->font = TTF_OpenFont("../frameworks/arial.ttf", 22);
 	return (1);
 }

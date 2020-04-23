@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/19 18:00:36 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/20 15:50:50 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,5 +200,4 @@ void	draw_portal_edit(t_var *info, t_map *map, t_sector *sector, int wall_id)
 void	draw_map_edit(t_var *info, t_map *map)
 {
 	draw_sectors_edit(info, map);
-	hud(info);
 }

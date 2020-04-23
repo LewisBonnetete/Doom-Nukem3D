@@ -6,31 +6,25 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/06 15:08:38 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/23 14:38:54 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
 
-
-
-int				main(int ac, char **av)
+int		main()
 {
 	t_map	map;
 	t_var	info;
 
-	(void)ac;
-	(void)av;
-	(void)info;
-	(void)map;
-
 	init_var(&info);
 	if (!(init_win1(&info)))
-		return (0);
-	if (!(init_win2(&info)))
-		return (0);
-	editer(&info, &map);
-	SDL_DestroyWindow(info.window);
-	SDL_Quit();
-	return (0);
+		exit_edit(&info, &map);
+	else if (!(init_win2(&info)))
+		exit_edit(&info, &map);
+	else if (!(init_win3(&info)))
+		exit_edit(&info, &map);
+	else if (!editer(&info, &map))
+		exit_edit(&info, &map);
+	return (exit_edit(&info, &map));
 }

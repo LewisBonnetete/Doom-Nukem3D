@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/19 17:56:34 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/23 14:03:48 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <SDL.h>
 # include <SDL_image.h>
+# include <SDL_ttf.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -26,7 +27,7 @@
 # define NB_THREADS_MAX		12
 # define BLACK				0x23272a
 # define WHITE				0xFFFFFF
-# define BLUE				0x1E90FF
+# define BLUE				0x7289DA
 # define DARK				0x2C2F33
 # define GRAY				0x99AAB5
 # define RMASK				0
@@ -122,6 +123,7 @@ struct					s_var
 	SDL_Renderer		*renderer;
 	SDL_Surface			*image;
 	SDL_Texture			*texture;
+	TTF_Font			*font;
 	int					weapon_cap;
 	int					texture_cap;
 	int					mouse_in;
@@ -207,6 +209,7 @@ struct					s_line
 //sdl func
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
+int						init_win3(t_var *info);
 
 //calculators
 float		cross_product(t_point a, t_point b, t_point c);

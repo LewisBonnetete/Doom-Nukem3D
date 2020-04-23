@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/03/27 14:59:14 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/23 14:25:53 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	del_sector(t_var *info, t_map *map)
 			free(sector->walls);
 			free(sector);
 			previous_sector->next_sector = NULL;
-			ft_putendl("Sector ");
+			ft_putstr("Sector ");
 			ft_putnbr(sector_id);
 			ft_putendl(" Destroyed");
 		}

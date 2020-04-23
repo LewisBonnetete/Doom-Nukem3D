@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/17 15:09:07 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/23 14:37:40 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		verif()
 		}
 		else
 			ft_putendl("What? try something else");
+		free(line);
 	}
 	return (0);
 }

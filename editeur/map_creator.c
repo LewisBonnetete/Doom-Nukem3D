@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/18 17:26:26 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/23 14:33:18 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	get_textures(t_wall *wall)
 		id = ft_atoi(line);
 		if (id < 0 || id > 10)
 			ft_putendl("Wrong id, try something else");
+		free(line);
 	}
 	wall->text_id = id;
 	if (wall->is_portal)
@@ -37,6 +38,7 @@ void	get_textures(t_wall *wall)
 			id = ft_atoi(line);
 			if (id < 0 || id > 10)
 				ft_putendl("Wrong id, try something else");
+			free(line);
 		}
 		wall->fill_up = id;
 		ft_putendl("Texture id of fill_down?");
@@ -47,6 +49,7 @@ void	get_textures(t_wall *wall)
 			id = ft_atoi(line);
 			if (id < 0 || id > 10)
 				ft_putendl("Wrong id, try something else");
+			free(line);
 		}
 		wall->fill_down = id;
 	}
@@ -72,6 +75,7 @@ void	get_portal_info(t_wall *wall)
 		}
 		else
 			ft_putendl("What? try something else");
+		free(line);
 	}
 	if (wall->is_portal)
 	{
@@ -90,6 +94,7 @@ void	get_portal_info(t_wall *wall)
 			}
 			else
 				ft_putendl("What? try something else");
+			free(line);
 		}
 		ok = 0;
 		ft_putendl("Is it textured?(y/n)");
@@ -106,6 +111,7 @@ void	get_portal_info(t_wall *wall)
 			}
 			else
 				ft_putendl("What? try something else");
+			free(line);
 		}
 	}	
 }
@@ -123,6 +129,7 @@ void		get_nbr_walls_sector_textures(t_sector *sector)
 		size = ft_atoi(line);
 		if (size < 3 || size > 25)
 			ft_putendl("Wrong number of walls, try something else");
+		free(line);
 	}
 	sector->nbr_walls = size;
 	ft_putendl("Texture id of the Floor?");
@@ -132,7 +139,8 @@ void		get_nbr_walls_sector_textures(t_sector *sector)
 		get_next_line(0, &line);
 		size = ft_atoi(line);
 		if (size < 0 || size > 10)
-			ft_putendl("Wrong number of walls, try something else");
+			ft_putendl("Wrong id, try something else");
+		free(line);
 	}
 	sector->floor.text_id = size;
 	ft_putendl("Texture id of the Ceilling?");
@@ -142,7 +150,8 @@ void		get_nbr_walls_sector_textures(t_sector *sector)
 		get_next_line(0, &line);
 		size = ft_atoi(line);
 		if (size < 0 || size > 10)
-			ft_putendl("Wrong number of walls, try something else");
+			ft_putendl("Wrong id, try something else");
+		free(line);
 	}
 	sector->celling.text_id = size;
 }
@@ -156,6 +165,7 @@ void		get_height_sector(t_map *map, int *height)
 		height[0] = ft_atoi(line);
 		if (height[0] < 1 || height[0] > map->size - 2)
 			ft_putendl("Wrong height, try something else");
+		free(line);
 	}
 	ft_putendl("How high is you sector?");
 	while(height[1] <= height[0] || height[1] > map->size - 1)
@@ -164,6 +174,7 @@ void		get_height_sector(t_map *map, int *height)
 		height[1] = ft_atoi(line);
 		if (height[1] <= height[0] || height[1] > map->size - 1)
 			ft_putendl("Wrong height, try something else");
+		free(line);
 	}
 }
 

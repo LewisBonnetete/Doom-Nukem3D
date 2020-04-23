@@ -6,7 +6,7 @@
 #    By: lewis <lewis@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/04/19 17:34:33 by lewis            ###   ########.fr        #
+#    Updated: 2020/04/20 15:30:45 by lewis            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = doom-nukem
 
 FLAGS       = -Wall -Wextra -Werror -O3
 
-SDL			= -lpthread -F ../frameworks/ -framework SDL2 -framework SDL2_image 
-SDL_HEADER	= -I ../frameworks/SDL2.framework/Headers -I ../frameworks/SDL2_image.framework/Headers
+SDL			= -lpthread -F ../frameworks/ -framework SDL2 -framework SDL2_image -framework SDL2_ttf 
+SDL_HEADER	= -I ../frameworks/SDL2.framework/Headers -I ../frameworks/SDL2_image.framework/Headers -I ../frameworks/SDL2_ttf.framework/Headers
 
 LIBFT = ../libft/libft.a
 
