@@ -267,6 +267,11 @@ int main()
     ray.eq_cste = 0;
     t_map   map;
     init_artificial_map(&map);
-    printf("%i\n",intersect(ray, &map.sectors[0].walls[1]));
+    printf("%i\n",intersect(ray, &map.sectors[0].walls[0]));
+	printf("%i\n",intersect(ray, &map.sectors[0].walls[2]));
+    printf("%i\n",intersect(ray, &map.sectors[0].walls[3]));
+    printf("%i\n",intersect(ray, &map.sectors[0].walls[4]));
+    printf("%i\n",intersect(ray, &map.sectors[0].walls[5]));
+
     return (0);
 }
