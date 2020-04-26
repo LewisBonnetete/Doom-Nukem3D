@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/23 14:03:48 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/26 17:06:33 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,6 +275,22 @@ int			nbr_of_sectors(t_map *map);
 t_sector	*get_a_sector_by_id(t_map *map, int id);
 void		del_sector(t_var *info, t_map *map);
 int			is_between(float x, float a, float b);
+
+//loadmap
+int     creat_fichier(t_map *map, char *name);
+int     do_int(int i, int fd);
+int     do_char(char c, int fd);
+int     do_x_char(char *str, int fd);
+int     do_double(double d, int fd);
+int     do_input(t_input_edit *in, int fd);
+int     do_var(t_var *v, int fd);
+int     do_wall(t_wall wall, int fd);
+int     do_point(t_point point, int fd);
+int     do_x_wall(t_wall *wall, int fd);
+int     do_sectors(t_sector *sectors, int fd);
+int     do_box(t_box box, int fd);
+int     do_map(t_map *map, int fd);
+char    *little_strcat(char *src, char c);
 
 //Hud
 void	hud(t_var *info);

@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/23 14:37:40 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/26 18:12:12 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,24 @@ int		verif()
 	return (0);
 }
 
+// int 	save(t_map *map)
+// {
+// 	char *line;
+// 	int size;
 
+// 	ft_putendl("What's name of your map?");
+// 	size = 0;
+// 	while(size < 3 || size > 15)
+// 	{
+// 		get_next_line(0, &line);
+// 		size = ft_strlen(line);
+// 		if (size < 3 || size > 15)
+// 			ft_putendl("Invalid name");
+// 	}
+// 	if(!creat_fichier(map, line))
+// 		return (0);
+// 	return (1);
+// }
 
 int		validate(t_map *map)
 {
