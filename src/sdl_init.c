@@ -21,7 +21,7 @@ int		init_win1(t_var *info)
 		ft_putendl(SDL_GetError());
 		return (0);
 	}
-	if (!(info->window = SDL_CreateWindow("wolf3d",
+	if (!(info->window = SDL_CreateWindow("doom_nukem",
 	SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 	WINDOW_W, WINDOW_H, SDL_WINDOW_SHOWN)))
 	{
