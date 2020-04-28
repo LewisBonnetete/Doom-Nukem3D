@@ -40,8 +40,8 @@ void	init_player(t_player *player, t_map *map)
 	player->posx = (double)map->spawn.x;
 	player->posy = (double)map->spawn.y;
 	player->posz = (double)map->spawn.z;
-	player->dx = -1.0;
-	player->dy = 0.0;
+	player->dx = 1.0;
+	player->dy = 1.0;
 	player->dz = 0.0;
 	player->planex = 0.0;
 	player->planey = 0.85;
@@ -74,9 +74,12 @@ int                main(int ac, char **av)
 					renderer.wall_y1--;
 			}
 	}*/
+	printf("main1\n");
 	t_player	player;
 	init_player(&player, &info.map);
+	info.player = &player;
 	raycasting(&info, &renderer);
+	printf("main2\n");
 	if (!(info.texture = SDL_CreateTextureFromSurface(info.renderer, info.image)))
 	{
 		ft_putstr("Erreur CreateTextureFromSurface :\n");
