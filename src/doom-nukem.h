@@ -176,7 +176,7 @@ struct					s_var
 	SDL_Renderer		*renderer;
 	SDL_Surface			*image;
 	SDL_Texture			*texture;
-	t_player			player;
+	t_player			*player;
 	t_map				map;
 	int					weapon_cap;
 	int					texture_cap;
