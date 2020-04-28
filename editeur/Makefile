@@ -6,7 +6,7 @@
 #    By: lewis <lewis@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/04/20 15:30:45 by lewis            ###   ########.fr        #
+#    Updated: 2020/04/26 18:11:53 by lewis            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRC =	main.c\
 		spawn.c\
 		portals.c\
 		hud.c\
-		hud_tools.c
+		hud_tools.c\
 
 INC = doom-nukem_edit.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
