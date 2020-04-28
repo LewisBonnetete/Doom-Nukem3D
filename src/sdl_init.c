@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem_edit.h"
+#include "../inc/doom-nukem.h"
 
 int		init_win1(t_var *info)
 {
