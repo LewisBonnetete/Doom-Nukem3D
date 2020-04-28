@@ -10,7 +10,7 @@ void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 	render->x = x0;
 	render->n = -1;
 	render->sector_id = sector_id;
-	render->s = info->map.sectors[sector_id];
+	render->s = &(info->map.sectors[sector_id]);
 	render->ray.cam_x = 2 * render->x / (double)(WINDOW_W) - 1;
 	render->ray.dx = info->player.dx + info->player.planex * render->ray.cam_x;
 	render->ray.dy = info->player.dy + info->player.planey * render->ray.cam_x;
@@ -126,7 +126,7 @@ void	update_ray(t_var *info, t_render *render)
 	render->ray.cam_x = 2 * render->x / (double)(WINDOW_W) - 1;
 	render->ray.dx = info->player.dx + info->player.planex * render->ray.cam_x;
 	render->ray.dy = info->player.dy + info->player.planey * render->ray.cam_x;
-	render->ray.eq_slope = ray.dy / ray.dx;
+	render->ray.eq_slope = render->ray.dy / render->ray.dx;
 	render->ray.eq_cste =  info->player.posy - render->ray.eq_slope * info->player.posx;
 }
 
@@ -134,7 +134,7 @@ void	draw_column(t_var *info, t_render *render)
 {
 	while(++render->n < render->s->nbr_walls)
 	{
-		render->wall = render->s->walls[n];
+		render->wall = &(render->s->walls[n]);
 		if(intersect(render->ray, render->wall) == 1)
 		{
 			if(render->wall.is_portal)
