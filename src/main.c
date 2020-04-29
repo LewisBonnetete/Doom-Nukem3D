@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/doom-nukem.h"
+#include "doom-nukem.h"
 
 void			ft_init_pour_linstant(t_var *info)
 {
@@ -34,6 +34,19 @@ void			ft_clock(t_var *info)
 	info->frametime = (info->time - info->oldtime) / 1000.0;
 }
 
+void	init_player(t_player *player, t_map *map)
+{
+	player->sector_id = map->sectors->sector_id;
+	player->posx = (double)map->spawn.x;
+	player->posy = (double)map->spawn.y;
+	player->posz = (double)map->spawn.z;
+	player->dx = 1.0;
+	player->dy = 1.0;
+	player->dz = 0.0;
+	player->planex = 0.0;
+	player->planey = 0.85;
+}
+
 int                main(int ac, char **av)
 {
 	t_var info;
@@ -45,13 +58,68 @@ int                main(int ac, char **av)
 	if (!(init_win2(&info)))
 		return (0);
 	ft_init_pour_linstant(&info);
-	start_doom(&info);
+	//start_doom(&info);
+	init_artificial_map(&(info.map));
+	t_render renderer;
+	/* 
+	renderer.wall_y0 = 200;
+	renderer.wall_y1 = 700;
+	renderer.x		= 13;
+	for (renderer.x = 13; renderer.x < 500; renderer.x++)
+	{
+			draw_tex(&info, &renderer);
+			if (renderer.x%7 == 0)
+			{
+					renderer.wall_y0++;
+					renderer.wall_y1--;
+			}
+	}*/
+	printf("main1\n");
+	t_player	player;
+	init_player(&player, &info.map);
+	info.player = &player;
+	raycasting(&info, &renderer);
+	printf("main2\n");
+	if (!(info.texture = SDL_CreateTextureFromSurface(info.renderer, info.image)))
+	{
+		ft_putstr("Erreur CreateTextureFromSurface :\n");
+		ft_putendl(SDL_GetError());
+		SDL_DestroyWindow(info.window);
+		SDL_Quit();
+		return (0);
+	}
+	if (SDL_RenderCopy(info.renderer, info.texture, NULL, NULL))
+	{
+		ft_putstr("Erreur RenderCopy :\n");
+		ft_putendl(SDL_GetError());
+		SDL_DestroyWindow(info.window);
+		SDL_Quit();
+		return (0);
+	}
+	SDL_Event e;
+	int quit = 0;
+	while (!quit)
+	{
+			SDL_RenderPresent(info.renderer);
+
+		while(SDL_PollEvent(&e))
+		{
+			if (e.type == SDL_QUIT)
+				quit = 1;
+			if (e.type == SDL_KEYDOWN)
+				quit = 1;
+			if (e.type == SDL_MOUSEBUTTONDOWN)
+				quit = 1;
+		}
+			
+	}
+	SDL_RenderPresent(info.renderer);
 	SDL_DestroyWindow(info.window);
 	SDL_Quit();
 	return (0);
 }
 
-int            start_doom(t_var *info)
+/* int            start_doom(t_var *info)
 {
 	if (1)
 		editeur(info);
@@ -59,4 +127,4 @@ int            start_doom(t_var *info)
 		play(info, str);
 	if (3);
 		leave(info);
-}
+}*/
