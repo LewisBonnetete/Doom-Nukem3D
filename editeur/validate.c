@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/26 18:12:12 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/29 20:06:58 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,27 @@ int		verif()
 	return (0);
 }
 
-// int 	save(t_map *map)
-// {
-// 	char *line;
-// 	int size;
+int 	save(t_map *map)
+{
+	char *line;
+	int size;
 
-// 	ft_putendl("What's name of your map?");
-// 	size = 0;
-// 	while(size < 3 || size > 15)
-// 	{
-// 		get_next_line(0, &line);
-// 		size = ft_strlen(line);
-// 		if (size < 3 || size > 15)
-// 			ft_putendl("Invalid name");
-// 	}
-// 	if(!creat_fichier(map, line))
-// 		return (0);
-// 	return (1);
-// }
+	ft_putendl("What's name of your map?");
+	size = 0;
+	while(size < 3 || size > 15)
+	{
+		get_next_line(0, &line);
+		size = ft_strlen(line);
+		if (size < 3 || size > 15)
+			ft_putendl("Invalid name");
+	}
+	if(!creat_fichier(map, line))
+	{
+		ft_putendl("save_map failed");
+		return (0);
+	}
+	return (1);
+}
 
 int		validate(t_map *map)
 {
@@ -62,7 +65,7 @@ int		validate(t_map *map)
 		ft_putendl("Map is empty");
 		return (0);
 	}
-	if (set_spawn(map) && portals(map))
+	if (set_spawn(map) && portals(map) && save(map))
 		return (1);
 	return (0);
 }
