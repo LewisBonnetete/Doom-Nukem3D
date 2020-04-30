@@ -27,6 +27,13 @@
 # define AMASK				0
 # define WALL_H				64
 # define DECALLAGE			32
+# define BLACK				0x000000
+# define SKY_BLUE			0x00BFFF
+# define GRASS_GREEN		0x1FBC3F
+# define SOUTH_WALL			0xd2b48c
+# define NORTH_WALL			0xD28F8F
+# define EAST_WALL			0xDAA520
+# define WEST_WALL			0xF4A460
 
 typedef struct s_input		t_input;
 typedef	struct s_var		t_var;
@@ -227,6 +234,7 @@ struct					s_input
 //sdl func
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
+int    					 dealer(t_var *info);
 
 //init func
 void					init_box(t_map *map);
@@ -237,5 +245,6 @@ void	draw_tex(t_var *info, t_render *render);
 int     raycasting(t_var *info, t_render *render);
 void	init_box(t_map *map);
 void	init_artificial_map(t_map *map);
+void	draw_bottop(t_var *info, t_render *render);
 
 #endif

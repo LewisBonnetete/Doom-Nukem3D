@@ -14,9 +14,46 @@ void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image)
 		pixels[y * image->w + x] = color;
 }
 
+void	draw_bottop(t_var *info, t_render *render)
+{
+	int i;
+
+	i = 0;
+	while (i < render->wall_y1)
+	{
+		put_pixel_to_suface(GRASS_GREEN, render->x,i , info->image);
+		i++;
+	}
+	i = render->wall_y0;
+	while (i < WINDOW_H)
+	{
+		put_pixel_to_suface(WEST_WALL, render->x,i , info->image);
+		i++;
+	}
+}
+
+void	paint_it_black(t_var *info, t_render *render)
+{
+	int y;
+	int x;
+
+	x = 0;
+	y = 0;
+	while (y < WINDOW_H)
+	{
+		x = 0;
+		while (x < WINDOW_W)
+		{
+			put_pixel_to_suface(BLACK, x, y, info->image);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	draw_tex(t_var *info, t_render *render)
 {
-	printf("draw\n");
+	//printf("draw\n");
 	int i;
 
 	i = 0;
@@ -62,35 +99,35 @@ void	calc_wall_spec(t_wall *wall)
 ** et la valeur de l'abscisse sur wall->eq_cste
 */
 
-int		intersect(t_ray ray, t_wall *wall)
+int		intersect(t_ray *ray, t_wall *wall)
 {
-	printf("intersect -\twall_id = %i\n", wall->wall_id);
+	//printf("intersect -\twall_id = %i\n", wall->wall_id);
 	calc_wall_spec(wall);	// a rajouter au moment du parsing ? plus rapide que pendant le rendering
-	if (ray.eq_slope == wall->eq_slope)
+	if (ray->eq_slope == wall->eq_slope)
 	{
 		//printf("intersect -\tpas de calcul du pt d'intersection :\n\tray.eq_slope = [%f]\n\twall->eq_slope = [%f]\n",ray.eq_slope, wall->eq_slope);
 		return (0);
 	}
 	if (wall->eq_slope == 1111)
 	{
-		ray.x2 = wall->eq_cste;
-		ray.y2 = ray.eq_slope * ray.x2 + ray.eq_cste;
+		ray->x2 = wall->eq_cste;
+		ray->y2 = ray->eq_slope * ray->x2 + ray->eq_cste;
 	}
-	else if (ray.eq_slope == 1111)
+	else if (ray->eq_slope == 1111)
 	{
-		ray.x2 = ray.x;
-		ray.y2 = wall->eq_slope * ray.x2 + wall->eq_cste;
+		ray->x2 = ray->x;
+		ray->y2 = wall->eq_slope * ray->x2 + wall->eq_cste;
 	}
 	else
 	{
-		ray.x2 = (wall->eq_cste - ray.eq_cste) / (ray.eq_slope - wall->eq_slope);
-		ray.y2 = ray.eq_slope * ray.x2 + ray.eq_cste;
+		ray->x2 = (wall->eq_cste - ray->eq_cste) / (ray->eq_slope - wall->eq_slope);
+		ray->y2 = ray->eq_slope * ray->x2 + ray->eq_cste;
 	}
 	//printf("Pt d'intersect : (%f,%f)\n", ray.x2, ray.y2);
-	if (xy_in_ab(ray.x2, ray.y2, wall->a, wall->b))
+	if (xy_in_ab(ray->y2, ray->y2, wall->a, wall->b))
 	{
 		//printf("intersect -\txy_in_ab = 1\n");
-		return (xy_in_frontview(ray.x2, ray.y2, ray));
+		return (xy_in_frontview(ray->x2, ray->y2, *ray));
 	}
 	return (0);
 }
@@ -138,9 +175,10 @@ int		init_next_render(t_var *info, t_render *render)
 			//	sur les pixels au dessus et en dessous du rectangle de diagonale (x0,y0) et (x1,y1) 
 	}
 	else
+		draw_bottop(info, render);
 		draw_tex(info, render);
-		// horizontalement : remplit, selon la texture, les pixels entre render->x et render->next_x 
-		// verticalement : voir en fonction de la distance au mur et sa hauteur ? 
+		//horizontalement : remplit, selon la texture, les pixels entre render->x et render->next_x 
+		//verticalement : voir en fonction de la distance au mur et sa hauteur ? 
 }
 
 
@@ -218,7 +256,7 @@ void	update_render(t_var *info, t_render *render)
 	}
 //	printf("wallsqdist = %f\n,walldist = %f\nwallH = %f\n",render->wall_sqdist, render->wall_dist, render->wall_height);
 	//printf("y0=%i\ny1=%i\n",render->wall_y0,render->wall_y1);
-	printf("walldist = %f\n",render->wall_dist);
+	//printf("wallcz = %d\n",render->wall->c.z);
 }
 
 void	draw_column(t_var *info, t_render *render)
@@ -228,7 +266,7 @@ void	draw_column(t_var *info, t_render *render)
 	//	printf("bonjour\n");
 		render->wall = render->s->walls + render->n;
 		//printf("wallID in draw = %i\nn = %i\nnbr_walls = %i\n",render->wall->wall_id, render->n,render->s->nbr_walls);
-		if(intersect(*render->ray, render->wall) == 1)
+		if(intersect(render->ray, render->wall) == 1)
 		{
 		//	printf("bonjour1\n");
 			if(render->wall->is_portal)
@@ -262,6 +300,7 @@ int     raycasting(t_var *info, t_render *render)
 		draw_column(info, render);
 		render->x++;
 	}
+	printf("player dx = %f\nplayer dy = %f\n",info->player->dx,info->player->dy);
 	return (1);
 }
 /*
