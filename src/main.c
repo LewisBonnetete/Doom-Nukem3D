@@ -15,24 +15,25 @@
 void			ft_init_pour_linstant(t_var *info)
 {
 	info->frametime = 0.03;
-	info->dirx = -1;
-	info->diry = 0;
-	info->planex = 0;
-	info->planey = 0.66;
-	info->movespeed = info->frametime * 2.5;
+//	info->dirx = -1;
+//	info->diry = 0;
+//	info->planex = 0;
+//	info->planey = 0.66;
+//	info->movespeed = info->frametime * 2.5;
 	info->rotspeed = info->frametime * 0.5;
-	info->y_dec = 0;
-	info->texture_cap = 0;
-	info->mouse_in = 0;
-	info->weapon_cap = 0;
+//	info->y_dec = 0;
+//	info->texture_cap = 0;
+//	info->mouse_in = 0;
+//	info->weapon_cap = 0;
 }
 
-void			ft_clock(t_var *info)
+/* void			ft_clock(t_var *info)
 {
 	info->oldtime = info->time;
 	info->time = SDL_GetTicks();
 	info->frametime = (info->time - info->oldtime) / 1000.0;
 }
+*/
 
 void	init_player(t_player *player, t_map *map)
 {
@@ -44,7 +45,7 @@ void	init_player(t_player *player, t_map *map)
 	player->dy = 0.0;
 	player->dz = 0.0;
 	player->planex = 0.0;
-	player->planey = 0.85;
+	player->planey = 0.4;
 }
 
 int                main(int ac, char **av)
@@ -77,10 +78,8 @@ int                main(int ac, char **av)
 	t_player	player;
 	init_player(&player, &info.map);
 	info.player = &player;
-	SDL_Event e;
-	while (dealer(&info))
+	while (dealer(&info, &renderer))
 	{
-		raycasting(&info, &renderer);
 		if (!(info.texture = SDL_CreateTextureFromSurface(info.renderer, info.image)))
 		{
 			ft_putstr("Erreur CreateTextureFromSurface :\n");

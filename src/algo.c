@@ -14,43 +14,6 @@ void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image)
 		pixels[y * image->w + x] = color;
 }
 
-void	draw_bottop(t_var *info, t_render *render)
-{
-	int i;
-
-	i = 0;
-	while (i < render->wall_y1)
-	{
-		put_pixel_to_suface(GRASS_GREEN, render->x,i , info->image);
-		i++;
-	}
-	i = render->wall_y0;
-	while (i < WINDOW_H)
-	{
-		put_pixel_to_suface(WEST_WALL, render->x,i , info->image);
-		i++;
-	}
-}
-
-void	paint_it_black(t_var *info, t_render *render)
-{
-	int y;
-	int x;
-
-	x = 0;
-	y = 0;
-	while (y < WINDOW_H)
-	{
-		x = 0;
-		while (x < WINDOW_W)
-		{
-			put_pixel_to_suface(BLACK, x, y, info->image);
-			x++;
-		}
-		y++;
-	}
-}
-
 void	draw_tex(t_var *info, t_render *render)
 {
 	//printf("draw\n");
@@ -201,7 +164,8 @@ void	update_ray(t_var *info, t_render *render)
 		render->ray->eq_slope = 1111;
 		render->ray->eq_cste = render->ray->x;
 	}
-	//printf("");
+	//printf("ray slope = %f\nray dx =%f\nray dy%f\n",render->ray->eq_slope,render->ray->dx,render->ray->dy);
+	//printf("ray cste =%f\n",render->ray->eq_cste);
 }
 
 /*
@@ -254,9 +218,8 @@ void	update_render(t_var *info, t_render *render)
 		render->wall_y0 += DECALLAGE * (render->wall->a.z - info->player->posz) /  render->wall_dist;
 		render->wall_y1 += DECALLAGE * (render->wall->a.z - info->player->posz) /  render->wall_dist;
 	}
-//	printf("wallsqdist = %f\n,walldist = %f\nwallH = %f\n",render->wall_sqdist, render->wall_dist, render->wall_height);
+	printf("wallh = %f\n",render->wall_height);
 	//printf("y0=%i\ny1=%i\n",render->wall_y0,render->wall_y1);
-	//printf("wallcz = %d\n",render->wall->c.z);
 }
 
 void	draw_column(t_var *info, t_render *render)
@@ -300,7 +263,7 @@ int     raycasting(t_var *info, t_render *render)
 		draw_column(info, render);
 		render->x++;
 	}
-	printf("player dx = %f\nplayer dy = %f\n",info->player->dx,info->player->dy);
+//	printf("player dx = %f\nplayer dy = %f\n",info->player->dx,info->player->dy);
 	return (1);
 }
 /*

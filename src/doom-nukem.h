@@ -25,8 +25,8 @@
 # define GMASK				0
 # define BMASK				0
 # define AMASK				0
-# define WALL_H				64
-# define DECALLAGE			32
+# define WALL_H				128
+# define DECALLAGE			0
 # define BLACK				0x000000
 # define SKY_BLUE			0x00BFFF
 # define GRASS_GREEN		0x1FBC3F
@@ -160,7 +160,7 @@ struct					s_player
 
 struct					s_ray
 {
-	int					cam_x;
+	double				cam_x;
 	//int					hit_portal; inutile au final ?
 	//int					hit_wall; inutile au final ?
 	double				x;
@@ -185,34 +185,10 @@ struct					s_var
 	SDL_Texture			*texture;
 	t_player			*player;
 	t_map				map;
-	int					weapon_cap;
-	int					texture_cap;
-	int					mouse_in;
-	int					p_x;	// pos de player?
-	int					p_y;
-	float				pf_x;	// ??
-	float				pf_y;
-	float				c_angl;	// ??
-	double				posx;
-	double				posy;
-	double				ori_x;
-	double				ori_y;
-	double				dirx;
-	double				diry;
-	double				planex;
-	double				planey;
-	double				time;
-	double				oldtime;
-	double				time_reset;
-	double				movespeed;
-	double				rotspeed;
 	double				olddirx;
 	double				oldplanex;
+	double				rotspeed;
 	double				frametime;
-	int					sprint;
-	int					x_dec;
-	int					y_dec;
-	
 };
 
 struct					s_input
@@ -234,7 +210,7 @@ struct					s_input
 //sdl func
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
-int    					 dealer(t_var *info);
+int     				dealer(t_var *info, t_render *render);
 
 //init func
 void					init_box(t_map *map);
@@ -246,5 +222,6 @@ int     raycasting(t_var *info, t_render *render);
 void	init_box(t_map *map);
 void	init_artificial_map(t_map *map);
 void	draw_bottop(t_var *info, t_render *render);
+void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
 
 #endif

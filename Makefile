@@ -12,7 +12,7 @@
 
 NAME = doom-nukem
 
-FLAGS       = -O3
+FLAGS       = -O3 -Wextra -Wall -Werror
 
 SDL			= -lpthread -F ./frameworks/ -framework SDL2 -framework SDL2_image 
 SDL_HEADER	= -I ./frameworks/SDL2.framework/Headers -I ./frameworks/SDL2_image.framework/Headers
@@ -28,7 +28,8 @@ OBJ_DIR	 = obj
 SRC =	main.c\
 		sdl_init.c\
 		algo.c\
-		init.c
+		init.c\
+		move.c
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 
