@@ -1,23 +1,5 @@
 #include "doom-nukem.h"
 
-void	draw_bottop(t_var *info, t_render *render)
-{
-	int i;
-
-	i = WINDOW_H;
-	while (i > render->wall_y1)
-	{
-		put_pixel_to_suface(GRASS_GREEN, render->x,i , info->image);
-		i--;
-	}
-	i = render->wall_y0;
-	while (i > 0)
-	{
-		put_pixel_to_suface(WEST_WALL, render->x,i , info->image);
-		i--;
-	}
-}
-
 void	rot_right(t_var *info)
 {
 	info->olddirx = info->player->dx;
@@ -61,7 +43,7 @@ int     dealer(t_var *info, t_render *render)
         if (e.key.keysym.sym == SDLK_LEFT)
 	    {
 		    if (e.key.state == SDL_PRESSED)
-		    {    
+		    {
                 rot_left(info);
                 raycasting(info, render);
             }

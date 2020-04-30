@@ -14,7 +14,7 @@ NAME = doom-nukem
 
 FLAGS       = -O3 -Wextra -Wall -Werror
 
-SDL			= -lpthread -F ./frameworks/ -framework SDL2 -framework SDL2_image 
+SDL			= -lpthread -F ./frameworks/ -framework SDL2 -framework SDL2_image
 SDL_HEADER	= -I ./frameworks/SDL2.framework/Headers -I ./frameworks/SDL2_image.framework/Headers
 
 LIBFT = libft/libft.a
@@ -27,8 +27,11 @@ OBJ_DIR	 = obj
 
 SRC =	main.c\
 		sdl_init.c\
+		game_init.c\
+		algo_intersection.c\
+		algo_draw.c\
 		algo.c\
-		init.c\
+		map_init.c\
 		move.c
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
@@ -38,8 +41,8 @@ $(shell mkdir -p $(OBJ_DIR))
 all: $(NAME)
 	echo "doom-nukem ready"
 
-$(NAME): $(OBJ) $(LIBFT) 
-	$(CC) -I $(HEAD_DIR) -o $@ $(OBJ) $(SDL) $(LIBFT) $(FLAGS) 
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) -I $(HEAD_DIR) -o $@ $(OBJ) $(SDL) $(LIBFT) $(FLAGS)
 
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c

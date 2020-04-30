@@ -213,15 +213,22 @@ int						init_win2(t_var *info);
 int     				dealer(t_var *info, t_render *render);
 
 //init func
+void					init_artificial_map(t_map *map);
 void					init_box(t_map *map);
-//algo
-int		xy_in_ab(double x, double y, t_point a, t_point b);
-int		xy_in_frontview(double x, double y, t_ray ray);
-void	draw_tex(t_var *info, t_render *render);
-int     raycasting(t_var *info, t_render *render);
-void	init_box(t_map *map);
-void	init_artificial_map(t_map *map);
+void					init_player(t_player *player, t_map *map);
+void					ft_init_pour_linstant(t_var *info);
+void					init_render(t_var *info, t_render *render, int x0, int sector_id);
+int						init_next_render(t_var *info, t_render *render);
+
+//draw
 void	draw_bottop(t_var *info, t_render *render);
+void	draw_tex(t_var *info, t_render *render);
+void	draw_textures(t_var *info, t_render *render);
+
+int		intersect(t_ray *ray, t_wall *wall);
+
+//algo
+int     raycasting(t_var *info, t_render *render);
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
 
 #endif
