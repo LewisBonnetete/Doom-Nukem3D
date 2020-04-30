@@ -13,19 +13,31 @@ void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image)
 	if (x >= 0 && y >= 0 && x < image->w && y < image->h)
 		pixels[y * image->w + x] = color;
 }
-
+/*
 void	draw_tex(t_var *info, t_render *render)
 {
 	//printf("draw\n");
 	int i;
 
-	i = 0;
-	while (i < render->wall_y0 - render->wall_y1)
+	i = render->wall_y0;
+	while (i <= render->wall_y1)
 	{
-		put_pixel_to_suface(255, render->x,i + render->wall_y0 , info->image);
+		put_pixel_to_suface(255, render->x, i, info->image);
 		i++;
 	}
+}
+*/
+void	draw_tex(t_var *info, t_render *render)
+{
+	//printf("draw\n");
+	int i;
 
+	i = render->wall_y1;
+	while (i <= render->wall_y0)
+	{
+		put_pixel_to_suface(255, render->x, i, info->image);
+		i++;
+	}
 }
 
 /*
@@ -125,23 +137,23 @@ int		init_next_render(t_var *info, t_render *render)
 	if(render->wall->is_portal)
 	{
 		//if (render->wall->is_transparent)
-		//	draw_tex(info, render);			
+		//	draw_tex(info, render);
 			//draw_portal_texture(info, render);
-			// rajouter la texture sur les pixels dans le rectangle de diagonale (x0,y0) et (x1,y1) 
+			// rajouter la texture sur les pixels dans le rectangle de diagonale (x0,y0) et (x1,y1)
 		//if (render->wall->is_textured)
 			//draw_tex(info, render);
 			//draw_portal_fill(info, render);
-			//		Pareil que draw_portal_texture? 
-			//  texture sur les pixels dans le rectangle de diagonale (x0,y0) et (x1,y1) 
-			//		OU		
+			//		Pareil que draw_portal_texture?
+			//  texture sur les pixels dans le rectangle de diagonale (x0,y0) et (x1,y1)
+			//		OU
 			//  texture fill_up et fill_down,
-			//	sur les pixels au dessus et en dessous du rectangle de diagonale (x0,y0) et (x1,y1) 
+			//	sur les pixels au dessus et en dessous du rectangle de diagonale (x0,y0) et (x1,y1)
 	}
 	else
 		draw_bottop(info, render);
 		draw_tex(info, render);
-		//horizontalement : remplit, selon la texture, les pixels entre render->x et render->next_x 
-		//verticalement : voir en fonction de la distance au mur et sa hauteur ? 
+		//horizontalement : remplit, selon la texture, les pixels entre render->x et render->next_x
+		//verticalement : voir en fonction de la distance au mur et sa hauteur ?
 }
 
 
@@ -218,7 +230,12 @@ void	update_render(t_var *info, t_render *render)
 		render->wall_y0 += DECALLAGE * (render->wall->a.z - info->player->posz) /  render->wall_dist;
 		render->wall_y1 += DECALLAGE * (render->wall->a.z - info->player->posz) /  render->wall_dist;
 	}
-	printf("wallh = %f\n",render->wall_height);
+	printf("WALL_H = %d\n", WALL_H);
+	printf("wall_sqdist = %f\n",render->wall_sqdist);
+	printf("wall_dist = %f\n",render->wall_dist);
+	printf("wall_height = %f\n",render->wall_height);
+	printf("wall_y0 = %d\n",render->wall_y0);
+	printf("wall_y1 = %d\n",render->wall_y1);
 	//printf("y0=%i\ny1=%i\n",render->wall_y0,render->wall_y1);
 }
 
