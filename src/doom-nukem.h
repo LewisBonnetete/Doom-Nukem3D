@@ -25,7 +25,7 @@
 # define GMASK				0
 # define BMASK				0
 # define AMASK				0
-# define WALL_H				32
+# define WALL_H				64
 # define DECALLAGE			32
 
 typedef struct s_input		t_input;

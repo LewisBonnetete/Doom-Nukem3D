@@ -89,7 +89,7 @@ int		intersect(t_ray ray, t_wall *wall)
 	//printf("Pt d'intersect : (%f,%f)\n", ray.x2, ray.y2);
 	if (xy_in_ab(ray.x2, ray.y2, wall->a, wall->b))
 	{
-		printf("intersect -\txy_in_ab = 1\n");
+		//printf("intersect -\txy_in_ab = 1\n");
 		return (xy_in_frontview(ray.x2, ray.y2, ray));
 	}
 	return (0);
@@ -163,6 +163,7 @@ void	update_ray(t_var *info, t_render *render)
 		render->ray->eq_slope = 1111;
 		render->ray->eq_cste = render->ray->x;
 	}
+	//printf("");
 }
 
 /*
@@ -173,11 +174,11 @@ void	update_ray(t_var *info, t_render *render)
 
 int		xy_in_frontview(double x, double y, t_ray ray)
 {
-	printf("frontview in\n");
+	//printf("frontview in\n");
 	if ((ray.dx > 0 && (x <= ray.x)) || (ray.dy > 0 && (y <= ray.y)) ||
 	(ray.dx < 0 && (x >= ray.x)) || (ray.dy < 0 && (y >= ray.y)))
 		return (0);
-	printf("frontview = true\n");
+	//printf("frontview = true\n");
 	return (1);
 }
 
@@ -188,7 +189,6 @@ int		xy_in_frontview(double x, double y, t_ray ray)
 ** et la valeur de l'abscisse sur wall->eq_cste
 */
 
-
 int		xy_in_ab(double x, double y, t_point a, t_point b)
 {
 	//return (a.x >= x >= b.x || a.x <= x <= b.x);
@@ -197,6 +197,7 @@ int		xy_in_ab(double x, double y, t_point a, t_point b)
 }
 void	update_render(t_var *info, t_render *render)
 {
+	//printf("wallID in render = %i\n",render->wall->wall_id);
 	render->wall_sqdist =
 		((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
 		+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x))
@@ -215,34 +216,35 @@ void	update_render(t_var *info, t_render *render)
 		render->wall_y0 += DECALLAGE * (render->wall->a.z - info->player->posz) /  render->wall_dist;
 		render->wall_y1 += DECALLAGE * (render->wall->a.z - info->player->posz) /  render->wall_dist;
 	}
-	printf("wallsqdist = %f\n,walldist = %f\nwallH = %f\n",render->wall_sqdist, render->wall_dist, render->wall_height);
-	printf("y0=%i\ny1=%i\n",render->wall_y0,render->wall_y1);
+//	printf("wallsqdist = %f\n,walldist = %f\nwallH = %f\n",render->wall_sqdist, render->wall_dist, render->wall_height);
+	//printf("y0=%i\ny1=%i\n",render->wall_y0,render->wall_y1);
+	printf("walldist = %f\n",render->wall_dist);
 }
 
 void	draw_column(t_var *info, t_render *render)
 {
 	while(++render->n < render->s->nbr_walls)
 	{
-		printf("bonjour\n");
+	//	printf("bonjour\n");
 		render->wall = render->s->walls + render->n;
-		printf("bonjourtest\n");
+		//printf("wallID in draw = %i\nn = %i\nnbr_walls = %i\n",render->wall->wall_id, render->n,render->s->nbr_walls);
 		if(intersect(*render->ray, render->wall) == 1)
 		{
-			printf("bonjour1\n");
+		//	printf("bonjour1\n");
 			if(render->wall->is_portal)
 			{
-				printf("bonjour2\n");
+			//	printf("bonjour2\n");
 				init_next_render(info, render);
 				draw_column(info, render);
 				ft_memdel((void**)&(render->next_render));
 			}
-			printf("update\n");
+		//	printf("update\n");
 			update_render(info, render);		// manque wall_y0 et wall_y1
-			printf("draw\n");
+		//	printf("draw\n");
 			draw_textures(info, render);		// a faire quand on a wally0/y1
 			return;
 		}
-		printf("bonjour out\n");
+	//	printf("bonjour out\n");
 	}
 }
 
@@ -250,11 +252,11 @@ int     raycasting(t_var *info, t_render *render)
 {
 	t_ray ray;
 	render->ray = &ray;
-	printf("render\n");
+//	printf("render\n");
 	init_render(info, render, 0, info->player->sector_id);
-	printf("update\n");
-	printf("%i\n",render->x);
-	while(render->x < 3)
+//	printf("update\n");
+//	printf("%i\n",render->x);
+	while(render->x < WINDOW_W)
 	{
 		update_ray(info, render);
 		draw_column(info, render);
