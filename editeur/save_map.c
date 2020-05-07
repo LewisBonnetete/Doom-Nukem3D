@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_map.c                                         :+:      :+:    :+:   */
+/*   save_map_c.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/29 20:03:09 by lewis            ###   ########.fr       */
+/*   Updated: 2020/04/16 15:27:09 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "doom-nukem_edit.h"
+//enregistrer une map
+#include "../editeur/doom-nukem_edit.h"
+#include <sys/stat.h>
 //l'idée est de créer la map de tel sorte que l'on ai une lettre suivi d'une info
 //a la fin on aura donc une grande ligne avec toutes les infos dont on va avoir besoin pour la map
 //il faut donc utiliser creat_fichier avec le t_map que l'on veut créer en .map
@@ -37,10 +38,11 @@ int     do_map(t_map *map, int fd)
         return (0);
     if (do_box(map->box, fd) == 0)
         return (0);
-    if (do_sectors(map->sectors, fd) == 0)
-    	return (0);
+    if (map->sectors)
+        if (do_sectors(map->sectors, fd) == 0)
+         return (0);
     if (do_int(map->size, fd) == 0)
-       return (0);
+        return (0);
     if (do_point(map->spawn, fd) == 0)
         return(0);
     return (1);
@@ -56,14 +58,12 @@ int     do_box(t_box box, int fd)
     if (write(fd, &c, 1) == -1)
         return (0);
     while (++x < 5)
-        if (&(box).walls[x])
-            if (do_wall(box.walls[x], fd) == 0)
-                return (0);
+        if (do_wall(box.walls[x], fd) == 0)
+            return (0);
     if (do_int(box.nbr_walls, fd) == 0)
         return (0);
-    if (box.size)
-        if (do_int(box.size, fd) == 0)
-            return (0);
+    if (do_int(box.size, fd) == 0)
+        return (0);
     if (do_wall(box.floor, fd) == 0 || do_wall(box.celling, fd) == 0)
         return (0);
     return (1);
@@ -76,15 +76,14 @@ int     do_sectors(t_sector *sectors, int fd)
     c = 's';
     if (write(fd, &c, 1) == -1)
         return (0);
-    if (do_x_wall(sectors->walls, fd) == 0)
-        return (0);
     if (do_int(sectors->nbr_walls, fd) == 0)
+        return (0);
+    if (do_x_wall(sectors->walls, fd, sectors->nbr_walls) == 0)
         return (0);
     if (do_wall(sectors->floor, fd) == 0 || do_wall(sectors->celling, fd) == 0)
         return (0);
-    if (sectors->light && sectors->sector_id)
-        if (do_int(sectors->light, fd) == 0 || do_int(sectors->sector_id, fd) == 0)
-            return (0);
+    if (do_int(sectors->light, fd) == 0 || do_int(sectors->sector_id, fd) == 0)
+        return (0);
     if (sectors->next_sector)
         if (do_sectors(sectors->next_sector, fd) == 0)
             return (0);
@@ -94,7 +93,7 @@ int     do_sectors(t_sector *sectors, int fd)
     return (1);
 }
 //ecriture de plusieurs structure wall
-int     do_x_wall(t_wall *wall, int fd)
+int     do_x_wall(t_wall *wall, int fd, int g)
 {
     char    c;
     int     x;
@@ -103,8 +102,8 @@ int     do_x_wall(t_wall *wall, int fd)
     if (write(fd, &c, 1) == -1)
 	return (0);
     x = -1;
-    while (&(wall[++x]))
-        if (do_wall(wall[x], fd) == 0)
+    while (++x < g)
+	if (do_wall(wall[x], fd) == 0)
             return (0);
     return (1);
 }
@@ -116,10 +115,9 @@ int     do_point(t_point point, int fd)
     c = 'p';
     if (write(fd, &c, 1) == -1)
         return (0);
-    if (&(point.x) && &(point.y) && &(point.z))
-        if (do_int(point.x, fd) == 0 || do_int(point.y, fd) == 0
+    if (do_int(point.x, fd) == 0 || do_int(point.y, fd) == 0
             || do_int(point.z, fd) == 0)
-            return (0);
+        return (0);
     return (1);
 }
 //ecriture de la strcuture wall
@@ -130,19 +128,15 @@ int     do_wall(t_wall wall, int fd)
     c = 'w';
     if (write(fd, &c, 1) == -1)
         return (0);
-    if (&(wall.a) && &(wall.b) && &(wall.c) && &(wall.d))
-        if (do_point(wall.a, fd) == 0 || do_point(wall.b, fd) == 0
+    if (do_point(wall.a, fd) == 0 || do_point(wall.b, fd) == 0
             || do_point(wall.c, fd) == 0 || do_point(wall.d, fd) == 0)
-            return (0);
-    if (wall.text_id && wall.wall_id && wall.is_portal && wall.is_transparent
-        && wall.is_textured && wall.fill_up && wall.fill_down && wall.sector_id
-        && wall.sector_id_it_leads_to)
-        if (do_int(wall.text_id, fd) == 0 || do_int(wall.wall_id, fd) == 0
-            || do_int(wall.is_portal, fd) == 0 || do_int(wall.is_transparent, fd) == 0
-            || do_int(wall.is_textured, fd) == 0 || do_int(wall.fill_up, fd) == 0
-            || do_int(wall.fill_down, fd) == 0 || do_int(wall.sector_id, fd) == 0
-            || do_int(wall.sector_id_it_leads_to, fd) == 0)
-            return (0);
+        return (0);
+    if (do_int(wall.text_id, fd) == 0 || do_int(wall.wall_id, fd) == 0
+    	|| do_int(wall.is_portal, fd) == 0 || do_int(wall.is_transparent, fd) == 0
+        || do_int(wall.is_textured, fd) == 0 || do_int(wall.fill_up, fd) == 0
+     	|| do_int(wall.fill_down, fd) == 0 || do_int(wall.sector_id, fd) == 0
+	|| do_int(wall.sector_id_it_leads_to, fd) == 0)
+        return (0);
     return (1);
 }
 //ecriture des double
@@ -189,6 +183,7 @@ int     do_char(char c, int fd)
         return (0);
     return (1);
 }
+#include <stdio.h>
 //ecriture d'un int
 int     do_int(int i, int fd)
 {
@@ -201,23 +196,26 @@ int     do_int(int i, int fd)
         return (0);
     c = ft_itoa(i);
     r = -1;
-    while (c[r++])
+    while (c[++r])
         if (write(fd, &c[r], 1) == -1)
             return (0);
     return (1);
 }
+//permet de creer le fichier
 int     creat_fichier(t_map *map, char *name)
 {
     int     fd;
 
     //on créer une map
-    if (creat(name, O_CREAT) == -1)
-        return (0);
-    if ((fd = open(name, O_APPEND)) == -1)
+    if ((fd = creat(name, O_CREAT | O_RDWR)) == -1)
+	return (0);
+    close(fd);
+    if (chmod(name, S_IRWXU) < 0)
+	return (0);
+    if ((fd = open(name, O_APPEND | O_RDWR)) == -1)
         return (0);
     if (do_map(map, fd) == 0)
         return(0);
-    free(name);
     close(fd);
-    return (1);
+    return(1);
 }

@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/26 17:06:33 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/07 16:53:15 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,7 +286,7 @@ int     do_input(t_input_edit *in, int fd);
 int     do_var(t_var *v, int fd);
 int     do_wall(t_wall wall, int fd);
 int     do_point(t_point point, int fd);
-int     do_x_wall(t_wall *wall, int fd);
+int     do_x_wall(t_wall *wall, int fd, int g);
 int     do_sectors(t_sector *sectors, int fd);
 int     do_box(t_box box, int fd);
 int     do_map(t_map *map, int fd);
