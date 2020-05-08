@@ -87,9 +87,6 @@ int     do_sectors(t_sector *sectors, int fd)
     if (sectors->next_sector)
         if (do_sectors(sectors->next_sector, fd) == 0)
             return (0);
-    if (sectors->map)
-        if (do_map(sectors->map, fd) == 0)
-            return (0);
     return (1);
 }
 //ecriture de plusieurs structure wall
