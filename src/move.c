@@ -31,7 +31,8 @@ void	rot_left(t_var *info)
 int     dealer(t_var *info, t_render *render)
 {
 	SDL_Event e;
-
+	
+	(void)render;
 	if (SDL_PollEvent(&e) == 1)
 	{
 		if (e.type == SDL_QUIT)
@@ -39,13 +40,12 @@ int     dealer(t_var *info, t_render *render)
 		if (e.key.keysym.sym == SDLK_ESCAPE)
 			return (0);
 		if (e.type == SDL_MOUSEBUTTONDOWN)
-			return(0);
+			return (0);
         if (e.key.keysym.sym == SDLK_LEFT)
 	    {
 		    if (e.key.state == SDL_PRESSED)
 		    {
                 rot_left(info);
-                raycasting(info, render);
             }
         }
 	    if (e.key.keysym.sym == SDLK_RIGHT)
@@ -53,9 +53,8 @@ int     dealer(t_var *info, t_render *render)
 		    if (e.key.state == SDL_PRESSED)
             {
                 rot_right(info);
-                raycasting(info, render);
             }
         }
     }
-    return(1);
+    return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/16 15:27:09 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/08 18:48:16 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ int		is_in_sector_spawn(t_point first,t_sector *sector)
 	if (pnpoly_spawn(sector->nbr_walls, sector->walls, first))
 	{
 		sector->map->spawn.z = sector->walls[0].d.z;
+		sector->map->spawn_sector_id = sector->sector_id;
 		return (1);
 	}
 	return (0);

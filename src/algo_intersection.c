@@ -9,8 +9,10 @@
 
 void	calc_wall_spec(t_wall *wall)
 {
+	ft_putendl("c1");
 	if (wall->b.x != wall->a.x)
 	{
+		ft_putendl("c2");
 		if (wall->a.y == wall->b.y)
 			wall->eq_slope = 0;
 		else
@@ -20,6 +22,7 @@ void	calc_wall_spec(t_wall *wall)
 	}
 	else
 	{
+		ft_putendl("c3");
 		wall->eq_slope = 1111;
 		wall->eq_cste = (double)wall->a.x;
 	}
@@ -42,7 +45,9 @@ int		xy_in_ab(double x, double y, t_point a, t_point b)
 
 int		intersect(t_ray *ray, t_wall *wall)
 {
+	ft_putendl("b1");
 	calc_wall_spec(wall);	// a rajouter au moment du parsing ? plus rapide que pendant le rendering
+	ft_putendl("b2");
 	if (ray->eq_slope == wall->eq_slope)
 		return (0);
 	if (wall->eq_slope == 1111)

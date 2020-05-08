@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom-nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/19 14:38:43 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/05/08 19:24:56 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <SDL_image.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 # define WINDOW_W			1280
 # define WINDOW_H			720
@@ -71,7 +72,6 @@ struct 					s_wall
 	int					fill_up;
 	int					fill_down;
 	int					sector_id;
-	int					sector_next;
 	double				height;
 	double				eq_slope;
 	double				eq_cste;
@@ -82,11 +82,13 @@ struct 					s_sector
 {
 	t_wall				*walls;
 	int 				nbr_walls;
-	t_wall				floor;		// ???
-	t_wall				celling;	// ???
+	t_wall				floor;
+	t_wall				celling;
 	int					light;
 	int					sector_id;
 	t_sector			*next_sector;
+	t_map				*map;
+	t_var				*info;
 };
 
 struct 					s_box
@@ -102,10 +104,10 @@ struct 					s_map
 {
 	t_box				box;
 	t_sector			*sectors;
-	int					nbr_sectors;
 	int					size;
 	SDL_Surface			*text_tab[10];
 	t_point				spawn;
+	int					i;
 };
 
 struct					s_text
@@ -184,7 +186,7 @@ struct					s_var
 	SDL_Surface			*image;
 	SDL_Texture			*texture;
 	t_player			*player;
-	t_map				map;
+	t_map				*map;
 	double				olddirx;
 	double				oldplanex;
 	double				rotspeed;
@@ -230,5 +232,19 @@ int		intersect(t_ray *ray, t_wall *wall);
 //algo
 int     raycasting(t_var *info, t_render *render);
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
+
+//load_map
+int    info_map(char *str, t_map *map);
+int     rec_map(char *the_map, t_map *map);
+t_box	rec_box(char *the_map, t_map *map);
+t_sector	*rec_sectors(char *the_map, t_map *map);
+void	rec_sectors_int(char *the_map, t_sector *sectors, t_map *map);
+t_point	rec_point(char *the_map, t_map *map);
+t_wall	rec_wall(char *the_map, t_map *map);
+double	rec_double(char *the_map, t_map *map);
+char	*rec_x_char(char *the_map, t_map *map);
+int     rec_int(char *the_map, t_map *map);
+void	rec_char(char *the_map, char dest, t_map *map);
+char    *recup_map(char *src);
 
 #endif

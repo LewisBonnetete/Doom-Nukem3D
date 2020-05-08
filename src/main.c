@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/02/06 15:09:32 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/05/08 19:16:15 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,32 @@
 int                main(int ac, char **av)
 {
 	t_var info;
+	t_map map;
 	t_render renderer;
 	t_player	player;
 
 	(void)ac;
 	(void)av;
+	(void)player;
+	(void)renderer;
+	info.map = &map;
 	if (!(init_win1(&info)))
 		return (0);
 	if (!(init_win2(&info)))
 		return (0);
-	init_artificial_map(&(info.map));
+	//init_artificial_map(&(info.map));
+	if (ac != 2 || info_map(av[1], info.map) == 0)
+		return (0);
+	ft_putendl("a");
 	ft_init_pour_linstant(&info);
-	init_player(&player, &info.map);
+	ft_putendl("b");
+	init_player(&player, info.map);
+	ft_putendl("c");
 	info.player = &player;
+	ft_putendl("d");
 	while (dealer(&info, &renderer))
 	{
+		ft_putendl("e");
 		if (!(info.texture = SDL_CreateTextureFromSurface(info.renderer, info.image)))
 		{
 			ft_putstr("Erreur CreateTextureFromSurface :\n");
@@ -46,6 +57,7 @@ int                main(int ac, char **av)
 			SDL_Quit();
 			return (0);
 		}
+		ft_putendl("f");
 		if (SDL_RenderCopy(info.renderer, info.texture, NULL, NULL))
 		{
 			ft_putstr("Erreur RenderCopy :\n");
@@ -54,7 +66,11 @@ int                main(int ac, char **av)
 			SDL_Quit();
 			return (0);
 		}
+		ft_putendl("g");
+		raycasting(&info, &renderer);
+		ft_putendl("h");
 		SDL_RenderPresent(info.renderer);
+		ft_putendl("i");
 		SDL_DestroyTexture(info.texture);
 	}
 	SDL_DestroyWindow(info.window);

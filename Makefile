@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
+#    By: lewis <lewis@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/02/06 15:05:40 by lbonnete         ###   ########.fr        #
+#    Updated: 2020/05/08 18:01:48 by lewis            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ SRC =	main.c\
 		algo_draw.c\
 		algo.c\
 		map_init.c\
-		move.c
+		move.c\
+		load_map.c
+		
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 

@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/08 17:33:01 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/08 18:51:36 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,18 +202,26 @@ int     do_int(int i, int fd)
 int     creat_fichier(t_map *map, char *name)
 {
     int     fd;
+	char	*namefinal;
+	char	*namefinalfinal;
+	char	*path;
 
     //on créer une map
-    if ((fd = creat(name, O_CREAT | O_RDWR)) == -1)
+	path = "../maps/";
+	namefinal = ft_strjoin(name, ".map");
+	namefinalfinal = ft_strjoin(path, namefinal);
+    if ((fd = creat(namefinalfinal, O_CREAT | O_RDWR)) == -1)
 	return (0);
     close(fd);
-    if (chmod(name, S_IRWXU) < 0)
+    if (chmod(namefinalfinal, S_IRWXU) < 0)
 	return (0);
-    if ((fd = open(name, O_APPEND | O_RDWR)) == -1)
+    if ((fd = open(namefinalfinal, O_APPEND | O_RDWR)) == -1)
         return (0);
     if (do_map(map, fd) == 0)
-        return(0);
+        return (0);
     close(fd);
-	free(name)
-    return(1);
+	free(namefinalfinal);
+	free(namefinal);
+	free(name);
+    return (1);
 }

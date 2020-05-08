@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/07 16:53:15 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/08 18:45:54 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ struct 					s_map
 	int					size;
 	SDL_Surface			*text_tab[10];
 	t_point				spawn;
+	int					spawn_sector_id;
+	int					i;
 };
 
 struct					s_text
