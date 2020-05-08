@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_map_c.c                                       :+:      :+:    :+:   */
+/*   save_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/16 15:27:09 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/08 17:33:01 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-//enregistrer une map
+
 #include "../editeur/doom-nukem_edit.h"
 #include <sys/stat.h>
 //l'idée est de créer la map de tel sorte que l'on ai une lettre suivi d'une info
@@ -214,5 +214,6 @@ int     creat_fichier(t_map *map, char *name)
     if (do_map(map, fd) == 0)
         return(0);
     close(fd);
+	free(name)
     return(1);
 }
