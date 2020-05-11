@@ -294,7 +294,7 @@ int     do_x_wall(t_wall *wall, int fd, int g);
 int     do_sectors(t_sector *sectors, int fd);
 int     do_box(t_box box, int fd);
 int     do_map(t_map *map, int fd);
-char    *little_strcat(char *src, char c);
+char    *little_strjoin(char *src, char c);
 
 //Hud
 void	hud(t_var *info);

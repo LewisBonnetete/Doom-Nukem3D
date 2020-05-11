@@ -6,18 +6,6 @@
 //si la fonction retourne 1 tout s'est bien passé, sinon elle retourne 0,n il y a donc une erreur dans la map envoyé en argument
 //je precise que tout est a testé, et rien n'est a la norme.
 //recupère les infos du .map avec recup_map puis remplit le t_map avec rec_map
-char    *little_strcat(char *src, char c)
-{
-    int     i;
-
-    i = 0;
-    while (src[i])
-        ++i;
-    src[i] = c;
-    src[i + 1] = 0;
-    return (src);
-}
-
 int     info_map(char *str, t_map *map)
 {
     char	*the_map;
@@ -202,7 +190,7 @@ char	*rec_x_char(char *the_map, t_map *map)
 		if (src)
         	{
             		rec_char(the_map, a, map);
-			src = little_strcat(src, a);
+			src = little_strjoin(src, a);
         	}
         	else
         	{

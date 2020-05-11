@@ -17,16 +17,20 @@
 //il faut donc utiliser creat_fichier avec le t_map que l'on veut créer en .map
 //creation du fichier et ouverture
 //strcat avec un seul caractère
-char    *little_strcat(char *src, char c)
+char    *little_strjoin(char *src, char c)
 {
     int     i;
+    char	*dest;
 
-    i = 0;
-    while (src[i])
-        ++i;
-    src[i] = c;
-    src[i + 1] = 0;
-    return (src);
+    i = ft_strlen(src);
+    if (!(dest) = (char *)malloc(sizeof(char) * i + 1))
+	    return (0);
+    dest[i + 1] = 0;
+    i = -1;
+    while (src[++i])
+        dest[i] = src[i];
+    dest[i] = c;
+    return (dest);
 }
 //écriture de la map
 int     do_map(t_map *map, int fd)
