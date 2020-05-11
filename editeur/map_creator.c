@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/26 17:37:53 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/11 13:19:13 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,6 +335,7 @@ void		init_walls(t_wall *walls, int nbr_walls)
 		walls[i].b.y = -1;
 		walls[i].d.y = -1;
 		walls[i].c.y = -1;
+		init_wall(&walls[i]);
 		i++;
 	}
 }
@@ -343,6 +344,7 @@ int		init_first_sector(t_var *info, t_sector *sector, t_map *map)
 {
 	int height[2];
 
+	init_sector(sector);
 	sector->sector_id = 1;
 	get_height_sector(map, height);
 	get_nbr_walls_sector_textures(sector);
@@ -361,6 +363,7 @@ int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
 {
 	int height[2];
 
+	init_sector(sector);
 	sector->next_sector->sector_id = sector->sector_id + 1;
 	sector = sector->next_sector;
 	get_height_sector(map, height);

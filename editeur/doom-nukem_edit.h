@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/08 18:45:54 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/11 13:13:49 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,6 +248,8 @@ void	init_box(t_map *map);
 void	init_map(t_map *map);
 void	init_var(t_var *info);
 void	init_walls(t_wall *walls, int nbr_walls);
+void	init_sector(t_sector *sector);
+void	init_wall(t_wall *wall);
 
 //drawers
 void	draw_interactions_edit(t_var *info, t_map *map);

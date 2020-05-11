@@ -6,12 +6,31 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/17 15:10:46 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/11 13:20:03 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
 
+void	init_sector(t_sector *sector)
+{
+	sector->light = 0;
+	sector->nbr_walls = 0;
+	sector->sector_id = 0;
+}
+
+void	init_wall(t_wall *wall)
+{
+	wall->fill_down = 0;
+	wall->fill_up = 0;
+	wall->is_portal = 0;
+	wall->is_textured = 0;
+	wall->is_transparent = 0;
+	wall->sector_id = 0;
+	wall->sector_id_it_leads_to = 0;
+	wall->text_id = 0;
+	wall->wall_id = 0;
+}
 
 void	init_box(t_map *map)
 {
@@ -20,22 +39,15 @@ void	init_box(t_map *map)
 	i = -1;
 	map->box.nbr_walls = 4;
 	while(++i < 4)
+	{
+		init_wall(&(map->box.walls[i]));
 		map->box.walls[i].is_portal = 0;
-	i = -1;
-	while(++i < 4)
 		map->box.walls[i].is_textured = 1;
-	i = -1;
-	while(++i < 4)
 		map->box.walls[i].is_transparent = 0;
-	i = -1;
-	while(++i < 4)
 		map->box.walls[i].text_id = 0;
-	i = -1;
-	while(++i < 4)
 		map->box.walls[i].sector_id = 0;
-	i = -1;
-	while(++i < 4)
 		map->box.walls[i].wall_id = i;
+	}
 	//premier mur a:
 	map->box.walls[0].a.x = 0;
 	map->box.walls[0].a.y = 0;
@@ -100,6 +112,7 @@ void	init_map(t_map *map)
 	map->spawn.x = -1;
 	map->spawn.y = -1;
 	map->spawn.z = -1;
+	map->i = 0;
 	map->sectors = NULL;
 }
 
