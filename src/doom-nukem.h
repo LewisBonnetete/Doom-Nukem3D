@@ -234,7 +234,8 @@ int     raycasting(t_var *info, t_render *render);
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
 
 //load_map
-int    info_map(char *str, t_map *map);
+int	check_map(char *the_map);
+int	info_map(char *str, t_map *map);
 int     rec_map(char *the_map, t_map *map);
 t_box	rec_box(char *the_map, t_map *map);
 t_sector	*rec_sectors(char *the_map, t_map *map);

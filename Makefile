@@ -33,7 +33,8 @@ SRC =	main.c\
 		algo.c\
 		map_init.c\
 		move.c\
-		load_map.c
+		load_map.c\
+		check_map.c
 		
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))

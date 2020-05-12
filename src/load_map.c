@@ -14,6 +14,8 @@ int     info_map(char *str, t_map *map)
     map->i = -1;
     if (!(the_map = recup_map(str)))
         return (0);
+    if (check_map(the_map) == 0)
+	    return (0);
     if (the_map[++map->i] == 'm')
     {
     	if (rec_map(the_map, map) == 0)
