@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/18 17:27:55 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/18 19:42:25 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int		check_wall_intersections(t_point new, t_point old, t_wall wall)
 			return (1);
 		x = (b2-b1)/(a1-a2);
 		if (is_between(x, (float)old.x, (float)new.x) && is_between(x, (float)w1.x, (float)w2.x))
-			return(0);
+			return (0);
 	}
 	return (1);
 }
