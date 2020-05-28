@@ -6,11 +6,11 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/08 18:51:36 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/28 11:47:03 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../editeur/doom-nukem_edit.h"
+#include "doom-nukem_edit.h"
 #include <sys/stat.h>
 //l'idée est de créer la map de tel sorte que l'on ai une lettre suivi d'une info
 //a la fin on aura donc une grande ligne avec toutes les infos dont on va avoir besoin pour la map
@@ -23,7 +23,7 @@ char    *little_strjoin(char *src, char c)
     char	*dest;
 
     i = ft_strlen(src);
-    if (!(dest) = (char *)malloc(sizeof(char) * i + 1))
+    if (!((dest) = (char *)malloc(sizeof(char) * i + 1)))
 	    return (0);
     dest[i + 1] = 0;
     i = -1;

@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/11 13:19:13 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/28 12:40:45 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,7 +290,7 @@ int		get_walls_sector(t_map *map, t_sector *sector, int *height)
 					ft_putendl("Nope, try something else");
 			}
 		}
-		else if (event.key.keysym.sym == SDLK_d)
+		else if (event.key.keysym.sym == SDLK_d && event.key.state == SDL_PRESSED)
 		{
 			i = 0;
 			init_walls(sector->walls, sector->nbr_walls);
@@ -312,6 +312,14 @@ int		get_walls_sector(t_map *map, t_sector *sector, int *height)
 			i = 0;
 			init_walls(sector->walls, sector->nbr_walls);
 			ft_putendl("Sorry but your sector crosses itself :(");
+			ft_putendl("Sector reseted");
+			draw_state(sector);
+		}
+		if (i == sector->nbr_walls && !check_surrounding(sector))
+		{
+			i = 0;
+			init_walls(sector->walls, sector->nbr_walls);
+			ft_putendl("Sorry but your sector surrounds another :(");
 			ft_putendl("Sector reseted");
 			draw_state(sector);
 		}
@@ -363,7 +371,7 @@ int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
 {
 	int height[2];
 
-	init_sector(sector);
+	init_sector(sector->next_sector);
 	sector->next_sector->sector_id = sector->sector_id + 1;
 	sector = sector->next_sector;
 	get_height_sector(map, height);

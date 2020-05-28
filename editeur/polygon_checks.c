@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/08 18:48:16 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/28 12:38:07 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,29 @@ int		check_convexity(t_sector *sector)
 	return (1);
 }
 
+int		check_surrounding(t_sector *sector)
+{
+	t_sector *current_sector;
+	int i;
+
+	i = 0;
+	current_sector = sector->map->sectors;
+	while (current_sector)
+	{
+		if (current_sector->sector_id != sector->sector_id)
+		{
+			while (i < current_sector->nbr_walls)
+			{
+				if (!is_in_sector(current_sector->walls[i].a, sector))
+					return (0);
+				i++;
+			}
+			i = 0;
+		}
+		current_sector = current_sector->next_sector;
+	} 
+	return (1);
+}
 
 int		check_self_intersection(t_sector *sector)
 {

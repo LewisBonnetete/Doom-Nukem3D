@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/11 13:13:49 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/28 12:27:50 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,8 @@ int		is_in_sectors_spawn(t_point first,t_map *map);
 int		is_in_sectors_float(float center_x, float center_y, t_map *map);
 int		is_new_point_in_sector(t_point new, t_wall *walls);
 int		is_same_point(t_point a, t_point b);
+int		check_surrounding(t_sector *sector);
+int		is_in_sector(t_point first,t_sector *sector);
 
 //init func
 void	init_box(t_map *map);

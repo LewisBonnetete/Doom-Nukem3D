@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/16 15:50:48 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/28 12:11:49 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_sector	*get_to_last_sector(t_sector *sectors)
 	{
 		sector = sector->next_sector;
 	}
-	return(sector);
+	return (sector);
 }
 
 int			nbr_of_sectors(t_map *map)
