@@ -75,7 +75,6 @@ void	draw_column(t_var *info, t_render *render)
 			ft_putendl("a10");
 			draw_textures(info, render);
 			ft_putendl("a11");
-			return;
 		}
 	}
 }
