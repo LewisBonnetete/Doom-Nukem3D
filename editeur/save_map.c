@@ -196,11 +196,17 @@ int     do_int(int i, int fd)
     if (write(fd, &b, 1) == -1)
         return (0);
     if (i < 0)
+    {
 	if (write(fd, "0", 1) == -1)
 	{
 	    return (0);
+<<<<<<< HEAD
 	}
 	else
+=======
+    }
+    else
+>>>>>>> 3b67ffb41d879c64acaf252f54333cc83aabd50d
     {
 	c = ft_itoa(i);
     	r = -1;
