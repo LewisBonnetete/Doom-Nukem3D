@@ -65,7 +65,7 @@ int		intersect(t_ray *ray, t_wall *wall)
 		ray->x2 = (wall->eq_cste - ray->eq_cste) / (ray->eq_slope - wall->eq_slope);
 		ray->y2 = ray->eq_slope * ray->x2 + ray->eq_cste;
 	}
-	if (xy_in_ab(ray->y2, ray->y2, wall->a, wall->b))
+	if (xy_in_ab(ray->x2, ray->y2, wall->a, wall->b))
 		return (xy_in_frontview(ray->x2, ray->y2, *ray));
 	return (0);
 }
