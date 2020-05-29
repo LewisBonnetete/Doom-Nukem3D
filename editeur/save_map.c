@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/28 11:47:03 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/29 12:38:10 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,8 +197,10 @@ int     do_int(int i, int fd)
         return (0);
     if (i < 0)
 	if (write(fd, "0", 1) == -1)
+	{
 	    return (0);
-    else
+	}
+	else
     {
 	c = ft_itoa(i);
     	r = -1;

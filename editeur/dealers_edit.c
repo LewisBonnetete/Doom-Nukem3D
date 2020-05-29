@@ -6,11 +6,16 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/26 18:11:01 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/29 12:46:18 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
+
+void	printer(t_map *map)
+{
+	printf("\n");
+}
 
 int		dealers_edit_3(t_map *map, SDL_Event event)
 {
@@ -63,6 +68,11 @@ int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit)
 		{
 			if (event.key.state == SDL_PRESSED)
 				del_sector(info, map);
+		}
+		if (event.key.keysym.sym == SDLK_p)
+		{
+			if (event.key.state == SDL_PRESSED)
+				printer(map);
 		}
 		if (event.key.keysym.sym == SDLK_s)
 		{
