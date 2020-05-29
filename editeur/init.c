@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/11 13:20:03 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/29 12:34:54 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	init_sector(t_sector *sector)
 	sector->light = 0;
 	sector->nbr_walls = 0;
 	sector->sector_id = 0;
+	init_wall(&sector->celling);
+	init_wall(&sector->floor);
 }
 
 void	init_wall(t_wall *wall)
