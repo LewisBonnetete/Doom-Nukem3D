@@ -195,11 +195,17 @@ int     do_int(int i, int fd)
     b = 'i';
     if (write(fd, &b, 1) == -1)
         return (0);
-    c = ft_itoa(i);
-    r = -1;
-    while (c[++r])
-        if (write(fd, &c[r], 1) == -1)
-            return (0);
+    if (i < 0)
+	if (write(fd, "0", 1) == -1)
+	    return (0);
+    else
+    {
+	c = ft_itoa(i);
+    	r = -1;
+    	while (c[++r])
+       	    if (write(fd, &c[r], 1) == -1)
+            	return (0);
+    }
     return (1);
 }
 //permet de creer le fichier
