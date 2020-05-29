@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/29 20:06:58 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/29 13:34:00 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int 	save(t_map *map)
 	char *line;
 	int size;
 
-	ft_putendl("What's name of your map?");
+	ft_putendl("What is your map's name?");
 	size = 0;
 	while(size < 3 || size > 15)
 	{

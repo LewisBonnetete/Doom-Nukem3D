@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/29 12:34:54 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/29 13:21:03 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@ void	init_sector(t_sector *sector)
 	init_wall(&sector->floor);
 }
 
+void		init_walls(t_wall *walls, int nbr_walls)
+{
+	int i;
+
+	i = 0;
+	while (i < nbr_walls)
+	{
+		init_wall(&walls[i]);
+		i++;
+	}
+}
+
 void	init_wall(t_wall *wall)
 {
 	wall->fill_down = 0;
@@ -32,6 +44,18 @@ void	init_wall(t_wall *wall)
 	wall->sector_id_it_leads_to = 0;
 	wall->text_id = 0;
 	wall->wall_id = 0;
+	wall->a.x = 0;
+	wall->a.y = 0;
+	wall->a.z = 0;
+	wall->b.x = 0;
+	wall->b.y = 0;
+	wall->b.z = 0;
+	wall->c.x = 0;
+	wall->c.y = 0;
+	wall->c.z = 0;
+	wall->d.x = 0;
+	wall->d.y = 0;
+	wall->d.z = 0;
 }
 
 void	init_box(t_map *map)
@@ -50,6 +74,8 @@ void	init_box(t_map *map)
 		map->box.walls[i].sector_id = 0;
 		map->box.walls[i].wall_id = i;
 	}
+	init_wall(&map->box.floor);
+	init_wall(&map->box.celling);
 	//premier mur a:
 	map->box.walls[0].a.x = 0;
 	map->box.walls[0].a.y = 0;

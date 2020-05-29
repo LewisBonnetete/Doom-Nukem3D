@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/29 12:42:53 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/29 13:31:37 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,26 +326,6 @@ int		get_walls_sector(t_map *map, t_sector *sector, int *height)
 	}
 	close_sector(sector, sector->nbr_walls - 1);
 	return (1);
-}
-
-void		init_walls(t_wall *walls, int nbr_walls)
-{
-	int i;
-
-	i = 0;
-	while (i < nbr_walls)
-	{
-		walls[i].a.x = -1;
-		walls[i].b.x = -1;
-		walls[i].c.x = -1;
-		walls[i].d.x = -1;
-		walls[i].a.y = -1;
-		walls[i].b.y = -1;
-		walls[i].d.y = -1;
-		walls[i].c.y = -1;
-		init_wall(&walls[i]);
-		i++;
-	}
 }
 
 int		init_first_sector(t_var *info, t_sector *sector, t_map *map)

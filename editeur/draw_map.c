@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/28 11:54:02 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/29 13:29:08 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	draw_sector_wall_edit(t_var *info, t_map *map, t_sector *sector)
 	max = sector->nbr_walls;
 	while (i < max)
 	{
-		if (sector->walls[i].b.x >= 0)
+		if (sector->walls[i].b.x > 0)
 		{
 			draw_wall_edit(info, map, sector, i);
 		}
@@ -149,7 +149,7 @@ void	draw_sector_portal_edit(t_var *info, t_map *map, t_sector *sector)
 	max = sector->nbr_walls;
 	while (i < max)
 	{
-		if (sector->walls[i].b.x >= 0)
+		if (sector->walls[i].b.x > 0)
 		{
 			draw_portal_edit(info, map, sector, i);
 		}
