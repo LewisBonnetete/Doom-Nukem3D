@@ -6,6 +6,22 @@
 //si la fonction retourne 1 tout s'est bien passé, sinon elle retourne 0,n il y a donc une erreur dans la map envoyé en argument
 //je precise que tout est a testé, et rien n'est a la norme.
 //recupère les infos du .map avec recup_map puis remplit le t_map avec rec_map
+char    *little_strjoin(char *src, char c)
+{
+    int     i;
+    char	*dest;
+
+    i = ft_strlen(src);
+    if (!((dest) = (char *)malloc(sizeof(char) * i + 1)))
+	    return (0);
+    dest[i + 1] = 0;
+    i = -1;
+    while (src[++i])
+        dest[i] = src[i];
+    dest[i] = c;
+    return (dest);
+}
+
 int     info_map(char *str, t_map *map)
 {
     char	*the_map;

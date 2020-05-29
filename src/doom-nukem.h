@@ -247,5 +247,7 @@ char	*rec_x_char(char *the_map, t_map *map);
 int     rec_int(char *the_map, t_map *map);
 void	rec_char(char *the_map, char dest, t_map *map);
 char    *recup_map(char *src);
+char    *little_strjoin(char *src, char c);
+
 
 #endif
