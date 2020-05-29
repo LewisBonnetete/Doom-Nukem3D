@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/29 13:34:23 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/28 11:47:03 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char    *little_strjoin(char *src, char c)
     while (src[++i])
         dest[i] = src[i];
     dest[i] = c;
+    if (src)
+	ft_strdel(&src);
     return (dest);
 }
 //écriture de la map

@@ -19,6 +19,8 @@ char    *little_strjoin(char *src, char c)
     while (src[++i])
         dest[i] = src[i];
     dest[i] = c;
+    if (src)
+    	ft_strdel(&src);
     return (dest);
 }
 
@@ -48,7 +50,6 @@ int     rec_map(char *the_map, t_map *map)
 	ft_putendl("map");
     if (the_map[++map->i] == 'b')
        map->box = rec_box(the_map, map);
-	printf("%c\n",the_map[map->i+1]);
     if (the_map[++map->i] == 's')
        map->sectors = rec_sectors(the_map, map);
     if (the_map[++map->i] == 'i')
@@ -90,12 +91,11 @@ t_sector	*rec_sectors(char *the_map, t_map *map)
 
 	ft_putendl("sect");
     g = -1;
-    if (!((sectors) = (t_sector *)malloc(sizeof(t_sector))))
+    if (!((sectors) = (t_sector *)ft_memalloc(sizeof(t_sector))))
         return (0);
-	printf("%p\n",sectors);
     if (the_map[++map->i] == 'i')
         sectors->nbr_walls = rec_int(the_map, map);
-    if (!((sectors->walls) = (t_wall *)malloc(sizeof(t_wall)
+    if (!((sectors->walls) = (t_wall *)ft_memalloc(sizeof(t_wall)
 	* sectors->nbr_walls)))
 		return (0);
     if (the_map[++map->i] == 'x')
@@ -212,7 +212,7 @@ char	*rec_x_char(char *the_map, t_map *map)
         	}
         	else
         	{
-            		if (!(src = (char *)malloc(sizeof(char) + 2)))
+            		if (!(src = (char *)ft_memalloc(sizeof(char) + 2)))
                 		return (0);
             		rec_char(the_map, src[0], map);
 			src[1] = 0;
