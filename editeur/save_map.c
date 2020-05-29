@@ -196,8 +196,10 @@ int     do_int(int i, int fd)
     if (write(fd, &b, 1) == -1)
         return (0);
     if (i < 0)
+    {
 	if (write(fd, "0", 1) == -1)
 	    return (0);
+    }
     else
     {
 	c = ft_itoa(i);
