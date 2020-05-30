@@ -57,7 +57,7 @@ void	draw_column(t_var *info, t_render *render)
 		{
 			if(render->wall->is_portal)
 			{
-				init_next_render(info, render);
+				init_next_render(info, render);//manque une etape ? changer la position de depart? changer de secteur? test fonctionne bizarrement voir ./doom-nukem maps/2sec.map
 				draw_column(info, render);
 				ft_memdel((void**)&(render->next_render));
 			}
