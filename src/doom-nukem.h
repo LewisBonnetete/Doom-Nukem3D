@@ -26,7 +26,7 @@
 # define GMASK				0
 # define BMASK				0
 # define AMASK				0
-# define WALL_H				64
+# define WALL_H				128
 # define DECALLAGE			0
 # define BLACK				0x000000
 # define SKY_BLUE			0x00BFFF
@@ -158,6 +158,8 @@ struct					s_player
 	double				dz;
 	double				planex;
 	double				planey;
+	double				movespeed;
+	double				frametime;
 };
 
 struct					s_ray

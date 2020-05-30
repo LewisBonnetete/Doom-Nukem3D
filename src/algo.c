@@ -39,42 +39,31 @@ void	update_render(t_var *info, t_render *render)
 		render->wall_y0 += DECALLAGE * (render->wall->a.z - info->player->posz) /  render->wall_dist;
 		render->wall_y1 += DECALLAGE * (render->wall->a.z - info->player->posz) /  render->wall_dist;
 	}
-	printf("WALL_H = %d\n", WALL_H);
-	printf("wall_sqdist = %f\n",render->wall_sqdist);
-	printf("wall_dist = %f\n",render->wall_dist);
-	printf("wall_height = %f\n",render->wall_height);
-	printf("wall_y0 = %d\n",render->wall_y0);
-	printf("wall_y1 = %d\n",render->wall_y1);
+	// printf("WALL_H = %d\n", WALL_H);
+	// printf("wall_sqdist = %f\n",render->wall_sqdist);
+	// printf("wall_dist = %f\n",render->wall_dist);
+	// printf("wall_height = %f\n",render->wall_height);
+	// printf("wall_y0 = %d\n",render->wall_y0);
+	// printf("wall_y1 = %d\n",render->wall_y1);
 }
 
 void	draw_column(t_var *info, t_render *render)
 {
-	ft_putendl("a1");
 	render->n = -1;
-	ft_putendl("a2");
 	while(++render->n < render->s->nbr_walls)
 	{
-		ft_putendl("a3");
 		render->wall = render->s->walls + render->n;
-		printf("%p\n", render->s->walls);
-		ft_putendl("a4");
 		if(intersect(render->ray, render->wall) == 1)
 		{
-			ft_putendl("a5");
 			if(render->wall->is_portal)
 			{
-				ft_putendl("a6");
 				init_next_render(info, render);
-				ft_putendl("a7");
 				draw_column(info, render);
-				ft_putendl("a8");
 				ft_memdel((void**)&(render->next_render));
 			}
-			ft_putendl("a9");
 			update_render(info, render);
-			ft_putendl("a10");
 			draw_textures(info, render);
-			ft_putendl("a11");
+			return;
 		}
 	}
 }
@@ -84,15 +73,11 @@ int     raycasting(t_var *info, t_render *render)
 	t_ray ray;
 	
 	render->ray = &ray;
-	ft_putendl("0");
 	init_render(info, render, 0, info->player->sector_id);
 	while(render->x < WINDOW_W)
 	{
-		ft_putendl("1");
 		update_ray(info, render);
-		ft_putendl("2");
 		draw_column(info, render);
-		ft_putendl("3");
 		render->x++;
 	}
 	return (1);

@@ -39,16 +39,11 @@ int                main(int ac, char **av)
 	//init_artificial_map(&(info.map));
 	if (ac != 2 || info_map(av[1], info.map) == 0)
 		return (0);
-	ft_putendl("a");
 	ft_init_pour_linstant(&info);
-	ft_putendl("b");
 	init_player(&player, info.map);
-	ft_putendl("c");
 	info.player = &player;
-	ft_putendl("d");
 	while (dealer(&info, &renderer))
 	{
-		ft_putendl("e");
 		if (!(info.texture = SDL_CreateTextureFromSurface(info.renderer, info.image)))
 		{
 			ft_putstr("Erreur CreateTextureFromSurface :\n");
@@ -57,7 +52,6 @@ int                main(int ac, char **av)
 			SDL_Quit();
 			return (0);
 		}
-		ft_putendl("f");
 		if (SDL_RenderCopy(info.renderer, info.texture, NULL, NULL))
 		{
 			ft_putstr("Erreur RenderCopy :\n");
@@ -66,11 +60,8 @@ int                main(int ac, char **av)
 			SDL_Quit();
 			return (0);
 		}
-		ft_putendl("g");
 		raycasting(&info, &renderer);
-		ft_putendl("h");
 		SDL_RenderPresent(info.renderer);
-		ft_putendl("i");
 		SDL_DestroyTexture(info.texture);
 	}
 	SDL_DestroyWindow(info.window);

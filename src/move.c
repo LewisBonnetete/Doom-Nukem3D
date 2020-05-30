@@ -55,6 +55,26 @@ int     dealer(t_var *info, t_render *render)
                 rot_right(info);
             }
         }
-    }
+		if (e.key.keysym.sym == SDLK_UP)
+		{
+			if (e.key.state == SDL_PRESSED)
+			{
+					info->player->posx += info->player->dx * info->player->movespeed;
+					info->player->posy += info->player->dy * info->player->movespeed;
+					ft_putendl("1");
+					printf("x = %f\ny = %f\n",info->player->posx, info->player->posy);
+			}		
+		}
+		if (e.key.keysym.sym == SDLK_DOWN)
+  		{
+			if (e.key.state == SDL_PRESSED)
+			{
+				info->player->posx -= info->player->dx * info->player->movespeed;
+				info->player->posy -= info->player->dy * info->player->movespeed;
+				ft_putendl("2");
+				printf("x = %f\ny = %f\n",info->player->posx, info->player->posy);
+			}
+		}
+	}
     return (1);
 }

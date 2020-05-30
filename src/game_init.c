@@ -21,6 +21,8 @@ void	init_player(t_player *player, t_map *map)
 	player->dz = 0.0;
 	player->planex = 0.0;
 	player->planey = 0.4;
+	player->frametime = 0.03;
+	player->movespeed = player->frametime * 2.5;
 }
 
 t_sector	*get_a_sector_by_id(t_map *map, int id)
@@ -30,8 +32,6 @@ t_sector	*get_a_sector_by_id(t_map *map, int id)
 
 	i = 1;
 	sector = map->sectors;
-	printf("%p\n",map->sectors);
-	printf("%p\n",map->sectors->walls);
 	while(i < id)
 	{
 		i++;
@@ -39,7 +39,6 @@ t_sector	*get_a_sector_by_id(t_map *map, int id)
 	}
 	if (id == 0)
 		return (NULL);
-	printf("%p\n",sector->walls);
 	return (sector);
 }
 

@@ -28,7 +28,6 @@ int     info_map(char *str, t_map *map)
 {
     char	*the_map;
 
-	ft_putendl("Loading map");
     map->i = -1;
     if (!(the_map = recup_map(str)))
         return (0);
@@ -47,7 +46,6 @@ int     info_map(char *str, t_map *map)
 //recupere une structure t_map
 int     rec_map(char *the_map, t_map *map)
 {
-	ft_putendl("map");
     if (the_map[++map->i] == 'b')
        map->box = rec_box(the_map, map);
     if (the_map[++map->i] == 's')
@@ -64,7 +62,6 @@ t_box	rec_box(char *the_map, t_map *map)
     int     x;
     t_box   box;
 
-	ft_putendl("box");
     ++map->i;
     x = -1;
     while (++x < 5)
@@ -89,7 +86,6 @@ t_sector	*rec_sectors(char *the_map, t_map *map)
     int	g;
     t_sector	*sectors;
 
-	ft_putendl("sect");
     g = -1;
     if (!((sectors) = (t_sector *)ft_memalloc(sizeof(t_sector))))
         return (0);
