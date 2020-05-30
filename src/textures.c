@@ -3,10 +3,10 @@
 char	**tab_path()
 {
 	int	i;
-	char	*tab_text[NB_TEXTURE];
+	char	*tab_text[NB_TEXT];
 
 	i = -1;
-	while (++i < NB_TEXTURE)
+	while (++i < NB_TEXT)
 	{
 		if (i - 1 < 0)
 			tab_text[i] = ft_strdup(TEXTURE_1);
@@ -26,7 +26,7 @@ int	load_text(char **tab, t_render renderer)
 	int		i;
 
 	i = -1;
-	while (++i < NB_TEXTURE)
+	while (++i < NB_TEXT)
 		if ((tab_sdl[i] = IMG_Load(tab[i])) == 0)
 			return (0);
 	i = -1;
