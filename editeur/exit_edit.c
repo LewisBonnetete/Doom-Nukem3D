@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/23 14:26:52 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/30 11:52:59 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int		exit_edit(t_var *info, t_map *map)
 	SDL_DestroyWindow(info->window);
 	SDL_Quit();
 	ft_putendl("Exiting editor properly.");
+	exit(0);
 	return (0);
 }

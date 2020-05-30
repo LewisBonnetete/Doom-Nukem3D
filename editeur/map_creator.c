@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/29 13:31:37 by lewis            ###   ########.fr       */
+/*   Updated: 2020/05/30 11:52:09 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,7 @@ int		get_walls_sector(t_map *map, t_sector *sector, int *height)
 	i = 0;
 	ft_putstr("Place you walls, you'll have to put two vertex ");
 	ft_putendl("for your first wall");
-	ft_putendl("Press 'd' to redraw your sector :)");
+	ft_putendl("Press 'd' to delete your sector :)");
 	while (i < sector->nbr_walls)
 	{
 		SDL_WaitEvent(&event);
@@ -292,36 +292,39 @@ int		get_walls_sector(t_map *map, t_sector *sector, int *height)
 		}
 		else if (event.key.keysym.sym == SDLK_d && event.key.state == SDL_PRESSED)
 		{
-			i = 0;
-			init_walls(sector->walls, sector->nbr_walls);
-			ft_putendl("Sector reseted");
-			ft_putendl("Place you walls, you'll have to put two vertex for your first wall");
-			ft_putendl("Press 'd' to redraw your sector :)");
+			ft_putendl("Sector deleted");
+			del_sector(sector->info, map);
 			draw_state(sector);
+			return (1);
 		}
 		if (i == sector->nbr_walls && !check_convexity(sector))
 		{
-			i = 0;
-			init_walls(sector->walls, sector->nbr_walls);
 			ft_putendl("Sorry but your sector is not convex :(");
-			ft_putendl("Sector reseted");
+			ft_putendl("Sector deleted");
+			del_sector(sector->info, map);
 			draw_state(sector);
+			return (1);
 		}
 		if (i == sector->nbr_walls && !check_self_intersection(sector))
 		{
-			i = 0;
-			init_walls(sector->walls, sector->nbr_walls);
 			ft_putendl("Sorry but your sector crosses itself :(");
-			ft_putendl("Sector reseted");
+			ft_putendl("Sector deleted");
+			del_sector(sector->info, map);
 			draw_state(sector);
+			return (1);
 		}
 		if (i == sector->nbr_walls && !check_surrounding(sector))
 		{
-			i = 0;
-			init_walls(sector->walls, sector->nbr_walls);
 			ft_putendl("Sorry but your sector surrounds another :(");
-			ft_putendl("Sector reseted");
+			ft_putendl("Sector deleted");
+			del_sector(sector->info, map);
 			draw_state(sector);
+			return (1);
+		}
+		if (event.type == SDL_QUIT || (event.key.keysym.sym == SDLK_ESCAPE && event.type == SDL_KEYDOWN))
+		{
+			exit_edit(sector->info, map);
+			return (1);
 		}
 	}
 	close_sector(sector, sector->nbr_walls - 1);
