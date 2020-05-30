@@ -1,5 +1,19 @@
 #include "doom-nukem.h"
 
+Uint32			get_pixel(SDL_Surface *tex, int x, int y)
+{
+	Uint32 color;
+	Uint32 *pixels;
+
+	color = 0;
+	pixels = tex->pixels;
+	if (x >= 0 && y >= 0 && x < tex->w && y < tex->h)
+	{
+		color = pixels[tex->h * x + y];
+	}
+	return (color);
+}
+
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image)
 {
 	Uint32 *pixels;
