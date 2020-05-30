@@ -35,6 +35,11 @@
 # define NORTH_WALL			0xD28F8F
 # define EAST_WALL			0xDAA520
 # define WEST_WALL			0xF4A460
+# define TEXTURE_1			"./xpm_textures/brick.xpm"
+# define TEXTURE_2			"./xpm_textures/redbrick.xpm"
+# define TEXTURE_3			"./xpm_textures/purplestone.xpm"
+# define TEXTURE_4			"./xpm_textures/wood.xpm"
+# define NB_TEXT			4
 
 typedef struct s_input		t_input;
 typedef	struct s_var		t_var;
