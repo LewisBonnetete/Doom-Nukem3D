@@ -20,7 +20,7 @@ void	init_player(t_player *player, t_map *map)
 	player->dy = 0.0;
 	player->dz = 0.0;
 	player->planex = 0.0;
-	player->planey = 0.4;
+	player->planey = 0.6;
 	player->frametime = 0.03;
 	player->movespeed = player->frametime * 2.5;
 }
