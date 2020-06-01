@@ -3,23 +3,20 @@
 void	tab_path(t_render *renderer)
 {
 	int	i;
-	char	*tab_text[NB_TEXT];
+
 	i = -1;
 	while (++i < NB_TEXT)
 	{
-		if (i - 1 < 0)
-			tab_text[i] = ft_strdup(TEXTURE_1);
-		else if (tab_text[i - 1] == TEXTURE_1)
-			tab_text[i] = ft_strdup(TEXTURE_2);
-		else if (tab_text[i - 1] == TEXTURE_2)
-			tab_text[i] = ft_strdup(TEXTURE_3);
+		if (i == 0)
+			if ((renderer->tab_sdl[i] = IMG_Load("./xpm_textures/stone.png")) == 0)
+				return;
+		if (i == 1)
+			if ((renderer->tab_sdl[i] = IMG_Load(TEXTURE_2)) == 0)
+				return;
+		if (i == 2)
+			if ((renderer->tab_sdl[i] = IMG_Load(TEXTURE_3)) == 0)
+				return;
 	}
-	i = -1;
-	while (++i < NB_TEXT)
-		if ((renderer->tab_sdl[i] = IMG_Load(tab_text[i])) == 0)
-			return;
-	free(tab_text);
-	free(&tab_text);
 	renderer->tab_sdl[i] = NULL;
 }
 

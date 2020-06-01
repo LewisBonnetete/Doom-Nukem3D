@@ -82,26 +82,25 @@ void	draw_texture_wall(t_var *info, t_render *render)
 {
 	double 		pos_relative;
 	t_point		hit;
-	int			temp;
 	int			i;
-	int 		texy;
+	double 		texy;
 	Uint32		color;
 	hit.x = render->ray->x2;
 	hit.y = render->ray->y2;
 	render->wall->wall_leng = calc_dist(render->wall->a, render->wall->b);
 	pos_relative = calc_dist(hit, render->wall->b);
 	pos_relative = pos_relative / render->wall->wall_leng;
-	temp = (int)pos_relative;
-	pos_relative = pos_relative - temp;
-	pos_relative = pos_relative * 64;
-	double step = 1.0 * 64 / render->wall_height;
-	double texpos = (render->wall_y0 - WINDOW_H / 2 + render->wall_height / 2) * step;
+	pos_relative = pos_relative * render->tab_sdl[0]->w;
+	render->wall_height = fabs(render->wall_height);
+	double step = 1.0 * render->tab_sdl[0]->w / render->wall_height;
 	i = render->wall_y0;
+	texy = 0;
+	printf("step = %f\n",step);
 	while (i > render->wall_y1)
 	{
-		texy = (int)texpos & (64 - 1);
-        texpos += step;
-		color = get_pixel(render->tab_sdl[render->wall->text_id], (int)pos_relative, 64 * texy);
+        texy += step;
+		color = get_pixel(render->tab_sdl[render->wall->text_id], (int)pos_relative, (int)texy);
+		//printf("posx = %i\nposy = %f\n",(int)pos_relative, texy * 64);
 		put_pixel_to_suface(color ,render->x, i, info->image);
 		i--;
 	}

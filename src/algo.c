@@ -43,8 +43,8 @@ void	update_render(t_var *info, t_render *render)
 	// printf("wall_sqdist = %f\n",render->wall_sqdist);
 	// printf("wall_dist = %f\n",render->wall_dist);
 	// printf("wall_height = %f\n",render->wall_height);
-	 printf("wall_y0 = %d\n",render->wall_y0);
-	 printf("wall_y1 = %d\n",render->wall_y1);
+	//printf("wall_y0 = %d\n",render->wall_y0);
+	//printf("wall_y1 = %d\n",render->wall_y1);
 }
 
 void	draw_column(t_var *info, t_render *render)
