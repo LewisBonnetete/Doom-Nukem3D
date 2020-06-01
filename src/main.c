@@ -42,6 +42,7 @@ int                main(int ac, char **av)
 	ft_init_pour_linstant(&info);
 	init_player(&player, info.map);
 	info.player = &player;
+	tab_path(&renderer);
 	while (dealer(&info, &renderer))
 	{
 		if (!(info.texture = SDL_CreateTextureFromSurface(info.renderer, info.image)))

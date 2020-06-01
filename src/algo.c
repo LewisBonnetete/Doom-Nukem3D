@@ -24,7 +24,7 @@ void	update_render(t_var *info, t_render *render)
 	render->wall_sqdist =
 		((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
 		+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x))
-		+ (render->wall->c.z - render->ray->z) * (render->wall->c.z - render->ray->z);
+		+ (render->wall->c.z - render->ray->z) * (render->wall->c.z - render->ray->z); //fish eye ici car distance euclidienne 
 	render->wall_dist = sqrt(render->wall_sqdist);
 	render->wall_height = WALL_H * (double)render->wall->height / (double)render->wall_dist;
 	/* optimisation : possible d'éviter la fnc sqrt ?
@@ -43,8 +43,8 @@ void	update_render(t_var *info, t_render *render)
 	// printf("wall_sqdist = %f\n",render->wall_sqdist);
 	// printf("wall_dist = %f\n",render->wall_dist);
 	// printf("wall_height = %f\n",render->wall_height);
-	// printf("wall_y0 = %d\n",render->wall_y0);
-	// printf("wall_y1 = %d\n",render->wall_y1);
+	 printf("wall_y0 = %d\n",render->wall_y0);
+	 printf("wall_y1 = %d\n",render->wall_y1);
 }
 
 void	draw_column(t_var *info, t_render *render)
