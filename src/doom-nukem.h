@@ -69,6 +69,7 @@ struct 					s_wall
 	t_point				b;
 	t_point				c;
 	t_point				d;
+	double				wall_leng;
 	int					text_id;
 	int					wall_id;
 	int					is_portal;
