@@ -145,6 +145,7 @@ struct					s_render
 	double				wall_dist;
 	int					wall_y0;
 	int					wall_y1;
+	SDL_Surface			*tab_sdl[NB_TEXT + 1];
 	t_ray				*ray;
 	t_sector			*s;
 	t_wall				*wall;

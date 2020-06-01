@@ -20,17 +20,15 @@ char	**tab_path()
 
 int	load_text(char **tab, t_render renderer)
 {
-	//mettre tab_sdl dans une structure
-	SDL_Surface	*tab_sdl[NB_TEXTURE];
-	//SDL_Texture	*tab_text[NB_TEXTURE];
 	int		i;
 
 	i = -1;
 	while (++i < NB_TEXT)
-		if ((tab_sdl[i] = IMG_Load(tab[i])) == 0)
+		if ((renderer.tab_sdl[i] = IMG_Load(tab[i])) == 0)
 			return (0);
-	i = -1;
-/* 	while (++i < NB_TEXTURE)
+	renderer.tab_sdl[i] = NULL;
+/*	i = -1;
+ 	while (++i < NB_TEXTURE)
 	{
 		if ((tab_text[i] = SDL_CreateTextureFromSurface(renderer, tab_sdl[i])) == 0)
 			return (0);
