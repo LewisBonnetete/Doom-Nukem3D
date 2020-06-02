@@ -8,3 +8,9 @@ double     calc_dist(t_point a, t_point b)
     + (b.y - a.y) * (b.y - a.y);
     return (sqrt(res));
 }
+
+void		ft_exit(t_var *info, t_render *render)
+{
+    
+}
+

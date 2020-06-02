@@ -98,7 +98,6 @@ void	draw_texture_wall(t_var *info, t_render *render)
 	pos_relative = pos_relative * render->tab_sdl[render->wall->text_id]->w;
 	render->wall_height = fabs(render->wall_height);
 	double step = 1.0 * (double)render->tab_sdl[render->wall->text_id]->h / render->wall_height;
-	//printf("w = %i\nh = %i\n",render->tab_sdl[0]->w,render->tab_sdl[0]->h);
 	i = render->wall_y1;
 	texy = 0;
 	while (i <= render->wall_y0)

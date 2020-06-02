@@ -36,11 +36,11 @@ int     dealer(t_var *info, t_render *render)
 	if (SDL_PollEvent(&e) == 1)
 	{
 		if (e.type == SDL_QUIT)
-			return (0);
+			ft_exit(info, render);
 		if (e.key.keysym.sym == SDLK_ESCAPE)
-			return (0);
+			ft_exit(info, render);
 		if (e.type == SDL_MOUSEBUTTONDOWN)
-			return (0);
+			ft_exit(info, render);
         if (e.key.keysym.sym == SDLK_LEFT)
 	    {
 		    if (e.key.state == SDL_PRESSED)
@@ -61,8 +61,6 @@ int     dealer(t_var *info, t_render *render)
 			{
 					info->player->posx += info->player->dx * info->player->movespeed;
 					info->player->posy += info->player->dy * info->player->movespeed;
-					ft_putendl("1");
-					printf("x = %f\ny = %f\n",info->player->posx, info->player->posy);
 			}		
 		}
 		if (e.key.keysym.sym == SDLK_DOWN)
@@ -71,8 +69,6 @@ int     dealer(t_var *info, t_render *render)
 			{
 				info->player->posx -= info->player->dx * info->player->movespeed;
 				info->player->posy -= info->player->dy * info->player->movespeed;
-				ft_putendl("2");
-				printf("x = %f\ny = %f\n",info->player->posx, info->player->posy);
 			}
 		}
 	}
