@@ -45,7 +45,7 @@ void	draw_bottop(t_var *info, t_render *render)
 		put_pixel_to_suface(GRASS_GREEN, render->x,i , info->image);
 	i = render->wall_y0 + 1;
 	while (--i > 0)
-		put_pixel_to_suface(WEST_WALL, render->x,i , info->image);
+		put_pixel_to_suface(SKY_BLUE, render->x,i , info->image);
 }
 
 void	draw_textures(t_var *info, t_render *render)
@@ -84,24 +84,35 @@ void	draw_texture_wall(t_var *info, t_render *render)
 	t_point		hit;
 	int			i;
 	double 		texy;
+	int			temp;
 	Uint32		color;
+	float 		temp2;
 	hit.x = render->ray->x2;
 	hit.y = render->ray->y2;
 	render->wall->wall_leng = calc_dist(render->wall->a, render->wall->b);
 	pos_relative = calc_dist(hit, render->wall->b);
-	pos_relative = pos_relative / render->wall->wall_leng;
-	pos_relative = pos_relative * render->tab_sdl[0]->w;
+	temp2 = (double)render->tab_sdl[0]->h / (double)WALL_H;
+	pos_relative = pos_relative * temp2;
+	temp = (int)pos_relative;
+	pos_relative -= temp;
+	pos_relative = pos_relative * render->tab_sdl[render->wall->text_id]->w;
 	render->wall_height = fabs(render->wall_height);
-	double step = 1.0 * render->tab_sdl[0]->w / render->wall_height;
-	i = render->wall_y0;
+	double step = 1.0 * (double)render->tab_sdl[render->wall->text_id]->h / render->wall_height;
+	//printf("w = %i\nh = %i\n",render->tab_sdl[0]->w,render->tab_sdl[0]->h);
+	i = render->wall_y1;
 	texy = 0;
-	printf("step = %f\n",step);
-	while (i > render->wall_y1)
+	while (i <= render->wall_y0)
 	{
-        texy += step;
-		color = get_pixel(render->tab_sdl[render->wall->text_id], (int)pos_relative, (int)texy);
-		//printf("posx = %i\nposy = %f\n",(int)pos_relative, texy * 64);
-		put_pixel_to_suface(color ,render->x, i, info->image);
-		i--;
+		if (i == render->wall_y0 || i == render->wall_y1)
+		{
+			put_pixel_to_suface(BLACK, render->x, i, info->image);
+		}
+		else
+		{
+			texy += step;
+			color = get_pixel(render->tab_sdl[render->wall->text_id], (int)pos_relative, (int)texy);
+			put_pixel_to_suface(color ,render->x, i, info->image);	
+		}
+		i++;
 	}
 }

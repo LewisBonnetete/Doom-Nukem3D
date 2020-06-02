@@ -43,6 +43,8 @@ int                main(int ac, char **av)
 	init_player(&player, info.map);
 	info.player = &player;
 	tab_path(&renderer);
+	if (WALL_H > 1000 || WALL_H <= 0)
+		return (0);
 	while (dealer(&info, &renderer))
 	{
 		if (!(info.texture = SDL_CreateTextureFromSurface(info.renderer, info.image)))

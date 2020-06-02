@@ -11,10 +11,10 @@ void	tab_path(t_render *renderer)
 			if ((renderer->tab_sdl[i] = IMG_Load("./xpm_textures/stone.png")) == 0)
 				return;
 		if (i == 1)
-			if ((renderer->tab_sdl[i] = IMG_Load(TEXTURE_2)) == 0)
+			if ((renderer->tab_sdl[i] = IMG_Load("./xpm_textures/stone2.png")) == 0)
 				return;
 		if (i == 2)
-			if ((renderer->tab_sdl[i] = IMG_Load(TEXTURE_3)) == 0)
+			if ((renderer->tab_sdl[i] = IMG_Load("./xpm_textures/stone3.png")) == 0)
 				return;
 	}
 	renderer->tab_sdl[i] = NULL;
