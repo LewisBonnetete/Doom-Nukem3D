@@ -41,6 +41,7 @@ int                main(int ac, char **av)
 		return (0);
 	ft_init_pour_linstant(&info);
 	init_player(&player, info.map);
+	//free_map(info.map);
 	info.player = &player;
 	tab_path(&renderer);
 	if (WALL_H > 1000 || WALL_H <= 0)

@@ -36,11 +36,11 @@ int     dealer(t_var *info, t_render *render)
 	if (SDL_PollEvent(&e) == 1)
 	{
 		if (e.type == SDL_QUIT)
-			ft_exit(info, render);
+	        ft_exit(info, render);
 		if (e.key.keysym.sym == SDLK_ESCAPE)
-			ft_exit(info, render);
+	        ft_exit(info, render);
 		if (e.type == SDL_MOUSEBUTTONDOWN)
-			ft_exit(info, render);
+	        ft_exit(info, render);
         if (e.key.keysym.sym == SDLK_LEFT)
 	    {
 		    if (e.key.state == SDL_PRESSED)
