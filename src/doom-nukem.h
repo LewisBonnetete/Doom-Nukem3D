@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/08 19:24:56 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/03 16:19:16 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef	struct s_enemy		t_enemy;
 typedef	struct s_prop		t_prop;
 typedef struct s_render		t_render;
 typedef struct s_player		t_player;
+typedef struct s_item		t_item;
 
 struct					s_point
 {
@@ -114,6 +115,8 @@ struct 					s_map
 	SDL_Surface			*text_tab[10];
 	t_point				spawn;
 	int					i;
+	t_item				*items;
+	t_prop				*prop;
 };
 
 struct					s_text
@@ -167,7 +170,19 @@ struct					s_player
 	double				planey;
 	double				movespeed;
 	double				frametime;
+	int					hp;
+	int					ammo;
+	t_item				weapon;
+	t_item				*inventory;
 };
+
+struct 					s_item
+{
+	char				*name;
+	int					x;
+	int					y;
+};
+
 
 struct					s_ray
 {
