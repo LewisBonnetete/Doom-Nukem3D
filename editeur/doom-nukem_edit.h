@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/28 12:27:50 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/03 16:24:47 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,29 @@ typedef	struct s_map	t_map;
 typedef	struct s_enemy	t_enemy;
 typedef	struct s_prop	t_prop;
 typedef	struct s_line	t_line;
+typedef	struct s_item	t_item;
 
 struct					s_point
 {
 	int				x;
 	int				y;
 	int				z;
+};
+
+struct					s_item
+{
+	char			*name;
+	int				x;
+	int				y;
+	t_item			*next_item;
+};
+
+struct					s_prop
+{
+	char			*name;
+	int				x;
+	int				y;
+	t_prop			*next_prop;
 };
 
 struct 					s_wall
@@ -105,6 +122,8 @@ struct 					s_map
 	t_point				spawn;
 	int					spawn_sector_id;
 	int					i;
+	t_item				*items;
+	t_prop				*props;
 };
 
 struct					s_text
