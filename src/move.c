@@ -31,48 +31,47 @@ void	rot_left(t_var *info)
 int     dealer(t_var *info, t_render *render)
 {
 	SDL_Event e;
+	int	tmp_x;
+	int	tmp_y;
 	
 	(void)render;
 	if (SDL_PollEvent(&e) == 1)
 	{
 		if (e.type == SDL_QUIT)
-			return (0);
+	        	ft_exit(info, render);
 		if (e.key.keysym.sym == SDLK_ESCAPE)
-			return (0);
+	        	ft_exit(info, render);
 		if (e.type == SDL_MOUSEBUTTONDOWN)
-			return (0);
-        if (e.key.keysym.sym == SDLK_LEFT)
-	    {
+	       		ft_exit(info, render);
+       		if (e.key.keysym.sym == SDLK_LEFT)
 		    if (e.key.state == SDL_PRESSED)
-		    {
-                rot_left(info);
-            }
-        }
-	    if (e.key.keysym.sym == SDLK_RIGHT)
-	    {
-		    if (e.key.state == SDL_PRESSED)
-            {
-                rot_right(info);
-            }
-        }
+	                rot_left(info);
+		if (e.key.keysym.sym == SDLK_RIGHT)
+		    	if (e.key.state == SDL_PRESSED)
+        			rot_right(info);
 		if (e.key.keysym.sym == SDLK_UP)
 		{
 			if (e.key.state == SDL_PRESSED)
 			{
+				//Metre dans les if, le if si le player avance il y a un mur
+				/*tmp_x = */info->player->posx += info->player->dx * info->player->movespeed;
+				/*tmp_y = */info->player->posy += info->player->dy * info->player->movespeed;
+				/*if ()
 					info->player->posx += info->player->dx * info->player->movespeed;
-					info->player->posy += info->player->dy * info->player->movespeed;
-					ft_putendl("1");
-					printf("x = %f\ny = %f\n",info->player->posx, info->player->posy);
+				if ()
+					info->player->posy += info->player->dy * info->player->movespeed;*/
 			}		
 		}
 		if (e.key.keysym.sym == SDLK_DOWN)
   		{
 			if (e.key.state == SDL_PRESSED)
 			{
-				info->player->posx -= info->player->dx * info->player->movespeed;
-				info->player->posy -= info->player->dy * info->player->movespeed;
-				ft_putendl("2");
-				printf("x = %f\ny = %f\n",info->player->posx, info->player->posy);
+				/*tmp_x = */info->player->posx -= info->player->dx * info->player->movespeed;
+				/*tmp_y = */info->player->posy -= info->player->dy * info->player->movespeed;
+				/*if ()
+					info->player->posx -= info->player->dx * info->player->movespeed;
+				if ()
+					info->player->posy -= info->player->dy * info->player->movespeed;*/
 			}
 		}
 	}

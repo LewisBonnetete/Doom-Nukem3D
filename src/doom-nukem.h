@@ -39,7 +39,7 @@
 # define TEXTURE_2			"./xpm_textures/redbrick.xpm"
 # define TEXTURE_3			"./xpm_textures/purplestone.xpm"
 //# define TEXTURE_4			"./xpm_textures/wood.xpm"
-# define NB_TEXT			3
+# define NB_TEXT			4
 
 typedef struct s_input		t_input;
 typedef	struct s_var		t_var;
@@ -239,8 +239,6 @@ int						init_win2(t_var *info);
 int     				dealer(t_var *info, t_render *render);
 
 //init func
-void					init_artificial_map(t_map *map);
-void					init_box(t_map *map);
 void					init_player(t_player *player, t_map *map);
 void					ft_init_pour_linstant(t_var *info);
 void					init_render(t_var *info, t_render *render, int x0, int sector_id);
@@ -276,6 +274,9 @@ char    *little_strjoin(char *src, char c);
 // tools
 double		calc_dist(t_point a, t_point b);
 void		tab_path(t_render *renderer);
+void        ft_exit(t_var *info, t_render *render);
+void		free_map(t_map *map);
+
 
 
 #endif

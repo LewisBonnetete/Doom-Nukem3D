@@ -14,6 +14,28 @@ Uint32			get_pixel(SDL_Surface *tex, int x, int y)
 	return (color);
 }
 
+static	void	ft_put_weapon(t_var *info, t_render *render)
+{
+	int		x;
+	int		y;
+	Uint32	color;
+
+	x = 0;
+	while (x < render->tab_sdl[3]->w)
+	{
+		y = 0;
+		while (y < render->tab_sdl[3]->h)
+		{
+			color = get_pixel(render->tab_sdl[3], y, x);
+			if (color != 0)
+				put_pixel_to_suface(color, x + WINDOW_W / 2 - 45,
+				WINDOW_H + y - 125, info->image);
+			y++;
+		}
+		x++;
+	}
+}
+
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image)
 {
 	Uint32 *pixels;
@@ -73,6 +95,7 @@ void	draw_textures(t_var *info, t_render *render)
     {
 		draw_bottop(info, render);
 		draw_texture_wall(info, render);
+		ft_put_weapon(info, render);
     }
 		//horizontalement : remplit, selon la texture, les pixels entre render->x et render->next_x
 		//verticalement : voir en fonction de la distance au mur et sa hauteur ?
@@ -98,7 +121,6 @@ void	draw_texture_wall(t_var *info, t_render *render)
 	pos_relative = pos_relative * render->tab_sdl[render->wall->text_id]->w;
 	render->wall_height = fabs(render->wall_height);
 	double step = 1.0 * (double)render->tab_sdl[render->wall->text_id]->h / render->wall_height;
-	//printf("w = %i\nh = %i\n",render->tab_sdl[0]->w,render->tab_sdl[0]->h);
 	i = render->wall_y1;
 	texy = 0;
 	while (i <= render->wall_y0)
@@ -116,3 +138,4 @@ void	draw_texture_wall(t_var *info, t_render *render)
 		i++;
 	}
 }
+
