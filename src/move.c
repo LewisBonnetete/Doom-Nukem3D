@@ -56,9 +56,9 @@ int     dealer(t_var *info, t_render *render)
 				tmp_x = info->player->posx += info->player->dx * info->player->movespeed;
 				tmp_y = info->player->posy += info->player->dy * info->player->movespeed;
 				if (do_trigo(info, render->wall) == 1)
-					info->player->posx += info->player->dx * info->player->movespeed;
+					info->player->posx = tmp_x;
 				if (do_trigo(info, render->wall) == 1)
-					info->player->posy += info->player->dy * info->player->movespeed;
+					info->player->posy = tmp_y;
 			}		
 		}
 		if (e.key.keysym.sym == SDLK_DOWN)
@@ -68,9 +68,9 @@ int     dealer(t_var *info, t_render *render)
 				tmp_x = info->player->posx -= info->player->dx * info->player->movespeed;
 				tmp_y = info->player->posy -= info->player->dy * info->player->movespeed;
 				if (do_trigo(info, render->wall) == 1)
-					info->player->posx -= info->player->dx * info->player->movespeed;
+					info->player->posx = tmp_x;
 				if (do_trigo(info, render->wall) == 1)
-					info->player->posy -= info->player->dy * info->player->movespeed;
+					info->player->posy = tmp_y;
 			}
 		}
 	}

@@ -19,7 +19,7 @@ static  void        free_info(t_var *info)
         SDL_DestroyTexture(info->texture);
     if (info->window)
        SDL_DestroyWindow(info->window);
-    free(&info);
+    free(info);
 }
 
 static  void        free_sector(t_sector *sector)
@@ -30,7 +30,7 @@ static  void        free_sector(t_sector *sector)
         free_info(sector->info);
     if (sector->next_sector)
         free_sector(sector->next_sector);
-    free(&sector);
+    free(sector);
 
 }
 
@@ -51,14 +51,14 @@ static  void		free_render(t_var *info, t_render *render)
         free_sector(render->s);
     if(render->next_render)
         free_render(info, render->next_render);
-    free(&render);
+    free(render);
 }
 
 void       free_map(t_map *map)
 {
     if (map->sectors)
         free(&map->sectors);
-    free(&map);
+    free(map);
 }
 
 void        ft_exit(t_var *info, t_render *render)

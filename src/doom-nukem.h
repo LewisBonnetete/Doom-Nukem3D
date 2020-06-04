@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
 # include "../libft/libft.h"
 # define WINDOW_W			1280
 # define WINDOW_H			720
@@ -172,7 +173,7 @@ struct					s_player
 	double				frametime;
 	int					hp;
 	int					ammo;
-	t_item				weapon;
+	t_item				*weapon;
 	t_item				*inventory;
 };
 
@@ -255,6 +256,7 @@ int		intersect(t_ray *ray, t_wall *wall);
 //algo
 int     raycasting(t_var *info, t_render *render);
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
+int		xy_in_ab(double x, double y, t_point a, t_point b);
 
 //load_map
 int	check_map(char *the_map);

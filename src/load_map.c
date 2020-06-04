@@ -250,6 +250,7 @@ int     rec_int(char *the_map, t_map *map)
 void	rec_char(char *the_map, char dest, t_map *map)
 {
     dest = the_map[map->i];
+    (void)dest;
 }
 //récuprération de la map avec gnl
 char    *recup_map(char *src)
