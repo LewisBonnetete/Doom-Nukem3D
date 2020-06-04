@@ -272,6 +272,7 @@ void	rec_char(char *the_map, char dest, t_map *map);
 char    *recup_map(char *src);
 char    *little_strjoin(char *src, char c);
 // tools
+int		do_trigo(t_var *info, t_wall *wall);
 double		calc_dist(t_point a, t_point b);
 void		tab_path(t_render *renderer);
 void        ft_exit(t_var *info, t_render *render);
