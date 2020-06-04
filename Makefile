@@ -36,7 +36,8 @@ SRC =	main.c\
 		load_map.c\
 		check_map.c\
 		tools.c\
-		textures.c
+		textures.c\
+		tools2.c
 		
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
