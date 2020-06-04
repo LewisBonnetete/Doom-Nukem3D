@@ -53,25 +53,24 @@ int     dealer(t_var *info, t_render *render)
 		{
 			if (e.key.state == SDL_PRESSED)
 			{
-				//Metre dans les if, le if si le player avance il y a un mur
-				/*tmp_x = */info->player->posx += info->player->dx * info->player->movespeed;
-				/*tmp_y = */info->player->posy += info->player->dy * info->player->movespeed;
-				/*if ()
+				tmp_x = info->player->posx += info->player->dx * info->player->movespeed;
+				tmp_y = info->player->posy += info->player->dy * info->player->movespeed;
+				if (do_trigo(info, render->wall) == 1)
 					info->player->posx += info->player->dx * info->player->movespeed;
-				if ()
-					info->player->posy += info->player->dy * info->player->movespeed;*/
+				if (do_trigo(info, render->wall) == 1)
+					info->player->posy += info->player->dy * info->player->movespeed;
 			}		
 		}
 		if (e.key.keysym.sym == SDLK_DOWN)
   		{
 			if (e.key.state == SDL_PRESSED)
 			{
-				/*tmp_x = */info->player->posx -= info->player->dx * info->player->movespeed;
-				/*tmp_y = */info->player->posy -= info->player->dy * info->player->movespeed;
-				/*if ()
+				tmp_x = info->player->posx -= info->player->dx * info->player->movespeed;
+				tmp_y = info->player->posy -= info->player->dy * info->player->movespeed;
+				if (do_trigo(info, render->wall) == 1)
 					info->player->posx -= info->player->dx * info->player->movespeed;
-				if ()
-					info->player->posy -= info->player->dy * info->player->movespeed;*/
+				if (do_trigo(info, render->wall) == 1)
+					info->player->posy -= info->player->dy * info->player->movespeed;
 			}
 		}
 	}
