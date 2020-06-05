@@ -83,3 +83,27 @@ int		hitboxy(t_var *info, t_render *render, double diry)
 	}
 	return(1);
 }
+
+int		hit_object(t_var *info, t_render *render)
+{
+	int i;
+
+	i = 0;
+	render->x = WINDOW_W / 2;
+	update_ray(info, render);
+	while (i < info->sector->nb_item)
+	{
+		if (xy_in_frontview(info->sector->item[i].x, info->sector->item[i].y, render->ray))
+		{
+			//calc wall.a wall.b
+			if (xy_in_ab(info->sector->item[i].x, info->sector->item[i].y, wall.a, wall.b))
+				//determnier eq cart de a(player);b(item) qui touche le wall entre wall.a et wall.b
+				//point d intersection entre wall et eq cart en deduire position de l item sur les X de l ecran
+				dist = calc_dist(info->sector->item[i].x, info->sector->item[i].y, player->posx, player->posy);
+				dist = sqrt(dist);
+				//changer la hauteur de l item pour les perspectives 
+				//draw l item sur x = X de l ecran et y fonction de dist
+		}
+		i++;
+	}
+}
