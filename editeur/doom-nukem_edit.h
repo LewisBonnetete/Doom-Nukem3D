@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/03 16:24:47 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/05 13:38:32 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define BLACK				0x23272a
 # define WHITE				0xFFFFFF
 # define BLUE				0x7289DA
+# define ORANGE				0xFFA500
 # define DARK				0x2C2F33
 # define GRAY				0x99AAB5
 # define RMASK				0
@@ -97,7 +98,7 @@ struct 					s_sector
 	int 				nbr_walls;
 	t_wall				floor;
 	t_wall				celling;
-	int					light;
+	double				light;
 	int					sector_id;
 	t_sector			*next_sector;
 	t_map				*map;
@@ -249,6 +250,13 @@ void	dealers_init(t_input_edit *input_edit);
 void	dealers_tester(t_input_edit input_edit);
 int		get_map_size();
 
+//items
+char 	*get_item_name();
+int		valid_new_item(t_map *map, int x, int y);
+t_item	*go_to_last_item(t_item *items);
+int		add_item(t_map *map, char *name, int x, int y);
+int		del_item(t_map *map, int x, int y);
+
 //checkers
 int		is_valid_wall(SDL_Event *event, t_sector *sector, int i);
 int		is_valid_first_wall(SDL_Event *event,t_map *map);
@@ -284,12 +292,14 @@ void	draw_grid(t_var *info, t_map *map);
 void	draw_map_edit(t_var *info, t_map *map);
 void	draw_cadre(t_var *info);
 void	draw_square(t_var *info, t_point a, t_point b, Uint32 color);
+void	draw_items(t_var *info,t_map *map);
 
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
 int		draw_line(t_var *info, t_line *line, Uint32 color);
 
 //creators
 int		create_sector(t_var *info, t_map *map);
+void	create_item(t_map *map);
 
 //destroyers
 int		exit_edit(t_var *info, t_map *map);
