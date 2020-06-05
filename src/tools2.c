@@ -22,54 +22,64 @@ int	do_trigo(t_var *info, t_wall *wall)
 	return (0);
 }
 
-// int		hitboxx(t_var *info, double dirx)
-// {
-// 	double x;
-// 	double y;
+int		hitboxx(t_var *info, t_render *render, double dirx)
+{
+	double x;
+	double y;
 
-// 	x = -0.2;
-// 	y = -0.2;
-// 	while (x < 0.2)
-// 	{
-// 		y = -0.2;
-// 		while (y < 0.2)
-// 		{
-// 			if (x * x + y * y  <= 0.17 * 0.17 && info->map[(int)(info->posx + x)][(int)(info->posy)] == '#')
-// 			{
-// 				if(dirx >= 0 && x >= 0)
-// 					return (0);
-// 				if(dirx <= 0 && x <= 0)
-// 					return (0);
-// 			}
-// 			y += 0.01;
-// 		}
-// 		x += 0.01;
-// 	}
-// 	return(1);
-// }
+	x = -0.2;
+	y = -0.2;
+	while (x < 0.2)
+	{
+		y = -0.2;
+		while (y < 0.2)
+		{
+			render->n = -1;
+			while(++render->n < render->s->nbr_walls)
+			{
+				render->wall = render->s->walls + render->n;
+				if (x * x + y * y  <= 0.17 * 0.17 &&  xy_in_ab(info->player->posx + x, y, render->s->walls->a, render->s->walls->b))
+				{
+					if(dirx >= 0 && x >= 0)
+						return (0);
+					if(dirx <= 0 && x <= 0)
+						return (0);
+				}
+			}
+			y += 0.01;
+		}
+		x += 0.01;
+	}
+	return(1);
+}
 
-// int		hitboxy(t_var *info, double diry)
-// {
-// 	double x;
-// 	double y;
+int		hitboxy(t_var *info, t_render *render, double diry)
+{
+	double x;
+	double y;
 
-// 	x = -0.2;
-// 	y = -0.2;
-// 	while (x < 0.2)
-// 	{
-// 		y = -0.2;
-// 		while (y < 0.2)
-// 		{
-// 			if (x * x + y * y  <= 0.17 * 0.17 && info->map[(int)(info->posx)][(int)(info->posy + y)] == '#')
-// 			{
-// 				if(diry >= 0 && y >= 0)
-// 					return (0);
-// 				if(diry <= 0 && y <= 0)
-// 					return (0);
-// 			}
-// 			y += 0.01;
-// 		}
-// 		x += 0.01;
-// 	}
-// 	return(1);
-// }
+	x = -0.2;
+	y = -0.2;
+	while (x < 0.2)
+	{
+		y = -0.2;
+		while (y < 0.2)
+		{
+			render->n = -1;
+			while(++render->n < render->s->nbr_walls)
+			{
+				render->wall = render->s->walls + render->n;
+				if (x * x + y * y  <= 0.17 * 0.17 &&  xy_in_ab(x ,info->player->posy + y, render->wall->a, render->wall->b))
+				{
+					if(diry >= 0 && x >= 0)
+						return (0);
+					if(diry <= 0 && x <= 0)
+						return (0);
+				}
+			}
+			y += 0.01;
+		}
+		x += 0.01;
+	}
+	return(1);
+}

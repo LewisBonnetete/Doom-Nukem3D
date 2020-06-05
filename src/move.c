@@ -31,8 +31,6 @@ void	rot_left(t_var *info)
 int     dealer(t_var *info, t_render *render)
 {
 	SDL_Event e;
-	int	tmp_x;
-	int	tmp_y;
 	
 	(void)render;
 	if (SDL_PollEvent(&e) == 1)
@@ -53,24 +51,20 @@ int     dealer(t_var *info, t_render *render)
 		{
 			if (e.key.state == SDL_PRESSED)
 			{
-				tmp_x = info->player->posx += info->player->dx * info->player->movespeed;
-				tmp_y = info->player->posy += info->player->dy * info->player->movespeed;
-				if (do_trigo(info, render->wall) == 1)
-					info->player->posx = tmp_x;
-				if (do_trigo(info, render->wall) == 1)
-					info->player->posy = tmp_y;
+				if (hitboxy(info, render, info->player->dx) == 1)
+					info->player->posx += info->player->dx * info->player->movespeed;
+				if (hitboxy(info, render, info->player->dy) == 1)
+					info->player->posy += info->player->dy * info->player->movespeed;
 			}		
 		}
 		if (e.key.keysym.sym == SDLK_DOWN)
   		{
 			if (e.key.state == SDL_PRESSED)
 			{
-				tmp_x = info->player->posx -= info->player->dx * info->player->movespeed;
-				tmp_y = info->player->posy -= info->player->dy * info->player->movespeed;
-				if (do_trigo(info, render->wall) == 1)
-					info->player->posx = tmp_x;
-				if (do_trigo(info, render->wall) == 1)
-					info->player->posy = tmp_y;
+				if (hitboxy(info, render, -1 * info->player->dx) == 1)
+					info->player->posx -= info->player->dx * info->player->movespeed;
+				if (hitboxy(info, render, -1 * info->player->dy) == 1)
+					info->player->posy -= info->player->dy * info->player->movespeed;
 			}
 		}
 	}
