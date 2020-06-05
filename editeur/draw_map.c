@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/29 13:29:08 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/05 13:34:32 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,4 +192,28 @@ void	draw_portal_edit(t_var *info, t_map *map, t_sector *sector, int wall_id)
 void	draw_map_edit(t_var *info, t_map *map)
 {
 	draw_sectors_edit(info, map);
+	draw_items(info, map);
+}
+
+void	draw_items(t_var *info,t_map *map)
+{
+	t_item *item;
+	SDL_Rect pos;
+	SDL_Surface *texte;
+	SDL_Color color;
+
+	color.r = 255;
+	color.g = 165;
+	color.b = 0;
+	color.a = 255;
+	item = map->items;
+	while (item)
+	{
+		texte = TTF_RenderText_Blended(info->font, item->name, color);
+		pos.x = item->x * ((WINDOW_H - 50) / map->size) - map->size;
+		pos.y = item->y * ((WINDOW_H - 50) / map->size) - map->size;
+		SDL_BlitSurface(texte, NULL, info->image, &pos);
+		SDL_FreeSurface(texte);
+		item = item->next_item;
+	}
 }

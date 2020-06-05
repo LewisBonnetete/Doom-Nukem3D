@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/30 11:40:50 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/05 12:16:39 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit)
 		{
 			if (event.key.state == SDL_PRESSED)
 				create_sector(info, map);
+		}
+		if (event.key.keysym.sym == SDLK_i)
+		{
+			if (event.key.state == SDL_PRESSED)
+				create_item(map);
 		}
 	}
 	return (dealers_edit_3(map, event));
