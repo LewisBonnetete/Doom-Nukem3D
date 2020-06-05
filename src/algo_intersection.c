@@ -38,8 +38,8 @@ int		xy_in_ab(double x, double y, t_point a, t_point b)
 {
 	if (((a.x <= x && x <= b.x) || (b.x <= x && x <= a.x))
                 && ((a.y <= y && y <= b.y) || (b.y <= y && y <= a.y)))
-		return (0);
-	return (1);
+		return (1);
+	return (0);
 }
 
 int		intersect(t_ray *ray, t_wall *wall)

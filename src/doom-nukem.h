@@ -58,6 +58,13 @@ typedef struct s_render		t_render;
 typedef struct s_player		t_player;
 typedef struct s_item		t_item;
 
+struct 					s_item
+{
+	char				*name;
+	int					x;
+	int					y;
+};
+
 struct					s_point
 {
 	float				x;
@@ -173,17 +180,9 @@ struct					s_player
 	double				frametime;
 	int					hp;
 	int					ammo;
-	t_item				*weapon;
+	t_item				weapon;
 	t_item				*inventory;
 };
-
-struct 					s_item
-{
-	char				*name;
-	int					x;
-	int					y;
-};
-
 
 struct					s_ray
 {
@@ -274,11 +273,14 @@ void	rec_char(char *the_map, char dest, t_map *map);
 char    *recup_map(char *src);
 char    *little_strjoin(char *src, char c);
 // tools
-int		do_trigo(t_var *info, t_wall *wall);
+int			do_trigo(t_var *info, t_wall *wall);
 double		calc_dist(t_point a, t_point b);
 void		tab_path(t_render *renderer);
 void        ft_exit(t_var *info, t_render *render);
 void		free_map(t_map *map);
+//hitbox
+int			hitboxy(t_var *info, t_render *render, double diry);
+int			hitboxx(t_var *info, t_render *render, double dirx);
 
 
 
