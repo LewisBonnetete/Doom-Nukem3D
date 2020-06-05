@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/30 11:52:09 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/05 16:37:02 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,17 @@ void		get_nbr_walls_sector_textures(t_sector *sector)
 		free(line);
 	}
 	sector->celling.text_id = size;
+	ft_putendl("lighting in this sector (0-100)?");
+	size = -1;
+	while (size < 0 || size > 100)
+	{
+		get_next_line(0, &line);
+		size = ft_atoi(line);
+		if (size < 0 || size > 100)
+			ft_putendl("Wrong value, try something else");
+		free(line);
+	}
+	sector->light = size;
 }
 
 void		get_height_sector(t_map *map, int *height)

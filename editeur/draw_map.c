@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/05 13:34:32 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/05 16:06:55 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,7 @@ void	draw_map_edit(t_var *info, t_map *map)
 {
 	draw_sectors_edit(info, map);
 	draw_items(info, map);
+	draw_props(info, map);
 }
 
 void	draw_items(t_var *info,t_map *map)
@@ -202,9 +203,9 @@ void	draw_items(t_var *info,t_map *map)
 	SDL_Surface *texte;
 	SDL_Color color;
 
-	color.r = 255;
-	color.g = 165;
-	color.b = 0;
+	color.r = 50;
+	color.g = 205;
+	color.b = 50;
 	color.a = 255;
 	item = map->items;
 	while (item)
@@ -215,5 +216,28 @@ void	draw_items(t_var *info,t_map *map)
 		SDL_BlitSurface(texte, NULL, info->image, &pos);
 		SDL_FreeSurface(texte);
 		item = item->next_item;
+	}
+}
+
+void	draw_props(t_var *info,t_map *map)
+{
+	t_prop *prop;
+	SDL_Rect pos;
+	SDL_Surface *texte;
+	SDL_Color color;
+
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
+	color.a = 255;
+	prop = map->props;
+	while (prop)
+	{
+		texte = TTF_RenderText_Blended(info->font, prop->name, color);
+		pos.x = prop->x * ((WINDOW_H - 50) / map->size) - map->size;
+		pos.y = prop->y * ((WINDOW_H - 50) / map->size) - map->size;
+		SDL_BlitSurface(texte, NULL, info->image, &pos);
+		SDL_FreeSurface(texte);
+		prop = prop->next_prop;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/05 12:16:39 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/05 15:54:14 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,32 @@ int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit)
 		if (event.key.keysym.sym == SDLK_i)
 		{
 			if (event.key.state == SDL_PRESSED)
-				create_item(map);
+			{
+				if (map->sectors == NULL)
+					ft_putendl("No sectors yet");
+				else
+					create_item(map);
+			}
+		}
+		if (event.key.keysym.sym == SDLK_p)
+		{
+			if (event.key.state == SDL_PRESSED)
+			{
+				if (map->sectors == NULL)
+					ft_putendl("No sectors yet");
+				else
+					create_prop(map);
+			}
+		}
+		if (event.key.keysym.sym == SDLK_r)
+		{
+			if (event.key.state == SDL_PRESSED)
+			{
+				if (map->items == NULL && map->props == NULL)
+					ft_putendl("No items or props yet");
+				else
+					del_item_or_prop(map);
+			}
 		}
 	}
 	return (dealers_edit_3(map, event));

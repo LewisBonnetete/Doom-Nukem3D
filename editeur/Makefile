@@ -6,11 +6,11 @@
 #    By: lewis <lewis@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/06/03 16:37:18 by lewis            ###   ########.fr        #
+#    Updated: 2020/06/05 16:01:52 by lewis            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = doom-nukem
+NAME = editeur
 
 FLAGS       = -Wall -Wextra -Werror -O3
 
@@ -55,7 +55,7 @@ OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 $(shell mkdir -p $(OBJ_DIR))
 
 all: $(NAME)
-	echo "doom-nukem ready"
+	echo "Editeur ready"
 
 $(NAME): $(OBJ) $(LIBFT) 
 	$(CC) -I $(HEAD_DIR) -o $@ $(OBJ) $(SDL) $(LIBFT) $(FLAGS) 

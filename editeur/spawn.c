@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/16 16:06:09 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/05 15:34:32 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		spawn_checks(t_point new, t_map *map)
 {
 	if (!is_in_sectors_spawn(new, map))
 	{
-		ft_putendl("Spawn must be in a sector or a bigger one");
+		ft_putendl("Spawn musts be in a sector");
 		return (0);
 	}
 	if (!is_new_point_in_sectors(new, map))
