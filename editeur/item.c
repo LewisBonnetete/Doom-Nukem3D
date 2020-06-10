@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/05 16:30:01 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/10 15:19:06 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ int		del_item(t_map *map, int x, int y)
 			return (1);
 		}
 		item = item->next_item;
-		while (item->next_item)
+		while (item)
 		{
 			if (item->x == x && item->y == y)
 			{

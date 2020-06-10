@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/05 16:30:05 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/10 15:19:31 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int		del_prop(t_map *map, int x, int y)
 			return (1);
 		}
 		prop = prop->next_prop;
-		while (prop->next_prop)
+		while (prop)
 		{
 			if (prop->x == x && prop->y == y)
 			{

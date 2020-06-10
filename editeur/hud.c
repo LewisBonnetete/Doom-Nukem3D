@@ -6,7 +6,7 @@
 /*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/23 14:12:01 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/10 15:27:27 by lewis            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,24 @@ void	command_hud(t_var *info, SDL_Color color)
 	pos.y = 200;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
-	texte = TTF_RenderText_Blended(info->font, "[ V ] Validate a map", color);
+	texte = TTF_RenderText_Blended(info->font, "[ V ] Validate the map", color);
+	pos.x = WINDOW_H + 20;
+	pos.y = 360;
+	SDL_BlitSurface(texte, NULL, info->image, &pos);
+	SDL_FreeSurface(texte);
+	texte = TTF_RenderText_Blended(info->font, "[ I ] Add an Item", color);
 	pos.x = WINDOW_H + 20;
 	pos.y = 240;
+	SDL_BlitSurface(texte, NULL, info->image, &pos);
+	SDL_FreeSurface(texte);
+	texte = TTF_RenderText_Blended(info->font, "[ P ] Add an Prop", color);
+	pos.x = WINDOW_H + 20;
+	pos.y = 280;
+	SDL_BlitSurface(texte, NULL, info->image, &pos);
+	SDL_FreeSurface(texte);
+	texte = TTF_RenderText_Blended(info->font, "[ R ] Remove an Item or a Prop", color);
+	pos.x = WINDOW_H + 20;
+	pos.y = 320;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
 }
