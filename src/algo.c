@@ -47,21 +47,53 @@ void	update_render(t_var *info, t_render *render)
 	//printf("wall_y1 = %d\n",render->wall_y1);
 }
 
+void	go_to_sector(t_render *render,t_var *info, int id)
+{
+	printf("1.6go\n");
+	render->s = render->sec_0;
+	printf("1.7go\n");
+	//printf("id = %i\n",)
+	while (render->s->sector_id < id)
+	{
+		printf("1.8go\n");
+		render->s = render->s->next_sector;
+		printf("1.9go\n");
+	}
+	printf("out go\n");
+	(void)info;
+}
+
 void	draw_column(t_var *info, t_render *render)
 {
 	render->n = -1;
+	int		id_sec;
+	t_point player;
+	player.x = info->player->posx;
+	player.y = info->player->posy;
+	player.z = info->player->posz;
+	//id_sec = is_in_sectors_spawn(player ,info->map);
+	if (id_sec)
+		go_to_sector(render, info, id_sec);
+	//else {exit func}
 	while(++render->n < render->s->nbr_walls)
 	{
+		//printf("player sector = %i\n", info->player->sector_id);
 		render->wall = render->s->walls + render->n;
 		if(intersect(render->ray, render->wall) == 1)
 		{
+			//printf("wall type = %i\n", render->wall->is_portal);
 			if(render->wall->is_portal)
 			{
-				init_next_render(info, render);//manque une etape ? changer la position de depart? changer de secteur? test fonctionne bizarrement voir ./doom-nukem maps/2sec.map
+				//printf("sector id = %i\n", render->s->sector_id);
+				id_sec = render->wall->sector_id_it_leads_to;
+				go_to_sector(render, info, id_sec);
 				draw_column(info, render);
-				ft_memdel((void**)&(render->next_render));
+				printf("sector id = %i\n",  render->s->sector_id);
+				//free_render(tmp);
 			}
+			//printf("1\n");
 			update_render(info, render);
+			//printf("2\n");
 			draw_textures(info, render);
 			return;
 		}

@@ -12,7 +12,7 @@
 
 NAME = doom-nukem
 
-FLAGS       = -O3 -Wextra -Wall -Werror
+FLAGS       = -O3
 
 SDL			= -lpthread -F ./frameworks/ -framework SDL2 -framework SDL2_image
 SDL_HEADER	= -I ./frameworks/SDL2.framework/Headers -I ./frameworks/SDL2_image.framework/Headers
@@ -37,7 +37,12 @@ SRC =	main.c\
 		check_map.c\
 		tools.c\
 		textures.c\
-		tools2.c
+		tools2.c\
+		valid_wall.c\
+		polygon_checks.c\
+		editer_tools.c\
+		points_comparator.c\
+		polygon_checks_float.c
 		
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))

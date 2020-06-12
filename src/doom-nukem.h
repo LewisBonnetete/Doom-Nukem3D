@@ -58,11 +58,12 @@ typedef struct s_render		t_render;
 typedef struct s_player		t_player;
 typedef struct s_item		t_item;
 
-struct 					s_item
+struct					s_item
 {
-	char				*name;
-	int					x;
-	int					y;
+	char			*name;
+	int				x;
+	int				y;
+	t_item			*next_item;
 };
 
 struct					s_point
@@ -70,6 +71,14 @@ struct					s_point
 	float				x;
 	float				y;
 	float				z;
+};
+
+struct					s_prop
+{
+	char			*name;
+	int				x;
+	int				y;
+	t_prop			*next_prop;
 };
 
 struct 					s_wall
@@ -157,6 +166,7 @@ struct					s_render
 	double				wall_dist;
 	int					wall_y0;
 	int					wall_y1;
+	t_sector			*sec_0;
 	SDL_Surface			*tab_sdl[NB_TEXT + 1];
 	t_ray				*ray;
 	t_sector			*s;
@@ -272,6 +282,9 @@ int     rec_int(char *the_map, t_map *map);
 void	rec_char(char *the_map, char dest, t_map *map);
 char    *recup_map(char *src);
 char    *little_strjoin(char *src, char c);
+t_item  *rec_item(char *the_map, t_map *map);
+t_prop  *rec_prop(char *the_map, t_map *map);
+
 // tools
 int			do_trigo(t_var *info, t_wall *wall);
 double		calc_dist(t_point a, t_point b);
@@ -281,7 +294,25 @@ void		free_map(t_map *map);
 //hitbox
 int			hitboxy(t_var *info, t_render *render, double diry);
 int			hitboxx(t_var *info, t_render *render, double dirx);
-
-
+//edit tools
+int		is_new_point_in_sector(t_point new, t_wall *walls);
+int		is_in_sectors_spawn(t_point first,t_map *map);
+float	ft_fabs(float a);
+//int		draw_line_condition(t_line *line);
+//int		draw_line(t_var *info, t_line *line, Uint32 color);
+t_sector	*get_to_last_sector(t_sector *sectors);
+int			nbr_of_sectors(t_map *map);
+t_sector	*get_a_sector_by_id(t_map *map, int id);
+float		cross_product(t_point a, t_point b, t_point c);
+int		is_between(float x, float a, float b);
+int		is_same_point(t_point a, t_point b);
+int		is_in_sectors(t_point first,t_map *map);
+int		is_in_sector(t_point first,t_sector *sector);
+int		check_wall_intersections(t_point new, t_point old, t_wall wall);
+int		is_both_superior_y(t_point a, t_point b, t_point c, t_point d);
+int		is_both_inferior_y(t_point a, t_point b, t_point c, t_point d);
+int		is_both_superior_x(t_point a, t_point b, t_point c, t_point d);
+int		is_both_inferior_x(t_point a, t_point b, t_point c, t_point d);
+int		is_in_sectors_float(float center_x, float center_y, t_map *map);
 
 #endif

@@ -25,23 +25,6 @@ void	init_player(t_player *player, t_map *map)
 	player->movespeed = player->frametime * 2.5;
 }
 
-t_sector	*get_a_sector_by_id(t_map *map, int id)
-{
-	t_sector	*sector;
-	int 		i;
-
-	i = 1;
-	sector = map->sectors;
-	while(i < id)
-	{
-		i++;
-		sector = sector->next_sector;
-	}
-	if (id == 0)
-		return (NULL);
-	return (sector);
-}
-
 void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 {
 	render->x = x0;
@@ -56,6 +39,7 @@ void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 	render->ray->dy = info->player->dy + info->player->planey * render->ray->cam_x;
 	render->wall = NULL;
 	render->next_render = NULL;
+	render->sec_0 = render->s;
 }
 
 int		init_next_render(t_var *info, t_render *render)
