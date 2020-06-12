@@ -51,6 +51,46 @@ int     do_map(t_map *map, int fd)
         return (0);
     if (do_point(map->spawn, fd) == 0)
         return(0);
+    if (do_item(map->items, fd) == 0)
+	return (0);
+    if (do_prop(map->props, fd) == 0)
+	return (0);
+    return (1);
+}
+
+int	do_item(t_item *tem, int fd)
+{
+    char	c;
+
+    c = 't';
+    if (write(fd, &c, 1) == -1)
+	return (0);
+    if (do_x_char(tem->name, fd) == 0)
+	return (0);
+    if (do_int(tem->x, fd) == 0)
+	return (0);
+    if (do_int(tem->y, fd) == 0)
+	return (0);
+    if (tem->next_item)
+	do_item(tem->next_item, fd);
+    return (1);
+}
+
+int     do_prop(t_prop *prop, int fd)
+{
+    char        c;
+
+    c = 'p';
+    if (write(fd, &c, 1) == -1)
+        return (0);
+    if (do_x_char(prop->name, fd) == 0)
+        return (0);
+    if (do_int(prop->x, fd) == 0)
+        return (0);
+    if (do_int(prop->y, fd) == 0)
+        return (0);
+    if (prop->next_prop)
+        do_prop(prop->next_prop, fd);
     return (1);
 }
 //écriture de la structure box
