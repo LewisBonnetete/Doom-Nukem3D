@@ -43,6 +43,7 @@ int                main(int ac, char **av)
 	init_player(&player, info.map);
 	//free_map(info.map);
 	info.player = &player;
+	init_render(&info, &renderer, 0, info.player->sector_id);
 	tab_path(&renderer);
 	if (WALL_H > 1000 || WALL_H <= 0)
 		return (0);

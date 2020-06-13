@@ -27,19 +27,13 @@ void	init_player(t_player *player, t_map *map)
 
 void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 {
-	render->x = x0;
-	render->n = -1;
 	render->sector_id = sector_id;
-	render->s = get_a_sector_by_id(info->map, sector_id);
-	render->ray->x = info->player->posx;
-	render->ray->y = info->player->posy;
-	render->ray->z = info->player->posz;
-	render->ray->cam_x = 2 * render->x / (double)(WINDOW_W) - 1;
-	render->ray->dx = info->player->dx + info->player->planex * render->ray->cam_x;
-	render->ray->dy = info->player->dy + info->player->planey * render->ray->cam_x;
+	render->s = get_a_sector_by_id(info->map, 1);
 	render->wall = NULL;
 	render->next_render = NULL;
 	render->sec_0 = render->s;
+	render->nb_sec = 0;
+	init_nb_sec(render->sec_0, render);
 }
 
 int		init_next_render(t_var *info, t_render *render)

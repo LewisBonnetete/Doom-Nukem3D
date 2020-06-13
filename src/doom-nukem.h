@@ -166,6 +166,7 @@ struct					s_render
 	double				wall_dist;
 	int					wall_y0;
 	int					wall_y1;
+	int					nb_sec;
 	t_sector			*sec_0;
 	SDL_Surface			*tab_sdl[NB_TEXT + 1];
 	t_ray				*ray;
@@ -291,6 +292,8 @@ double		calc_dist(t_point a, t_point b);
 void		tab_path(t_render *renderer);
 void        ft_exit(t_var *info, t_render *render);
 void		free_map(t_map *map);
+void    	init_tab(int *tab, int n);
+
 //hitbox
 int			hitboxy(t_var *info, t_render *render, double diry);
 int			hitboxx(t_var *info, t_render *render, double dirx);
@@ -314,5 +317,10 @@ int		is_both_inferior_y(t_point a, t_point b, t_point c, t_point d);
 int		is_both_superior_x(t_point a, t_point b, t_point c, t_point d);
 int		is_both_inferior_x(t_point a, t_point b, t_point c, t_point d);
 int		is_in_sectors_float(float center_x, float center_y, t_map *map);
+int 	pnpoly_float(int nbr_walls, t_wall *walls, float center_x, float center_y);
+int		player_sec(t_sector *sector, t_var *info);
+void		init_nb_sec(t_sector *sector, t_render *render);
+
+t_render            *cpy_render(t_render *render);
 
 #endif

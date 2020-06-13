@@ -54,10 +54,8 @@ int     rec_map(char *the_map, t_map *map)
        map->size = rec_int(the_map, map);
     if (the_map[++map->i] == 'p')
        map->spawn = rec_point(the_map, map);
-    printf("1\n");
     if (the_map[++map->i] == 't')
        map->items = rec_item(the_map, map);
-    printf("2\n");
     if (the_map[++map->i] == 'p') //changer P
        map->prop = rec_prop(the_map, map);
     return (1);
@@ -200,31 +198,25 @@ char	*rec_x_char(char *the_map, t_map *map)
     src = 0;
     a = 0;
 	++map->i;
-    printf("a\n");
 	while (((the_map[map->i] >= 65 && the_map[map->i] <= 90)
 		|| (the_map[map->i] >= 97 && the_map[map->i] <= 122))
         && ((the_map[map->i + 1] >= 65 && the_map[map->i + 1] <= 90)
 		|| (the_map[map->i + 1] >= 97 && the_map[map->i + 1] <= 122)))
 	{
-        printf("b\n");
 		if (src)
         {
-            printf("c\n");
             rec_char(the_map, a, map);
 			src = little_strjoin(src, a);
         }
         else
         {
-            printf("d\n");
         	if (!(src = (char *)ft_memalloc(sizeof(char) + 2)))
             	return (0);
     	    rec_char(the_map, src[0], map);
 			src[1] = 0;
         }
-        printf("e\n");
         ++map->i;
     }
-    printf("f\n");
     return (src);
 }
 
@@ -315,10 +307,8 @@ t_item  *rec_item(char *the_map, t_map *map)
     t_item *res;
     if (!(res = (t_item *)ft_memalloc(sizeof(t_item))))
         return(0);
-    printf("avant\n");
     if (the_map[++map->i] == 'e')
         res->name = rec_x_char(the_map, map);
-    printf("2apres\n");
     if (the_map[++map->i] == 'i')
         res->x = rec_int(the_map, map);   
     if (the_map[++map->i] == 'y')

@@ -134,6 +134,29 @@ int		is_in_sectors(t_point first,t_map *map)
 	return (1);
 }
 
+int		player_sec(t_sector *sector, t_var *info)
+{
+	if (pnpoly_float(sector->nbr_walls, sector->walls, info->player->posx, info->player->posy))
+	{
+		return (sector->sector_id);
+	}
+	else if (sector->next_sector)
+		return(player_sec(sector->next_sector, info));
+	return (-1);
+}
+
+// int		player_sec(t_render *render, t_var *info)
+// {
+// 	render->s = render->sec_0;
+// 	while (render->s)
+// 	{
+// 		if (pnpoly_float(render->s->nbr_walls, render->s->walls, info->player->posx, info->player->posy))
+// 			return (render->s->sector_id);
+// 		render->s = render->s->next_sector;
+// 	}
+// 	return (0);
+// }
+
 int 	pnpoly_spawn(int nbr_walls, t_wall *walls, t_point first)
 {
 	int i;
