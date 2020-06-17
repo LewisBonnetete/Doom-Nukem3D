@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dealers_edit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/05 15:54:14 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/17 14:51:09 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,21 @@ int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit)
 					create_prop(map);
 			}
 		}
+		if (event.key.keysym.sym == SDLK_e)
+		{
+			if (event.key.state == SDL_PRESSED)
+			{
+				if (map->sectors == NULL)
+					ft_putendl("No sectors yet");
+				else
+					create_enemy(map);
+			}
+		}
 		if (event.key.keysym.sym == SDLK_r)
 		{
 			if (event.key.state == SDL_PRESSED)
 			{
-				if (map->items == NULL && map->props == NULL)
+				if (map->items == NULL && map->props == NULL && map->enemys == NULL)
 					ft_putendl("No items or props yet");
 				else
 					del_item_or_prop(map);

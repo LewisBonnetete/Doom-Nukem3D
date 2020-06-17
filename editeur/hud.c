@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/10 15:27:27 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/17 16:07:11 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,34 @@ void	command_hud(t_var *info, SDL_Color color)
 	pos.y = 160;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
-	texte = TTF_RenderText_Blended(info->font, "[ D ] Delete sector or restart its building", color);
+	texte = TTF_RenderText_Blended(info->font, "[ D ] Delete sector", color);
 	pos.x = WINDOW_H + 20;
 	pos.y = 200;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
 	texte = TTF_RenderText_Blended(info->font, "[ V ] Validate the map", color);
 	pos.x = WINDOW_H + 20;
-	pos.y = 360;
+	pos.y = 400;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
-	texte = TTF_RenderText_Blended(info->font, "[ I ] Add an Item", color);
+	texte = TTF_RenderText_Blended(info->font, "[  I  ] Add an Item", color);
 	pos.x = WINDOW_H + 20;
 	pos.y = 240;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
-	texte = TTF_RenderText_Blended(info->font, "[ P ] Add an Prop", color);
+	texte = TTF_RenderText_Blended(info->font, "[ P ] Add a Prop", color);
 	pos.x = WINDOW_H + 20;
 	pos.y = 280;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
-	texte = TTF_RenderText_Blended(info->font, "[ R ] Remove an Item or a Prop", color);
+	texte = TTF_RenderText_Blended(info->font, "[ E ] Add an Enemy", color);
 	pos.x = WINDOW_H + 20;
 	pos.y = 320;
+	SDL_BlitSurface(texte, NULL, info->image, &pos);
+	SDL_FreeSurface(texte);
+	texte = TTF_RenderText_Blended(info->font, "[ R ] Remove an Item, a Prop or an Enemy", color);
+	pos.x = WINDOW_H + 20;
+	pos.y = 360;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
 }

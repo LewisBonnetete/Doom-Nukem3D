@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prop.c                                             :+:      :+:    :+:   */
+/*   enemy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/17 14:37:30 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/17 14:42:36 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
 
-void	create_prop(t_map *map)
+void	create_enemy(t_map *map)
 {
 	int valid_coo = 0;
 	int x;
@@ -20,7 +20,7 @@ void	create_prop(t_map *map)
 	float temp;
 	SDL_Event	event;
 
-	ft_putendl("Place your prop");
+	ft_putendl("Place your enemy");
 	while(valid_coo == 0)
 	{
 		SDL_WaitEvent(&event);
@@ -30,26 +30,26 @@ void	create_prop(t_map *map)
 			x = round(temp);
 			temp = (float)event.button.y / (float)(WINDOW_H - 50) * map->size;
 			y = round(temp);
-			if (valid_new_prop(map, x, y))
+			if (valid_new_enemy(map, x, y))
 			{
 				valid_coo = 1;
-				if (!add_prop(map, get_prop_name(), x, y))
+				if (!add_enemy(map, get_enemy_name(), x, y))
 					exit_edit(map->sectors->info, map);
 			}
 			else
 			{
-				ft_putendl("You can't put a prop here");
+				ft_putendl("You can't put an enemy here");
 			}
 		}
 	}
 }
 
-char 	*get_prop_name()
+char 	*get_enemy_name()
 {
 	char *line;
 	int size;
 
-	ft_putendl("What is your prop?");
+	ft_putendl("What is your enemy?");
 	size = 0;
 	while(size < 3 || size > 5)
 	{
@@ -61,14 +61,23 @@ char 	*get_prop_name()
 	return (line);
 }
 
-int		valid_new_prop(t_map *map, int x, int y)
+int		valid_new_enemy(t_map *map, int x, int y)
 {
+	t_enemy		*enemy;
 	t_item		*item;
 	t_prop		*prop;
 	t_sector	*sector;
 	t_point		new;
-	t_enemy		*enemy;
-	
+
+	item = map->items;
+	while (item)
+	{
+		if (item->x == x && item->y == y)
+		{
+			return (0);
+		}
+		item = item->next_item;
+	}
 	enemy = map->enemys;
 	while (enemy)
 	{
@@ -87,105 +96,96 @@ int		valid_new_prop(t_map *map, int x, int y)
 		}
 		prop = prop->next_prop;
 	}
-	item = map->items;
-	while (item)
-	{
-		if (item->x == x && item->y == y)
-		{
-			return (0);
-		}
-		item = item->next_item;
-	}
 	sector = map->sectors;
 	new.x = x;
 	new.y = y;
-	if (prop_checks(new, map))
+	if (enemy_checks(new, map))
 		return (0);
 	return (1);
 }
 
-int		prop_checks(t_point new, t_map *map)
+int		enemy_checks(t_point new, t_map *map)
 {
 	if (is_in_sectors_spawn(new, map))
 	{
-		ft_putendl("props must be in a sector");
+		ft_putendl("enemys must be in a sector");
 		return (0);
 	}
 	if (!is_new_point_in_sectors(new, map))
 	{
-		ft_putendl("props can't be inside a wall");
+		ft_putendl("enemys can't be inside a wall");
 		return (0);
 	}
 	return (1);
 }
 
-t_prop	*go_to_last_prop(t_prop *props)
+t_enemy	*go_to_last_enemy(t_enemy *enemys)
 {
-	t_prop *prop;
+	t_enemy *enemy;
 
-	prop = props;
-	while (prop->next_prop)
+	enemy = enemys;
+	while (enemy->next_enemy)
 	{
-		prop = prop->next_prop;
+		enemy = enemy->next_enemy;
 	}
-	return (prop);
+	return (enemy);
 }
 
-int		add_prop(t_map *map, char *name, int x, int y)
+int		add_enemy(t_map *map, char *name, int x, int y)
 {
-	t_prop	*prop;
+	t_enemy	*enemy;
 
-	if (map->props)
-		prop = go_to_last_prop(map->props);
+	if (map->enemys)
+		enemy = go_to_last_enemy(map->enemys);
 	else
 	{
-		if (!(map->props = (t_prop*)malloc(sizeof(t_prop))))
+		if (!(map->enemys = (t_enemy*)malloc(sizeof(t_enemy))))
 			return (0);
-		map->props->next_prop = NULL;
-		map->props->x = x;
-		map->props->y = y;
-		map->props->name = name;
+		map->enemys->next_enemy = NULL;
+		map->enemys->x = x;
+		map->enemys->y = y;
+		map->enemys->name = name;
 		return (1);
 	}
-	if (!(prop->next_prop = (t_prop*)malloc(sizeof(t_prop))))
+	if (!(enemy->next_enemy = (t_enemy*)malloc(sizeof(t_enemy))))
 		return (0);
-	prop->next_prop->next_prop = NULL;
-	prop->next_prop->x = x;
-	prop->next_prop->y = y;
-	prop->next_prop->name = name;
+	enemy->next_enemy->next_enemy = NULL;
+	enemy->next_enemy->x = x;
+	enemy->next_enemy->y = y;
+	enemy->next_enemy->name = name;
 	return (1);
 }
 
-int		del_prop(t_map *map, int x, int y)
+int		del_enemy(t_map *map, int x, int y)
 {
-	t_prop *prop;
-	t_prop *previous;
+	t_enemy *enemy;
+	t_enemy *previous;
 
-	prop = map->props;
-	previous = map->props;
-	if (prop)
+	enemy = map->enemys;
+	previous = map->enemys;
+	if (enemy)
 	{
-		if (prop->x == x && prop->y == y)
+		if (enemy->x == x && enemy->y == y)
 		{
-			map->props = map->props->next_prop;
-			ft_putstr(prop->name);
-			free(prop->name);
-			free(prop);
+			map->enemys = map->enemys->next_enemy;
+			ft_putstr(enemy->name);
+			free(enemy->name);
+			free(enemy);
 			return (1);
 		}
-		prop = prop->next_prop;
-		while (prop)
+		enemy = enemy->next_enemy;
+		while (enemy)
 		{
-			if (prop->x == x && prop->y == y)
+			if (enemy->x == x && enemy->y == y)
 			{
-				previous->next_prop = prop->next_prop;
-				ft_putstr(prop->name);
-				free(prop->name);
-				free(prop);
+				previous->next_enemy = enemy->next_enemy;
+				ft_putstr(enemy->name);
+				free(enemy->name);
+				free(enemy);
 				return (1);
 			}
-			prop = prop->next_prop;
-			previous = previous->next_prop;
+			enemy = enemy->next_enemy;
+			previous = previous->next_enemy;
 		}
 	}
 	return (0);

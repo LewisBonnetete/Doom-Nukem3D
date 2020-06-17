@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom-nukem_edit.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/05 16:07:10 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/17 14:48:34 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,14 @@ struct					s_prop
 	t_prop			*next_prop;
 };
 
+struct					s_enemy
+{
+	char			*name;
+	int				x;
+	int				y;
+	t_enemy		*next_enemy;
+};
+
 struct 					s_wall
 {
 	t_point				a;
@@ -125,6 +133,7 @@ struct 					s_map
 	int					i;
 	t_item				*items;
 	t_prop				*props;
+	t_enemy				*enemys;
 };
 
 struct					s_text
@@ -250,7 +259,7 @@ void	dealers_init(t_input_edit *input_edit);
 void	dealers_tester(t_input_edit input_edit);
 int		get_map_size();
 
-//items && props
+//items && props &7 enemy
 char 	*get_item_name();
 int		valid_new_item(t_map *map, int x, int y);
 t_item	*go_to_last_item(t_item *items);
@@ -266,6 +275,13 @@ int		del_item(t_map *map, int x, int y);
 int		del_prop(t_map *map, int x, int y);
 void	del_item_or_prop(t_map *map);
 char 	*get_prop_name();
+void	create_enemy(t_map *map);
+char 	*get_enemy_name();
+int		valid_new_enemy(t_map *map, int x, int y);
+int		enemy_checks(t_point new, t_map *map);
+t_enemy	*go_to_last_enemy(t_enemy *enemys);
+int		add_enemy(t_map *map, char *name, int x, int y);
+int		del_enemy(t_map *map, int x, int y);
 
 //checkers
 int		is_valid_wall(SDL_Event *event, t_sector *sector, int i);
@@ -305,6 +321,7 @@ void	draw_cadre(t_var *info);
 void	draw_square(t_var *info, t_point a, t_point b, Uint32 color);
 void	draw_items(t_var *info,t_map *map);
 void	draw_props(t_var *info,t_map *map);
+void	draw_enemys(t_var *info,t_map *map);
 
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
 int		draw_line(t_var *info, t_line *line, Uint32 color);
@@ -322,7 +339,7 @@ t_sector	*get_a_sector_by_id(t_map *map, int id);
 void		del_sector(t_var *info, t_map *map);
 int			is_between(float x, float a, float b);
 
-//loadmap
+//savemap
 int     creat_fichier(t_map *map, char *name);
 int     do_int(int i, int fd);
 int     do_char(char c, int fd);
@@ -336,6 +353,8 @@ int     do_x_wall(t_wall *wall, int fd, int g);
 int     do_sectors(t_sector *sectors, int fd);
 int     do_box(t_box box, int fd);
 int     do_map(t_map *map, int fd);
+int		do_item(t_item *tem, int fd);
+int		do_prop(t_prop *prop, int fd);
 char    *little_strjoin(char *src, char c);
 
 //Hud

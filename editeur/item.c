@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   item.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/10 15:19:06 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/17 14:50:43 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		valid_new_item(t_map *map, int x, int y)
 	t_prop		*prop;
 	t_sector	*sector;
 	t_point		new;
+	t_enemy		*enemy;
 
 	item = map->items;
 	while (item)
@@ -76,6 +77,15 @@ int		valid_new_item(t_map *map, int x, int y)
 			return (0);
 		}
 		item = item->next_item;
+	}
+	enemy = map->enemys;
+	while (enemy)
+	{
+		if (enemy->x == x && enemy->y == y)
+		{
+			return (0);
+		}
+		enemy = enemy->next_enemy;
 	}
 	prop = map->props;
 	while (prop)
@@ -165,7 +175,7 @@ void	del_item_or_prop(t_map *map)
 			x = round(temp);
 			temp = (float)event.button.y / (float)(WINDOW_H - 50) * map->size;
 			y = round(temp);
-			if (del_item(map, x, y) || del_prop(map, x, y))
+			if (del_item(map, x, y) || del_prop(map, x, y) || del_enemy(map, x, y))
 				ft_putendl(" removed");
 			else
 				ft_putendl("Nothing here...");
