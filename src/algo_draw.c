@@ -114,7 +114,7 @@ void	draw_texture_wall(t_var *info, t_render *render)
 	hit.y = render->ray->y2;
 	render->wall->wall_leng = calc_dist(render->wall->a, render->wall->b);
 	pos_relative = calc_dist(hit, render->wall->b);
-	temp2 = (double)render->tab_sdl[0]->h / (double)WALL_H;
+	temp2 = (double)render->tab_sdl[0]->h / (double)WALL_H; //Dans le cas d un item wallH = itemH/2
 	pos_relative = pos_relative * temp2;
 	temp = (int)pos_relative;
 	pos_relative -= temp;

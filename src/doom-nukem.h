@@ -57,6 +57,7 @@ typedef	struct s_prop		t_prop;
 typedef struct s_render		t_render;
 typedef struct s_player		t_player;
 typedef struct s_item		t_item;
+typedef struct s_itab		t_itab;
 
 struct					s_item
 {
@@ -227,6 +228,13 @@ struct					s_var
 	double				rotspeed;
 	double				frametime;
 };
+
+struct 					s_itab
+{
+	float				dist;
+	char				*name;
+};
+
 
 struct					s_input
 {
