@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   editer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/29 13:03:38 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/23 16:40:12 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
+
+int		editer_help(t_var *info)
+{
+	if (!(info->texture = SDL_CreateTextureFromSurface(info->renderer,
+	info->image)))
+	{
+		ft_putstr("Erreur CreateTextureFromSurface :\n");
+		ft_putendl(SDL_GetError());
+		SDL_DestroyWindow(info->window);
+		SDL_Quit();
+		return (0);
+	}
+	if (SDL_RenderCopy(info->renderer, info->texture, NULL, NULL))
+	{
+		ft_putstr("Erreur RenderCopy :\n");
+		ft_putendl(SDL_GetError());
+		SDL_DestroyWindow(info->window);
+		SDL_Quit();
+		return (0);
+	}
+	return (1);
+}
 
 int		editer(t_var *info, t_map *map)
 {
@@ -26,22 +48,8 @@ int		editer(t_var *info, t_map *map)
 	{
 		draw_map_edit(info, map);
 		hud(info);
-		if (!(info->texture = SDL_CreateTextureFromSurface(info->renderer, info->image)))
-		{
-			ft_putstr("Erreur CreateTextureFromSurface :\n");
-			ft_putendl(SDL_GetError());
-			SDL_DestroyWindow(info->window);
-			SDL_Quit();
+		if (editer_help(info) == 0)
 			return (0);
-		}
-		if (SDL_RenderCopy(info->renderer, info->texture, NULL, NULL))
-		{
-			ft_putstr("Erreur RenderCopy :\n");
-			ft_putendl(SDL_GetError());
-			SDL_DestroyWindow(info->window);
-			SDL_Quit();
-			return (0);
-		}
 		SDL_RenderPresent(info->renderer);
 		SDL_DestroyTexture(info->texture);
 	}

@@ -6,7 +6,7 @@
 #    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/06/17 14:43:25 by lbonnete         ###   ########.fr        #
+#    Updated: 2020/06/23 16:44:45 by lbonnete         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,10 @@ SRC =	main.c\
 		map_creator.c\
 		init_interact.c\
 		draw_map.c\
+		draw_map2.c\
+		draw_map3.c\
 		editer_tools.c\
+		editer_tools2.c\
 		exit_edit.c\
 		del_sector.c\
 		valid_wall.c\
@@ -48,7 +51,8 @@ SRC =	main.c\
 		save_map.c\
 		item.c\
 		prop.c\
-		enemy.c
+		enemy.c\
+		enemy2.c
 
 INC = doom-nukem_edit.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
