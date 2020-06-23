@@ -20,14 +20,27 @@ void	update_ray(t_var *info, t_render *render)
 
 void	update_render(t_var *info, t_render *render)
 {
+	float	tmp;
+	int cap;
+
+	cap = 1;
 	render->wall_sqdist =
 		((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
 		+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x))
-		+ (render->wall->c.z - render->ray->z) * (render->wall->c.z - render->ray->z); //fish eye ici car distance euclidienne 
+		+ (render->wall->c.z - render->ray->z) * (render->wall->c.z - render->ray->z); //fish eye ici car distance euclidienne
+	tmp = ((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
+		+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x));
+	tmp = render->wall_sqdist - tmp;
+	if (tmp < 0)
+		cap = -1;
+	tmp = fabs(tmp);
+	tmp = sqrt(tmp);
+	tmp = (double)tmp * WALL_H * cap / (double)render->wall_dist;
+	//printf("tmp = %f\n", tmp);
 	render->wall_dist = sqrt(render->wall_sqdist);
 	render->wall_height = WALL_H * (double)render->wall->height / (double)render->wall_dist;
-	render->wall_y0 = WINDOW_H / 2 - render->wall_height / 2;
-	render->wall_y1 = WINDOW_H / 2 + render->wall_height / 2;
+	render->wall_y0 = WINDOW_H / 2 - render->wall_height / 2 + tmp;
+	render->wall_y1 = WINDOW_H / 2 + render->wall_height / 2 + tmp;
 	if (info->player->posz != render->wall->a.z)
 	{
 		render->wall_y0 += DECALLAGE * (render->wall->a.z - info->player->posz) /  render->wall_dist;
@@ -131,6 +144,7 @@ int     raycasting(t_var *info, t_render *render)
 	info->player->sector_id = player_sec(render->sec_0, info);
 	if (info->player->sector_id)
 		go_to_sector(render->sec_0, info->player->sector_id, render);
+	tex_floor_ciel(info, render);
 	while(render->x < WINDOW_W)
 	{
 		go_to_sector(render->sec_0, info->player->sector_id, render);

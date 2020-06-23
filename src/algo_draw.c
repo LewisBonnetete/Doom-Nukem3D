@@ -14,6 +14,59 @@ Uint32			get_pixel(SDL_Surface *tex, int x, int y)
 	return (color);
 }
 
+void			tex_floor_ciel(t_var *info, t_render *render)
+{
+	int i;
+	int j;
+	int k;
+	double dirx0;
+	double diry0;
+	double dirx1;
+	double diry1;
+	int p;
+	double dist;
+	double stepx;
+	double stepy;
+	double floorx;
+	double floory;
+	i = 0;
+	j = 0;
+	k = 0;
+	double posz;
+
+	while (i++ < WINDOW_H)
+	{
+		dirx0 = info->player->dx - info->player->planex;
+		diry0 = info->player->dy - info->player->planey;
+		dirx1 = info->player->dx + info->player->planex;
+		diry1 = info->player->dy + info->player->planey;
+		posz = 0.5 * WINDOW_H;
+		p = i - WINDOW_H / 2;
+		dist = posz / p;
+		stepx = dist * (dirx1 - dirx0) / WINDOW_W;
+		stepy = dist * (diry1 - diry0) / WINDOW_W;
+		floorx = info->player->posx + dist * dirx0;
+		floory = info->player->posy + dist * diry0;
+		j = 0;
+		while (j < WINDOW_W)
+		{
+			int cellx = (int)floorx;
+			int celly = (int)floory;
+			int tx = (int)(render->tab_sdl[render->s->celling.text_id]->w * (floorx - cellx)) & (render->tab_sdl[render->s->celling.text_id]->w - 1);
+        	int ty = (int)(render->tab_sdl[render->s->celling.text_id]->h * (floory - celly)) & (render->tab_sdl[render->s->celling.text_id]->h - 1);
+			floorx += stepx;
+			floory += stepy;
+			// printf("stepx = %f\n", stepx);
+			// printf("stepy = %f\n", stepy);
+			Uint32 color = get_pixel(render->tab_sdl[render->s->celling.text_id],tx,ty);
+			put_pixel_to_suface(color, j, i, info->image);
+			color = get_pixel(render->tab_sdl[render->s->celling.text_id],tx,ty);
+			put_pixel_to_suface(color, WINDOW_H - j - 1, i, info->image);
+			j++;
+		}
+	}
+}
+
 static	void	ft_put_weapon(t_var *info, t_render *render)
 {
 	int		x;
@@ -93,7 +146,7 @@ void	draw_textures(t_var *info, t_render *render)
 	}
 	else
     {
-		draw_bottop(info, render);
+		//draw_bottop(info, render);
 		draw_texture_wall(info, render);
 		ft_put_weapon(info, render);
     }
@@ -109,7 +162,7 @@ void	draw_texture_wall(t_var *info, t_render *render)
 	double 		texy;
 	int			temp;
 	Uint32		color;
-	float 		temp2;
+	double 		temp2;
 	hit.x = render->ray->x2;
 	hit.y = render->ray->y2;
 	render->wall->wall_leng = calc_dist(render->wall->a, render->wall->b);

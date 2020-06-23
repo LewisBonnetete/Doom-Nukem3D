@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom-nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/03 16:19:16 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/23 15:42:03 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,6 +328,7 @@ int		is_in_sectors_float(float center_x, float center_y, t_map *map);
 int 	pnpoly_float(int nbr_walls, t_wall *walls, float center_x, float center_y);
 int		player_sec(t_sector *sector, t_var *info);
 void		init_nb_sec(t_sector *sector, t_render *render);
+void			tex_floor_ciel(t_var *info, t_render *render);
 
 t_render            *cpy_render(t_render *render);
 
