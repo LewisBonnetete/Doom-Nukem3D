@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/05 15:34:32 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/23 16:18:07 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,33 @@ int		is_new_point_in_sectors(t_point new, t_map *map)
 	return (1);
 }
 
+int		is_in_object(t_point new, t_map *map)
+{
+	t_item *item;
+	t_prop *prop;
+	t_enemy *enemy;
+
+	item = map->items;
+	prop = map->props;
+	enemy = map->enemys;
+	while (item || prop || enemy)
+	{
+		if (item->x == new.x && item->y == new.y)
+			return (0);
+		if (prop->x == new.x && prop->y == new.x)
+			return (0);
+		if (enemy->x == new.x && enemy->y == new.y)
+			return (0);
+		if (item)
+			item = item->next_item;
+		if (prop)
+			prop = prop->next_prop;
+		if (enemy)
+			enemy = enemy->next_enemy;
+	}
+	return (1);
+}
+
 int		spawn_checks(t_point new, t_map *map)
 {
 	if (!is_in_sectors_spawn(new, map))
@@ -36,6 +63,11 @@ int		spawn_checks(t_point new, t_map *map)
 	if (!is_new_point_in_sectors(new, map))
 	{
 		ft_putendl("Spawn can't be inside a wall");
+		return (0);
+	}
+	if (!is_in_object(new, map))
+	{
+		ft_putendl("Spawn can't be inside something");
 		return (0);
 	}
 	return (1);

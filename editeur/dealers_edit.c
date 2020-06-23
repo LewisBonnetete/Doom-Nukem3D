@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/17 14:51:09 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/23 14:52:19 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int		dealers_edit_3(t_map *map, SDL_Event event)
 {
 	if (event.key.keysym.sym == SDLK_v)
+	{
+		if (event.key.state == SDL_PRESSED)
 		{
-			if (event.key.state == SDL_PRESSED)
-			{
-				if (validate(map))
-					return (0);
-			}
+			if (validate(map))
+				return (0);
 		}
+	}
 	return (1);
 }
 
-void		dealers_edit_2(t_input_edit *input_edit, SDL_Event event)
+void	dealers_edit_2(t_input_edit *input_edit, SDL_Event event)
 {
 	if (event.type == SDL_MOUSEMOTION)
 	{
@@ -46,6 +46,31 @@ void		dealers_edit_2(t_input_edit *input_edit, SDL_Event event)
 		if (event.button.button == SDL_BUTTON_RIGHT)
 			input_edit->right_click = 0;
 	}
+}
+
+void	dealers_edit_4(SDL_Event event, t_map *map)
+{
+	if (event.key.keysym.sym == SDLK_e)
+		{
+			if (event.key.state == SDL_PRESSED)
+			{
+				if (map->sectors == NULL)
+					ft_putendl("No sectors yet");
+				else
+					create_enemy(map);
+			}
+		}
+		if (event.key.keysym.sym == SDLK_r)
+		{
+			if (event.key.state == SDL_PRESSED)
+			{
+				if (map->items == NULL && map->props == NULL
+				&& map->enemys == NULL)
+					ft_putendl("No items or props yet");
+				else
+					del_item_or_prop(map);
+			}
+		}
 }
 
 int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit)
@@ -89,26 +114,7 @@ int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit)
 					create_prop(map);
 			}
 		}
-		if (event.key.keysym.sym == SDLK_e)
-		{
-			if (event.key.state == SDL_PRESSED)
-			{
-				if (map->sectors == NULL)
-					ft_putendl("No sectors yet");
-				else
-					create_enemy(map);
-			}
-		}
-		if (event.key.keysym.sym == SDLK_r)
-		{
-			if (event.key.state == SDL_PRESSED)
-			{
-				if (map->items == NULL && map->props == NULL && map->enemys == NULL)
-					ft_putendl("No items or props yet");
-				else
-					del_item_or_prop(map);
-			}
-		}
+		dealers_edit_4(event, map);
 	}
 	return (dealers_edit_3(map, event));
 }

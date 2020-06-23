@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/23 15:19:42 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/06/23 15:23:52 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int     do_map(t_map *map, int fd)
     return (1);
 }
 
-int	do_enemy(t_item *enemy, int fd)
+int	do_enemy(t_enemy *enemy, int fd)
 {
     char	c;
 
