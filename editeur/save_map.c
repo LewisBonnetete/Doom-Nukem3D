@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/28 11:47:03 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/23 15:23:52 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,34 @@ int     do_map(t_map *map, int fd)
         return (0);
     if (do_point(map->spawn, fd) == 0)
         return(0);
-    if (do_item(map->items, fd) == 0)
-	return (0);
-    if (do_prop(map->props, fd) == 0)
-	return (0);
+    if (map->items)
+		if (do_item(map->items, fd) == 0)
+			return (0);
+	if (map->props)
+		if (do_prop(map->props, fd) == 0)
+			return (0);
+	if (map->enemys)
+		if (do_enemy(map->enemys, fd) == 0)
+			return (0);
+    return (1);
+}
+
+int	do_enemy(t_enemy *enemy, int fd)
+{
+    char	c;
+
+    c = 'y';
+    if (write(fd, &c, 1) == -1)
+		return (0);
+	if (enemy->name)
+		if (do_x_char(enemy->name, fd) == 0)
+			return (0);
+    if (do_int(enemy->x, fd) == 0)
+		return (0);
+    if (do_int(enemy->y, fd) == 0)
+		return (0);
+    if (enemy->next_enemy)
+		do_enemy(enemy->next_enemy, fd);
     return (1);
 }
 
@@ -64,15 +88,16 @@ int	do_item(t_item *tem, int fd)
 
     c = 't';
     if (write(fd, &c, 1) == -1)
-	return (0);
-    if (do_x_char(tem->name, fd) == 0)
-	return (0);
+		return (0);
+	if (tem->name)
+		if (do_x_char(tem->name, fd) == 0)
+			return (0);
     if (do_int(tem->x, fd) == 0)
-	return (0);
+		return (0);
     if (do_int(tem->y, fd) == 0)
-	return (0);
+		return (0);
     if (tem->next_item)
-	do_item(tem->next_item, fd);
+		do_item(tem->next_item, fd);
     return (1);
 }
 
@@ -83,8 +108,9 @@ int     do_prop(t_prop *prop, int fd)
     c = 'p';
     if (write(fd, &c, 1) == -1)
         return (0);
-    if (do_x_char(prop->name, fd) == 0)
-        return (0);
+	if (prop->name)
+		if (do_x_char(prop->name, fd) == 0)
+			return (0);
     if (do_int(prop->x, fd) == 0)
         return (0);
     if (do_int(prop->y, fd) == 0)

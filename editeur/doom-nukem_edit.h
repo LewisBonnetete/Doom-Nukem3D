@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/17 14:48:34 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/23 15:23:20 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@
 # define WHITE				0xFFFFFF
 # define BLUE				0x7289DA
 # define ORANGE				0xFFA500
+# define RED				0xFF0000
 # define DARK				0x2C2F33
 # define GRAY				0x99AAB5
+# define GREEN				0x32cd32
 # define RMASK				0
 # define GMASK				0
 # define BMASK				0
 # define AMASK				0
+# define NAME_DEC			2
 
 typedef struct s_input	t_input;
 typedef struct s_input_edit	t_input_edit;
@@ -355,6 +358,7 @@ int     do_box(t_box box, int fd);
 int     do_map(t_map *map, int fd);
 int		do_item(t_item *tem, int fd);
 int		do_prop(t_prop *prop, int fd);
+int		do_enemy(t_enemy *enemy, int fd);
 char    *little_strjoin(char *src, char c);
 
 //Hud
