@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/23 15:12:42 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/23 16:26:49 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,27 @@ void	init_map(t_map *map)
 void	init_var(t_var *info)
 {
 	(void)info;
+}
+
+void	dealers_init(t_input_edit *input_edit)
+{
+	input_edit->mouse_x = 0;
+	input_edit->mouse_y = 0;
+	input_edit->right_click = 0;
+	input_edit->left_click = 0;
+	input_edit->del = 0;
+	input_edit->t_s = 0;
+	input_edit->t_n = 0;
+	input_edit->t_0 = 0;
+	input_edit->t_1 = 0;
+	input_edit->t_2 = 0;
+	input_edit->t_3 = 0;
+	input_edit->t_4 = 0;
+	input_edit->t_5 = 0;
+	input_edit->t_6 = 0;
+	input_edit->t_7 = 0;
+	input_edit->t_8 = 0;
+	input_edit->t_9 = 0;
 }
 
 void	init_artificial_map(t_map *map)
