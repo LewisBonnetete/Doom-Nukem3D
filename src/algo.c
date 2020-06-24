@@ -1,6 +1,14 @@
 #include "doom-nukem.h"
+/*
+void	normalize(double *dx, double *dy)
+{
+	double	length;
 
-
+	length = sqrt((*dx * *dx) + (*dy * *dy));
+	*dx /= length;
+	*dy /= length;
+}
+*/
 void	update_ray(t_var *info, t_render *render)
 {
 	render->ray->cam_x = 2 * render->x / (double)(WINDOW_W) - 1;
@@ -20,27 +28,15 @@ void	update_ray(t_var *info, t_render *render)
 
 void	update_render(t_var *info, t_render *render)
 {
-	float	tmp;
-	int cap;
-
-	cap = 1;
 	render->wall_sqdist =
-		((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
-		+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x))
-		+ (render->wall->c.z - render->ray->z) * (render->wall->c.z - render->ray->z); //fish eye ici car distance euclidienne
-	tmp = ((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
-		+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x));
-	tmp = render->wall_sqdist - tmp;
-	if (tmp < 0)
-		cap = -1;
-	tmp = fabs(tmp);
-	tmp = sqrt(tmp);
-	tmp = (double)tmp * WALL_H * cap / (double)render->wall_dist;
+		((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y) * info->player->dy * info->player->dy)
+		+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x) * info->player->dx * info->player->dx)
+		/*+ (render->wall->c.z - render->ray->z) * (render->wall->c.z - render->ray->z)*/; //fish eye ici car distance euclidienne
 	//printf("tmp = %f\n", tmp);
 	render->wall_dist = sqrt(render->wall_sqdist);
 	render->wall_height = WALL_H * (double)render->wall->height / (double)render->wall_dist;
-	render->wall_y0 = WINDOW_H / 2 - render->wall_height / 2 + tmp;
-	render->wall_y1 = WINDOW_H / 2 + render->wall_height / 2 + tmp;
+	render->wall_y0 = WINDOW_H / 2 - render->wall_height / 2;
+	render->wall_y1 = WINDOW_H / 2 + render->wall_height / 2;
 	if (info->player->posz != render->wall->a.z)
 	{
 		render->wall_y0 += DECALLAGE * (render->wall->a.z - info->player->posz) /  render->wall_dist;
