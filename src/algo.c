@@ -56,11 +56,21 @@ void	go_to_sector(t_sector *sec_0, int id, t_render *render)
 		render->s = sec_0;
 }
 
+void	calc_item_wall(t_render *render, t_var *info)
+{
+	render->wall_item->a.x = 0.3 * info->player->planex + render->item->x;
+	render->wall_item->a.y = 0.3 * info->player->planey + render->item->y;
+	render->wall_item->b.x = 0.3 * info->player->planex - render->item->x;
+	render->wall_item->b.y = 0.3 * info->player->planey - render->item->y;
+}
+
 void	draw_column(t_var *info, t_render *render, int *tab)
 {
 	int		id_sec;
-//	int		i;
-//	t_itab	itab[5];
+/*	int		i;
+	int		k;
+	int		j;
+	t_itab	itab[5];*/
 
 	render->n = -1;
 	while(++render->n < render->s->nbr_walls)
@@ -80,41 +90,40 @@ void	draw_column(t_var *info, t_render *render, int *tab)
 			return;
 		}
 	}
-	// if (!render->s->nbr_items)
-	// 	return;
-	// ft_bzero(itab, 5);
-	// i = -1;
-	// while(++i < 5)
-	// {
-	// 	itab[i].name = 0;
-	// 	itab[i].dist = 0;
-	// }
-	// while(++render->n < render->s->nbr_item)
-	// {
-	// 	render->item = render->s->item + render->n;
-	// 	calc_item_wall(render, info);
-	// 	if(intersect(render->ray, render->wall) == 1)
-	// 	{
-	// 		update_render(info, render);
-	// 		itab[render->n].dist = render->wall_dist;
-	// 		itab[render->n].name = render->s->item->name;
-	// 	}
-	// }
-	// int k;
-	// int j = 0,
-	// while (itab[++j].name)
-	// {
-	// 	k = 0;
-	// 	i = 0;
-	// 	while (itab[++i].name)
-	// 	{
-	// 		if (itab[k].dist < itab[i].dist && itab[k].name != -1)
-	// 			k = i;
-	// 	}
-	// 	itab[k].name = -1;
-	// 	itab[k].dist = -1;
-	// 	draw_item(render, info, itab[k].name)
-	// }
+	/*if (!render->s->nbr_items)
+		return;
+	ft_bzero(itab, 5);
+	i = -1;
+	while(++i < 5)
+	{
+		itab[i].name = 0;
+		itab[i].dist = 0;
+	}
+	while(++render->n < render->s->nbr_items)
+	{
+		render->item = render->s->item + render->n;
+		calc_item_wall(render, info);
+		if(intersect(render->ray, render->wall_item) == 1)
+		{
+			//update_render_item(info, render);
+			itab[render->n].dist = render->wall_dist;
+			itab[render->n].name = render->s->item->name;
+		}
+	}
+	j = 0;
+	while (itab[++j].name)
+	{
+		k = 0;
+		i = 0;
+		while (itab[++i].name)
+		{
+			if (itab[k].dist < itab[i].dist && itab[k].name[0] != '-' && itab[k].name[1] != '1')
+				k = i;
+		}
+		itab[k].name = "-1";
+		itab[k].dist = -1;
+		draw_item(render, info, itab[k].name);
+	}*/
 }
 
 void		init_nb_sec(t_sector *sector, t_render *render)

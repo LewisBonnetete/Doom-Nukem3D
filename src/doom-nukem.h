@@ -116,6 +116,8 @@ struct 					s_sector
 {
 	t_wall				*walls;
 	int 				nbr_walls;
+	t_item				*item;
+	int					nbr_items;
 	t_wall				floor;
 	t_wall				celling;
 	int					light;
@@ -183,6 +185,8 @@ struct					s_render
 	t_ray				*ray;
 	t_sector			*s;
 	t_wall				*wall;
+	t_wall				*wall_item;
+	t_item				*item;
 	t_render			*next_render;
 };
 
@@ -285,6 +289,7 @@ int		intersect(t_ray *ray, t_wall *wall);
 int     raycasting(t_var *info, t_render *render);
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
 int		xy_in_ab(double x, double y, t_point a, t_point b);
+void	calc_item_wall(t_render *render, t_var *info);
 
 //load_map
 int	check_map(char *the_map);

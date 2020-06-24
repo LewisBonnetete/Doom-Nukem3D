@@ -48,7 +48,7 @@ void			tex_floor_ciel(t_var *info, t_render *render)
 		floorx = info->player->posx + dist * dirx0;
 		floory = info->player->posy + dist * diry0;
 		j = 0;
-		while (j < WINDOW_W)
+		while (j++ < WINDOW_W)
 		{
 			int cellx = (int)floorx;
 			int celly = (int)floory;
@@ -56,13 +56,12 @@ void			tex_floor_ciel(t_var *info, t_render *render)
         	int ty = (int)(render->tab_sdl[render->s->celling.text_id]->h * (floory - celly)) & (render->tab_sdl[render->s->celling.text_id]->h - 1);
 			floorx += stepx;
 			floory += stepy;
-			// printf("stepx = %f\n", stepx);
-			// printf("stepy = %f\n", stepy);
-			Uint32 color = get_pixel(render->tab_sdl[render->s->celling.text_id],tx,ty);
+			// printf("tx = %f\n", tx);
+			// printf("ty = %f\n", ty);
+			Uint32 color = get_pixel(render->tab_sdl[1],tx,ty);
 			put_pixel_to_suface(color, j, i, info->image);
-			color = get_pixel(render->tab_sdl[render->s->celling.text_id],tx,ty);
-			put_pixel_to_suface(color, WINDOW_H - j - 1, i, info->image);
-			j++;
+			color = get_pixel(render->tab_sdl[2],tx,ty);
+			put_pixel_to_suface(color,j , WINDOW_H - i - 1, info->image);
 		}
 	}
 }
