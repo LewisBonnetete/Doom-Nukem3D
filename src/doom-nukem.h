@@ -63,6 +63,7 @@ typedef struct s_enemy		y_enemy;
 struct					s_item
 {
 	char			*name;
+	int				id;
 	int				x;
 	int				y;
 	t_item			*next_item;
@@ -181,12 +182,13 @@ struct					s_render
 	int					wall_y1;
 	int					nb_sec;
 	t_sector			*sec_0;
+	SDL_Surface			*tab_sdl_item[NB_TEXT_I + 1];
 	SDL_Surface			*tab_sdl[NB_TEXT + 1];
 	t_ray				*ray;
 	t_sector			*s;
 	t_wall				*wall;
 	t_wall				*wall_item;
-	t_item				*item;
+	t_item				item;
 	t_render			*next_render;
 };
 
@@ -290,6 +292,7 @@ int     raycasting(t_var *info, t_render *render);
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
 int		xy_in_ab(double x, double y, t_point a, t_point b);
 void	calc_item_wall(t_render *render, t_var *info);
+void»···draw_item(t_render *render, t_var *info_map, char *name);
 
 //load_map
 int	check_map(char *the_map);

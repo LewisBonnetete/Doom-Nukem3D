@@ -34,6 +34,14 @@ void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 	render->sec_0 = render->s;
 	render->nb_sec = 0;
 	init_nb_sec(render->sec_0, render);
+	init_item_id(render, 0);
+}
+
+void	init_item_id(t_item item, int i)
+{
+	item->id = i;
+	if (item->next_item)
+		init_item_id(item->next_item, i + 1);
 }
 
 int		init_next_render(t_var *info, t_render *render)
