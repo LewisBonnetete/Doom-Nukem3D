@@ -58,8 +58,11 @@ int     rec_map(char *the_map, t_map *map)
        map->items = rec_item(the_map, map);
     if (the_map[++map->i] == 'p') //changer P
        map->prop = rec_prop(the_map, map);
+    if (the_map[++map->i] == 'y') //changer P
+       map->enemy = rec_enemy(the_map, map);
     return (1);
 }
+
 //recupere une structure t_box
 t_box	rec_box(char *the_map, t_map *map)
 {
@@ -193,30 +196,33 @@ double	rec_double(char *the_map, t_map *map)
 char	*rec_x_char(char *the_map, t_map *map)
 {
     char    *src;
-
     char   a;
+
     src = 0;
     a = 0;
 	++map->i;
-	while (((the_map[map->i] >= 65 && the_map[map->i] <= 90)
-		|| (the_map[map->i] >= 97 && the_map[map->i] <= 122))
-        && ((the_map[map->i + 1] >= 65 && the_map[map->i + 1] <= 90)
-		|| (the_map[map->i + 1] >= 97 && the_map[map->i + 1] <= 122)))
+	while ((((the_map[map->i] >= 'a' && the_map[map->i] <= 'z')
+		|| (the_map[map->i] >= 'A' && the_map[map->i] <= 'Z'))
+        || (the_map[map->i] >= '0' && the_map[map->i] <= '9'))
+		&& (the_map[map->i] != 'i' || (the_map[map->i + 1] < '0'
+		&& the_map[map->i + 1] > '9')))
 	{
-		if (src)
+		if (src != 0)
         {
-            rec_char(the_map, a, map);
+            a = rec_char(the_map, map);
 			src = little_strjoin(src, a);
         }
         else
         {
         	if (!(src = (char *)ft_memalloc(sizeof(char) + 2)))
             	return (0);
-    	    rec_char(the_map, src[0], map);
+    	    src[0] = rec_char(the_map, map);
 			src[1] = 0;
         }
         ++map->i;
     }
+	if (src != 0)
+		src = little_strjoin(src, 0);
     return (src);
 }
 
@@ -245,10 +251,12 @@ int     rec_int(char *the_map, t_map *map)
     return (dest);
 }
 //recupere un char
-void	rec_char(char *the_map, char dest, t_map *map)
+char	rec_char(char *the_map, t_map *map)
 {
-    dest = the_map[map->i];
-    (void)dest;
+	char	a;
+
+	a = the_map[map->i];
+    return (a);
 }
 //récuprération de la map avec gnl
 char    *recup_map(char *src)
@@ -284,13 +292,14 @@ char    *recup_map(char *src)
 t_prop  *rec_prop(char *the_map, t_map *map)
 {
     t_prop *res;
-    if (!(res = (t_prop *)ft_memalloc(sizeof(t_prop))))
+ 
+	if (!(res = (t_prop *)ft_memalloc(sizeof(t_prop))))
         return (0);
     if (the_map[++map->i] == 'e')
         res->name = rec_x_char(the_map, map);
+    if (the_map[map->i] == 'i')
+        res->x = rec_int(the_map, map); 
     if (the_map[++map->i] == 'i')
-        res->x = rec_int(the_map, map);   
-    if (the_map[++map->i] == 'y')
         res->y = rec_int(the_map, map);
     if (the_map[++map->i] == 'p')
 	    res->next_prop = rec_prop(the_map, map);
@@ -305,15 +314,16 @@ t_prop  *rec_prop(char *the_map, t_map *map)
 t_item  *rec_item(char *the_map, t_map *map)
 {
     t_item *res;
+
     if (!(res = (t_item *)ft_memalloc(sizeof(t_item))))
         return(0);
     if (the_map[++map->i] == 'e')
         res->name = rec_x_char(the_map, map);
+    if (the_map[map->i] == 'i')
+        res->x = rec_int(the_map, map);
     if (the_map[++map->i] == 'i')
-        res->x = rec_int(the_map, map);   
-    if (the_map[++map->i] == 'y')
         res->y = rec_int(the_map, map);
-    if (the_map[++map->i] == 'p')
+    if (the_map[++map->i] == 't')
 	    res->next_item = rec_item(the_map, map);
     else
     {
@@ -321,4 +331,26 @@ t_item  *rec_item(char *the_map, t_map *map)
         res->next_item = NULL;
     }
     return (res);
+}
+
+t_enemy	*rec_enemy(char *the_map, t_map *map)
+{
+	t_enemy	*enemy;
+
+    if (!(enemy = (t_enemy *)ft_memalloc(sizeof(t_enemy))))
+        return(0);
+	if (the_map[++map->i] == 'e')
+		enemy->name = rec_x_char(the_map, map);
+	if (the_map[map->i] == 'i')
+		enemy->x = rec_int(the_map, map);
+	if (the_map[++map->i] == 'i')
+		enemy->y = rec_int(the_map, map);
+	if (the_map[++map->i] == 'y')
+		enemy->next_enemy = rec_enemy(the_map, map);
+	else
+	{
+		--map->i;
+		enemy->next_enemy = NULL;
+	}
+	return (enemy);
 }

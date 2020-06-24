@@ -58,6 +58,7 @@ typedef struct s_render		t_render;
 typedef struct s_player		t_player;
 typedef struct s_item		t_item;
 typedef struct s_itab		t_itab;
+typedef struct s_enemy		y_enemy;
 
 struct					s_item
 {
@@ -65,6 +66,14 @@ struct					s_item
 	int				x;
 	int				y;
 	t_item			*next_item;
+};
+
+struct					s_enemy
+{
+	char			*name;
+	int				x;
+	int				y;
+	t_enemy			*next_enemy;
 };
 
 struct					s_point
@@ -135,6 +144,7 @@ struct 					s_map
 	int					i;
 	t_item				*items;
 	t_prop				*prop;
+	t_enemy				*enemy;
 };
 
 struct					s_text
@@ -288,11 +298,12 @@ t_wall	rec_wall(char *the_map, t_map *map);
 double	rec_double(char *the_map, t_map *map);
 char	*rec_x_char(char *the_map, t_map *map);
 int     rec_int(char *the_map, t_map *map);
-void	rec_char(char *the_map, char dest, t_map *map);
+char	rec_char(char *the_map, t_map *map);
 char    *recup_map(char *src);
 char    *little_strjoin(char *src, char c);
 t_item  *rec_item(char *the_map, t_map *map);
 t_prop  *rec_prop(char *the_map, t_map *map);
+t_enemy *rec_enemy(char *the_map, t_map *map);
 
 // tools
 int			do_trigo(t_var *info, t_wall *wall);
