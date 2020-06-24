@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/23 16:18:07 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/24 16:39:11 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int		is_new_point_in_sectors(t_point new, t_map *map)
 
 int		is_in_object(t_point new, t_map *map)
 {
-	t_item *item;
-	t_prop *prop;
+	t_item	*item;
+	t_prop	*prop;
 	t_enemy *enemy;
 
 	item = map->items;
@@ -75,22 +75,21 @@ int		spawn_checks(t_point new, t_map *map)
 
 int		set_spawn(t_map *map)
 {
-	int ok;
-	t_point new;
-	SDL_Event event;
-	float	temp;
+	int			ok;
+	t_point		new;
+	SDL_Event	event;
 
 	ok = 0;
 	ft_putendl("Set your Spawn");
-	while(ok == 0)
+	while (ok == 0)
 	{
 		SDL_WaitEvent(&event);
 		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
-			temp = (float)event.button.x / (float)(WINDOW_H - 50) * map->size;
-			new.x = round(temp);
-			temp = (float)event.button.y / (float)(WINDOW_H - 50) * map->size;
-			new.y = round(temp);
+			new.x = round(((float)event.button.x
+			/ (float)(WINDOW_H - 50) * map->size));
+			new.y = round(((float)event.button.y
+			/ (float)(WINDOW_H - 50) * map->size));
 			ok = spawn_checks(new, map);
 		}
 		else if (event.key.keysym.sym == SDLK_d)
@@ -101,6 +100,6 @@ int		set_spawn(t_map *map)
 	}
 	map->spawn.x = new.x;
 	map->spawn.y = new.y;
-	printf("spawn: %i | %i | %i\n",map->spawn.x,map->spawn.y,map->spawn.z);
+	printf("spawn: %i | %i | %i\n", map->spawn.x, map->spawn.y, map->spawn.z);
 	return (1);
 }

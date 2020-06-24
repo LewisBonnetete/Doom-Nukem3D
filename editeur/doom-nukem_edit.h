@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/23 15:23:20 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/24 15:56:06 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef	struct s_enemy	t_enemy;
 typedef	struct s_prop	t_prop;
 typedef	struct s_line	t_line;
 typedef	struct s_item	t_item;
+typedef struct s_convex t_convex;
 
 struct					s_point
 {
@@ -60,6 +61,17 @@ struct					s_point
 	int				y;
 	int				z;
 };
+
+
+struct					s_convex
+{
+	int				a;
+	int				b;
+	int				c;
+	int				got_positive;
+	int				got_negative;
+};
+
 
 struct					s_item
 {

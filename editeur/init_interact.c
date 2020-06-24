@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   init_interact.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/23 14:34:41 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/24 15:21:53 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
 
-int		get_map_size()
+int		get_map_size(void)
 {
 	char	*line;
 	int		size;
+
 	ft_putendl("Map size?");
 	size = 0;
-	while(size < 10 || size > 101)
+	while (size < 10 || size > 101)
 	{
 		get_next_line(0, &line);
 		size = ft_atoi(line);

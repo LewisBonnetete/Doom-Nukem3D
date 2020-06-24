@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sdl_init.c                                          :+:      :+:    :+:   */
+/*   sdl_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 15:01:16 by trabut            #+#    #+#             */
-/*   Updated: 2020/01/29 14:02:02 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/24 16:36:57 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		init_win3(t_var *info)
 {
 	if (TTF_Init() == -1)
 	{
-    	ft_putstr("Erreur TTF_init :\n");
+		ft_putstr("Erreur TTF_init :\n");
 		SDL_DestroyWindow(info->window);
 		SDL_Quit();
 		return (0);

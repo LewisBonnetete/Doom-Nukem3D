@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/17 14:37:30 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/24 16:36:15 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,40 @@
 
 void	create_prop(t_map *map)
 {
-	int valid_coo = 0;
-	int x;
-	int y;
-	float temp;
+	int			valid_coo;
+	int			x;
+	int			y;
 	SDL_Event	event;
 
 	ft_putendl("Place your prop");
-	while(valid_coo == 0)
+	while (valid_coo == 0)
 	{
 		SDL_WaitEvent(&event);
 		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
-			temp = (float)event.button.x / (float)(WINDOW_H - 50) * map->size;
-			x = round(temp);
-			temp = (float)event.button.y / (float)(WINDOW_H - 50) * map->size;
-			y = round(temp);
-			if (valid_new_prop(map, x, y))
+			x = round(((float)event.button.x
+			/ (float)(WINDOW_H - 50) * map->size));
+			y = round(((float)event.button.y
+			/ (float)(WINDOW_H - 50) * map->size));
+			if (valid_coo = valid_new_prop(map, x, y))
 			{
-				valid_coo = 1;
 				if (!add_prop(map, get_prop_name(), x, y))
 					exit_edit(map->sectors->info, map);
 			}
 			else
-			{
 				ft_putendl("You can't put a prop here");
-			}
 		}
 	}
 }
 
-char 	*get_prop_name()
+char	*get_prop_name(void)
 {
-	char *line;
-	int size;
+	char	*line;
+	int		size;
 
 	ft_putendl("What is your prop?");
 	size = 0;
-	while(size < 3 || size > 5)
+	while (size < 3 || size > 5)
 	{
 		get_next_line(0, &line);
 		size = ft_strlen(line);
@@ -61,6 +57,23 @@ char 	*get_prop_name()
 	return (line);
 }
 
+int		valid_new_prop2(int x, int y, t_enemy *enemy, t_item *item)
+{
+	while (enemy)
+	{
+		if (enemy->x == x && enemy->y == y)
+			return (0);
+		enemy = enemy->next_enemy;
+	}
+	while (item)
+	{
+		if (item->x == x && item->y == y)
+			return (0);
+		item = item->next_item;
+	}
+	return (1);
+}
+
 int		valid_new_prop(t_map *map, int x, int y)
 {
 	t_item		*item;
@@ -68,16 +81,8 @@ int		valid_new_prop(t_map *map, int x, int y)
 	t_sector	*sector;
 	t_point		new;
 	t_enemy		*enemy;
-	
+
 	enemy = map->enemys;
-	while (enemy)
-	{
-		if (enemy->x == x && enemy->y == y)
-		{
-			return (0);
-		}
-		enemy = enemy->next_enemy;
-	}
 	prop = map->props;
 	while (prop)
 	{
@@ -88,15 +93,7 @@ int		valid_new_prop(t_map *map, int x, int y)
 		prop = prop->next_prop;
 	}
 	item = map->items;
-	while (item)
-	{
-		if (item->x == x && item->y == y)
-		{
-			return (0);
-		}
-		item = item->next_item;
-	}
-	sector = map->sectors;
+	valid_new_prop2(x, y, enemy, item);
 	new.x = x;
 	new.y = y;
 	if (prop_checks(new, map))
@@ -156,6 +153,24 @@ int		add_prop(t_map *map, char *name, int x, int y)
 	return (1);
 }
 
+int		del_prop2(int x, int y, t_prop *prop, t_prop *previous)
+{
+	while (prop)
+	{
+		if (prop->x == x && prop->y == y)
+		{
+			previous->next_prop = prop->next_prop;
+			ft_putstr(prop->name);
+			free(prop->name);
+			free(prop);
+			return (1);
+		}
+		prop = prop->next_prop;
+		previous = previous->next_prop;
+	}
+	return (0);
+}
+
 int		del_prop(t_map *map, int x, int y)
 {
 	t_prop *prop;
@@ -174,19 +189,8 @@ int		del_prop(t_map *map, int x, int y)
 			return (1);
 		}
 		prop = prop->next_prop;
-		while (prop)
-		{
-			if (prop->x == x && prop->y == y)
-			{
-				previous->next_prop = prop->next_prop;
-				ft_putstr(prop->name);
-				free(prop->name);
-				free(prop);
-				return (1);
-			}
-			prop = prop->next_prop;
-			previous = previous->next_prop;
-		}
+		if (del_prop2(x, y, prop, previous) == 1)
+			return (1);
 	}
 	return (0);
 }

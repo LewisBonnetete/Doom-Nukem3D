@@ -6,7 +6,7 @@
 #    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/06/23 16:44:45 by lbonnete         ###   ########.fr        #
+#    Updated: 2020/06/24 15:43:32 by lbonnete         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ OBJ_DIR	 = ./
 
 SRC =	main.c\
 		init.c\
+		init2.c\
 		sdl_init.c\
 		editer.c\
 		dealers_edit.c\
@@ -50,6 +51,7 @@ SRC =	main.c\
 		hud_tools.c\
 		save_map.c\
 		item.c\
+		item2.c\
 		prop.c\
 		enemy.c\
 		enemy2.c

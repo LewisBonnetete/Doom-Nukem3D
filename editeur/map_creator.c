@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_creator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/05 16:37:02 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/24 15:52:33 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
 
-void	get_textures(t_wall *wall)
+void		get_textures(t_wall *wall)
 {
 	int		id;
 	char	*line;
@@ -55,7 +55,7 @@ void	get_textures(t_wall *wall)
 	}
 }
 
-void	get_portal_info(t_wall *wall)
+void		get_portal_info(t_wall *wall)
 {
 	int		ok;
 	char	*line;
@@ -191,7 +191,8 @@ void		get_height_sector(t_map *map, int *height)
 	}
 }
 
-int			create_first_wall_edit(t_sector *sector, int *height, int i, SDL_Event event)
+int			create_first_wall_edit(t_sector *sector, int *height,
+int i, SDL_Event event)
 {
 	float temp;
 
@@ -220,7 +221,8 @@ void		wall_fusion(t_sector *sector, int i)
 	sector->walls[i - 1].b.z = sector->walls[i].a.z;
 }
 
-int			create_wall_edit(t_sector *sector, int *height, int i, SDL_Event event)
+int			create_wall_edit(t_sector *sector, int *height,
+int i, SDL_Event event)
 {
 	float temp;
 
@@ -242,7 +244,7 @@ int			create_wall_edit(t_sector *sector, int *height, int i, SDL_Event event)
 	return (1);
 }
 
-void	close_sector(t_sector *sector, int i)
+void		close_sector(t_sector *sector, int i)
 {
 	sector->walls[i].b.x = sector->walls[0].a.x;
 	sector->walls[i].c.x = sector->walls[0].d.x;
@@ -254,7 +256,7 @@ void	close_sector(t_sector *sector, int i)
 	get_textures(&sector->walls[i]);
 }
 
-int		get_walls_sector(t_map *map, t_sector *sector, int *height)
+int			get_walls_sector(t_map *map, t_sector *sector, int *height)
 {
 	SDL_Event	event;
 	int			i;
@@ -301,7 +303,8 @@ int		get_walls_sector(t_map *map, t_sector *sector, int *height)
 					ft_putendl("Nope, try something else");
 			}
 		}
-		else if (event.key.keysym.sym == SDLK_d && event.key.state == SDL_PRESSED)
+		else if (event.key.keysym.sym == SDLK_d
+		&& event.key.state == SDL_PRESSED)
 		{
 			ft_putendl("Sector deleted");
 			del_sector(sector->info, map);
@@ -332,7 +335,8 @@ int		get_walls_sector(t_map *map, t_sector *sector, int *height)
 			draw_state(sector);
 			return (1);
 		}
-		if (event.type == SDL_QUIT || (event.key.keysym.sym == SDLK_ESCAPE && event.type == SDL_KEYDOWN))
+		if (event.type == SDL_QUIT || (event.key.keysym.sym == SDLK_ESCAPE
+		&& event.type == SDL_KEYDOWN))
 		{
 			exit_edit(sector->info, map);
 			return (1);
@@ -342,7 +346,7 @@ int		get_walls_sector(t_map *map, t_sector *sector, int *height)
 	return (1);
 }
 
-int		init_first_sector(t_var *info, t_sector *sector, t_map *map)
+int			init_first_sector(t_var *info, t_sector *sector, t_map *map)
 {
 	int height[2];
 
@@ -361,7 +365,7 @@ int		init_first_sector(t_var *info, t_sector *sector, t_map *map)
 	return (1);
 }
 
-int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
+int			init_new_sector(t_var *info, t_sector *sector, t_map *map)
 {
 	int height[2];
 
@@ -382,7 +386,7 @@ int		init_new_sector(t_var *info, t_sector *sector, t_map *map)
 	return (1);
 }
 
-int		create_sector(t_var *info, t_map *map)
+int			create_sector(t_var *info, t_map *map)
 {
 	t_sector *sector;
 
