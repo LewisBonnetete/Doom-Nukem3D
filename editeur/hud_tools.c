@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/19 17:51:25 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/24 15:07:53 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		draw_square(t_var *info, t_point a, t_point b, Uint32 color)
 {
-	int x;
-	t_line line;
+	int		x;
+	t_line	line;
 
 	x = a.x;
 	while (x <= b.x)
