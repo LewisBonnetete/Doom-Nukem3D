@@ -67,10 +67,10 @@ void	calc_item_wall(t_render *render, t_var *info)
 void	draw_column(t_var *info, t_render *render, int *tab)
 {
 	int		id_sec;
-	int		i;
+/*	int		i;
 	int		k;
 	int		j;
-	t_itab	itab[5];
+	t_itab	itab[5];*/
 
 	render->n = -1;
 	while(++render->n < render->s->nbr_walls)
@@ -90,7 +90,7 @@ void	draw_column(t_var *info, t_render *render, int *tab)
 			return;
 		}
 	}
-	if (!render->s->nbr_items)
+	/*if (!render->s->nbr_items)
 		return;
 	ft_bzero(itab, 5);
 	i = -1;
@@ -123,7 +123,7 @@ void	draw_column(t_var *info, t_render *render, int *tab)
 		itab[k].name = "-1";
 		itab[k].dist = -1;
 		draw_item(render, info, itab[k].name);
-	}
+	}*/
 }
 
 void		init_nb_sec(t_sector *sector, t_render *render)
