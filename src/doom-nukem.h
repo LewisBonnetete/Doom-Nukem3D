@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/23 15:42:03 by trabut           ###   ########.fr       */
+/*   Updated: 2020/06/25 13:55:11 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define NORTH_WALL			0xD28F8F
 # define EAST_WALL			0xDAA520
 # define WEST_WALL			0xF4A460
+# define NB_TEXT_I			3
 # define TEXTURE_1			"./xpm_textures/brick.xpm"
 # define TEXTURE_2			"./xpm_textures/redbrick.xpm"
 # define TEXTURE_3			"./xpm_textures/purplestone.xpm"
@@ -66,6 +67,9 @@ struct					s_item
 	int				id;
 	int				x;
 	int				y;
+	int				cap;
+	int				h;
+	int				text_id;
 	t_item			*next_item;
 };
 
@@ -188,7 +192,7 @@ struct					s_render
 	t_sector			*s;
 	t_wall				*wall;
 	t_wall				*wall_item;
-	t_item				item;
+	t_item				*item;
 	t_render			*next_render;
 };
 
@@ -292,7 +296,7 @@ int     raycasting(t_var *info, t_render *render);
 void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
 int		xy_in_ab(double x, double y, t_point a, t_point b);
 void	calc_item_wall(t_render *render, t_var *info);
-void»···draw_item(t_render *render, t_var *info_map, char *name);
+void	draw_item(t_render *render, t_var *info);
 
 //load_map
 int	check_map(char *the_map);

@@ -138,27 +138,27 @@ void	draw_item(t_render *render, t_var *info)
 	p.x = render->ray->x2;
 	p.y = render->ray->y2;
 	x = calc_dist(p, render->wall_item->b);
-	tmp = render->tab_sdl_item[render->item->text->id]->h / (double)(item->h / 2);
+	tmp = render->tab_sdl_item[render->item->text_id]->h / (double)(render->item->h / 2);
 	x *= tmp;
-	x *= render->tab_sdl_item[render->item->text->id]->w;
-	(int)x;
+	x *= render->tab_sdl_item[render->item->text_id]->w;
+	x = (int)x;
 	render->wall_sqdist =
 	((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
 	+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x));
 	render->wall_dist = sqrt(render->wall_sqdist);
-	render->wall_height = render->tab_sdl_item[render->item->text->id]->h * 1
+	render->wall_height = render->tab_sdl_item[render->item->text_id]->h * 1
 		/ (double)render->wall_dist;
 	pig = render->wall_height / render->item->h;
 	//pig *= pixel;
 	tx = 0;
 	ty = 0;
 	y = WINDOW_H / 2 - render->wall_height / 2 - 1;
-	while (++y < item_height * pig)
+	while (++y < render->item->h * pig)
 	{
 		tx += pig;
 		ty += pig;
-		color = get_pixel(render->tab_sdl_item[render->item->tet->id], (int)tx, (int)ty);
-		put_pixel_to_surface(color, x, y, info->image);
+		color = get_pixel(render->tab_sdl_item[render->item->text_id], (int)tx, (int)ty);
+		put_pixel_to_suface(color, x, y, info->image);
 	}
 }
 
