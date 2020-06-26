@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/24 15:56:06 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/26 14:53:16 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef	struct s_prop	t_prop;
 typedef	struct s_line	t_line;
 typedef	struct s_item	t_item;
 typedef struct s_convex t_convex;
+typedef struct s_intersec t_intersec;
 
 struct					s_point
 {
@@ -71,6 +72,17 @@ struct					s_convex
 	int				got_positive;
 	int				got_negative;
 };
+
+struct 					s_intersec
+{
+	float			a1;
+	float			a2;
+	float			b1;
+	float			b2;
+	float			x;
+	float			y;
+};
+
 
 
 struct					s_item
@@ -274,7 +286,7 @@ void	dealers_init(t_input_edit *input_edit);
 void	dealers_tester(t_input_edit input_edit);
 int		get_map_size();
 
-//items && props &7 enemy
+//items && props && enemy
 char 	*get_item_name();
 int		valid_new_item(t_map *map, int x, int y);
 t_item	*go_to_last_item(t_item *items);
@@ -313,6 +325,9 @@ int		is_same_point(t_point a, t_point b);
 int		check_surrounding(t_sector *sector);
 int		is_in_sector(t_point first,t_sector *sector);;
 int		is_new_point_in_sectors(t_point new, t_map *map);
+int		is_new_point_in_sector(t_point new, t_wall *walls);
+int		center_in_poly(t_point a, t_point b, t_sector *sector);
+int		verify_crossing(t_point new, t_point old, t_sector *sector);
 
 //init func
 void	init_box(t_map *map);
@@ -343,6 +358,18 @@ int		draw_line(t_var *info, t_line *line, Uint32 color);
 
 //creators
 int		create_sector(t_var *info, t_map *map);
+int		get_walls_sector(t_map *map, t_sector *sector, int *height);
+void	get_textures(t_wall *wall);
+void		get_portal_info(t_wall *wall);
+void		get_nbr_walls_sector_textures(t_sector *sector);
+void		get_height_sector(t_map *map, int *height);
+void		wall_fusion(t_sector *sector, int i);
+int			create_sector(t_var *info, t_map *map);
+void		close_sector(t_sector *sector, int i);
+int			create_wall_edit(t_sector *sector, int *height,
+int i, SDL_Event event);
+int			create_first_wall_edit(t_sector *sector, int *height,
+int i, SDL_Event event);
 
 //destroyers
 int		exit_edit(t_var *info, t_map *map);
