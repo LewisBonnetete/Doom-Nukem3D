@@ -6,26 +6,11 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/26 14:51:57 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:26:10 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom-nukem_edit.h"
-
-// int			get_walls_sector4(t_map *map, t_sector *sector, int *height)
-// {
-	
-// }
-
-// int			get_walls_sector3(t_map *map, t_sector *sector, int *height)
-// {
-
-// }
-
-// int			get_walls_sector2(t_map *map, t_sector *sector, int *height)
-// {
-	
-// }
 
 int			get_walls_sector(t_map *map, t_sector *sector, int *height)
 {

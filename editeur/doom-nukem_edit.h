@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/26 14:53:16 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/26 16:23:08 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,6 +328,8 @@ int		is_new_point_in_sectors(t_point new, t_map *map);
 int		is_new_point_in_sector(t_point new, t_wall *walls);
 int		center_in_poly(t_point a, t_point b, t_sector *sector);
 int		verify_crossing(t_point new, t_point old, t_sector *sector);
+int		comparator1(t_point new, t_point old, t_point w1, t_point w2);
+int		comparator2(t_point new, t_point old, t_point w1, t_point w2);
 
 //init func
 void	init_box(t_map *map);

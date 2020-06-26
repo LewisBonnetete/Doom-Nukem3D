@@ -6,7 +6,7 @@
 #    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/06/26 14:56:05 by lbonnete         ###   ########.fr        #
+#    Updated: 2020/06/26 16:22:27 by lbonnete         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ SRC =	main.c\
 		enemy.c\
 		enemy2.c\
 		get_walls_sector.c\
-		check_wall_intersections.c
+		check_wall_intersections.c\
+		comparator.c
 
 INC = doom-nukem_edit.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
