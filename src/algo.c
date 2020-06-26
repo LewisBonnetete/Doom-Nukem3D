@@ -1,6 +1,14 @@
 #include "doom-nukem.h"
+/*
+void	normalize(double *dx, double *dy)
+{
+	double	length;
 
-
+	length = sqrt((*dx * *dx) + (*dy * *dy));
+	*dx /= length;
+	*dy /= length;
+}
+*/
 void	update_ray(t_var *info, t_render *render)
 {
 	render->ray->cam_x = 2 * render->x / (double)(WINDOW_W) - 1;
@@ -20,27 +28,15 @@ void	update_ray(t_var *info, t_render *render)
 
 void	update_render(t_var *info, t_render *render)
 {
-	float	tmp;
-	int cap;
-
-	cap = 1;
 	render->wall_sqdist =
-		((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
-		+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x))
-		+ (render->wall->c.z - render->ray->z) * (render->wall->c.z - render->ray->z); //fish eye ici car distance euclidienne
-	tmp = ((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
-		+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x));
-	tmp = render->wall_sqdist - tmp;
-	if (tmp < 0)
-		cap = -1;
-	tmp = fabs(tmp);
-	tmp = sqrt(tmp);
-	tmp = (double)tmp * WALL_H * cap / (double)render->wall_dist;
+		((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y) * info->player->dy * info->player->dy)
+		+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x) * info->player->dx * info->player->dx)
+		/*+ (render->wall->c.z - render->ray->z) * (render->wall->c.z - render->ray->z)*/; //fish eye ici car distance euclidienne
 	//printf("tmp = %f\n", tmp);
 	render->wall_dist = sqrt(render->wall_sqdist);
 	render->wall_height = WALL_H * (double)render->wall->height / (double)render->wall_dist;
-	render->wall_y0 = WINDOW_H / 2 - render->wall_height / 2 + tmp;
-	render->wall_y1 = WINDOW_H / 2 + render->wall_height / 2 + tmp;
+	render->wall_y0 = WINDOW_H / 2 - render->wall_height / 2;
+	render->wall_y1 = WINDOW_H / 2 + render->wall_height / 2;
 	if (info->player->posz != render->wall->a.z)
 	{
 		render->wall_y0 += DECALLAGE * (render->wall->a.z - info->player->posz) /  render->wall_dist;
@@ -67,10 +63,10 @@ void	calc_item_wall(t_render *render, t_var *info)
 void	draw_column(t_var *info, t_render *render, int *tab)
 {
 	int		id_sec;
-/*	int		i;
+	int		i;
 	int		k;
 	int		j;
-	t_itab	itab[5];*/
+	t_itab	itab[5];
 
 	render->n = -1;
 	while(++render->n < render->s->nbr_walls)
@@ -90,7 +86,7 @@ void	draw_column(t_var *info, t_render *render, int *tab)
 			return;
 		}
 	}
-	/*if (!render->s->nbr_items)
+	if (!render->s->nbr_items)
 		return;
 	ft_bzero(itab, 5);
 	i = -1;
@@ -103,7 +99,8 @@ void	draw_column(t_var *info, t_render *render, int *tab)
 	{
 		render->item = render->s->item + render->n;
 		calc_item_wall(render, info);
-		if(intersect(render->ray, render->wall_item) == 1)
+		if(intersect(render->ray, render->wall_item) == 1
+		&& render->item->cap == 0)
 		{
 			//update_render_item(info, render);
 			itab[render->n].dist = render->wall_dist;
@@ -120,10 +117,49 @@ void	draw_column(t_var *info, t_render *render, int *tab)
 			if (itab[k].dist < itab[i].dist && itab[k].name[0] != '-' && itab[k].name[1] != '1')
 				k = i;
 		}
+		render->item = render->s->item + k;
 		itab[k].name = "-1";
 		itab[k].dist = -1;
-		draw_item(render, info, itab[k].name);
-	}*/
+		draw_item(render, info);
+	}
+}
+
+void	draw_item(t_render *render, t_var *info)
+{
+	float	pig;
+	int		y;
+	double	tx;
+	double	ty;
+	double	tmp;
+	double	x;
+	t_point	p;
+	Uint32	color;
+
+	p.x = render->ray->x2;
+	p.y = render->ray->y2;
+	x = calc_dist(p, render->wall_item->b);
+	tmp = render->tab_sdl_item[render->item->text_id]->h / (double)(render->item->h / 2);
+	x *= tmp;
+	x *= render->tab_sdl_item[render->item->text_id]->w;
+	x = (int)x;
+	render->wall_sqdist =
+	((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
+	+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x));
+	render->wall_dist = sqrt(render->wall_sqdist);
+	render->wall_height = render->tab_sdl_item[render->item->text_id]->h * 1
+		/ (double)render->wall_dist;
+	pig = render->wall_height / render->item->h;
+	//pig *= pixel;
+	tx = 0;
+	ty = 0;
+	y = WINDOW_H / 2 - render->wall_height / 2 - 1;
+	while (++y < render->item->h * pig)
+	{
+		tx += pig;
+		ty += pig;
+		color = get_pixel(render->tab_sdl_item[render->item->text_id], (int)tx, (int)ty);
+		put_pixel_to_suface(color, x, y, info->image);
+	}
 }
 
 void		init_nb_sec(t_sector *sector, t_render *render)

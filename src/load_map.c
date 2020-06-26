@@ -330,6 +330,7 @@ t_item  *rec_item(char *the_map, t_map *map)
 		--map->i;
         res->next_item = NULL;
     }
+	res->cap = 0;
     return (res);
 }
 
