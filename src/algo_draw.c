@@ -59,9 +59,25 @@ void			tex_floor_ciel(t_var *info, t_render *render)
 			// printf("tx = %f\n", tx);
 			// printf("ty = %f\n", ty);
 			Uint32 color = get_pixel(render->tab_sdl[1],tx,ty);
-			put_pixel_to_suface(color, j, i, info->image);
+			int red = (color >> 16) & 0xFF;
+			int green = (color >> 8) & 0xFF;
+			int blue = color & 0xFF;
+
+			red = red / (2 * dist);
+			green = green / (2 * dist);
+			blue = blue / (2 * dist);
+
+			put_pixel_to_suface(RGB(red,green,blue), j, i, info->image);
 			color = get_pixel(render->tab_sdl[2],tx,ty);
-			put_pixel_to_suface(color,j , WINDOW_H - i - 1, info->image);
+			red = (color >> 16) & 0xFF;
+			green = (color >> 8) & 0xFF;
+			blue = color & 0xFF;
+
+			red = red / (1.5 * dist);
+			green = green / (1.5 * dist);
+			blue = blue / (1.5 * dist);
+
+			put_pixel_to_suface(RGB(red,green,blue),j , WINDOW_H - i - 1, info->image);
 		}
 	}
 }
@@ -162,6 +178,7 @@ void	draw_texture_wall(t_var *info, t_render *render)
 	int			temp;
 	Uint32		color;
 	double 		temp2;
+	Uint8 		r,g,b;
 	hit.x = render->ray->x2;
 	hit.y = render->ray->y2;
 	render->wall->wall_leng = calc_dist(render->wall->a, render->wall->b);
@@ -185,7 +202,33 @@ void	draw_texture_wall(t_var *info, t_render *render)
 		{
 			texy += step;
 			color = get_pixel(render->tab_sdl[render->wall->text_id], (int)pos_relative, (int)texy);
-			put_pixel_to_suface(color ,render->x, i, info->image);	
+			//color = color * render->wall_dist ;
+			// r = color >> 16;
+			// g = color >> 8;
+			// b = color;
+			// r = r / (0.5 * render->wall_dist);
+			// g = g / (0.5 * render->wall_dist);
+			// b = b / (0.5 * render->wall_dist);
+			// color += r;
+			// color <<= 8;
+			// color += g;
+			// color <<= 16;
+			// color += b;
+
+
+			// int	a = (color >>1 ) & 8355711;
+			// a /= render->wall_dist / 15;
+			// color = a;
+
+			int red = (color >> 16) & 0xFF;
+			int green = (color >> 8) & 0xFF;
+			int blue = color & 0xFF;
+
+			red = red / (0.8 * render->wall_dist);
+			green = green / (0.8 * render->wall_dist);
+			blue = blue / (0.8 * render->wall_dist);
+
+			put_pixel_to_suface( RGB(red,green,blue) ,render->x, i, info->image);	
 		}
 		i++;
 	}
