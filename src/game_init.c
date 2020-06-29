@@ -25,6 +25,26 @@ void	init_player(t_player *player, t_map *map)
 	player->movespeed = player->frametime * 2.5;
 }
 
+t_item	*init_item(t_item *src, int i)
+{
+	t_item	*dest;
+
+	if (!(dest = (t_item *)ft_memalloc(sizeof(t_item))))
+		return (0);
+	dest->name = src->name;
+	dest->x = src->x;
+	dest->y = src->y;
+	dest->cap = 0;
+	dest->id = i;
+	dest->h = 64;
+	dest->text_id = 0;
+	if (src->next_item)
+		dest->next_item = init_item(src->next_item, i + 1);
+	else
+		dest->next_item = NULL;
+	return (dest);
+}
+
 void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 {
 	render->sector_id = sector_id;
@@ -33,6 +53,9 @@ void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 	render->next_render = NULL;
 	render->sec_0 = render->s;
 	render->nb_sec = 0;
+	render->s->item = init_item(info->map->items, 0);
+	render->item = init_item(info->map->items, 0);
+	render->nbr_items = 1;
 	init_nb_sec(render->sec_0, render);
 }
 

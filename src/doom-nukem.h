@@ -193,6 +193,7 @@ struct					s_render
 	t_wall				*wall;
 	t_wall				*wall_item;
 	t_item				*item;
+	int					nbr_items;
 	t_render			*next_render;
 };
 
@@ -352,6 +353,7 @@ int 	pnpoly_float(int nbr_walls, t_wall *walls, float center_x, float center_y);
 int		player_sec(t_sector *sector, t_var *info);
 void		init_nb_sec(t_sector *sector, t_render *render);
 void			tex_floor_ciel(t_var *info, t_render *render);
+void	tab_path_text(t_render *renderer);
 
 t_render            *cpy_render(t_render *render);
 

@@ -34,7 +34,7 @@ void	tab_path_text(t_render *renderer)
 			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/diamond.png")) == 0)
 				return;
 	}
-	renderer->tab_sdl[i] = NULL;
+	renderer->tab_sdl_item[1] = NULL;
 }
 // int	load_text(char **tab, t_render renderer)
 // {
