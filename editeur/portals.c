@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/24 16:28:18 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/29 14:43:29 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,27 +70,6 @@ int			find_otherside(t_map *map, t_wall *portal)
 	return (0);
 }
 
-void		portal_test(t_map *map)
-{
-	t_sector	*sector;
-	int			i;
-
-	sector = map->sectors;
-	while (sector)
-	{
-		i = 0;
-		while (i < sector->nbr_walls)
-		{
-			if (sector->walls[i].is_portal)
-			{
-				printf("%i -> %i  (%i:%i | %i:%i) (%i-%i)\n", sector->sector_id, sector->walls[i].sector_id_it_leads_to, sector->walls[i].a.x, sector->walls[i].a.y, sector->walls[i].b.x, sector->walls[i].b.y, sector->walls[i].b.z, sector->walls[i].c.z);
-			}
-			i++;
-		}
-		sector = sector->next_sector;
-	}
-}
-
 int			portals(t_map *map)
 {
 	t_sector	*sector;
@@ -110,6 +89,5 @@ int			portals(t_map *map)
 		}
 		sector = sector->next_sector;
 	}
-	portal_test(map);
 	return (1);
 }

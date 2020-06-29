@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/24 15:44:20 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/29 14:34:50 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void	create_item(t_map *map)
 			}
 			else
 				ft_putendl("You can't put an item here");
+		}
+		else if (event.key.keysym.sym == SDLK_d)
+		{
+			ft_putendl("Back to creation");
+			break;
 		}
 	}
 }

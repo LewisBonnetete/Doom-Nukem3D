@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/26 16:26:33 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/29 14:37:03 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void	create_prop(t_map *map)
 			}
 			else
 				ft_putendl("You can't put a prop here");
+		}
+		else if (event.key.keysym.sym == SDLK_d)
+		{
+			ft_putendl("Back to creation");
+			break;
 		}
 	}
 }
