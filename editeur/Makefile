@@ -6,7 +6,7 @@
 #    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/06/26 16:22:27 by lbonnete         ###   ########.fr        #
+#    Updated: 2020/06/29 14:56:04 by lbonnete         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC =	main.c\
 		draw_map3.c\
 		editer_tools.c\
 		editer_tools2.c\
+		editer_tools3.c\
 		exit_edit.c\
 		del_sector.c\
 		valid_wall.c\

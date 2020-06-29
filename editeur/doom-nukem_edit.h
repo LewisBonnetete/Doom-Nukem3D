@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/26 16:23:08 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/29 15:04:52 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -382,6 +382,8 @@ int			nbr_of_sectors(t_map *map);
 t_sector	*get_a_sector_by_id(t_map *map, int id);
 void		del_sector(t_var *info, t_map *map);
 int			is_between(float x, float a, float b);
+int			x_coo(SDL_Event *event, t_map *map);
+int			y_coo(SDL_Event *event, t_map *map);
 
 //savemap
 int     creat_fichier(t_map *map, char *name);

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/29 14:29:58 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/29 15:02:35 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ void		create_enemy(t_map *map)
 		SDL_WaitEvent(&event);
 		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
-			x = round(((float)event.button.x /
-			(float)(WINDOW_H - 50) * map->size));
-			y = round(((float)event.button.y /
-			(float)(WINDOW_H - 50) * map->size));
+			x = x_coo(&event, map);
+			y = y_coo(&event, map);
 			if ((valid_coo = valid_new_enemy(map, x, y)))
 			{
 				if (!add_enemy(map, get_enemy_name(), x, y))
@@ -39,10 +37,7 @@ void		create_enemy(t_map *map)
 				ft_putendl("You can't put an enemy here");
 		}
 		else if (event.key.keysym.sym == SDLK_d)
-		{
-			ft_putendl("Back to creation");
-			break;
-		}
+			break ;
 	}
 }
 
