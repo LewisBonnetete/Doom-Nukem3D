@@ -1,6 +1,6 @@
 #include "doom-nukem.h"
 /*
-void	normalize(double *dx, double *dy)
+   void	normalize(double *dx, double *dy)
 {
 	double	length;
 
@@ -54,6 +54,8 @@ void	go_to_sector(t_sector *sec_0, int id, t_render *render)
 
 void	calc_item_wall(t_render *render, t_var *info)
 {
+	if (!(render->wall_item = (t_wall *)ft_memalloc(sizeof(t_wall))))
+		return;
 	render->wall_item->a.x = 0.3 * info->player->planex + render->item->x;
 	render->wall_item->a.y = 0.3 * info->player->planey + render->item->y;
 	render->wall_item->b.x = 0.3 * info->player->planex - render->item->x;
@@ -86,7 +88,7 @@ void	draw_column(t_var *info, t_render *render, int *tab)
 			return;
 		}
 	}
-	if (!render->s->nbr_items)
+	/*if (render->nbr_items <= 0)
 		return;
 	ft_bzero(itab, 5);
 	i = -1;
@@ -95,7 +97,8 @@ void	draw_column(t_var *info, t_render *render, int *tab)
 		itab[i].name = 0;
 		itab[i].dist = 0;
 	}
-	while(++render->n < render->s->nbr_items)
+	render->n = -1;
+	while(++render->n < render->nbr_items)
 	{
 		render->item = render->s->item + render->n;
 		calc_item_wall(render, info);
@@ -104,14 +107,16 @@ void	draw_column(t_var *info, t_render *render, int *tab)
 		{
 			//update_render_item(info, render);
 			itab[render->n].dist = render->wall_dist;
-			itab[render->n].name = render->s->item->name;
+			itab[render->n].name = render->item->name;
 		}
 	}
-	j = 0;
+	if (!itab[0].name)
+		return;
+	j = -1;
 	while (itab[++j].name)
 	{
 		k = 0;
-		i = 0;
+		i = -1;
 		while (itab[++i].name)
 		{
 			if (itab[k].dist < itab[i].dist && itab[k].name[0] != '-' && itab[k].name[1] != '1')
@@ -121,7 +126,7 @@ void	draw_column(t_var *info, t_render *render, int *tab)
 		itab[k].name = "-1";
 		itab[k].dist = -1;
 		draw_item(render, info);
-	}
+	}*/
 }
 
 void	draw_item(t_render *render, t_var *info)
@@ -131,17 +136,19 @@ void	draw_item(t_render *render, t_var *info)
 	double	tx;
 	double	ty;
 	double	tmp;
-	double	x;
+	double	tmp2;
+	//double	x;
 	t_point	p;
 	Uint32	color;
 
 	p.x = render->ray->x2;
 	p.y = render->ray->y2;
-	x = calc_dist(p, render->wall_item->b);
-	tmp = render->tab_sdl_item[render->item->text_id]->h / (double)(render->item->h / 2);
-	x *= tmp;
-	x *= render->tab_sdl_item[render->item->text_id]->w;
-	x = (int)x;
+	tx = calc_dist(p, render->wall_item->b);
+	tmp = (double)render->tab_sdl_item[render->item->text_id]->h / (double)(render->item->h / 2);
+	tx *= tmp;
+	tmp2 = (int)tx;
+	tx -= tmp2;
+	tx *= render->tab_sdl_item[render->item->text_id]->w;
 	render->wall_sqdist =
 	((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
 	+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x));
@@ -150,16 +157,22 @@ void	draw_item(t_render *render, t_var *info)
 		/ (double)render->wall_dist;
 	pig = render->wall_height / render->item->h;
 	//pig *= pixel;
-	tx = 0;
 	ty = 0;
 	y = WINDOW_H / 2 - render->wall_height / 2 - 1;
-	while (++y < render->item->h * pig)
-	{
-		tx += pig;
-		ty += pig;
-		color = get_pixel(render->tab_sdl_item[render->item->text_id], (int)tx, (int)ty);
-		put_pixel_to_suface(color, x, y, info->image);
-	}
+	if (y >= (int)(render->item->h * pig))
+		while (--y >= (int)(render->item->h * pig))
+		{
+			ty += pig;
+			color = get_pixel(render->tab_sdl_item[render->item->text_id], (int)tx, (int)ty);
+			put_pixel_to_suface(color, render->x, y, info->image);
+		}
+	else
+		while (++y <= (int)(render->item->h * pig))
+		{
+			ty += pig;
+			color = get_pixel(render->tab_sdl_item[render->item->text_id], (int)tx, (int)ty);
+			put_pixel_to_suface(color, render->x, y, info->image);
+		}
 }
 
 void		init_nb_sec(t_sector *sector, t_render *render)
