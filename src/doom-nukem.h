@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/25 13:55:11 by trabut           ###   ########.fr       */
+/*   Updated: 2020/06/29 15:35:57 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ struct 					s_box
 
 struct 					s_map
 {
+	char				*name;
 	t_box				box;
 	t_sector			*sectors;
 	int					size;
