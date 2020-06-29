@@ -196,6 +196,7 @@ struct					s_render
 	t_wall				*wall_item;
 	t_item				*item;
 	int					nbr_items;
+	double				tx;
 	t_render			*next_render;
 };
 
