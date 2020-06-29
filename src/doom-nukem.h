@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom-nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/29 15:35:57 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/29 15:52:28 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_render		t_render;
 typedef struct s_player		t_player;
 typedef struct s_item		t_item;
 typedef struct s_itab		t_itab;
-typedef struct s_enemy		y_enemy;
+typedef struct s_line		t_line;
 
 struct					s_item
 {
@@ -272,6 +272,20 @@ struct					s_input
 	double				diag_x;
 	double				diag_y;
 	int					diag;
+};
+
+struct					s_line
+{
+	int			x1;
+	int			y1;
+	int			x2;
+	int			y2;
+	int			dx;
+	int			sx;
+	int			dy;
+	int			sy;
+	int			err;
+	int			e2;
 };
 
 //sdl func
