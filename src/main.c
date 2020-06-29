@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/08 19:16:15 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/29 16:29:19 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int                main(int ac, char **av)
 	if (!(init_win1(&info)))
 		return (0);
 	if (!(init_win2(&info)))
+		return (0);
+	if (!(init_win3(&info)))
 		return (0);
 	//init_artificial_map(&(info.map));
 	if (ac != 2 || info_map(av[1], info.map) == 0)

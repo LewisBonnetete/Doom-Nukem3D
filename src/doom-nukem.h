@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/29 15:52:28 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/29 16:53:55 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <SDL.h>
 # include <SDL_image.h>
+# include <SDL_ttf.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -243,6 +244,7 @@ struct					s_var
 	SDL_Renderer		*renderer;
 	SDL_Surface			*image;
 	SDL_Texture			*texture;
+	TTF_Font			*font;
 	t_player			*player;
 	t_map				*map;
 	double				olddirx;
@@ -291,6 +293,7 @@ struct					s_line
 //sdl func
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
+int						init_win3(t_var *info);
 int     				dealer(t_var *info, t_render *render);
 
 //init func
@@ -313,6 +316,14 @@ void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
 int		xy_in_ab(double x, double y, t_point a, t_point b);
 void	calc_item_wall(t_render *render, t_var *info);
 void	draw_item(t_render *render, t_var *info);
+
+//hud
+void	hud(t_var *info, t_player *player, t_map *map);
+void	weapon(t_var *info, t_player *player, SDL_Color color);
+void	inventory(t_var *info, t_player *player, SDL_Color color);
+void	name(t_var *info, t_map *map, SDL_Color color);
+void	hp(t_var *info, t_player *player, SDL_Color color);
+void	ammo(t_var *info, t_player *player, SDL_Color color);
 
 //load_map
 int	check_map(char *the_map);

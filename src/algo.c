@@ -211,6 +211,7 @@ int     raycasting(t_var *info, t_render *render)
 		draw_column(info, render, tab);
 		render->x++;
 	}
+	hud(info, info->player, info->map);
 	free(tab);
 	return (1);
 }
