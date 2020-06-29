@@ -84,23 +84,23 @@ void			tex_floor_ciel(t_var *info, t_render *render)
 
 static	void	ft_put_weapon(t_var *info, t_render *render)
 {
-	int		x;
-	int		y;
+	double		x;
+	double		y;
 	Uint32	color;
 
 	x = 0;
-	while (x < render->tab_sdl[3]->w)
+	while (x < render->tab_sdl[3]->w * 2)
 	{
 		y = 0;
-		while (y < render->tab_sdl[3]->h)
+		while (y < render->tab_sdl[3]->h * 2)
 		{
-			color = get_pixel(render->tab_sdl[3], y, x);
+			color = get_pixel(render->tab_sdl[3], (int)y, (int)x);
 			if (color != 0)
-				put_pixel_to_suface(color, x + WINDOW_W / 2 - 45,
-				WINDOW_H + y - 125, info->image);
-			y++;
+				put_pixel_to_suface(color, (int)x + WINDOW_W / 2 - 45,
+				WINDOW_H + (int)y - 125 + info->d_gun, info->image);
+			y += 0.5;
 		}
-		x++;
+		x += 0.5;
 	}
 }
 
@@ -142,22 +142,7 @@ void	draw_textures(t_var *info, t_render *render)
 {
 	if(render->wall->is_portal)
 	{
-		//if (render->wall->is_transparent)
-		//{
-		//	draw_tex(info, render);
-		//	draw_portal_texture(info, render);
-		//}
-		// rajouter la texture sur les pixels dans le rectangle de diagonale (x0,y0) et (x1,y1)
-		//if (render->wall->is_textured)
-		//{
-		//	draw_tex(info, render);
-		//	draw_portal_fill(info, render);
-		//}
-		//		Pareil que draw_portal_texture?
-		//  texture sur les pixels dans le rectangle de diagonale (x0,y0) et (x1,y1)
-		//		OU
-		//  texture fill_up et fill_down,
-		//	sur les pixels au dessus et en dessous du rectangle de diagonale (x0,y0) et (x1,y1)
+
 	}
 	else
     {
@@ -223,10 +208,14 @@ void	draw_texture_wall(t_var *info, t_render *render)
 			int red = (color >> 16) & 0xFF;
 			int green = (color >> 8) & 0xFF;
 			int blue = color & 0xFF;
-
-			red = red / (0.8 * render->wall_dist);
-			green = green / (0.8 * render->wall_dist);
-			blue = blue / (0.8 * render->wall_dist);
+			double screen_r;
+			double screen_i;
+			//printf("ray = %f\n", render->ray->cam_x);
+			screen_r = fabs(render->ray->cam_x);
+			screen_i = fabs (2.0 * (double)i / (double)WINDOW_W - 0.70);
+			red = red / (0.5 * render->wall_dist + (screen_r * screen_r + screen_i * screen_i) * 1.5);
+			green = green / (0.5 * render->wall_dist + (screen_r * screen_r + screen_i * screen_i) * 1.5);
+			blue = blue / (0.5 * render->wall_dist + (screen_r * screen_r + screen_i * screen_i) * 1.5);
 
 			put_pixel_to_suface( RGB(red,green,blue) ,render->x, i, info->image);	
 		}
