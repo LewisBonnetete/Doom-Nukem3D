@@ -184,6 +184,9 @@ struct					s_render
 	double				wall_sqdist;
 	double				wall_height;
 	double				wall_dist;
+	double				scalar;
+	double				x2;
+	double				y2;
 	int					wall_y0;
 	int					wall_y1;
 	int					nb_sec;

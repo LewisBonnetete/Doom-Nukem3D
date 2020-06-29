@@ -26,13 +26,28 @@ void	update_ray(t_var *info, t_render *render)
 	}
 }
 
+double	norm2(double x, double y)
+{
+	return ((x * x) + (y * y));
+}
+
+double	scalar(double x1, double y1, double x2, double y2)
+{
+	return ((norm2(x1 + x2, y1 + y2) - norm2(x1, y1) - norm2(x2, y2)) / 2);
+}
+
 void	update_render(t_var *info, t_render *render)
 {
-	render->wall_sqdist =
+	/*render->wall_sqdist =
 		((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y) * info->player->dy * info->player->dy)
 		+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x) * info->player->dx * info->player->dx)
-		/*+ (render->wall->c.z - render->ray->z) * (render->wall->c.z - render->ray->z)*/; //fish eye ici car distance euclidienne
+		+ (render->wall->c.z - render->ray->z) * (render->wall->c.z - render->ray->z); fish eye ici car distance euclidienne
 	//printf("tmp = %f\n", tmp);
+	render->wall_dist = sqrt(render->wall_sqdist);*/
+	render->scalar = scalar(info->player->dx, info->player->dy, render->ray->x2 - render->ray->x, render->ray->y2 - render->ray->y);
+	render->y2 = render->scalar * info->player->dy;
+	render->x2 = render->scalar * info->player->dx;
+	render->wall_sqdist = norm2(render->x2, render->y2);
 	render->wall_dist = sqrt(render->wall_sqdist);
 	render->wall_height = WALL_H * (double)render->wall->height / (double)render->wall_dist;
 	render->wall_y0 = WINDOW_H / 2 - render->wall_height / 2;
