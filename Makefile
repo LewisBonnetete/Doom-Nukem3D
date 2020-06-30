@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
+#    By: trabut <trabut@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/06/29 16:51:40 by lbonnete         ###   ########.fr        #
+#    Updated: 2020/06/30 17:24:53 by trabut           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = doom-nukem
 
-FLAGS       = -O3
+FLAGS       = -O2 -O3
 
 SDL			= -lpthread -F ./frameworks/ -framework SDL2 -framework SDL2_image -framework SDL2_ttf
 SDL_HEADER	= -I ./frameworks/SDL2.framework/Headers -I ./frameworks/SDL2_image.framework/Headers -I ./frameworks/SDL2_ttf.framework/Headers
@@ -44,7 +44,10 @@ SRC =	main.c\
 		points_comparator.c\
 		polygon_checks_float.c\
 		hud.c\
-		hud2.c
+		hud2.c\
+		draw_tools.c\
+		algo_tools.c\
+		math_tools.c
 		
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
