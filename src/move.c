@@ -1,4 +1,4 @@
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 void	rot_right(t_var *info)
 {
@@ -31,7 +31,7 @@ void	rot_left(t_var *info)
 int     dealer(t_var *info, t_render *render)
 {
 	SDL_Event e;
-	
+
 	(void)render;
 	if (SDL_PollEvent(&e) == 1)
 	{
@@ -51,6 +51,18 @@ int     dealer(t_var *info, t_render *render)
 		{
 			if (e.key.state == SDL_PRESSED)
 			{
+				// if (info->d_gunb == 0)
+				// {
+				// 	info->d_gun += 5;
+				// 	if (info->d_gun == 50)
+				// 		info->d_gunb = 1;
+				// }
+				// else
+				// {
+				// 	info->d_gun -= 5;
+				// 	if (info->d_gun == 0)
+				// 		info->d_gunb = 0;
+			//	}
 				if (hitboxy(info, render, info->player->dx) == 1)
 					info->player->posx += info->player->dx * info->player->movespeed;
 				if (hitboxy(info, render, info->player->dy) == 1)

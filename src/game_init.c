@@ -1,9 +1,11 @@
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 void			ft_init_pour_linstant(t_var *info)
 {
 	info->frametime = 0.03;
 	info->rotspeed = info->frametime * 0.5;
+	info->d_gun = 0;
+	info->d_gunb = 0;
 //	info->y_dec = 0;
 //	info->texture_cap = 0;
 //	info->mouse_in = 0;

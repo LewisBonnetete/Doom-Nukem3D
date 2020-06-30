@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   points_comparator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/15 18:18:38 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/30 17:58:54 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 int		is_both_inferior_x(t_point a, t_point b, t_point c, t_point d)
 {

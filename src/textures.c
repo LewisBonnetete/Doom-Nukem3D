@@ -1,4 +1,4 @@
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 void	tab_path(t_render *renderer)
 {

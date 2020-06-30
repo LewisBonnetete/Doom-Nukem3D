@@ -1,83 +1,28 @@
-#include "doom-nukem.h"
-
-Uint32			get_pixel(SDL_Surface *tex, int x, int y)
-{
-	Uint32 color;
-	Uint32 *pixels;
-
-	color = 0;
-	pixels = tex->pixels;
-	if (x >= 0 && y >= 0 && x < tex->w && y < tex->h)
-	{
-		color = pixels[tex->h * x + y];
-	}
-	return (color);
-}
+#include "doom_nukem.h"
 
 void			tex_floor_ciel(t_var *info, t_render *render)
 {
-	int i;
-	int j;
-	int k;
-	double dirx0;
-	double diry0;
-	double dirx1;
-	double diry1;
-	int p;
-	double dist;
-	double stepx;
-	double stepy;
-	double floorx;
-	double floory;
-	i = 0;
-	j = 0;
-	k = 0;
-	double posz;
+	t_f_tool tool;
 
-	while (i++ < WINDOW_H)
+	tool.i = 0;
+	tool.j = 0;
+	tool.k = 0;
+	while (tool.i++ < WINDOW_H)
 	{
-		dirx0 = info->player->dx - info->player->planex;
-		diry0 = info->player->dy - info->player->planey;
-		dirx1 = info->player->dx + info->player->planex;
-		diry1 = info->player->dy + info->player->planey;
-		posz = 0.5 * WINDOW_H;
-		p = i - WINDOW_H / 2;
-		dist = posz / p;
-		stepx = dist * (dirx1 - dirx0) / WINDOW_W;
-		stepy = dist * (diry1 - diry0) / WINDOW_W;
-		floorx = info->player->posx + dist * dirx0;
-		floory = info->player->posy + dist * diry0;
-		j = 0;
-		while (j++ < WINDOW_W)
+		init_floor(info, &tool);
+		while (tool.j++ < WINDOW_W)
 		{
-			int cellx = (int)floorx;
-			int celly = (int)floory;
-			int tx = (int)(render->tab_sdl[render->s->celling.text_id]->w * (floorx - cellx)) & (render->tab_sdl[render->s->celling.text_id]->w - 1);
-        	int ty = (int)(render->tab_sdl[render->s->celling.text_id]->h * (floory - celly)) & (render->tab_sdl[render->s->celling.text_id]->h - 1);
-			floorx += stepx;
-			floory += stepy;
-			// printf("tx = %f\n", tx);
-			// printf("ty = %f\n", ty);
-			Uint32 color = get_pixel(render->tab_sdl[1],tx,ty);
-			int red = (color >> 16) & 0xFF;
-			int green = (color >> 8) & 0xFF;
-			int blue = color & 0xFF;
-
-			red = red / (2 * dist);
-			green = green / (2 * dist);
-			blue = blue / (2 * dist);
-
-			put_pixel_to_suface(RGB(red,green,blue), j, i, info->image);
-			color = get_pixel(render->tab_sdl[2],tx,ty);
-			red = (color >> 16) & 0xFF;
-			green = (color >> 8) & 0xFF;
-			blue = color & 0xFF;
-
-			red = red / (1.5 * dist);
-			green = green / (1.5 * dist);
-			blue = blue / (1.5 * dist);
-
-			put_pixel_to_suface(RGB(red,green,blue),j , WINDOW_H - i - 1, info->image);
+			tool.tx = (int)(render->tab_sdl[render->s->celling.text_id]->w
+			* (tool.floorx - (int)tool.floorx)) &
+			(render->tab_sdl[render->s->celling.text_id]->w - 1);
+			tool.ty = (int)(render->tab_sdl[render->s->celling.text_id]->h *
+			(tool.floory - (int)tool.floory)) &
+			(render->tab_sdl[render->s->celling.text_id]->h - 1);
+			tool.floorx += tool.stepx;
+			tool.floory += tool.stepy;
+			put_pixel(darken_floor(&tool, render), tool.j, tool.i, info->image);
+			put_pixel(darken_floor(&tool, render),
+			tool.j, WINDOW_H - tool.i - 1, info->image);
 		}
 	}
 }
@@ -86,7 +31,7 @@ static	void	ft_put_weapon(t_var *info, t_render *render)
 {
 	double		x;
 	double		y;
-	Uint32	color;
+	Uint32		color;
 
 	x = 0;
 	while (x < render->tab_sdl[3]->w)
@@ -96,7 +41,7 @@ static	void	ft_put_weapon(t_var *info, t_render *render)
 		{
 			color = get_pixel(render->tab_sdl[3], y, x);
 			if (color != 0)
-				put_pixel_to_suface(color, (int)x + WINDOW_W / 2 - 45,
+				put_pixel(color, (int)x + WINDOW_W / 2 - 45,
 				WINDOW_H + (int)y - 125 + info->d_gun, info->image);
 			y++;
 		}
@@ -104,7 +49,7 @@ static	void	ft_put_weapon(t_var *info, t_render *render)
 	}
 }
 
-void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image)
+void			put_pixel(Uint32 color, int x, int y, SDL_Surface *image)
 {
 	Uint32 *pixels;
 
@@ -113,113 +58,31 @@ void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image)
 		pixels[y * image->w + x] = color;
 }
 
-void	draw_tex(t_var *info, t_render *render)
+void			draw_textures(t_var *info, t_render *render)
 {
-	int i;
-
-	i = render->wall_y1;
-	while (i <= render->wall_y0)
-	{
-		put_pixel_to_suface(255, render->x, i, info->image);
-		i++;
-	}
+	draw_texture_wall(info, render);
+	ft_put_weapon(info, render);
 }
 
-
-void	draw_bottop(t_var *info, t_render *render)
+void			draw_texture_wall(t_var *info, t_render *render)
 {
-	int i;
+	t_w_draw draw;
 
-	i = WINDOW_H + 1;
-	while (--i > render->wall_y1)
-		put_pixel_to_suface(GRASS_GREEN, render->x,i , info->image);
-	i = render->wall_y0 + 1;
-	while (--i > 0)
-		put_pixel_to_suface(SKY_BLUE, render->x,i , info->image);
-}
-
-void	draw_textures(t_var *info, t_render *render)
-{
-	if(render->wall->is_portal)
+	w_draw_calc(render, info, &draw);
+	while (draw.i <= render->wall_y0)
 	{
-
-	}
-	else
-    {
-		//draw_bottop(info, render);
-		draw_texture_wall(info, render);
-		ft_put_weapon(info, render);
-    }
-		//horizontalement : remplit, selon la texture, les pixels entre render->x et render->next_x
-		//verticalement : voir en fonction de la distance au mur et sa hauteur ?
-}
-
-void	draw_texture_wall(t_var *info, t_render *render)
-{
-	double 		pos_relative;
-	t_point		hit;
-	int			i;
-	double 		texy;
-	int			temp;
-	Uint32		color;
-	double 		temp2;
-	Uint8 		r,g,b;
-	hit.x = render->ray->x2;
-	hit.y = render->ray->y2;
-	render->wall->wall_leng = calc_dist(render->wall->a, render->wall->b);
-	pos_relative = calc_dist(hit, render->wall->b);
-	temp2 = (double)render->tab_sdl[0]->h / (double)WALL_H; //Dans le cas d un item wallH = itemH/2
-	pos_relative = pos_relative * temp2;
-	temp = (int)pos_relative;
-	pos_relative -= temp;
-	pos_relative = pos_relative * render->tab_sdl[render->wall->text_id]->w;
-	render->wall_height = fabs(render->wall_height);
-	double step = 1.0 * (double)render->tab_sdl[render->wall->text_id]->h / render->wall_height;
-	i = render->wall_y1;
-	texy = 0;
-	while (i <= render->wall_y0)
-	{
-		if (i == render->wall_y0 || i == render->wall_y1)
+		if (draw.i == render->wall_y0 || draw.i == render->wall_y1)
 		{
-			put_pixel_to_suface(BLACK, render->x, i, info->image);
+			put_pixel(BLACK, render->x, draw.i, info->image);
 		}
 		else
 		{
-			texy += step;
-			color = get_pixel(render->tab_sdl[render->wall->text_id], (int)pos_relative, (int)texy);
-			//color = color * render->wall_dist ;
-			// r = color >> 16;
-			// g = color >> 8;
-			// b = color;
-			// r = r / (0.5 * render->wall_dist);
-			// g = g / (0.5 * render->wall_dist);
-			// b = b / (0.5 * render->wall_dist);
-			// color += r;
-			// color <<= 8;
-			// color += g;
-			// color <<= 16;
-			// color += b;
-
-
-			// int	a = (color >>1 ) & 8355711;
-			// a /= render->wall_dist / 15;
-			// color = a;
-
-			int red = (color >> 16) & 0xFF;
-			int green = (color >> 8) & 0xFF;
-			int blue = color & 0xFF;
-			double screen_r;
-			double screen_i;
-			//printf("ray = %f\n", render->ray->cam_x);
-			screen_r = fabs(render->ray->cam_x);
-			screen_i = fabs (2.0 * (double)i / (double)WINDOW_W - 0.70);
-			red = red / (0.5 * render->wall_dist + (screen_r * screen_r + screen_i * screen_i) * 1.5);
-			green = green / (0.5 * render->wall_dist + (screen_r * screen_r + screen_i * screen_i) * 1.5);
-			blue = blue / (0.5 * render->wall_dist + (screen_r * screen_r + screen_i * screen_i) * 1.5);
-
-			put_pixel_to_suface( RGB(red,green,blue) ,render->x, i, info->image);	
+			draw.texy += draw.step;
+			draw.color = get_pixel(render->tab_sdl[render->wall->text_id],
+			(int)draw.pos_relative, (int)draw.texy);
+			put_pixel(darken_wall(info, draw.color, render, draw.i),
+			render->x, draw.i, info->image);
 		}
-		i++;
+		draw.i++;
 	}
 }
-

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   editer_tools.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/05 13:17:43 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/30 17:57:39 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 // void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image)
 // {

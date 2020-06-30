@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hud2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/29 16:52:25 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/06/30 17:57:53 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 float		ft_fabs(float a)
 {
@@ -37,7 +37,7 @@ int			draw_line(t_var *info, t_line *line, Uint32 color)
 	line->err = (line->dx > line->dy ? line->dx : -line->dy) / 2;
 	while (draw_line_condition(line))
 	{
-		put_pixel_to_suface(color, line->x1, line->y1, info->image);
+		put_pixel(color, line->x1, line->y1, info->image);
 		e2 = line->err;
 		if (e2 > -line->dx)
 		{

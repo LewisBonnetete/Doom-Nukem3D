@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   polygon_checks_float.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/04/18 17:27:27 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/30 17:59:01 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 
 int 	pnpoly_float(int nbr_walls, t_wall *walls, float center_x, float center_y)

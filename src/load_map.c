@@ -1,6 +1,5 @@
 //récupération des info de la map
-#include "doom-nukem.h"
-#include <sys/stat.h>
+#include "doom_nukem.h"
 //maintenant nous avons une grande ligne avec toutes les infos, il ne faut plus que les récupérer avec des forets de if
 //on donc besoin de l'endroit ou se trouve la map (str) et de la map a remplir (t_map) et de lancer info_map
 //si la fonction retourne 1 tout s'est bien passé, sinon elle retourne 0,n il y a donc une erreur dans la map envoyé en argument

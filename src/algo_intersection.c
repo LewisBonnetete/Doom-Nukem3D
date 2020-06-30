@@ -1,4 +1,4 @@
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 /*
 ** calc_wall_spec details :
@@ -15,7 +15,7 @@ void	calc_wall_spec(t_wall *wall)
 			wall->eq_slope = 0;
 		else
 			wall->eq_slope =
-				(double)(wall->b.y - wall->a.y)/(wall->b.x - wall->a.x);
+				(double)(wall->b.y - wall->a.y) / (wall->b.x - wall->a.x);
 		wall->eq_cste = (double)wall->a.y - wall->eq_slope * wall->a.x;
 	}
 	else
@@ -37,14 +37,14 @@ int		xy_in_frontview(double x, double y, t_ray ray)
 int		xy_in_ab(double x, double y, t_point a, t_point b)
 {
 	if (((a.x <= x && x <= b.x) || (b.x <= x && x <= a.x))
-                && ((a.y <= y && y <= b.y) || (b.y <= y && y <= a.y)))
+		&& ((a.y <= y && y <= b.y) || (b.y <= y && y <= a.y)))
 		return (1);
 	return (0);
 }
 
 int		intersect(t_ray *ray, t_wall *wall)
 {
-	calc_wall_spec(wall);	// a rajouter au moment du parsing ? plus rapide que pendant le rendering
+	calc_wall_spec(wall); //a rajouter au moment du parsing* ? plus rapide que pendant le rendering 
 	if (ray->eq_slope == wall->eq_slope)
 		return (0);
 	if (wall->eq_slope == 1111)
@@ -59,7 +59,8 @@ int		intersect(t_ray *ray, t_wall *wall)
 	}
 	else
 	{
-		ray->x2 = (wall->eq_cste - ray->eq_cste) / (ray->eq_slope - wall->eq_slope);
+		ray->x2 = (wall->eq_cste - ray->eq_cste)
+		/ (ray->eq_slope - wall->eq_slope);
 		ray->y2 = ray->eq_slope * ray->x2 + ray->eq_cste;
 	}
 	if (xy_in_ab(ray->x2, ray->y2, wall->a, wall->b))

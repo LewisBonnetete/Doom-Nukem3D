@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   valid_wall.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/28 12:17:35 by lewis            ###   ########.fr       */
+/*   Updated: 2020/06/30 17:59:25 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem.h"
+#include "doom_nukem.h"
 
 int		is_new_point_in_sector(t_point new, t_wall *walls)
 {
