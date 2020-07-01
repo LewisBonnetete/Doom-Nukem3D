@@ -16,21 +16,33 @@ void		init_floor(t_var *info, t_f_tool *tool)
 	tool->j = 0;
 }
 
+
 int			darken_floor(t_f_tool *tool, t_render *render)
 {
 	Uint32	color;
-	int		red;
-	int		green;
-	int		blue;
 
 	color = get_pixel(render->tab_sdl[1], tool->tx, tool->ty);
-	red = (color >> 16) & 0xFF;
-	green = (color >> 8) & 0xFF;
-	blue = color & 0xFF;
-	red = red / (2 * tool->dist);
-	green = green / (2 * tool->dist);
-	blue = blue / (2 * tool->dist);
-	return (rgb_calc(red, green, blue));
+	t_rgb	rgb;
+	double	screen_r;
+	double	screen_i;
+	rgb.r = (color >> 16) & 0xFF;
+	rgb.g = (color >> 8) & 0xFF;
+	rgb.b = color & 0xFF;
+	screen_r = ft_fabs(2.0 * (double)tool->i / (double)WINDOW_H - 1);
+	screen_i = ft_fabs(2.0 * (double)tool->j / (double)WINDOW_W - 1);
+	rgb.r = rgb.r / (0.33 * tool->dist +
+	(screen_r * screen_r + screen_i * screen_i) * 3);
+	rgb.g = rgb.g / (0.33 * tool->dist +
+	(screen_r * screen_r + screen_i * screen_i) * 3);
+	rgb.b = rgb.b / (0.33 * tool->dist + (screen_r *
+	screen_r + screen_i * screen_i) * 3);
+	if (rgb.r >= 255)
+		rgb.r = 255;
+	if (rgb.g >= 255)
+		rgb.g = 255;
+	if (rgb.b >= 255)
+		rgb.b = 255;
+	return (rgb_calc(rgb.r, rgb.g, rgb.g));
 }
 
 int			darken_wall(t_var *info, Uint32 color, t_render *render, int i)
