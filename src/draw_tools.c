@@ -45,11 +45,17 @@ int			darken_wall(t_var *info, Uint32 color, t_render *render, int i)
 	screen_r = ft_fabs(render->ray->cam_x);
 	screen_i = ft_fabs(2.0 * (double)i / (double)WINDOW_W - 0.70);
 	rgb.r = rgb.r / (0.5 * render->wall_dist +
-	(screen_r * screen_r + screen_i * screen_i) * 1.5);
+	(screen_r * screen_r + screen_i * screen_i) * 3);
 	rgb.g = rgb.g / (0.5 * render->wall_dist +
-	(screen_r * screen_r + screen_i * screen_i) * 1.5);
+	(screen_r * screen_r + screen_i * screen_i) * 3);
 	rgb.b = rgb.b / (0.5 * render->wall_dist + (screen_r *
-	screen_r + screen_i * screen_i) * 1.5);
+	screen_r + screen_i * screen_i) * 3);
+	if (rgb.r >= 255)
+		rgb.r = 255;
+	if (rgb.g >= 255)
+		rgb.g = 255;
+	if (rgb.b >= 255)
+		rgb.b = 255;
 	return (rgb_calc(rgb.r, rgb.g, rgb.g));
 }
 
