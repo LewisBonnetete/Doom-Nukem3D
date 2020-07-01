@@ -39,6 +39,7 @@ int     info_map(char *str, t_map *map)
     }
     else
 		return (0);
+	map->name = str;
     ft_strdel(&the_map);
     return (1);
 }

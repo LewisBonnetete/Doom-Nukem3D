@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/29 17:35:31 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/01 14:31:21 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@
 # define TEXTURE_3			"./xpm_textures/purplestone.xpm"
 //# define TEXTURE_4			"./xpm_textures/wood.xpm"
 # define NB_TEXT			4
+//on a le droit a ca?
 # define RGB(r, g, b)(256 * 256 * (int)(r) + 256 * (int)(g) + (int)(b))
-
+//on a le droit a ca?
 typedef struct s_input		t_input;
 typedef	struct s_var		t_var;
 typedef	struct s_text		t_text;

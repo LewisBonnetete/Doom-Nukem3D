@@ -25,6 +25,9 @@ void	init_player(t_player *player, t_map *map)
 	player->planey = 0.6;
 	player->frametime = 0.03;
 	player->movespeed = player->frametime * 2.5;
+	player->weapon = NULL;
+	player->hp = 100;
+	player->ammo = 0;
 }
 
 t_item	*init_item(t_item *src, int i)
