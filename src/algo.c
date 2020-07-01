@@ -95,6 +95,7 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 			render->itab[render->n].h = render->item->h;
 			render->itab[render->n].w = render->item->w;
 			render->itab[render->n].text_id = render->item->text_id;
+			render->itab[render->n].id = render->item->id;
 			render->item->cap = 1;
 			render->x++;
 			while (intersect(render->ray, render->wall_item) == 1 && render->x <= WINDOW_W)
@@ -124,6 +125,7 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 	render->distance = calc_dist(p, w);
 	if (render->distance < 0.5)
 	{
+	//	add_item_to_inventory(info, render->itab[k]i.id);
 		//rajouter ici la fonvtion qui met l'arme dans la main !
 		render->item->cap = 2;
 	}
