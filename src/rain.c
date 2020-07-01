@@ -26,7 +26,7 @@ int				rain_gen(t_var *info, t_render *render)
 	{
 		p.x = rand()%(WINDOW_W - 10);
 		p.y = rand()%(WINDOW_H - 10);
-		draw_col(info, render, p, rand()%25);
+		draw_col(info, render, p, rand()%25 + 5);
 	}
 	return (0);
 }
