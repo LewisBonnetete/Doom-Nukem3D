@@ -136,10 +136,6 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 		render->tx = (render->widht_item - render->itab[k].end) * render->step_width;
 		render->widht_item -= (render->widht_item - render->itab[k].end);
 	}
-//	if (render->itab[k].end > render->itab[k].h)
-//		render->itab[k].start -= (render->widht_item - render->itab[k].h) / 2;
-//	else
-//		render->itab[k].start += (render->widht_item - render->itab[k].end) / 2;
 	render->x = render->itab[k].start - 1;
 	render->p_0 = render->x + 1;
 	while (++render->x <= render->widht_item + render->p_0)
