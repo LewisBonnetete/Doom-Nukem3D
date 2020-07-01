@@ -133,15 +133,15 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 	render->step_width = render->tab_sdl_item[render->itab[k].text_id]->w / render->widht_item;
 	render->tx = 0;
 	render->itab[k].end /= render->distance;
-//	if (render->itab[k].start == 0 && render->widht_item > render->itab[k].end)
-//	{
-//		render->tx = (render->widht_item - render->itab[k].end) * render->step_width;
-//		render->widht_item -= (render->widht_item - render->itab[k].end);
-//	}
-	if (render->itab[k].end > render->itab[k].h)
-		render->itab[k].start -= (render->widht_item - render->itab[k].h) / 2;
-	else
-		render->itab[k].start += (render->widht_item - render->itab[k].end) / 2;
+	if (render->itab[k].start == 0 && render->widht_item > render->itab[k].end)
+	{
+		render->tx = (render->widht_item - render->itab[k].end) * render->step_width;
+		render->widht_item -= (render->widht_item - render->itab[k].end);
+	}
+//	if (render->itab[k].end > render->itab[k].h)
+//		render->itab[k].start -= (render->widht_item - render->itab[k].h) / 2;
+//	else
+//		render->itab[k].start += (render->widht_item - render->itab[k].end) / 2;
 	render->x = render->itab[k].start - 1;
 	render->p_0 = render->x + 1;
 	while (++render->x <= render->widht_item + render->p_0)
@@ -153,6 +153,7 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 		{
 			color = get_pixel(render->tab_sdl_item[render->item->text_id], render->tab_sdl_item[render->itab[k].text_id]->h - (int)ty, (int)render->tx);
 			ty += render->step_height;
+			render->wall_dist = render->distance;
 			put_pixel(darken_wall(info, color, render, y), render->x, y, info->image);
 			--y;
 		}
@@ -167,6 +168,8 @@ void	draw_item(t_render *render, t_var *info)
 	int		i;
 
 	if (!render->itab)
+		return;
+	if (render->itab[0].name == 0)
 		return;
 	j = -1;
 	while (render->itab[++j].name)
@@ -231,9 +234,7 @@ int			raycasting(t_var *info, t_render *render)
 		draw_column(info, render, tab);
 		render->x++;
 	}
-	printf("seg1\n");
 	draw_item(render, info);
-	printf("seg2\n");
 	ft_put_weapon(info, render);
 	hud(info, info->player, info->map);
 	free(tab);

@@ -27,6 +27,10 @@ void		init_cast(t_var *info, t_render *render, t_ray *ray)
 	render->n = -1;
 	render->x = 0;
 	render->ray = ray;
+	if (!render->item->cap)
+		render->item->cap = 0;
+	else if (render->item->cap == 1)
+		render->item->cap = 0;
 	render->ray->x = info->player->posx;
 	render->ray->y = info->player->posy;
 	render->ray->z = info->player->posz;
