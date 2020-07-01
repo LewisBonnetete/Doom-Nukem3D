@@ -152,7 +152,8 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 			color = get_pixel(render->tab_sdl_item[render->item->text_id], render->tab_sdl_item[render->itab[k].text_id]->h - (int)ty, (int)render->tx);
 			ty += render->step_height;
 			render->wall_dist = render->distance;
-			put_pixel(darken_wall(info, color, render, y), render->x, y, info->image);
+			if (color != 0)
+				put_pixel(darken_wall(info, color, render, y), render->x, y, info->image);
 			--y;
 		}
 		render->tx += render->step_width;

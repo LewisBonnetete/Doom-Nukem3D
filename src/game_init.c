@@ -41,8 +41,8 @@ t_item	*init_item(t_item *src, int i)
 	dest->y = src->y;
 	dest->cap = 0;
 	dest->id = i;
-	dest->h = 64;
-	dest->w = 64;
+	dest->h = 128;
+	dest->w = 128;
 	dest->text_id = 0;
 	if (src->next_item)
 		dest->next_item = init_item(src->next_item, i + 1);
