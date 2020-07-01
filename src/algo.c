@@ -235,6 +235,7 @@ int			raycasting(t_var *info, t_render *render)
 	draw_item(render, info);
 	ft_put_weapon(info, render);
 	hud(info, info->player, info->map);
+	rain_gen(info, render);
 	free(tab);
 	return (1);
 }

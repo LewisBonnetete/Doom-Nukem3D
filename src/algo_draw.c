@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/01 16:24:16 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/01 16:45:23 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,28 @@ void			tex_floor_ciel(t_var *info, t_render *render)
 	}
 }
 
+static	void	ft_put_weapon(t_var *info, t_render *render)
+{
+	double		x;
+	double		y;
+	Uint32		color;
+
+	x = 0;
+	while (x < render->tab_sdl[3]->w)
+	{
+		y = 0;
+		while (y < render->tab_sdl[3]->h)
+		{
+			color = get_pixel(render->tab_sdl[3], y, x);
+			if (color != 0)
+				put_pixel(color, (int)x + WINDOW_W / 2 - 45,
+				WINDOW_H + (int)y - 125 + info->d_gun, info->image);
+			y++;
+		}
+		x++;
+	}
+}
+
 void			put_pixel(Uint32 color, int x, int y, SDL_Surface *image)
 {
 	Uint32 *pixels;
@@ -51,6 +73,7 @@ void			put_pixel(Uint32 color, int x, int y, SDL_Surface *image)
 void			draw_textures(t_var *info, t_render *render)
 {
 	draw_texture_wall(info, render);
+	ft_put_weapon(info, render);
 }
 
 void			draw_texture_wall(t_var *info, t_render *render)

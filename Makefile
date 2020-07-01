@@ -6,7 +6,7 @@
 #    By: trabut <trabut@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/06/30 17:24:53 by trabut           ###   ########.fr        #
+#    Updated: 2020/07/01 17:00:40 by trabut           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,8 @@ SRC =	main.c\
 		hud2.c\
 		draw_tools.c\
 		algo_tools.c\
-		math_tools.c
+		math_tools.c\
+		rain.c
 		
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
