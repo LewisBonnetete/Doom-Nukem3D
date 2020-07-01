@@ -39,6 +39,7 @@ t_item	*init_item(t_item *src, int i)
 	dest->cap = 0;
 	dest->id = i;
 	dest->h = 64;
+	dest->w = 64;
 	dest->text_id = 0;
 	if (src->next_item)
 		dest->next_item = init_item(src->next_item, i + 1);
@@ -55,12 +56,9 @@ void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 	render->next_render = NULL;
 	render->sec_0 = render->s;
 	render->nb_sec = 0;
-	if (info->map->items)
-	{
-		render->s->item = init_item(info->map->items, 0);
-		render->item = init_item(info->map->items, 0);
-		render->nbr_items = 1;
-	}
+	render->s->item = init_item(info->map->items, 0);
+	render->item = init_item(info->map->items, 0);
+	render->nbr_items = 1;
 	init_nb_sec(render->sec_0, render);
 }
 

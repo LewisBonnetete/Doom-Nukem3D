@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/30 17:58:17 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/01 12:26:17 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ struct					s_item
 	int				y;
 	int				cap;
 	int				h;
+	int				w;
 	int				text_id;
 	t_item			*next_item;
 };
@@ -183,6 +184,13 @@ struct					s_render
 	int					wall_y0;
 	int					wall_y1;
 	int					nb_sec;
+	int					p_0;
+	float				distance;
+	float				height_item;
+	float				widht_item;
+	float				step_height;
+	float				step_width;
+	t_itab				*itab;
 	t_sector			*sec_0;
 	SDL_Surface			*tab_sdl_item[NB_TEXT_I + 1];
 	SDL_Surface			*tab_sdl[NB_TEXT + 1];
@@ -253,6 +261,15 @@ struct					s_itab
 {
 	float				dist;
 	char				*name;
+	int					item_x;
+	int					item_y;
+	int					start;
+	int					end;
+	int					item_h;
+	int					item_w;
+	int					text_id;
+	int					h;
+	int					w;
 };
 
 struct					s_rgb

@@ -63,58 +63,122 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 			}
 			update_render(info, render);
 			draw_textures(info, render);
-			return ;
+			break;
+		}
+	}
+	if (render->nbr_items <= 0)
+		return;
+	i = -1;
+	if (!render->itab)
+	{
+		if (!(render->itab = (t_itab *)ft_memalloc(sizeof(t_itab) * 5)))
+			return;
+		while (++i < 5)
+		{
+			render->itab[i].name = 0;
+			render->itab[i].dist = 0;
+		}
+	}
+	render->n = -1;
+	while (++render->n < render->nbr_items)
+	{
+		render->item = render->s->item + render->n;
+		calc_item_wall(render, info);
+		if (intersect(render->ray, render->wall_item) == 1
+		&& render->item->cap == 0)
+		{
+			render->itab[render->n].dist = render->wall_dist;
+			render->itab[render->n].name = render->item->name;
+			render->itab[render->n].item_x = render->item->x;
+			render->itab[render->n].item_y = render->item->y;
+			render->itab[render->n].start = render->x;
+			render->itab[render->n].h = render->item->h;
+			render->itab[render->n].w = render->item->w;
+			render->itab[render->n].text_id = render->item->text_id;
+			render->item->cap = 1;
+			render->x++;
+			while (intersect(render->ray, render->wall_item) == 1)
+			{
+				++render->x;
+				update_ray(info, render);
+			}
+			render->itab[render->n].end = render->x;
+			render->x = render->itab[render->n].start;
 		}
 	}
 }
 
-/*void	draw_item(t_render *render, t_var *info)
+void	draw_item_2(t_render *render, t_var *info, int k)
 {
-	float	pig;
-	int		y;
-	double	tx;
-	double	ty;
-	double	tmp;
-	double	tmp2;
 	t_point	p;
+	t_point	w;
+	float	ty;
+	int		y;
+	int		i;
 	Uint32	color;
 
-	p.x = render->ray->x2;
-	p.y = render->ray->y2;
-	tx = calc_dist(p, render->wall_item->b);
-	tmp = (double)render->tab_sdl_item[render->item->text_id]->h
-	/ (double)(render->item->h / 2);
-	tx *= tmp;
-	tmp2 = (int)tx;
-	tx -= tmp2;
-	tx *= render->tab_sdl_item[render->item->text_id]->w;
-	render->wall_sqdist =
-	((render->ray->y2 - render->ray->y) * (render->ray->y2 - render->ray->y))
-	+ ((render->ray->x2 - render->ray->x) * (render->ray->x2 - render->ray->x));
-	render->wall_dist = sqrt(render->wall_sqdist);
-	render->wall_height = render->tab_sdl_item[render->item->text_id]->h * 1
-		/ (double)render->wall_dist;
-	pig = render->wall_height / render->item->h;
-	ty = 0;
-	y = WINDOW_H / 2 - render->wall_height / 2 - 1;
-	if (y >= (int)(render->item->h * pig))
-		while (--y >= (int)(render->item->h * pig))
+	p.x = info->player->posx;
+	p.y = info->player->posy;
+	w.x = render->itab[k].item_x;
+	w.y = render->itab[k].item_y;
+	render->distance = calc_dist(p, w);
+	render->height_item = render->itab[k].h / render->distance;
+	render->widht_item = render->itab[k].w / render->distance;
+	render->step_height = render->tab_sdl_item[render->itab[k].text_id]->h / render->height_item;
+	render->step_width = render->tab_sdl_item[render->itab[k].text_id]->w / render->widht_item;
+	render->tx = 0;
+	render->x = render->itab[k].start - 1;
+	render->p_0 = render->x + 1;
+	render->itab[k].end /= render->distance;
+	if (render->itab[k].start == 0)
+	{
+		render->tx = (render->widht_item - render->itab[k].end) * render->step_width;
+		render->widht_item -= (render->widht_item - render->itab[k].end);
+	}
+	while (++render->x <= render->widht_item + render->p_0)
+	{
+		ty = 0;
+		y = WINDOW_H / 2 + WINDOW_H / 2 / render->distance;
+		i = -1;
+		while (++i <= render->height_item)
 		{
-			ty += pig;
-			color = get_pixel(render->tab_sdl_item[render->item->text_id],
-			(int)tx, (int)ty);
-			put_pixel_to_suface(color, render->x, y,
-			info->image);
+			color = get_pixel(render->tab_sdl_item[render->item->text_id], render->tab_sdl_item[render->itab[k].text_id]->h - (int)ty, (int)render->tx);
+			ty += render->step_height;
+			put_pixel(darken_wall(info, color, render, y), render->x, y, info->image);
+			--y;
 		}
-	else
-		while (++y <= (int)(render->item->h * pig))
+		render->tx += render->step_width;
+	}
+}
+
+void	draw_item(t_render *render, t_var *info)
+{
+	int		j;
+	int		k;
+	int		i;
+
+	if (!render->itab[0].name)
+		return;
+	j = -1;
+	while (render->itab[++j].name)
+	{
+		k = 0;
+		i = -1;
+		while (render->itab[++i].name)
 		{
-			ty += pig;
-			color = get_pixel(render->tab_sdl_item[render->item->text_id],
-			(int)tx, (int)ty);
-			put_pixel_to_suface(color, render->x, y, info->image);
+			if (render->itab[k].dist < render->itab[i].dist
+				&& render->itab[k].name[0] != '-' && render->itab[k].name[1] != '1')
+				k = i;
 		}
-}*/
+		render->item = render->s->item + k;
+		render->itab[k].name = "-1";
+		render->itab[k].dist = -1;
+		draw_item_2(render, info, k);
+	}
+	i = -1;
+	while (render->itab[++i].name)
+		render->itab[i].name = 0;
+}
 
 int			raycasting(t_var *info, t_render *render)
 {
@@ -122,6 +186,8 @@ int			raycasting(t_var *info, t_render *render)
 	int		*tab;
 
 	init_cast(info, render, &ray);
+	render->p_0 = -1;
+	render->item->cap = 0;
 	if (!(tab = (int *)ft_memalloc((sizeof(int) * render->nb_sec + 1))))
 		return (0);
 	info->player->sector_id = player_sec(render->sec_0, info);
@@ -136,6 +202,7 @@ int			raycasting(t_var *info, t_render *render)
 		draw_column(info, render, tab);
 		render->x++;
 	}
+	draw_item(render, info);
 	hud(info, info->player, info->map);
 	free(tab);
 	return (1);
