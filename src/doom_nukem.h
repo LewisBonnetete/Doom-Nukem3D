@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/01 14:32:09 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/01 16:36:01 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,6 +270,7 @@ struct					s_itab
 	int					text_id;
 	int					h;
 	int					w;
+	int					id;
 };
 
 struct					s_rgb
@@ -456,5 +457,6 @@ void					init_nb_sec(t_sector *sector, t_render *render);
 void					tex_floor_ciel(t_var *info, t_render *render);
 void					tab_path_text(t_render *renderer);
 t_render				*cpy_render(t_render *render);
+void					add_item_to_inventory(t_var *info, int id);
 
 #endif
