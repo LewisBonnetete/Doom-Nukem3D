@@ -35,8 +35,8 @@ void		calc_item_wall(t_render *render, t_var *info)
 		return ;
 	render->wall_item->a.x = 0.3 * info->player->planex + render->item->x;
 	render->wall_item->a.y = 0.3 * info->player->planey + render->item->y;
-	render->wall_item->b.x = 0.3 * info->player->planex - render->item->x;
-	render->wall_item->b.y = 0.3 * info->player->planey - render->item->y;
+	render->wall_item->b.x = render->item->x - 0.3 * info->player->planex;
+	render->wall_item->b.y = render->item->y - 0.3 * info->player->planey;
 }
 
 void		draw_column(t_var *info, t_render *render, int *tab)
@@ -124,10 +124,7 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 	w.y = render->itab[k].item_y;
 	render->distance = calc_dist(p, w);
 	if (render->distance < 0.5)
-	{
-		//rajouter ici la fonvtion qui met l'arme dans la main !
 		render->item->cap = 2;
-	}
 	render->height_item = render->itab[k].h / render->distance;
 	render->widht_item = render->itab[k].w / render->distance;
 	render->step_height = render->tab_sdl_item[render->itab[k].text_id]->h / render->height_item;
