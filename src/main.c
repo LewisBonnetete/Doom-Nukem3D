@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/30 17:58:38 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/01 17:01:15 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int                main(int ac, char **av)
 	//free_map(info.map);
 	info.player = &player;
 	init_render(&info, &renderer, 0, info.player->sector_id);
+	info.render = &renderer;
 	tab_path(&renderer);
 	tab_path_text(&renderer);
 	if (WALL_H > 1000 || WALL_H <= 0)

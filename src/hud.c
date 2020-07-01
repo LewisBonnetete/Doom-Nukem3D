@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/01 14:45:49 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/01 17:03:18 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,18 @@ void	inventory(t_var *info, t_player *player, SDL_Color color)
 	pos.y = 5;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
-	item = info->map->items;
+	// item = info->render->item;
+	//Ca ca segfault aled
 	pos.y += 10;
 	while (item && pos.y < WINDOW_H - 40)
 	{
-		texte = TTF_RenderText_Blended(info->font, item->name, color);
-		pos.y += 20 ;
-		SDL_BlitSurface(texte, NULL, info->image, &pos);
-		SDL_FreeSurface(texte);
+		if (item->cap == 2)
+		{
+			texte = TTF_RenderText_Blended(info->font, item->name, color);
+			pos.y += 20 ;
+			SDL_BlitSurface(texte, NULL, info->image, &pos);
+			SDL_FreeSurface(texte);
+		}
 		item = item->next_item;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/01 14:26:58 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/01 16:58:52 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,6 @@ void	init_map(t_map *map)
 	map->spawn.y = -1;
 	map->spawn.z = -1;
 	map->sectors = NULL;
-}
-
-void	init_var(t_var *info)
-{
-	(void)info;
 }
 
 void	init_artificial_map(t_map *map)

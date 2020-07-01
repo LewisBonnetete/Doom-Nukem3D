@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/01 16:36:01 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/01 16:57:33 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,6 @@ struct					s_player
 	int					hp;
 	int					ammo;
 	t_item				*weapon;
-	t_item				*inventory;
 };
 
 struct					s_ray
@@ -249,6 +248,7 @@ struct					s_var
 	TTF_Font			*font;
 	t_player			*player;
 	t_map				*map;
+	t_render			*render;
 	double				olddirx;
 	double				oldplanex;
 	double				rotspeed;
@@ -457,6 +457,5 @@ void					init_nb_sec(t_sector *sector, t_render *render);
 void					tex_floor_ciel(t_var *info, t_render *render);
 void					tab_path_text(t_render *renderer);
 t_render				*cpy_render(t_render *render);
-void					add_item_to_inventory(t_var *info, int id);
 
 #endif

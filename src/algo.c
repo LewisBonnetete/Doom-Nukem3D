@@ -125,7 +125,6 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 	render->distance = calc_dist(p, w);
 	if (render->distance < 0.5)
 	{
-	//	add_item_to_inventory(info, render->itab[k]i.id);
 		//rajouter ici la fonvtion qui met l'arme dans la main !
 		render->item->cap = 2;
 	}
