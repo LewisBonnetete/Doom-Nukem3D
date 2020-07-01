@@ -97,7 +97,7 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 			render->itab[render->n].text_id = render->item->text_id;
 			render->item->cap = 1;
 			render->x++;
-			while (intersect(render->ray, render->wall_item) == 1)
+			while (intersect(render->ray, render->wall_item) == 1 && render->x <= WINDOW_W)
 			{
 				++render->x;
 				update_ray(info, render);
@@ -122,19 +122,28 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 	w.x = render->itab[k].item_x;
 	w.y = render->itab[k].item_y;
 	render->distance = calc_dist(p, w);
+	if (render->distance < 0.5)
+	{
+		//rajouter ici la fonvtion qui met l'arme dans la main !
+		render->item->cap = 2;
+	}
 	render->height_item = render->itab[k].h / render->distance;
 	render->widht_item = render->itab[k].w / render->distance;
 	render->step_height = render->tab_sdl_item[render->itab[k].text_id]->h / render->height_item;
 	render->step_width = render->tab_sdl_item[render->itab[k].text_id]->w / render->widht_item;
 	render->tx = 0;
+	render->itab[k].end /= render->distance;
+//	if (render->itab[k].start == 0 && render->widht_item > render->itab[k].end)
+//	{
+//		render->tx = (render->widht_item - render->itab[k].end) * render->step_width;
+//		render->widht_item -= (render->widht_item - render->itab[k].end);
+//	}
+	if (render->itab[k].end > render->itab[k].h)
+		render->itab[k].start -= (render->widht_item - render->itab[k].h) / 2;
+	else
+		render->itab[k].start += (render->widht_item - render->itab[k].end) / 2;
 	render->x = render->itab[k].start - 1;
 	render->p_0 = render->x + 1;
-	render->itab[k].end /= render->distance;
-	if (render->itab[k].start == 0)
-	{
-		render->tx = (render->widht_item - render->itab[k].end) * render->step_width;
-		render->widht_item -= (render->widht_item - render->itab[k].end);
-	}
 	while (++render->x <= render->widht_item + render->p_0)
 	{
 		ty = 0;
@@ -157,7 +166,7 @@ void	draw_item(t_render *render, t_var *info)
 	int		k;
 	int		i;
 
-	if (!render->itab[0].name)
+	if (!render->itab)
 		return;
 	j = -1;
 	while (render->itab[++j].name)
@@ -180,14 +189,34 @@ void	draw_item(t_render *render, t_var *info)
 		render->itab[i].name = 0;
 }
 
+static	void	ft_put_weapon(t_var *info, t_render *render)
+{
+	double		x;
+	double		y;
+	Uint32		color;
+
+	x = 0;
+	while (x < render->tab_sdl[3]->w)
+	{
+		y = 0;
+		while (y < render->tab_sdl[3]->h)
+		{
+			color = get_pixel(render->tab_sdl[3], y, x);
+			if (color != 0)
+				put_pixel(color, (int)x + WINDOW_W / 2 - 45,
+				WINDOW_H + (int)y - 125 + info->d_gun, info->image);
+			y++;
+		}
+		x++;
+	}
+}
+
 int			raycasting(t_var *info, t_render *render)
 {
 	t_ray	ray;
 	int		*tab;
 
 	init_cast(info, render, &ray);
-	render->p_0 = -1;
-	render->item->cap = 0;
 	if (!(tab = (int *)ft_memalloc((sizeof(int) * render->nb_sec + 1))))
 		return (0);
 	info->player->sector_id = player_sec(render->sec_0, info);
@@ -202,7 +231,10 @@ int			raycasting(t_var *info, t_render *render)
 		draw_column(info, render, tab);
 		render->x++;
 	}
+	printf("seg1\n");
 	draw_item(render, info);
+	printf("seg2\n");
+	ft_put_weapon(info, render);
 	hud(info, info->player, info->map);
 	free(tab);
 	return (1);
