@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/02 14:37:45 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/02 16:27:59 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	do_enemy(t_enemy *enemy, int fd)
 {
     char	c;
 
-    c = 'y';
+    c = 't';
     if (write(fd, &c, 1) == -1)
 		return (0);
 	if (enemy->name)
@@ -86,7 +86,7 @@ int	do_item(t_item *tem, int fd)
 {
     char	c;
 
-    c = 'y';
+    c = 't';
     if (write(fd, &c, 1) == -1)
 		return (0);
 	if (tem->name)
@@ -291,10 +291,10 @@ int     creat_fichier(t_map *map, char *name)
 	namefinal = ft_strjoin(name, ".map");
 	namefinalfinal = ft_strjoin(path, namefinal);
     if ((fd = creat(namefinalfinal, O_CREAT | O_RDWR)) == -1)
-	return (0);
+		return (0);
     close(fd);
-    if (chmod(namefinalfinal, S_IRWXU) < 0)
-	return (0);
+	if (chmod(namefinalfinal, S_IRWXU) < 0)
+		return (0);
     if ((fd = open(namefinalfinal, O_APPEND | O_RDWR)) == -1)
         return (0);
     if (do_map(map, fd) == 0)

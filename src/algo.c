@@ -73,49 +73,91 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 	i = -1;
 	if (!render->itab)
 	{
-		if (!(render->itab = (t_itab *)ft_memalloc(sizeof(t_itab) * 5)))
+		if (!(render->itab
+			= (t_itab *)ft_memalloc(sizeof(t_itab) * (render->nbr_items + 1))))
 			return;
-		while (++i < 5)
+		while (++i < render->nb_item_total + 1)
 		{
 			render->itab[i].name = 0;
 			render->itab[i].dist = 0;
 		}
 	}
 	render->n = -1;
-	while (++render->n < render->nb_item_total)
+	if (render->nbr_items >= render->nb_item_total)
 	{
-		render->item = render->s->item + render->n;
-		calc_item_wall(render, info);
-		if (intersect(render->ray, render->wall_item) == 1
-			&& render->item->cap == 0)
+		while (++render->n < render->nb_item_total)
 		{
-			p.x = info->player->posx;
-			p.y = info->player->posy;
-			w.x= render->itab[render->n].item_x;
-			w.y = render->itab[render->n].item_y;
-			render->wall_dist = calc_dist(p, w);
-			render->itab[render->n].dist = render->wall_dist;
-			render->itab[render->n].name = ft_strdup(render->item->name);
-			render->itab[render->n].item_x = render->item->x;
-			render->itab[render->n].item_y = render->item->y;
-			render->itab[render->n].start = render->x;
-			render->itab[render->n].h = render->item->h;
-			render->itab[render->n].w = render->item->w;
-			render->itab[render->n].text_id = render->item->text_id;
-			render->itab[render->n].id = render->item->id;
-//			if (render->n == render->nbr_items - 1)
-			render->item->cap = 1;
-			render->x++;
-			while (intersect(render->ray, render->wall_item) == 1/* && render->x <= WINDOW_W*/)
+			render->item = render->s->item + render->n;
+			calc_item_wall(render, info);
+			if (intersect(render->ray, render->wall_item) == 1
+				&& render->item->cap == 0)
 			{
-				++render->x;
-				update_ray(info, render);
+				p.x = info->player->posx;
+				p.y = info->player->posy;
+				w.x= render->itab[render->n].item_x;
+				w.y = render->itab[render->n].item_y;
+				render->wall_dist = calc_dist(p, w);
+				render->itab[render->n].dist = render->wall_dist;
+				render->itab[render->n].name = ft_strdup(render->item->name);
+				render->itab[render->n].item_x = render->item->x;
+				render->itab[render->n].item_y = render->item->y;
+				render->itab[render->n].start = render->x;
+				render->itab[render->n].h = render->item->h;
+				render->itab[render->n].w = render->item->w;
+				render->itab[render->n].text_id = render->item->text_id;
+				render->itab[render->n].id = render->item->id;
+//				if(render->n == render->nbr_items - 1)
+				render->item->cap = 1;
+				render->x++;
+				while (intersect(render->ray, render->wall_item) == 1/* && render->x <= WINDOW_W*/)
+				{
+					++render->x;
+					update_ray(info, render);
+				}
+				render->itab[render->n].end = render->x;
+				render->x = render->itab[render->n].start;
 			}
-			render->itab[render->n].end = render->x;
-			render->x = render->itab[render->n].start;
+		}
+	}
+	else
+	{
+		while (++render->n < render->nbr_items)
+		{
+			render->item = render->s->item + render->n;
+			calc_item_wall(render, info);
+			if (intersect(render->ray, render->wall_item) == 1
+				&& render->item->cap == 0)
+			{
+				p.x = info->player->posx;
+				p.y = info->player->posy;
+				w.x= render->itab[render->n].item_x;
+				w.y = render->itab[render->n].item_y;
+				render->wall_dist = calc_dist(p, w);
+				render->itab[render->n].dist = render->wall_dist;
+				render->itab[render->n].name = ft_strdup(render->item->name);
+				render->itab[render->n].item_x = render->item->x;
+				render->itab[render->n].item_y = render->item->y;
+				render->itab[render->n].start = render->x;
+				render->itab[render->n].h = render->item->h;
+				render->itab[render->n].w = render->item->w;
+				render->itab[render->n].text_id = render->item->text_id;
+				render->itab[render->n].id = render->item->id;
+//				if(render->n == render->nbr_items - 1)
+				render->item->cap = 1;
+				render->x++;
+				while (intersect(render->ray, render->wall_item) == 1/* && render->x <= WINDOW_W*/)
+				{
+					++render->x;
+					update_ray(info, render);
+				}
+				render->itab[render->n].end = render->x;
+				render->x = render->itab[render->n].start;
+			}
 		}
 	}
 }
+
+
 
 void	draw_item_2(t_render *render, t_var *info, int k)
 {
@@ -179,14 +221,11 @@ void	draw_item(t_render *render, t_var *info)
 		return;
 	i = -1;
 	while (++i < render->nb_item_total)
-	{
 		if (render->itab[i].name == 0)
 		{
-			if (!(render->itab[i].name = (char *)ft_memalloc(sizeof(char) + 3)))
-				return;
+			render->itab[i].dist = -1;
 			render->itab[i].name = "-1";
 		}
-	}
 	j = -1;
 	while (j < render->nb_item_total)
 	{

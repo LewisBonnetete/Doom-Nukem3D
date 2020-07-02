@@ -34,8 +34,9 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 {
 	t_item	*dest;
 
-	if (!(dest = (t_item *)ft_memalloc(sizeof(t_item))))
-		return (0);
+	if (!dest)
+		if (!(dest = (t_item *)ft_memalloc(sizeof(t_item))))
+			return (0);
 	dest->name = src->name;
 	dest->x = src->x;
 	dest->y = src->y;
@@ -60,7 +61,12 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 		dest->text_id = 2;
 	}
 	else
-		return NULL;
+	{
+		if (src->next_item)
+			dest = init_item(render, src->next_item, i + 1);
+		else
+			return (0);
+	}
 	render->nbr_items++;
 	render->nb_item_total = 3;
 	if (src->next_item)
