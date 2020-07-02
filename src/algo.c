@@ -95,7 +95,7 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 			w.y = render->itab[render->n].item_y;
 			render->wall_dist = calc_dist(p, w);
 			render->itab[render->n].dist = render->wall_dist;
-			render->itab[render->n].name = render->item->name;
+			render->itab[render->n].name = ft_strdup(render->item->name);
 			render->itab[render->n].item_x = render->item->x;
 			render->itab[render->n].item_y = render->item->y;
 			render->itab[render->n].start = render->x;
@@ -179,8 +179,14 @@ void	draw_item(t_render *render, t_var *info)
 		return;
 	i = -1;
 	while (++i < render->nb_item_total)
-		if (!render->itab[i].name)
+	{
+		if (render->itab[i].name == 0)
+		{
+			if (!(render->itab[i].name = (char *)ft_memalloc(sizeof(char) + 3)))
+				return;
 			render->itab[i].name = "-1";
+		}
+	}
 	j = -1;
 	while (j < render->nb_item_total)
 	{

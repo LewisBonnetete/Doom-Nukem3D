@@ -53,12 +53,14 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 		dest->w = 350;
 		dest->text_id = 1;
 	}
-	else
+	else if (dest->name[0] == 'b')
 	{
 		dest->h = 300;
 		dest->w = 300;
 		dest->text_id = 2;
 	}
+	else
+		return NULL;
 	render->nbr_items++;
 	render->nb_item_total = 3;
 	if (src->next_item)
