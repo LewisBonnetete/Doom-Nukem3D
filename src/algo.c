@@ -182,7 +182,7 @@ void	draw_item(t_render *render, t_var *info)
 		if (!render->itab[i].name)
 			render->itab[i].name = "-1";
 	j = -1;
-	while (render->itab[++j].name)
+	while (j < render->nb_item_total)
 	{
 		k = 0;
 		while (render->itab[k].name && render->itab[k].name[0] == '-'
