@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/01 16:57:33 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/02 12:25:13 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ struct					s_render
 	t_wall				*wall_item;
 	t_item				*item;
 	int					nbr_items;
+	int					nb_item_total;
 	double				tx;
 	t_render			*next_render;
 };
@@ -370,6 +371,7 @@ int						darken_floor(t_f_tool *tool, t_render *render);
 int						darken_wall(t_var *info, Uint32 color,
 							t_render *render, int i);
 int						rgb_calc(int r, int g, int b);
+int						rain_gen(t_var *info, t_render *render);
 
 //algo
 int						raycasting(t_var *info, t_render *render);

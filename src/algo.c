@@ -35,8 +35,8 @@ void		calc_item_wall(t_render *render, t_var *info)
 		return ;
 	render->wall_item->a.x = 0.3 * info->player->planex + render->item->x;
 	render->wall_item->a.y = 0.3 * info->player->planey + render->item->y;
-	render->wall_item->b.x = 0.3 * info->player->planex - render->item->x;
-	render->wall_item->b.y = 0.3 * info->player->planey - render->item->y;
+	render->wall_item->b.x = render->item->x - 0.3 * info->player->planex;
+	render->wall_item->b.y = render->item->y - 0.3 * info->player->planey;
 }
 
 void		draw_column(t_var *info, t_render *render, int *tab)
@@ -45,6 +45,8 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 	int		i;
 	int		k;
 	int		j;
+	t_point	p;
+	t_point	w;
 	t_itab	itab[5];
 
 	render->n = -1;
@@ -80,13 +82,18 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 		}
 	}
 	render->n = -1;
-	while (++render->n < render->nbr_items)
+	while (++render->n < render->nb_item_total)
 	{
 		render->item = render->s->item + render->n;
 		calc_item_wall(render, info);
 		if (intersect(render->ray, render->wall_item) == 1
-		&& render->item->cap == 0)
+			&& render->item->cap == 0)
 		{
+			p.x = info->player->posx;
+			p.y = info->player->posy;
+			w.x= render->itab[render->n].item_x;
+			w.y = render->itab[render->n].item_y;
+			render->wall_dist = calc_dist(p, w);
 			render->itab[render->n].dist = render->wall_dist;
 			render->itab[render->n].name = render->item->name;
 			render->itab[render->n].item_x = render->item->x;
@@ -96,9 +103,10 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 			render->itab[render->n].w = render->item->w;
 			render->itab[render->n].text_id = render->item->text_id;
 			render->itab[render->n].id = render->item->id;
+//			if (render->n == render->nbr_items - 1)
 			render->item->cap = 1;
 			render->x++;
-			while (intersect(render->ray, render->wall_item) == 1 && render->x <= WINDOW_W)
+			while (intersect(render->ray, render->wall_item) == 1/* && render->x <= WINDOW_W*/)
 			{
 				++render->x;
 				update_ray(info, render);
@@ -123,11 +131,10 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 	w.x = render->itab[k].item_x;
 	w.y = render->itab[k].item_y;
 	render->distance = calc_dist(p, w);
-	if (render->distance < 0.5)
-	{
-		//rajouter ici la fonvtion qui met l'arme dans la main !
+	if (render->distance < 0.5 && render->itab[k].text_id == 0)
 		render->item->cap = 2;
-	}
+	else
+		render->item->cap = 0;
 	render->height_item = render->itab[k].h / render->distance;
 	render->widht_item = render->itab[k].w / render->distance;
 	render->step_height = render->tab_sdl_item[render->itab[k].text_id]->h / render->height_item;
@@ -139,10 +146,6 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 		render->tx = (render->widht_item - render->itab[k].end) * render->step_width;
 		render->widht_item -= (render->widht_item - render->itab[k].end);
 	}
-//	if (render->itab[k].end > render->itab[k].h)
-//		render->itab[k].start -= (render->widht_item - render->itab[k].h) / 2;
-//	else
-//		render->itab[k].start += (render->widht_item - render->itab[k].end) / 2;
 	render->x = render->itab[k].start - 1;
 	render->p_0 = render->x + 1;
 	while (++render->x <= render->widht_item + render->p_0)
@@ -155,7 +158,8 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 			color = get_pixel(render->tab_sdl_item[render->item->text_id], render->tab_sdl_item[render->itab[k].text_id]->h - (int)ty, (int)render->tx);
 			ty += render->step_height;
 			render->wall_dist = render->distance;
-			put_pixel(darken_wall(info, color, render, y), render->x, y, info->image);
+			if (color != 0)
+				put_pixel(darken_wall(info, color, render, y), render->x, y, info->image);
 			--y;
 		}
 		render->tx += render->step_width;
@@ -170,23 +174,35 @@ void	draw_item(t_render *render, t_var *info)
 
 	if (!render->itab)
 		return;
-	if (render->itab[0].name == 0)
+	if (render->itab[0].name == 0 && render->itab[1].name == 0
+			&& render->itab[2].name == 0)
 		return;
+	i = -1;
+	while (++i < render->nb_item_total)
+		if (!render->itab[i].name)
+			render->itab[i].name = "-1";
 	j = -1;
-	while (render->itab[++j].name)
+	while (j < render->nb_item_total)
 	{
 		k = 0;
+		while (render->itab[k].name && render->itab[k].name[0] == '-'
+				&& render->itab[k].name[1] == '1')
+			++k;
+		if (!render->itab[k].name)
+			break;
 		i = -1;
 		while (render->itab[++i].name)
-		{
 			if (render->itab[k].dist < render->itab[i].dist
-				&& render->itab[k].name[0] != '-' && render->itab[k].name[1] != '1')
+				&& render->itab[i].name[0] != '-' && render->itab[i].name[1] != '1')
 				k = i;
+		if (render->itab[k].name[0] != '-' && render->itab[k].name[1] != '1')
+		{
+			render->item = render->s->item + k;
+			render->itab[k].name = "-1";
+			render->itab[k].dist = -1;
+			draw_item_2(render, info, k);
 		}
-		render->item = render->s->item + k;
-		render->itab[k].name = "-1";
-		render->itab[k].dist = -1;
-		draw_item_2(render, info, k);
+		++j;
 	}
 	i = -1;
 	while (render->itab[++i].name)
@@ -238,6 +254,7 @@ int			raycasting(t_var *info, t_render *render)
 	draw_item(render, info);
 	ft_put_weapon(info, render);
 	hud(info, info->player, info->map);
+	rain_gen(info, render);
 	free(tab);
 	return (1);
 }

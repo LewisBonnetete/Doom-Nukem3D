@@ -21,7 +21,7 @@ int			darken_floor(t_f_tool *tool, t_render *render)
 {
 	Uint32	color;
 
-	color = get_pixel(render->tab_sdl[1], tool->tx, tool->ty);
+	color = get_pixel(render->tab_sdl[2], tool->tx, tool->ty);
 	t_rgb	rgb;
 	double	screen_r;
 	double	screen_i;

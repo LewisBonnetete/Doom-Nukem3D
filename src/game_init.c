@@ -30,7 +30,7 @@ void	init_player(t_player *player, t_map *map)
 	player->ammo = 0;
 }
 
-t_item	*init_item(t_item *src, int i)
+t_item	*init_item(t_render *render, t_item *src, int i)
 {
 	t_item	*dest;
 
@@ -41,11 +41,28 @@ t_item	*init_item(t_item *src, int i)
 	dest->y = src->y;
 	dest->cap = 0;
 	dest->id = i;
-	dest->h = 64;
-	dest->w = 64;
-	dest->text_id = 0;
+	if (dest->name[0] == 'a')
+	{
+		dest->h = 128;
+		dest->w = 128;
+		dest->text_id = 0;
+	}
+	else if (dest->name[0] == 'c')
+	{
+		dest->h = 350;
+		dest->w = 350;
+		dest->text_id = 1;
+	}
+	else
+	{
+		dest->h = 300;
+		dest->w = 300;
+		dest->text_id = 2;
+	}
+	render->nbr_items++;
+	render->nb_item_total = 3;
 	if (src->next_item)
-		dest->next_item = init_item(src->next_item, i + 1);
+		dest->next_item = init_item(render, src->next_item, i + 1);
 	else
 		dest->next_item = NULL;
 	return (dest);
@@ -59,14 +76,9 @@ void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 	render->next_render = NULL;
 	render->sec_0 = render->s;
 	render->nb_sec = 0;
+	render->nbr_items = 0;
 	if (info->map->items && info->map->items->name != 0)
-	{
-		render->s->item = init_item(info->map->items, 0);
-		render->item = init_item(info->map->items, 0);
-		render->nbr_items = 1;
-	}
-	else
-		render->nbr_items = 0;
+		render->s->item = init_item(render, info->map->items, 0);
 	init_nb_sec(render->sec_0, render);
 }
 
