@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/01 17:03:40 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:25:42 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ void	inventory(t_var *info, t_player *player, SDL_Color color)
 	pos.y = 5;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
-	// item = info->render->item;
-	//Ca ca segfault aled
+	item = info->render->item;
 	pos.y += 10;
 	while (item && pos.y < WINDOW_H - 40)
 	{
