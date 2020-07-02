@@ -95,7 +95,7 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 			w.y = render->itab[render->n].item_y;
 			render->wall_dist = calc_dist(p, w);
 			render->itab[render->n].dist = render->wall_dist;
-			render->itab[render->n].name = render->item->name;
+			render->itab[render->n].name = ft_strdup(render->item->name);
 			render->itab[render->n].item_x = render->item->x;
 			render->itab[render->n].item_y = render->item->y;
 			render->itab[render->n].start = render->x;
