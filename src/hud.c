@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/02 14:49:44 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:52:03 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	weapon(t_var *info, t_player *player, SDL_Color color)
 {
 	SDL_Surface	*texte;
 	SDL_Rect	pos;
-	
+
 	if (player->weapon)
 	{
 		texte = TTF_RenderText_Blended(info->font, player->weapon->name, color);
@@ -44,7 +44,7 @@ void	inventory(t_var *info, t_player *player, SDL_Color color)
 		if (item->cap == 2)
 		{
 			texte = TTF_RenderText_Blended(info->font, item->name, color);
-			pos.y += 20 ;
+			pos.y += 20;
 			SDL_BlitSurface(texte, NULL, info->image, &pos);
 			SDL_FreeSurface(texte);
 		}
@@ -66,7 +66,6 @@ void	name(t_var *info, t_map *map, SDL_Color color)
 	pos.y = 5;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
-	
 }
 
 void	hp(t_var *info, t_player *player, SDL_Color color)

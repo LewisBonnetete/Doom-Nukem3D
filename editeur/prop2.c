@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/29 15:26:38 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/02 16:03:00 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	create_prop(t_map *map)
 					exit_edit(map->sectors->info, map);
 			}
 			else
+			{
 				ft_putendl("You can't put a prop here");
+				break ;
+			}
 		}
 		else if (event.key.keysym.sym == SDLK_d)
 			break ;
@@ -48,11 +51,11 @@ char	*get_prop_name(void)
 
 	ft_putendl("What is your prop?");
 	size = 0;
-	while (size < 3 || size > 5)
+	while (size < 3 || size > 10)
 	{
 		get_next_line(0, &line);
 		size = ft_strlen(line);
-		if (size < 3 || size > 5)
+		if (size < 3 || size > 10)
 			ft_putendl("Invalid name");
 	}
 	return (line);
@@ -93,7 +96,8 @@ int		valid_new_prop(t_map *map, int x, int y)
 		prop = prop->next_prop;
 	}
 	item = map->items;
-	valid_new_prop2(x, y, enemy, item);
+	if (valid_new_prop2(x, y, enemy, item) == 0)
+		return (0);
 	new.x = x;
 	new.y = y;
 	if (prop_checks(new, map))
@@ -104,14 +108,8 @@ int		valid_new_prop(t_map *map, int x, int y)
 int		prop_checks(t_point new, t_map *map)
 {
 	if (is_in_sectors_spawn(new, map))
-	{
-		ft_putendl("props must be in a sector");
 		return (0);
-	}
 	if (!is_new_point_in_sectors(new, map))
-	{
-		ft_putendl("props can't be inside a wall");
 		return (0);
-	}
 	return (1);
 }

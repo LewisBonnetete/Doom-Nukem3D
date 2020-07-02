@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/29 15:02:35 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/02 15:49:56 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void		create_enemy(t_map *map)
 					exit_edit(map->sectors->info, map);
 			}
 			else
+			{
 				ft_putendl("You can't put an enemy here");
+				break ;
+			}
 		}
 		else if (event.key.keysym.sym == SDLK_d)
 			break ;
@@ -48,11 +51,11 @@ char		*get_enemy_name(void)
 
 	ft_putendl("What is your enemy?");
 	size = 0;
-	while (size < 3 || size > 5)
+	while (size < 3 || size > 10)
 	{
 		get_next_line(0, &line);
 		size = ft_strlen(line);
-		if (size < 3 || size > 5)
+		if (size < 3 || size > 10)
 			ft_putendl("Invalid name");
 	}
 	return (line);

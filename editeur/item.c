@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/29 15:25:01 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/02 16:03:14 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ void	create_item(t_map *map)
 					exit_edit(map->sectors->info, map);
 			}
 			else
+			{
 				ft_putendl("You can't put an item here");
+				break ;
+			}
 		}
 		else if (event.key.keysym.sym == SDLK_d)
 			break ;
@@ -48,11 +51,11 @@ char	*get_item_name(void)
 
 	ft_putendl("What is your item?");
 	size = 0;
-	while (size < 3 || size > 5)
+	while (size < 3 || size > 10)
 	{
 		get_next_line(0, &line);
 		size = ft_strlen(line);
-		if (size < 3 || size > 5)
+		if (size < 3 || size > 10)
 			ft_putendl("Invalid name");
 	}
 	return (line);
@@ -93,10 +96,11 @@ int		valid_new_item(t_map *map, int x, int y)
 	}
 	enemy = map->enemys;
 	prop = map->props;
-	valid_new_item2(x, y, enemy, prop);
+	if (valid_new_item2(x, y, enemy, prop) == 0)
+		return (0);
 	new.x = x;
 	new.y = y;
-	if (item_checks(new, map))
+	if (item_checks(new, map) )
 		return (0);
 	return (1);
 }
@@ -104,14 +108,8 @@ int		valid_new_item(t_map *map, int x, int y)
 int		item_checks(t_point new, t_map *map)
 {
 	if (is_in_sectors_spawn(new, map))
-	{
-		ft_putendl("Items must be in a sector");
 		return (0);
-	}
 	if (!is_new_point_in_sectors(new, map))
-	{
-		ft_putendl("Items can't be inside a wall");
 		return (0);
-	}
 	return (1);
 }

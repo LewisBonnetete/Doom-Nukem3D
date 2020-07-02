@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/23 16:48:57 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/02 16:02:47 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,9 @@
 int		enemy_checks(t_point new, t_map *map)
 {
 	if (is_in_sectors_spawn(new, map))
-	{
-		ft_putendl("enemys must be in a sector");
 		return (0);
-	}
 	if (!is_new_point_in_sectors(new, map))
-	{
-		ft_putendl("enemys can't be inside a wall");
 		return (0);
-	}
 	return (1);
 }
 

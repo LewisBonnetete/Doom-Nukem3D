@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/01 16:50:59 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:52:54 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,15 @@ void		draw_square(t_var *info, t_point a, t_point b, Uint32 color)
 	}
 }
 
-void	hud(t_var *info, t_player *player, t_map *map)
+void		hud(t_var *info, t_player *player, t_map *map)
 {
-	(void)info;
-	(void)player;
-	(void)map;
 	SDL_Rect	pos;
 	SDL_Surface	*texte;
 	SDL_Color	color;
 
 	color.a = 255;
 	color.r = 255;
-	color.g	= 255;
+	color.g = 255;
 	color.b = 255;
 	hp(info, player, color);
 	ammo(info, player, color);
