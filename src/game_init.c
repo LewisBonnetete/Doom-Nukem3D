@@ -41,11 +41,26 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 	dest->y = src->y;
 	dest->cap = 0;
 	dest->id = i;
-	//if (nom item)
-	dest->h = 128;
-	dest->w = 128;
+	if (dest->name[0] == 'a')
+	{
+		dest->h = 128;
+		dest->w = 128;
+		dest->text_id = 0;
+	}
+	else if (dest->name[0] == 'c')
+	{
+		dest->h = 350;
+		dest->w = 350;
+		dest->text_id = 1;
+	}
+	else
+	{
+		dest->h = 300;
+		dest->w = 300;
+		dest->text_id = 2;
+	}
 	render->nbr_items++;
-	dest->text_id = 0;
+	render->nb_item_total = 3;
 	if (src->next_item)
 		dest->next_item = init_item(render, src->next_item, i + 1);
 	else

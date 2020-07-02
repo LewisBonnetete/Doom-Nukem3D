@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/01 17:36:14 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/02 12:25:13 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ struct					s_render
 	t_wall				*wall_item;
 	t_item				*item;
 	int					nbr_items;
+	int					nb_item_total;
 	double				tx;
 	t_render			*next_render;
 };
