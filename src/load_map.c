@@ -56,10 +56,6 @@ int     rec_map(char *the_map, t_map *map)
        map->spawn = rec_point(the_map, map);
     if (the_map[++map->i] == 't')
        map->items = rec_item(the_map, map);
-    if (the_map[++map->i] == 'p') //changer P
-       map->prop = rec_prop(the_map, map);
-    if (the_map[++map->i] == 'y') //changer P
-       map->enemy = rec_enemy(the_map, map);
     return (1);
 }
 
