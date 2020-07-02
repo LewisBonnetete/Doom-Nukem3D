@@ -147,7 +147,7 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 		render->widht_item -= (render->widht_item - render->itab[k].end);
 	}
 	render->x = render->itab[k].start - 1;
-	render->p_0 = render->x + 1;
+	render->p_0 = render->x + 2;
 	while (++render->x <= render->widht_item + render->p_0)
 	{
 		ty = 0;

@@ -56,10 +56,6 @@ int     rec_map(char *the_map, t_map *map)
        map->spawn = rec_point(the_map, map);
     if (the_map[++map->i] == 't')
        map->items = rec_item(the_map, map);
-    if (the_map[++map->i] == 'p') //changer P
-       map->prop = rec_prop(the_map, map);
-    if (the_map[++map->i] == 'y') //changer P
-       map->enemy = rec_enemy(the_map, map);
     return (1);
 }
 
@@ -289,28 +285,6 @@ char    *recup_map(char *src)
     return (map);
 }
 
-t_prop  *rec_prop(char *the_map, t_map *map)
-{
-    t_prop *res;
- 
-	if (!(res = (t_prop *)ft_memalloc(sizeof(t_prop))))
-        return (0);
-    if (the_map[++map->i] == 'e')
-        res->name = rec_x_char(the_map, map);
-    if (the_map[map->i] == 'i')
-        res->x = rec_int(the_map, map); 
-    if (the_map[++map->i] == 'i')
-        res->y = rec_int(the_map, map);
-    if (the_map[++map->i] == 'p')
-	    res->next_prop = rec_prop(the_map, map);
-    else
-    {
-		--map->i;
-        res->next_prop = NULL;
-    }
-    return (res);
-}
-
 t_item  *rec_item(char *the_map, t_map *map)
 {
     t_item *res;
@@ -332,26 +306,4 @@ t_item  *rec_item(char *the_map, t_map *map)
     }
 	res->cap = 0;
     return (res);
-}
-
-t_enemy	*rec_enemy(char *the_map, t_map *map)
-{
-	t_enemy	*enemy;
-
-    if (!(enemy = (t_enemy *)ft_memalloc(sizeof(t_enemy))))
-        return(0);
-	if (the_map[++map->i] == 'e')
-		enemy->name = rec_x_char(the_map, map);
-	if (the_map[map->i] == 'i')
-		enemy->x = rec_int(the_map, map);
-	if (the_map[++map->i] == 'i')
-		enemy->y = rec_int(the_map, map);
-	if (the_map[++map->i] == 'y')
-		enemy->next_enemy = rec_enemy(the_map, map);
-	else
-	{
-		--map->i;
-		enemy->next_enemy = NULL;
-	}
-	return (enemy);
 }
