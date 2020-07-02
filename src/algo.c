@@ -140,7 +140,7 @@ void	draw_item_2(t_render *render, t_var *info, int k)
 	render->step_height = render->tab_sdl_item[render->itab[k].text_id]->h / render->height_item;
 	render->step_width = render->tab_sdl_item[render->itab[k].text_id]->w / render->widht_item;
 	render->tx = 0;
-	render->itab[k].end /= render->distance;
+	render->itab[k].end /= render->distance / 2;
 	if (render->itab[k].start == 0 && render->widht_item > render->itab[k].end)
 	{
 		render->tx = (render->widht_item - render->itab[k].end) * render->step_width;
