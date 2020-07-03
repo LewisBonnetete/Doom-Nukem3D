@@ -6,7 +6,7 @@
 #    By: trabut <trabut@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/01 17:00:40 by trabut           ###   ########.fr        #
+#    Updated: 2020/07/03 16:38:39 by trabut           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,11 @@ SRC =	main.c\
 		draw_tools.c\
 		algo_tools.c\
 		math_tools.c\
+		dealers.c\
+		dealers2.c\
+		dealers3.c\
+		dealers4.c\
+		diag.c\
 		rain.c
 		
 INC = doom-nukem.h

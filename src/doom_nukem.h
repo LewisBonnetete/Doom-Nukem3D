@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 14:31:20 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/03 16:57:33 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,8 @@ struct					s_player
 	double				posx;
 	double				posy;
 	double				posz;
+	int					sprint;
+	double				rotspeed;
 	double				dx;
 	double				dy;
 	double				dz;
@@ -255,6 +257,9 @@ struct					s_var
 	double				oldplanex;
 	double				rotspeed;
 	double				frametime;
+	int					y_dec;
+	int					x_dec;
+	int					mouse_in;
 	int					d_gun;
 	int					d_gunb;
 };
@@ -286,6 +291,8 @@ struct					s_input
 {
 	int					up;
 	int					down;
+	int					left;
+	int					right;
 	int					shoot;
 	int					straf_left;
 	int					straf_right;
@@ -349,7 +356,24 @@ struct					s_w_draw
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 int						init_win3(t_var *info);
-int						dealer(t_var *info, t_render *render);
+int						dealer(t_var *info);
+void					sprint(t_var *info, SDL_Event event);
+void					straff_and_rot(t_var *info, t_input input);
+void					straff_and_rot2(t_var *info, t_input input);
+void					rotate(t_var *info);
+void					mouser(t_var *info);
+void					get_speed(t_var *info);
+void					get_move1(SDL_Event event, t_input *input);
+void					get_move2(SDL_Event event, t_input *input);
+int						move(t_var *info, t_input input);
+void					move_diag(t_input *input);
+void					diag(t_var *info, t_input input);
+void					diag1(t_var *info, t_input input);
+void					diag2(t_var *info, t_input input);
+void					diag3(t_var *info, t_input input);
+void					diag4(t_var *info, t_input input);
+void					rot_left(t_var *info);
+void					rot_right(t_var *info);
 
 //init func
 void					init_player(t_player *player, t_map *map);
@@ -460,5 +484,6 @@ void					init_nb_sec(t_sector *sector, t_render *render);
 void					tex_floor_ciel(t_var *info, t_render *render);
 void					tab_path_text(t_render *renderer);
 t_render				*cpy_render(t_render *render);
+int						hit_box(t_var *info, t_render *render);
 
 #endif
