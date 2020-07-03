@@ -186,7 +186,7 @@ int		little_check(t_render *render, t_var *info, int k)
 
 void	put_item(int k, t_item *src, t_render *render, t_var *info)
 {
-	if (render->itab[k].name[0] == src->name[0])
+	if (render->itab[k].name[0] == src->name[0] && src->cap == 1)
 		draw_item_2(render, info, k, src);
 	else if (src->next_item)
 		put_item(k, src->next_item, render, info);
@@ -226,9 +226,6 @@ void	draw_item(t_render *render, t_var *info)
 				k = i;
 		if (render->itab[k].name[0] != '-' && render->itab[k].name[1] != '1')
 		{
-		//	render->item = render->s->item + k;
-		//	put_item(k, &render->item, render->item_0, render);
-		//	printf("essaie afficher %s \n", render->item->name);
 			put_item(k, render->item_0, render, info);
 			render->itab[k].name = "-1";
 			render->itab[k].dist = -1;
