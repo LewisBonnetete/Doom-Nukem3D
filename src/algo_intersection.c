@@ -57,6 +57,12 @@ int		intersect(t_ray *ray, t_wall *wall)
 		ray->x2 = ray->x;
 		ray->y2 = wall->eq_slope * ray->x2 + wall->eq_cste;
 	}
+	else if (wall->eq_slope == 0)
+	{
+		ray->x2 = (wall->eq_cste - ray->eq_cste)
+		/ (ray->eq_slope);
+		ray->y2 = wall->eq_cste;
+	}
 	else
 	{
 		ray->x2 = (wall->eq_cste - ray->eq_cste)
