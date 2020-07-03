@@ -32,21 +32,21 @@ int     dealer(t_var *info, t_render *render)
 {
 	SDL_Event e;
 
-	(void)render;
+//	(void)render;
 	if (SDL_PollEvent(&e) == 1)
 	{
 		if (e.type == SDL_QUIT)
-	        	ft_exit(info, render);
+				ft_exit(info, render);
 		if (e.key.keysym.sym == SDLK_ESCAPE)
-	        	ft_exit(info, render);
+				ft_exit(info, render);
 		if (e.type == SDL_MOUSEBUTTONDOWN)
-	       		ft_exit(info, render);
-       		if (e.key.keysym.sym == SDLK_LEFT)
-		    if (e.key.state == SDL_PRESSED)
-	                rot_left(info);
+			ft_exit(info, render);
+		if (e.key.keysym.sym == SDLK_LEFT)
+			if (e.key.state == SDL_PRESSED)
+				rot_left(info);
 		if (e.key.keysym.sym == SDLK_RIGHT)
-		    	if (e.key.state == SDL_PRESSED)
-        			rot_right(info);
+			if (e.key.state == SDL_PRESSED)
+				rot_right(info);
 		if (e.key.keysym.sym == SDLK_UP)
 		{
 			if (e.key.state == SDL_PRESSED)

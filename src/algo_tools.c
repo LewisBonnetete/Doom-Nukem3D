@@ -26,6 +26,8 @@ void		init_cast(t_var *info, t_render *render, t_ray *ray)
 	render->sector_id = info->player->sector_id;
 	render->n = -1;
 	render->x = 0;
+	render->k = 0;
+	render->nb_item_to_draw = 0;
 	render->ray = ray;
 	if (render->item && !render->item->cap)
 		render->item->cap = 0;

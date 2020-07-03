@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/02 12:25:13 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/03 14:31:20 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ struct					s_sector
 	int					sector_id;
 	t_sector			*next_sector;
 	t_map				*map;
-	t_var				*info;
+//	t_var				*info;
 };
 
 struct					s_box
@@ -199,10 +199,11 @@ struct					s_render
 	t_wall				*wall;
 	t_wall				*wall_item;
 	t_item				*item;
+	t_item				*item_0;
 	int					nbr_items;
-	int					nb_item_total;
+	int					nb_item_to_draw;
 	double				tx;
-	t_render			*next_render;
+	int					k;
 };
 
 struct					s_player
@@ -378,7 +379,7 @@ int						raycasting(t_var *info, t_render *render);
 void					put_pixel(Uint32 color, int x,
 							int y, SDL_Surface *image);
 int						xy_in_ab(double x, double y, t_point a, t_point b);
-void					calc_item_wall(t_render *render, t_var *info);
+void					calc_item_wall(t_render *render, t_item *item, t_var *info);
 void					draw_item(t_render *render, t_var *info);
 double					norm2(double x, double y);
 void					update_ray(t_var *info, t_render *render);

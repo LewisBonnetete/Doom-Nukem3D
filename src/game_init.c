@@ -37,7 +37,7 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 	if (!dest)
 		if (!(dest = (t_item *)ft_memalloc(sizeof(t_item))))
 			return (0);
-	dest->name = src->name;
+	dest->name = ft_strdup(src->name);
 	dest->x = src->x;
 	dest->y = src->y;
 	dest->cap = 0;
@@ -68,7 +68,6 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 			return (0);
 	}
 	render->nbr_items++;
-	render->nb_item_total = 3;
 	if (src->next_item)
 		dest->next_item = init_item(render, src->next_item, i + 1);
 	else
@@ -81,16 +80,18 @@ void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 	render->sector_id = sector_id;
 	render->s = get_a_sector_by_id(info->map, 1);
 	render->wall = NULL;
-	render->next_render = NULL;
 	render->sec_0 = render->s;
 	render->nb_sec = 0;
 	render->nbr_items = 0;
 	if (info->map->items && info->map->items->name != 0)
-		render->s->item = init_item(render, info->map->items, 0);
+	{
+		render->item = init_item(render, info->map->items, 0);
+		render->item_0 = render->item;
+	}
 	init_nb_sec(render->sec_0, render);
 }
 
-int		init_next_render(t_var *info, t_render *render)
+/*int		init_next_render(t_var *info, t_render *render)
 {
 	t_render	*tmp;
 
@@ -100,4 +101,4 @@ int		init_next_render(t_var *info, t_render *render)
 	init_render(info, tmp, render->x, render->wall->sector_id_it_leads_to);
 	tmp->x1 = render->next_x;
 	return (1);
-}
+}*/
