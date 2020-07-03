@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   doom-nukem_edit.h                                  :+:      :+:    :+:   */
+/*   doom_nukem_edit.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/29 15:04:52 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/03 15:00:47 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,7 +364,7 @@ int		get_walls_sector(t_map *map, t_sector *sector, int *height);
 void	get_textures(t_wall *wall);
 void		get_portal_info(t_wall *wall);
 void		get_nbr_walls_sector_textures(t_sector *sector);
-void		get_height_sector(t_map *map, int *height);
+void		get_height_sector(int *height);
 void		wall_fusion(t_sector *sector, int i);
 int			create_sector(t_var *info, t_map *map);
 void		close_sector(t_sector *sector, int i);

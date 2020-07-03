@@ -92,7 +92,7 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 	render->n = -1;
 	while (++render->n < render->s->nbr_walls)
 	{
-		render->wall = render->s->walls + render->n;
+		render->wall = &render->s->walls[render->n];
 		if (intersect(render->ray, render->wall) == 1)
 		{
 			if (render->wall->is_portal &&
@@ -279,6 +279,8 @@ int			raycasting(t_var *info, t_render *render)
 		init_tab(tab, render->nb_sec);
 		update_ray(info, render);
 		draw_column(info, render, tab);
+		printf("%f | %f    %f | %f\n", render->wall->a.x, render->wall->a.y, render->wall->b.x, render->wall->b.y);
+		printf("%f\n", render->wall->eq_slope);
 		render->x++;
 	}
 	draw_item(render, info);

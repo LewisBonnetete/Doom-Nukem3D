@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 14:33:55 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/03 15:00:37 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,28 +70,10 @@ void		get_nbr_walls_sector_textures(t_sector *sector)
 	get_nbr_walls_sector_textures2(sector);
 }
 
-void		get_height_sector(t_map *map, int *height)
+void		get_height_sector(int *height)
 {
-	char	*line;
-
-	ft_putendl("How low is you sector?");
-	while (height[0] < 1 || height[0] > map->size - 2)
-	{
-		get_next_line(0, &line);
-		height[0] = ft_atoi(line);
-		if (height[0] < 1 || height[0] > map->size - 2)
-			ft_putendl("Wrong height, try something else");
-		free(line);
-	}
-	ft_putendl("How high is you sector?");
-	while (height[1] <= height[0] || height[1] > map->size - 1)
-	{
-		get_next_line(0, &line);
-		height[1] = ft_atoi(line);
-		if (height[1] <= height[0] || height[1] > map->size - 1)
-			ft_putendl("Wrong height, try something else");
-		free(line);
-	}
+	height[0] = 1;
+	height[1] = 3;
 }
 
 int			create_first_wall_edit(t_sector *sector, int *height,

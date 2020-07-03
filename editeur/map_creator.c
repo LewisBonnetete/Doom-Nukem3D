@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 14:33:48 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/03 15:01:01 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			init_first_sector(t_var *info, t_sector *sector, t_map *map)
 
 	init_sector(sector);
 	sector->sector_id = 1;
-	get_height_sector(map, height);
+	get_height_sector(height);
 	get_nbr_walls_sector_textures(sector);
 	sector->map = map;
 	sector->info = info;
@@ -73,7 +73,7 @@ int			init_new_sector(t_var *info, t_sector *sector, t_map *map)
 	init_sector(sector->next_sector);
 	sector->next_sector->sector_id = sector->sector_id + 1;
 	sector = sector->next_sector;
-	get_height_sector(map, height);
+	get_height_sector(height);
 	get_nbr_walls_sector_textures(sector);
 	sector->map = map;
 	sector->info = info;
