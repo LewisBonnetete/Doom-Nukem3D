@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 14:31:20 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/03 16:49:14 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define WEST_WALL			0xF4A460
 # define NB_TEXT_I			3
 # define NB_TEXT			4
+# define DMG				1
 
 typedef struct s_input		t_input;
 typedef	struct s_var		t_var;
@@ -257,6 +258,7 @@ struct					s_var
 	double				frametime;
 	int					d_gun;
 	int					d_gunb;
+	int					clock;
 };
 
 struct					s_itab
@@ -460,5 +462,6 @@ void					init_nb_sec(t_sector *sector, t_render *render);
 void					tex_floor_ciel(t_var *info, t_render *render);
 void					tab_path_text(t_render *renderer);
 t_render				*cpy_render(t_render *render);
+int						gameplay(t_var *info);
 
 #endif

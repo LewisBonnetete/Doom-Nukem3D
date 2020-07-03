@@ -6,6 +6,7 @@ void			ft_init_pour_linstant(t_var *info)
 	info->rotspeed = info->frametime * 0.5;
 	info->d_gun = 0;
 	info->d_gunb = 0;
+	info->clock = 0;
 //	info->y_dec = 0;
 //	info->texture_cap = 0;
 //	info->mouse_in = 0;

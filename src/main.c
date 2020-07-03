@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 11:16:25 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/03 16:53:20 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int                main(int ac, char **av)
 		raycasting(&info, &renderer);
 		SDL_RenderPresent(info.renderer);
 		SDL_DestroyTexture(info.texture);
+		if (!gameplay(&info))
+			break;
 	}
 	SDL_DestroyWindow(info.window);
 	SDL_Quit();

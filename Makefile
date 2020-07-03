@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: trabut <trabut@student.42.fr>              +#+  +:+       +#+         #
+#    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/01 17:00:40 by trabut           ###   ########.fr        #
+#    Updated: 2020/07/03 16:24:55 by lbonnete         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ SRC =	main.c\
 		draw_tools.c\
 		algo_tools.c\
 		math_tools.c\
-		rain.c
+		rain.c\
+		gameplay.c
 		
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
