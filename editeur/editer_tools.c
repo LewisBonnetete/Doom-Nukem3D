@@ -6,11 +6,11 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/23 16:43:16 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/03 14:32:48 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem_edit.h"
+#include "doom_nukem_edit.h"
 
 int			nbr_of_sectors(t_map *map)
 {

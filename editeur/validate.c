@@ -6,11 +6,11 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/29 14:42:13 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/03 14:40:14 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem_edit.h"
+#include "doom_nukem_edit.h"
 
 int		verif(void)
 {

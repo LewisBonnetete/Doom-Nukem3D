@@ -6,11 +6,11 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/02 16:27:59 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/03 14:39:51 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem_edit.h"
+#include "doom_nukem_edit.h"
 #include <sys/stat.h>
 //l'idée est de créer la map de tel sorte que l'on ai une lettre suivi d'une info
 //a la fin on aura donc une grande ligne avec toutes les infos dont on va avoir besoin pour la map

@@ -6,11 +6,11 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/29 14:43:29 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/03 14:39:34 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem_edit.h"
+#include "doom_nukem_edit.h"
 
 int			similar_height(t_wall *w1, t_wall *w2)
 {

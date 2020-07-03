@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   del_sector.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lewis <lewis@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/05/28 11:58:06 by lewis            ###   ########.fr       */
+/*   Updated: 2020/07/03 14:32:25 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "doom-nukem_edit.h"
+#include "doom_nukem_edit.h"
 
 void	del_sector2(t_map *map)
 {
