@@ -38,7 +38,7 @@
 # define NORTH_WALL			0xD28F8F
 # define EAST_WALL			0xDAA520
 # define WEST_WALL			0xF4A460
-# define NB_TEXT_I			3
+# define NB_TEXT_I			5
 # define NB_TEXT			4
 # define DMG				1
 
@@ -358,7 +358,7 @@ struct					s_w_draw
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 int						init_win3(t_var *info);
-int						dealer(t_var *info);
+int						dealer(t_var *info, t_render *render);
 void					sprint(t_var *info, SDL_Event event);
 void					straff_and_rot(t_var *info, t_input input);
 void					straff_and_rot2(t_var *info, t_input input);
@@ -456,6 +456,7 @@ int						hitboxx(t_var *info, t_render *render, double dirx);
 //edit tools
 int						is_new_point_in_sector(t_point new, t_wall *walls);
 int						is_in_sectors_spawn(t_point first, t_map *map);
+int						is_in_sector_float(float center_x, float center_y, t_sector *sector);
 float					ft_fabs(float a);
 //int		draw_line_condition(t_line *line);
 //int		draw_line(t_var *info, t_line *line, Uint32 color);

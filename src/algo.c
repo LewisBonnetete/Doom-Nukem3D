@@ -63,7 +63,6 @@ void		check_intersect(t_var *info, t_render *render, t_item *item)
 		render->itab[render->k].w = item->w;
 		render->itab[render->k].text_id = item->text_id;
 		render->itab[render->k].id = item->id;
-//			if(render->n == render->nbr_items - 1)
 		item->cap = 1;
 		render->x++;
 		while (intersect(render->ray, render->wall_item) == 1)
@@ -73,7 +72,7 @@ void		check_intersect(t_var *info, t_render *render, t_item *item)
 		}
 		render->itab[render->k].end = render->x;
 		render->x = render->itab[render->k].start;
-//		update_ray(info, render);
+		update_ray(info, render);
 		++render->k;
 	}
 	if (item->next_item)
@@ -83,11 +82,7 @@ void		check_intersect(t_var *info, t_render *render, t_item *item)
 void		draw_column(t_var *info, t_render *render, int *tab)
 {
 	int		id_sec;
-	int		i;
-	int		k;
-	int		j;
-	t_itab	itab[5];
-	int		end;
+	t_itab		*itab;
 
 	render->n = -1;
 	while (++render->n < render->s->nbr_walls)
@@ -110,18 +105,6 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 	}
 	if (render->nbr_items <= 0)
 		return;
-	if (!render->itab)
-	{
-		if (!(render->itab
-			= (t_itab *)ft_memalloc(sizeof(t_itab) * (render->nbr_items + 2))))
-		return;
-		i = -1;
-		while (++i < render->nbr_items + 2)
-		{
-			render->itab[i].name = 0;
-			render->itab[i].dist = 0;
-		}
-	}
 	check_intersect(info, render, render->item_0);
 }
 
@@ -145,6 +128,8 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 		item->cap = 0;
 	if (render->distance <= 0)
 		render->distance = 0.1;
+	if (is_in_sector(w, render->s) != is_in_sector(p, render->s) && item->name[0] == 'c')
+		render->itab[k].text_id = 3;
 	render->height_item = render->itab[k].h / render->distance;
 	render->widht_item = render->itab[k].w / render->distance;
 	render->step_height = render->tab_sdl_item[render->itab[k].text_id]->h / render->height_item;
@@ -165,7 +150,7 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 		i = -1;
 		while (++i <= render->height_item)
 		{
-			color = get_pixel(render->tab_sdl_item[item->text_id], render->tab_sdl_item[render->itab[k].text_id]->h - (int)ty, (int)render->tx);
+			color = get_pixel(render->tab_sdl_item[render->itab[k].text_id], render->tab_sdl_item[render->itab[k].text_id]->h - (int)ty, (int)render->tx);
 			ty += render->step_height;
 			render->wall_dist = render->distance;
 			if (color != 0)
@@ -174,6 +159,8 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 		}
 		render->tx += render->step_width;
 	}
+	if (render->itab[k].text_id == 3)
+		render->itab[k].text_id = 1;
 }
 
 int		little_check(t_render *render, t_var *info, int k)
@@ -262,6 +249,7 @@ int			raycasting(t_var *info, t_render *render)
 {
 	t_ray	ray;
 	int		*tab;
+	int		i;
 
 	init_cast(info, render, &ray);
 	if (!(tab = (int *)ft_memalloc((sizeof(int) * (render->nb_sec + 2)))))
@@ -270,6 +258,15 @@ int			raycasting(t_var *info, t_render *render)
 	if (info->player->sector_id)
 		go_to_sector(render->sec_0, info->player->sector_id, render);
 	tex_floor_ciel(info, render);
+	if (!(render->itab
+		= (t_itab *)ft_memalloc(sizeof(t_itab) * (render->nbr_items + 2))))
+		return (0);
+	i = -1;
+	while (++i < render->nbr_items + 2)
+	{
+		render->itab[i].name = 0;
+		render->itab[i].dist = 0;
+	}
 	while (render->x < WINDOW_W)
 	{
 		go_to_sector(render->sec_0, info->player->sector_id, render);
@@ -283,5 +280,7 @@ int			raycasting(t_var *info, t_render *render)
 	hud(info, info->player, info->map);
 	rain_gen(info, render);
 	free(tab);
+	if (render->itab)
+		free(render->itab);
 	return (1);
 }

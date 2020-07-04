@@ -39,8 +39,12 @@ void	tab_path_text(t_render *renderer)
 		if (i == 2)
 			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/barrel.png")) == 0)
 				return;
+		if (i == 3)
+			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/dos.png")) == 0)
+				return;
 	}
-	renderer->tab_sdl_item[3] = NULL;
+	printf("texture load\n");
+	renderer->tab_sdl_item[4] = NULL;
 }
 // int	load_text(char **tab, t_render renderer)
 // {
