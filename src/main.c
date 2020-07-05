@@ -69,11 +69,12 @@ int                main(int ac, char **av)
 			SDL_Quit();
 			return (0);
 		}
-		raycasting(&info, &renderer);
+		if (raycasting(&info, &renderer) == 0)
+			ft_exit(&info, &renderer);
 		SDL_RenderPresent(info.renderer);
 		SDL_DestroyTexture(info.texture);
 		if (!gameplay(&info))
-			break;
+			ft_exit(&info, &renderer);
 	}
 	SDL_DestroyWindow(info.window);
 	SDL_Quit();

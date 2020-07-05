@@ -43,37 +43,53 @@ void		check_intersect(t_var *info, t_render *render, t_item *item)
 {
 	t_point	p;
 	t_point	w;
+	int	a;
 
 	calc_item_wall(render, item, info);
 	if (intersect(render->ray, render->wall_item) == 1
 		&& item->cap == 0)
 	{
-		render->nb_item_to_draw++;
+		a = 0;
 		p.x = info->player->posx;
 		p.y = info->player->posy;
-		w.x = render->itab[render->k].item_x;
-		w.y = render->itab[render->k].item_y;
+		w.x = item->x;
+		w.y = item->y;
 		render->wall_dist = calc_dist(p, w);
-		render->itab[render->k].dist = render->wall_dist;
-		render->itab[render->k].name = ft_strdup(item->name);
-		render->itab[render->k].item_x = item->x;
-		render->itab[render->k].item_y = item->y;
-		render->itab[render->k].start = render->x;
-		render->itab[render->k].h = item->h;
-		render->itab[render->k].w = item->w;
-		render->itab[render->k].text_id = item->text_id;
-		render->itab[render->k].id = item->id;
-		item->cap = 1;
-		render->x++;
-		while (intersect(render->ray, render->wall_item) == 1)
+		if (is_in_sector(w, render->s) != is_in_sector(p, render->s))
 		{
-			++render->x;
-			update_ray(info, render);
+			render->n = -1;
+			while (++render->n < render->s->nbr_walls)
+			{
+				render->wall = &render->s->walls[render->n];
+				if (intersect(render->ray, render->wall) == 1)
+					if (!render->wall->is_portal)
+						a = 1;
+			}
 		}
-		render->itab[render->k].end = render->x;
-		render->x = render->itab[render->k].start;
-		update_ray(info, render);
-		++render->k;
+		if (a == 0)
+		{
+			render->nb_item_to_draw++;
+			render->itab[render->k].dist = render->wall_dist;
+			render->itab[render->k].name = ft_strdup(item->name);
+			render->itab[render->k].item_x = item->x;
+			render->itab[render->k].item_y = item->y;
+			render->itab[render->k].start = render->x;
+			render->itab[render->k].h = item->h;
+			render->itab[render->k].w = item->w;
+			render->itab[render->k].text_id = item->text_id;
+			render->itab[render->k].id = item->id;
+			item->cap = 1;
+			render->x++;
+			while (intersect(render->ray, render->wall_item) == 1)
+			{
+				++render->x;
+				update_ray(info, render);
+			}
+			render->itab[render->k].end = render->x;
+			render->x = render->itab[render->k].start;
+			update_ray(info, render);
+			++render->k;
+		}
 	}
 	if (item->next_item)
 		check_intersect(info, render, item->next_item);
@@ -159,8 +175,6 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 		}
 		render->tx += render->step_width;
 	}
-	if (render->itab[k].text_id == 3)
-		render->itab[k].text_id = 1;
 }
 
 int		little_check(t_render *render, t_var *info, int k)
@@ -258,14 +272,21 @@ int			raycasting(t_var *info, t_render *render)
 	if (info->player->sector_id)
 		go_to_sector(render->sec_0, info->player->sector_id, render);
 	tex_floor_ciel(info, render);
-	if (!(render->itab
-		= (t_itab *)ft_memalloc(sizeof(t_itab) * (render->nbr_items + 2))))
-		return (0);
-	i = -1;
-	while (++i < render->nbr_items + 2)
+	if (render->nbr_items != 0)
 	{
-		render->itab[i].name = 0;
-		render->itab[i].dist = 0;
+		printf("passe ici\n");
+		if (!(render->itab = (t_itab *)ft_memalloc(sizeof(t_itab) * (render->nbr_items + 1))))
+		{
+			printf("etonnant\n");
+			return (0);
+		}
+		printf("passe ici\n");
+		i = -1;
+		while (++i < render->nbr_items + 1)
+		{
+			render->itab[i].name = 0;
+			render->itab[i].dist = 0;
+		}
 	}
 	while (render->x < WINDOW_W)
 	{
@@ -281,6 +302,6 @@ int			raycasting(t_var *info, t_render *render)
 	rain_gen(info, render);
 	free(tab);
 	if (render->itab)
-		free(render->itab);
+		free(&render->itab);
 	return (1);
 }

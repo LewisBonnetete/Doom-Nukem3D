@@ -22,8 +22,6 @@ void    init_tab(int *tab, int n)
 
 static	void		free_itab(t_itab *tab)
 {
-	if (tab->name)
-		free(&tab->name);
 	free(&tab);
 }
 
@@ -44,29 +42,23 @@ static	void	free_item(t_item *item)
 
 static  void        free_sector(t_sector *sector)
 {
-	if (sector->walls)
-		free(&sector->walls);
 	if (sector->next_sector)
 		free_sector(sector->next_sector);
-    free(&sector);
+	free(&sector);
 }
 
 static  void		free_render(t_render *render)
 {
-    int i;
+	int i;
 
 	i = 0;
 	while(i < NB_TEXT)
-	{
 		if (render->tab_sdl[i])
 			SDL_FreeSurface(render->tab_sdl[i++]);
-	}
 	i = 0;
 	while(i < NB_TEXT_I)
-	{
 		if (render->tab_sdl_item[i])
 			SDL_FreeSurface(render->tab_sdl_item[i++]);
-	}
 	if(render->itab)
 		free_itab(render->itab);
 	if(render->ray)
