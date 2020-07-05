@@ -98,14 +98,16 @@ void		check_intersect(t_var *info, t_render *render, t_item *item)
 void		draw_column(t_var *info, t_render *render, int *tab)
 {
 	int		id_sec;
-	t_itab		*itab;
 
 	render->n = -1;
+	printf("debut draw\n");
 	while (++render->n < render->s->nbr_walls)
 	{
 		render->wall = &render->s->walls[render->n];
+		printf("dans boucle\n");
 		if (intersect(render->ray, render->wall) == 1)
 		{
+			printf("trouve un malheeureux portail\n");
 			if (render->wall->is_portal &&
 				tab[render->wall->sector_id_it_leads_to] == 0)
 			{
@@ -118,7 +120,9 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 			draw_textures(info, render);
 			break;
 		}
+		printf("spoiler, non .\n");
 	}
+	printf("check nb item\n");
 	if (render->nbr_items <= 0)
 		return;
 	check_intersect(info, render, render->item_0);
@@ -272,15 +276,12 @@ int			raycasting(t_var *info, t_render *render)
 	if (info->player->sector_id)
 		go_to_sector(render->sec_0, info->player->sector_id, render);
 	tex_floor_ciel(info, render);
-	if (render->nbr_items != 0)
+	if (render->nbr_items > 100)
+		return (0);
+	if (render->nbr_items > 0)
 	{
-		printf("passe ici\n");
 		if (!(render->itab = (t_itab *)ft_memalloc(sizeof(t_itab) * (render->nbr_items + 1))))
-		{
-			printf("etonnant\n");
 			return (0);
-		}
-		printf("passe ici\n");
 		i = -1;
 		while (++i < render->nbr_items + 1)
 		{
@@ -290,10 +291,15 @@ int			raycasting(t_var *info, t_render *render)
 	}
 	while (render->x < WINDOW_W)
 	{
+		printf("dans le while\n");
 		go_to_sector(render->sec_0, info->player->sector_id, render);
+		printf("a iniit le sector\n");
 		init_tab(tab, render->nb_sec);
+		printf("a init le tab\n");
 		update_ray(info, render);
+		printf("a update le ray\n");
 		draw_column(info, render, tab);
+		printf("a fait les collones\n");
 		render->x++;
 	}
 	draw_item(render, info);

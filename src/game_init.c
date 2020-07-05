@@ -43,6 +43,7 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 	dest->y = src->y;
 	dest->cap = 0;
 	dest->id = i;
+	render->nbr_items++;
 	if (dest->name[0] == 'a')
 	{
 		dest->h = 128;
@@ -63,12 +64,13 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 	}
 	else
 	{
+		render->nbr_items--;
 		if (src->next_item)
-			dest = init_item(render, src->next_item, i + 1);
+			dest = init_item(render, src->next_item, i);
 		else
-			return (0);
+			dest = NULL;
+		return (dest);
 	}
-	render->nbr_items++;
 	if (src->next_item)
 		dest->next_item = init_item(render, src->next_item, i + 1);
 	else
