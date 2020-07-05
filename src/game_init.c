@@ -38,6 +38,7 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 	if (!dest)
 		if (!(dest = (t_item *)ft_memalloc(sizeof(t_item))))
 			return (0);
+	printf("essaie d'init l'item\n");
 	dest->name = ft_strdup(src->name);
 	dest->x = src->x;
 	dest->y = src->y;
@@ -64,6 +65,7 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 	}
 	else
 	{
+		printf("passe ici\n");
 		render->nbr_items--;
 		if (src->next_item)
 			dest = init_item(render, src->next_item, i);
@@ -86,7 +88,7 @@ void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 	render->sec_0 = render->s;
 	render->nb_sec = 0;
 	render->nbr_items = 0;
-	if (info->map->items && info->map->items->name != 0)
+	if (info->map->items && info->map->items->name[0] != 0)
 	{
 		render->item = init_item(render, info->map->items, 0);
 		render->item_0 = render->item;
