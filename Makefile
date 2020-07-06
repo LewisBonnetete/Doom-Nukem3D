@@ -48,13 +48,11 @@ SRC =	main.c\
 		draw_tools.c\
 		algo_tools.c\
 		math_tools.c\
-		rain.c\
-		gameplay.c
+		gameplay.c\
 		dealers.c\
 		dealers2.c\
 		dealers3.c\
 		dealers4.c\
-		diag.c\
 		rain.c
 		
 INC = doom-nukem.h
