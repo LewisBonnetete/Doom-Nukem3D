@@ -137,8 +137,15 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 	w.x = render->itab[k].item_x;
 	w.y = render->itab[k].item_y;
 	render->distance = calc_dist(p, w);
-	if (render->distance < 0.5 && render->itab[k].text_id == 0)
+	if (render->distance < 0.5 && (render->itab[k].text_id == 0
+	|| render->itab[k].text_id == 4 || render->itab[k].text_id == 5))
+	{
+		if (render->itab[k].text_id == 4)
+			info->player->hp += 25;
+		if (info->player->hp > 100)
+			info->player->hp = 100;
 		item->cap = 2;
+	}
 	else
 		item->cap = 0;
 	if (render->distance <= 0)

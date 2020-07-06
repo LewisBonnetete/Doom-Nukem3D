@@ -62,6 +62,18 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 		dest->w = 300;
 		dest->text_id = 2;
 	}
+	else if (dest->name[0] == 'h')
+	{
+		dest->h = 250;
+		dest->w = 250;
+		dest->text_id = 4;
+	}
+	else if (dest->name[0] == 'm')
+	{
+		dest->h = 100;
+		dest->w = 100;
+		dest->text_id = 5;
+	}
 	else
 	{
 		render->nbr_items--;
