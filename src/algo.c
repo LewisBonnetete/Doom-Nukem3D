@@ -204,13 +204,12 @@ void	draw_item(t_render *render, t_var *info)
 		return;
 	i = -1;
 	while (++i < render->nb_item_to_draw + 1)
-	{
 		if (render->itab[i].name == 0)
 		{
 			render->itab[i].dist = -1;
 			render->itab[i].name = "-1";
 		}
-	}j = -1;
+	j = -1;
 	while (++j < render->nb_item_to_draw)
 	{
 		k = 0;
@@ -298,6 +297,6 @@ int			raycasting(t_var *info, t_render *render)
 	rain_gen(info, render);
 	free(tab);
 	if (render->itab)
-		free(&render->itab);
+		free(render->itab);
 	return (1);
 }
