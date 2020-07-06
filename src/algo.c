@@ -105,14 +105,17 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 		render->wall = &render->s->walls[render->n];
 		if (intersect(render->ray, render->wall) == 1)
 		{
-			if (render->wall->is_portal &&
-				tab[render->wall->sector_id_it_leads_to] == 0)
+			if (render->wall->is_portal
+			&& tab[render->wall->sector_id_it_leads_to] == 0)
 			{
 				tab[render->wall->sector_id_it_leads_to] = 1;
 				id_sec = render->wall->sector_id_it_leads_to;
 				go_to_sector(render->sec_0, id_sec, render);
 				draw_column(info, render, tab);
 			}
+			else if (render->wall->is_portal
+			&& tab[render->wall->sector_id_it_leads_to] == 1)
+				break;
 			update_render(info, render);
 			draw_textures(info, render);
 			break;
@@ -141,10 +144,16 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 	|| render->itab[k].text_id == 4 || render->itab[k].text_id == 5))
 	{
 		if (render->itab[k].text_id == 4)
+		{
+			item->cap = 3;
 			info->player->hp += 25;
+		}
 		if (info->player->hp > 100)
 			info->player->hp = 100;
-		item->cap = 2;
+		if (render->itab[k].text_id == 0)
+			item->cap = 2;
+		if (render->itab[k].text_id == 5)
+			item->cap = 3;//ici rajouter les munitions
 	}
 	else
 		item->cap = 0;
