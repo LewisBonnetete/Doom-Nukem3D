@@ -99,31 +99,34 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 {
 	int		id_sec;
 
+	if (render->nbr_items > 0)
+		check_intersect(info, render, render->item_0);
 	render->n = -1;
 	while (++render->n < render->s->nbr_walls)
 	{
 		render->wall = &render->s->walls[render->n];
 		if (intersect(render->ray, render->wall) == 1)
 		{
-			if (render->wall->is_portal
+			if (render->wall->is_portal == 1
 			&& tab[render->wall->sector_id_it_leads_to] == 0)
 			{
 				tab[render->wall->sector_id_it_leads_to] = 1;
+				tab[render->s->sector_id] = 1;
 				id_sec = render->wall->sector_id_it_leads_to;
 				go_to_sector(render->sec_0, id_sec, render);
 				draw_column(info, render, tab);
 			}
-			else if (render->wall->is_portal
+			else if (render->wall->is_portal == 1
 			&& tab[render->wall->sector_id_it_leads_to] == 1)
 				break;
-			update_render(info, render);
-			draw_textures(info, render);
-			break;
+			else
+			{
+				update_render(info, render);
+				draw_textures(info, render);
+				break;
+			}
 		}
 	}
-	if (render->nbr_items <= 0)
-		return;
-	check_intersect(info, render, render->item_0);
 }
 
 void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
@@ -279,12 +282,10 @@ int			raycasting(t_var *info, t_render *render)
 	int		*tab;
 	int		i;
 
-	init_cast(info, render, &ray);
-	if (!(tab = (int *)ft_memalloc((sizeof(int) * (render->nb_sec + 2)))))
-		return (0);
 	info->player->sector_id = player_sec(render->sec_0, info);
 	if (info->player->sector_id)
 		go_to_sector(render->sec_0, info->player->sector_id, render);
+	init_cast(info, render, &ray);
 	tex_floor_ciel(info, render);
 	if (render->nbr_items > 100)
 		return (0);
@@ -299,6 +300,8 @@ int			raycasting(t_var *info, t_render *render)
 			render->itab[i].dist = 0;
 		}
 	}
+	if (!(tab = (int *)ft_memalloc((sizeof(int) * (render->nb_sec + 1)))))
+		return (0);
 	while (render->x < WINDOW_W)
 	{
 		go_to_sector(render->sec_0, info->player->sector_id, render);

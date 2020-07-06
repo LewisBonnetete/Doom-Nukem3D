@@ -3,10 +3,10 @@
 void		update_ray(t_var *info, t_render *render)
 {
 	render->ray->cam_x = 2 * render->x / (double)(WINDOW_W) - 1;
-	render->ray->dx = info->player->dx +
-	info->player->planex * render->ray->cam_x;
-	render->ray->dy = info->player->dy +
-	info->player->planey * render->ray->cam_x;
+	render->ray->dx = info->player->dx
+		+ info->player->planex * render->ray->cam_x;
+	render->ray->dy = info->player->dy
+		+ info->player->planey * render->ray->cam_x;
 	if (render->ray->dx != 0.0)
 	{
 		render->ray->eq_slope = render->ray->dy
