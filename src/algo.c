@@ -138,6 +138,7 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 	int		y;
 	int		i;
 	Uint32	color;
+	t_item	*weapon;
 
 	p.x = info->player->posx;
 	p.y = info->player->posy;
@@ -157,7 +158,20 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 		if (render->itab[k].text_id == 0)
 			item->cap = 2;
 		if (render->itab[k].text_id == 5)
-			item->cap = 3;//ici rajouter les munitions
+		{
+			if (may_weapon(render->item_0))
+			{
+				weapon = go_to_item(render->item_0, 'a');
+				while (weapon && weapon->hold != 1)
+					weapon = go_to_item(weapon->next_item, 'a');
+				if (!weapon)
+					weapon = go_to_item(render->item_0, 'a');
+				weapon->mun += 25;
+				item->cap = 3;//ici rajouter les munitions
+			}
+			else
+				item->cap = 0;
+		}
 	}
 	else
 		item->cap = 0;

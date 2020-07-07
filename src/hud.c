@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 13:06:37 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/07 13:55:46 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,13 @@ void	munitions(t_var *info, t_player *player, SDL_Color color)
 	if (may_weapon(info->render->item_0))
 	{
 		weapon = go_to_item(info->render->item_0, 'a');
+		while (weapon && weapon->hold != 1)
+			weapon = go_to_item(weapon->next_item, 'a');
+		if (!weapon)
+		{
+			weapon = go_to_item(info->render->item_0, 'a');
+			weapon->hold = 1;
+		}
 		nb = ft_itoa(weapon->mun);
 		texte = TTF_RenderText_Blended(info->font, nb, color);
 		pos.x = 600;

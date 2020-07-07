@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 13:04:46 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/07 13:56:37 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ struct					s_item
 	int				text_id;
 	int				mun;
 	int				pv;
+	int				hold;
 	t_item			*next_item;
 };
 
@@ -403,6 +404,7 @@ int						darken_wall(t_var *info, Uint32 color,
 int						rgb_calc(int r, int g, int b);
 int						rain_gen(t_var *info, t_render *render);
 void					shoot_ennemy(t_var *info);
+void					change_weapon(t_var *info);
 
 //algo
 int						raycasting(t_var *info, t_render *render);

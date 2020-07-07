@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:35:50 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/07/07 12:50:37 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/07 14:06:31 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ void	shoot_ennemy(t_var *info)
 	if (may_weapon(info->render->item_0))
 	{
 		weapon = go_to_item(info->render->item_0, 'a');
+		while (weapon && weapon->hold != 1)
+			weapon = go_to_item(weapon->next_item, 'a');
+		if (!weapon)
+			weapon = go_to_item(info->render->item_0, 'a');
 		weapon->mun -= 1;
 		if (weapon->mun <= 0)
 			weapon->mun = 0;

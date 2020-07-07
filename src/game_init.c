@@ -50,6 +50,7 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 		dest->w = 128;
 		dest->text_id = 0;
 		dest->mun = 50;
+		dest->hold = 0;
 	}
 	else if (dest->name[0] == 'c')
 	{

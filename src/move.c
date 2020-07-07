@@ -82,6 +82,9 @@ int     dealer(t_var *info, t_render *render)
 		if (e.key.keysym.sym == SDLK_SPACE)
 			if (e.key.state == SDL_PRESSED)
 				shoot_ennemy(info);
+		if (e.key.keysym.sym == SDLK_v)
+			if (e.key.state == SDL_PRESSED)
+				change_weapon(info);
 	}
     return (1);
 }
