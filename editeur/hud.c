@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 14:33:18 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 18:14:47 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	command_hud(t_var *info, SDL_Color color)
 	pos.y = 160;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
-	texte = TTF_RenderText_Blended(info->font, "[ D ] Delete sector or cancel creations", color);
+	texte = TTF_RenderText_Blended(info->font,
+	"[ D ] Delete sector or cancel creations", color);
 	pos.x = WINDOW_H + 20;
 	pos.y = 200;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);

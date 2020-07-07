@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 16:50:32 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 18:57:31 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,30 @@ int		is_new_point_in_sectors(t_point new, t_map *map)
 
 int		is_in_object(t_point new, t_map *map)
 {
-	t_item	*item;
-	t_prop	*prop;
-	t_enemy *enemy;
+	t_norm1 norm1;
 
-	item = map->items;
-	prop = map->props;
-	enemy = map->enemys;
-	while (item || prop || enemy)
+	norm1.item = map->items;
+	norm1.prop = map->props;
+	norm1.enemy = map->enemys;
+	while (norm1.item || norm1.prop || norm1.enemy)
 	{
-		if (item)
+		if (norm1.item)
 		{
-			if (item->x == new.x && item->y == new.y)
+			if (norm1.item->x == new.x && norm1.item->y == new.y)
 				return (0);
-			item = item->next_item;
+			norm1.item = norm1.item->next_item;
 		}
-		if (prop)
+		if (norm1.prop)
 		{
-			if (prop->x == new.x && prop->y == new.x)
+			if (norm1.prop->x == new.x && norm1.prop->y == new.y)
 				return (0);
-			prop = prop->next_prop;
+			norm1.prop = norm1.prop->next_prop;
 		}
-		if (enemy)
+		if (norm1.enemy)
 		{
-			if (enemy->x == new.x && enemy->y == new.y)
+			if (norm1.enemy->x == new.x && norm1.enemy->y == new.y)
 				return (0);
-			enemy = enemy->next_enemy;
+			norm1.enemy = norm1.enemy->next_enemy;
 		}
 	}
 	return (1);
@@ -97,10 +95,8 @@ int		set_spawn(t_map *map)
 		SDL_WaitEvent(&event);
 		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
-			new.x = round(((float)event.button.x
-			/ (float)(WINDOW_H - 50) * map->size));
-			new.y = round(((float)event.button.y
-			/ (float)(WINDOW_H - 50) * map->size));
+			new.x = x_coo(&event, map);
+			new.y = y_coo(&event, map);
 			ok = spawn_checks(new, map);
 		}
 		else if (event.key.keysym.sym == SDLK_d)
@@ -111,6 +107,5 @@ int		set_spawn(t_map *map)
 	}
 	map->spawn.x = new.x;
 	map->spawn.y = new.y;
-	printf("spawn: %i | %i | %i\n", map->spawn.x, map->spawn.y, map->spawn.z);
 	return (1);
 }

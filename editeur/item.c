@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 14:56:03 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 18:18:55 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,8 @@ void	create_item(t_map *map)
 				if (!add_item(map, get_item_name(), x, y))
 					exit_edit(map->sectors->info, map);
 			}
-			else
-			{
+			if (valid_coo == 0)
 				ft_putendl("You can't put an item here");
-				break ;
-			}
 		}
 		else if (event.key.keysym.sym == SDLK_d)
 			break ;
@@ -54,7 +51,8 @@ char	*get_item_name(void)
 	while (size)
 	{
 		get_next_line(0, &line);
-		if (ft_strcmp("ak47", line) == 0 || ft_strcmp("mun", line) == 0 || ft_strcmp("heal", line) == 0)
+		if (ft_strcmp("ak47", line) == 0 || ft_strcmp("mun", line) == 0
+		|| ft_strcmp("heal", line) == 0)
 			size = 0;
 		else
 			ft_putendl("We only got ak47, mun and heal for now");
@@ -101,7 +99,7 @@ int		valid_new_item(t_map *map, int x, int y)
 		return (0);
 	new.x = x;
 	new.y = y;
-	if (item_checks(new, map) )
+	if (item_checks(new, map))
 		return (0);
 	return (1);
 }
