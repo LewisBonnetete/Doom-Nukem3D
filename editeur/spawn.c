@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 16:37:19 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:50:32 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,26 @@ int		is_in_object(t_point new, t_map *map)
 	item = map->items;
 	prop = map->props;
 	enemy = map->enemys;
-	ft_putendl("0");
 	while (item || prop || enemy)
 	{
-		ft_putendl("a");
 		if (item)
 		{
 			if (item->x == new.x && item->y == new.y)
 				return (0);
 			item = item->next_item;
 		}
-		ft_putendl("b");
 		if (prop)
 		{
 			if (prop->x == new.x && prop->y == new.x)
 				return (0);
 			prop = prop->next_prop;
 		}
-		ft_putendl("c");
 		if (enemy)
 		{
 			if (enemy->x == new.x && enemy->y == new.y)
 				return (0);
 			enemy = enemy->next_enemy;
 		}
-		ft_putendl("d");
 	}
 	return (1);
 }
