@@ -203,7 +203,7 @@ char	*rec_x_char(char *the_map, t_map *map)
 		|| (the_map[map->i] >= 'A' && the_map[map->i] <= 'Z'))
         || (the_map[map->i] >= '0' && the_map[map->i] <= '9'))
 		&& (the_map[map->i] != 'i' || (the_map[map->i + 1] < '0'
-		&& the_map[map->i + 1] > '9')))
+		|| the_map[map->i + 1] > '9')))
 	{
 		if (src != 0)
         {
