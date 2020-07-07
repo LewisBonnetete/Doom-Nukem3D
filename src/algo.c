@@ -224,9 +224,10 @@ void	put_item(int k, t_item *src, t_render *render, t_var *info)
 {
 	if (render->itab[k].name[0] == src->name[0] && src->cap == 1)
 	{
-		if (src->name[0] == 'c' && src->pv > 0)
+		if ((src->name[0] == 'c' && src->pv > 0)
+			|| (src->name[0] == 's' && src->pv > 0))
 			draw_item_2(render, info, k, src);
-		else if (src->name[0] == 'c')
+		else if (src->name[0] == 'c' || src->name[0] == 's')
 			src->cap = 3;
 		else
 			draw_item_2(render, info, k, src);
