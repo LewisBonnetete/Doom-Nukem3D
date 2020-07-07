@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 12:54:41 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/07 15:12:52 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int		enemys_in_sector(t_var *info, t_player *player)
 	{
 		if (item->name[0] == 'c' && same_sector(info, item, player->sector_id)
 			&& item->cap != 3)
-			i++;
+			i += 2;
+		if (item->name[0] == 's' && same_sector(info, item, player->sector_id)
+			&& item->cap != 3)
+			i += 1;
 		item = item->next_item;
 	}
 	return (i);
