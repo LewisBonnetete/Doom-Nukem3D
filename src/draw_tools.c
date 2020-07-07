@@ -42,7 +42,7 @@ int			darken_floor(t_f_tool *tool, t_render *render)
 		rgb.g = 255;
 	if (rgb.b >= 255)
 		rgb.b = 255;
-	return (rgb_calc(rgb.r, rgb.g, rgb.g));
+	return (rgb_calc(rgb.r, rgb.g, rgb.b));
 }
 
 int			darken_wall(t_var *info, Uint32 color, t_render *render, int i)
@@ -68,7 +68,7 @@ int			darken_wall(t_var *info, Uint32 color, t_render *render, int i)
 		rgb.g = 255;
 	if (rgb.b >= 255)
 		rgb.b = 255;
-	return (rgb_calc(rgb.r, rgb.g, rgb.g));
+	return (rgb_calc(rgb.r, rgb.g, rgb.b));
 }
 
 void		w_draw_calc(t_render *render, t_var *info, t_w_draw *draw)
