@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 16:53:20 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:43:30 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int                main(int ac, char **av)
 	tab_path_text(&renderer);
 	if (WALL_H > 1000 || WALL_H <= 0)
 		return (0);
-	while (dealer(&info, &renderer))
+	while (dealer(&info))
 	{
 		if (!(info.texture = SDL_CreateTextureFromSurface(info.renderer, info.image)))
 		{
