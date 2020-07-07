@@ -49,6 +49,7 @@ void		check_intersect(t_var *info, t_render *render, t_item *item)
 	if (intersect(render->ray, render->wall_item) == 1
 		&& item->cap == 0)
 	{
+		render->itab[render->k].pv = item->pv;
 		a = 0;
 		p.x = info->player->posx;
 		p.y = info->player->posy;
@@ -206,7 +207,14 @@ int		little_check(t_render *render, t_var *info, int k)
 void	put_item(int k, t_item *src, t_render *render, t_var *info)
 {
 	if (render->itab[k].name[0] == src->name[0] && src->cap == 1)
-		draw_item_2(render, info, k, src);
+	{
+		if (src->name[0] == 'c' && src->pv > 0)
+			draw_item_2(render, info, k, src);
+		else if (src->name[0] == 'c')
+			src->cap = 3;
+		else
+			draw_item_2(render, info, k, src);
+	}
 	else if (src->next_item)
 		put_item(k, src->next_item, render, info);
 }
@@ -276,6 +284,15 @@ static	void	ft_put_weapon(t_var *info, t_render *render)
 	}
 }
 
+int			may_weapon(t_item *item)
+{
+	if (item->cap == 2 && item->name[0] == 'a')
+		return (1);
+	else if (item->next_item)
+		return(may_weapon(item->next_item));
+	return (0);
+}
+
 int			raycasting(t_var *info, t_render *render)
 {
 	t_ray	ray;
@@ -311,7 +328,8 @@ int			raycasting(t_var *info, t_render *render)
 		render->x++;
 	}
 	draw_item(render, info);
-	ft_put_weapon(info, render);
+	if (may_weapon(render->item_0) == 1)
+		ft_put_weapon(info, render);
 	hud(info, info->player, info->map);
 	rain_gen(info, render);
 	free(tab);

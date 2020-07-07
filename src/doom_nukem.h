@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 17:05:21 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 12:17:53 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ struct					s_item
 	int				h;
 	int				w;
 	int				text_id;
+	int				mun;
+	int				pv;
 	t_item			*next_item;
 };
 
@@ -280,6 +282,7 @@ struct					s_itab
 	int					h;
 	int					w;
 	int					id;
+	int					pv;
 };
 
 struct					s_rgb
@@ -399,6 +402,7 @@ int						darken_wall(t_var *info, Uint32 color,
 							t_render *render, int i);
 int						rgb_calc(int r, int g, int b);
 int						rain_gen(t_var *info, t_render *render);
+void					shoot_ennemy(t_var *info);
 
 //algo
 int						raycasting(t_var *info, t_render *render);
@@ -412,6 +416,7 @@ void					update_ray(t_var *info, t_render *render);
 double					scalar(double x1, double y1, double x2, double y2);
 void					init_cast(t_var *info, t_render *render, t_ray *ray);
 void					init_nb_sec(t_sector *sector, t_render *render);
+int						may_weapon(t_item *item);
 
 //hud
 void					hud(t_var *info, t_player *player, t_map *map);

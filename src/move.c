@@ -79,6 +79,9 @@ int     dealer(t_var *info, t_render *render)
 					info->player->posy -= info->player->dy * info->player->movespeed;
 			}
 		}
+		if (e.key.keysym.sym == SDLK_SPACE)
+			if (e.key.state == SDL_PRESSED)
+				shoot_ennemy(info);
 	}
     return (1);
 }

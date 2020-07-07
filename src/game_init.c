@@ -49,12 +49,14 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 		dest->h = 128;
 		dest->w = 128;
 		dest->text_id = 0;
+		dest->mun = 50;
 	}
 	else if (dest->name[0] == 'c')
 	{
 		dest->h = 350;
 		dest->w = 350;
 		dest->text_id = 1;
+		dest->pv = 20;
 	}
 	else if (dest->name[0] == 'b')
 	{
