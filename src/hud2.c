@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/02 14:52:54 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 12:58:11 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ void		hud(t_var *info, t_player *player, t_map *map)
 	name(info, map, color);
 	inventory(info, player, color);
 	weapon(info, player, color);
+	munitions(info, player, color);
 	//il faudra TTF_CloseFont(info->font);dans l'exit
 }
