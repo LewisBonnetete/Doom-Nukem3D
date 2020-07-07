@@ -6,7 +6,11 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2020/07/07 16:34:38 by atyczyns         ###   ########.fr       */
+=======
 /*   Updated: 2020/07/07 16:42:49 by lbonnete         ###   ########.fr       */
+>>>>>>> fff5003e2dfabe322ffc0bd849169a73fefa2a19
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -412,7 +416,7 @@ int						raycasting(t_var *info, t_render *render);
 void					put_pixel(Uint32 color, int x,
 							int y, SDL_Surface *image);
 int						xy_in_ab(double x, double y, t_point a, t_point b);
-void					calc_item_wall(t_render *render, t_item *item, t_var *info);
+int						calc_item_wall(t_render *render, t_item *item, t_var *info);
 void					draw_item(t_render *render, t_var *info);
 double					norm2(double x, double y);
 void					update_ray(t_var *info, t_render *render);
@@ -454,7 +458,7 @@ t_enemy					*rec_enemy(char *the_map, t_map *map);
 // tools
 int						do_trigo(t_var *info, t_wall *wall);
 double					calc_dist(t_point a, t_point b);
-void					tab_path(t_render *renderer);
+int						tab_path(t_render *renderer);
 void					ft_exit(t_var *info, t_render *render);
 void					free_map(t_map *map);
 void					init_tab(int *tab, int n);
@@ -494,7 +498,7 @@ int						pnpoly_float(int nbr_walls, t_wall *walls,
 int						player_sec(t_sector *sector, t_var *info);
 void					init_nb_sec(t_sector *sector, t_render *render);
 void					tex_floor_ciel(t_var *info, t_render *render);
-void					tab_path_text(t_render *renderer);
+int						tab_path_text(t_render *renderer);
 t_render				*cpy_render(t_render *render);
 int						gameplay(t_var *info);
 int						hit_box(t_var *info, t_render *render);
