@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 12:58:11 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/07 14:26:02 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void		hud(t_var *info, t_player *player, t_map *map)
 	color.g = 255;
 	color.b = 255;
 	hp(info, player, color);
-	ammo(info, player, color);
 	name(info, map, color);
 	inventory(info, player, color);
 	weapon(info, player, color);

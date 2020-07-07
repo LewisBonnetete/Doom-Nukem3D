@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 16:56:26 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/07 14:27:50 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	sprint(t_var *info, SDL_Event event)
 	}
 }
 
-int		dealer(t_var *info)
+/*int		dealer(t_var *info)
 {
 	SDL_Event		event;
 	static t_input	input;
@@ -82,4 +82,4 @@ int		dealer(t_var *info)
 	straff_and_rot(info, input);
 	move(info, input);
 	return (0);
-}
+}*/

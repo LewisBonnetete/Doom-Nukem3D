@@ -6,13 +6,13 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/03 16:10:42 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/07 14:28:05 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
-void	move_diag(t_input *input)
+/*void	move_diag(t_input *input)
 {
 	input->diag = 0;
 	if (input->up && input->straf_right && !input->down && !input->straf_left)
@@ -51,4 +51,4 @@ void	diag(t_var *info, t_input input)
 	{
 		diag4(info, input);
 	}
-}
+}*/

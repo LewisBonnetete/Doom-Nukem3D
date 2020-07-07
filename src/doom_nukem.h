@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 13:56:37 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/07 14:26:51 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -428,7 +428,6 @@ void					inventory(t_var *info, t_player *player,
 							SDL_Color color);
 void					name(t_var *info, t_map *map, SDL_Color color);
 void					hp(t_var *info, t_player *player, SDL_Color color);
-void					ammo(t_var *info, t_player *player, SDL_Color color);
 void					munitions(t_var *info, t_player *player, SDL_Color color);
 
 //load_map

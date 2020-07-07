@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 13:55:46 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/07 14:26:39 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,6 @@ void	hp(t_var *info, t_player *player, SDL_Color color)
 	free(nb);
 }
 
-void	ammo(t_var *info, t_player *player, SDL_Color color)
-{
-	SDL_Surface	*texte;
-	SDL_Rect	pos;
-	char		*nb;
-
-	nb = ft_itoa(player->ammo);
-	texte = TTF_RenderText_Blended(info->font, nb, color);
-	pos.x = 170;
-	pos.y = WINDOW_H - 30;
-	SDL_BlitSurface(texte, NULL, info->image, &pos);
-	SDL_FreeSurface(texte);
-	free(nb);
-}
-
 void	munitions(t_var *info, t_player *player, SDL_Color color)
 {
 	t_item	*weapon;
@@ -117,7 +102,7 @@ void	munitions(t_var *info, t_player *player, SDL_Color color)
 		}
 		nb = ft_itoa(weapon->mun);
 		texte = TTF_RenderText_Blended(info->font, nb, color);
-		pos.x = 600;
+		pos.x = 170;
 		pos.y = WINDOW_H - 30;
 		SDL_BlitSurface(texte, NULL, info->image, &pos);
 		SDL_FreeSurface(texte);
