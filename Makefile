@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
+#    By: trabut <trabut@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/07 13:57:19 by atyczyns         ###   ########.fr        #
+#    Updated: 2020/07/07 18:38:58 by trabut           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC =	main.c\
 		dealers4.c\
 		rain.c\
 		shoot.c\
+		tools_draw.c\
 		change_weapon.c
 
 INC = doom-nukem.h
