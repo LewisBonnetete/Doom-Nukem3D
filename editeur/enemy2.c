@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 15:26:51 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 18:02:59 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,10 @@ void		create_enemy(t_map *map)
 			x = x_coo(&event, map);
 			y = y_coo(&event, map);
 			if ((valid_coo = valid_new_enemy(map, x, y)))
-			{
 				if (!add_enemy(map, get_enemy_name(), x, y))
 					exit_edit(map->sectors->info, map);
-			}
-			else
-			{
+			if (valid_coo == 0)
 				ft_putendl("You can't put an enemy here");
-				break ;
-			}
 		}
 		else if (event.key.keysym.sym == SDLK_d)
 			break ;

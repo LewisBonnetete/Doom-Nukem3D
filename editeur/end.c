@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 17:01:57 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 18:02:02 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		end_checks(t_point new, t_map *map)
 		ft_putendl("end can't be inside something");
 		return (0);
 	}
-	 return (1);
+	return (1);
 }
 
 int		set_end(t_map *map)
@@ -45,10 +45,8 @@ int		set_end(t_map *map)
 		SDL_WaitEvent(&event);
 		if (event.type == SDL_MOUSEBUTTONDOWN)
 		{
-			new.x = round(((float)event.button.x
-			/ (float)(WINDOW_H - 50) * map->size));
-			new.y = round(((float)event.button.y
-			/ (float)(WINDOW_H - 50) * map->size));
+			new.x = x_coo(&event, map);
+			new.y = y_coo(&event, map);
 			ok = end_checks(new, map);
 		}
 		else if (event.key.keysym.sym == SDLK_d)
@@ -59,6 +57,5 @@ int		set_end(t_map *map)
 	}
 	map->end.x = new.x;
 	map->end.y = new.y;
-	printf("end: %i | %i | %i\n", map->end.x, map->end.y, map->end.z);
 	return (1);
 }
