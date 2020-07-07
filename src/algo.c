@@ -205,7 +205,16 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 			ty += render->step_height;
 			render->wall_dist = render->distance;
 			if (color != 0)
-				put_pixel(darken_wall(info, color, render, y), render->x, y, info->image);
+			{
+				if (item->name[0] == 's')
+				{
+					if (color != -6815608)
+						put_pixel(darken_wall(info, color, render, y),
+						render->x, y, info->image);
+				}
+				else
+					put_pixel(darken_wall(info, color, render, y), render->x, y, info->image);
+			}
 			--y;
 		}
 		render->tx += render->step_width;
