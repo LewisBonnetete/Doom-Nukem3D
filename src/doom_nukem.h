@@ -6,7 +6,11 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/07/07 15:52:36 by lbonnete         ###   ########.fr       */
+=======
+/*   Updated: 2020/07/07 15:39:56 by atyczyns         ###   ########.fr       */
+>>>>>>> 11e51984e6d5e72f7edf72a151223bb721beeb7d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +42,7 @@
 # define NORTH_WALL			0xD28F8F
 # define EAST_WALL			0xDAA520
 # define WEST_WALL			0xF4A460
-# define NB_TEXT_I			6
+# define NB_TEXT_I			7
 # define NB_TEXT			4
 # define DMG				1
 

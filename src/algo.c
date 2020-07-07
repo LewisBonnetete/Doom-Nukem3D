@@ -179,6 +179,8 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 		render->distance = 0.1;
 	if (is_in_sector(w, render->s) != is_in_sector(p, render->s) && item->name[0] == 'c')
 		return;
+	if (is_in_sector(w, render->s) != is_in_sector(p, render->s) && item->name[0] == 's')
+		render->itab[k].text_id = 6;
 	render->height_item = render->itab[k].h / render->distance;
 	render->widht_item = render->itab[k].w / render->distance;
 	render->step_height = render->tab_sdl_item[render->itab[k].text_id]->h / render->height_item;
@@ -203,7 +205,16 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 			ty += render->step_height;
 			render->wall_dist = render->distance;
 			if (color != 0)
-				put_pixel(darken_wall(info, color, render, y), render->x, y, info->image);
+			{
+				if (item->name[0] == 's')
+				{
+					if (color != -6815608)
+						put_pixel(darken_wall(info, color, render, y),
+						render->x, y, info->image);
+				}
+				else
+					put_pixel(darken_wall(info, color, render, y), render->x, y, info->image);
+			}
 			--y;
 		}
 		render->tx += render->step_width;
@@ -222,9 +233,10 @@ void	put_item(int k, t_item *src, t_render *render, t_var *info)
 {
 	if (render->itab[k].name[0] == src->name[0] && src->cap == 1)
 	{
-		if (src->name[0] == 'c' && src->pv > 0)
+		if ((src->name[0] == 'c' && src->pv > 0)
+			|| (src->name[0] == 's' && src->pv > 0))
 			draw_item_2(render, info, k, src);
-		else if (src->name[0] == 'c')
+		else if (src->name[0] == 'c' || src->name[0] == 's')
 			src->cap = 3;
 		else
 			draw_item_2(render, info, k, src);

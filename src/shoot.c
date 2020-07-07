@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:35:50 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/07/07 14:06:31 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/07 15:47:22 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_item	*check_monster(t_item *item, t_var *info, t_item *item_2)
 	t_point	p;
 	t_point	w;
 
-	if (item->name[0] == 'c')
+	if (item->name[0] == 'c' || item->name[0] == 's')
 	{
 		return (item);
 		/*info->render->x = WINDOW_W / 2;
