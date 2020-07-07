@@ -79,8 +79,8 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 	}
 	else if (dest->name[0] == 's')
 	{
-		dest->h = 60;
-		dest->w = 60;
+		dest->h = 80;
+		dest->w = 80;
 		dest->text_id = 3;
 		dest->pv = 40;
 	}

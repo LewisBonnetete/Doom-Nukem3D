@@ -178,7 +178,7 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 	if (render->distance <= 0)
 		render->distance = 0.1;
 	if (is_in_sector(w, render->s) != is_in_sector(p, render->s) && item->name[0] == 'c')
-		/*render->itab[k].text_id = 6*/return;
+		return;
 	render->height_item = render->itab[k].h / render->distance;
 	render->widht_item = render->itab[k].w / render->distance;
 	render->step_height = render->tab_sdl_item[render->itab[k].text_id]->h / render->height_item;
