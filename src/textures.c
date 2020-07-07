@@ -40,7 +40,7 @@ void	tab_path_text(t_render *renderer)
 			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/barrel.png")) == 0)
 				return;
 		if (i == 3)
-			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/slime.png")) == 0)
+			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/soldier.png")) == 0)
 				return;
 		if (i == 4)
 			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/heal.png")) == 0)
@@ -48,8 +48,11 @@ void	tab_path_text(t_render *renderer)
 		if (i == 5)
 			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/balle.png")) == 0)
 				return;
+		if (i == 6)
+			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/dos_soldier.png")) == 0)
+				return;
 	}
-	renderer->tab_sdl_item[6] = NULL;
+	renderer->tab_sdl_item[7] = NULL;
 }
 // int	load_text(char **tab, t_render renderer)
 // {
