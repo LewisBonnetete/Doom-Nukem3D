@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/01 18:27:11 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/07 16:53:39 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,23 @@ void			tex_floor_ciel(t_var *info, t_render *render)
 	while (tool.i++ < WINDOW_H)
 	{
 		init_floor(info, &tool);
+
 		while (tool.j++ < WINDOW_W)
 		{
-			tool.tx = (int)(render->tab_sdl[render->s->celling.text_id - 1]->w
+
+			tool.tx = (int)(render->tab_sdl[render->s->celling.text_id]->w
 			* (tool.floorx - (int)tool.floorx)) &
-			(render->tab_sdl[render->s->celling.text_id - 1]->w - 1);
-			tool.ty = (int)(render->tab_sdl[render->s->celling.text_id - 1]->h *
+			(render->tab_sdl[render->s->celling.text_id]->w - 1);
+			
+			tool.ty = (int)(render->tab_sdl[render->s->celling.text_id]->h *
 			(tool.floory - (int)tool.floory)) &
-			(render->tab_sdl[render->s->celling.text_id - 1]->h - 1);
+			(render->tab_sdl[render->s->celling.text_id]->h - 1);
+			
 			tool.floorx += tool.stepx;
 			tool.floory += tool.stepy;
+
 			put_pixel(darken_floor(&tool, render), tool.j, tool.i, info->image);
+			
 			put_pixel(darken_floor(&tool, render),
 			tool.j, WINDOW_H - tool.i - 1, info->image);
 		}
