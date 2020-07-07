@@ -16,18 +16,20 @@ void		init_floor(t_var *info, t_f_tool *tool)
 	tool->j = 0;
 }
 
-
 int			darken_floor(t_f_tool *tool, t_render *render)
 {
 	Uint32	color;
-
-	color = get_pixel(render->tab_sdl[2], tool->tx, tool->ty);
 	t_rgb	rgb;
 	double	screen_r;
 	double	screen_i;
+
+	color = get_pixel(render->tab_sdl[2], tool->tx, tool->ty);
 	rgb.r = (color >> 16) & 0xFF;
 	rgb.g = (color >> 8) & 0xFF;
 	rgb.b = color & 0xFF;
+	rgb.r = rgb.r * ((double)render->s->light / (double)100);
+	rgb.g = rgb.g * ((double)render->s->light / (double)100);
+	rgb.b = rgb.b * ((double)render->s->light / (double)100);
 	screen_r = ft_fabs(2.0 * (double)tool->i / (double)WINDOW_H - 1);
 	screen_i = ft_fabs(2.0 * (double)tool->j / (double)WINDOW_W - 1);
 	rgb.r = rgb.r / (0.33 * tool->dist +
@@ -36,12 +38,7 @@ int			darken_floor(t_f_tool *tool, t_render *render)
 	(screen_r * screen_r + screen_i * screen_i) * 3);
 	rgb.b = rgb.b / (0.33 * tool->dist + (screen_r *
 	screen_r + screen_i * screen_i) * 3);
-	if (rgb.r >= 255)
-		rgb.r = 255;
-	if (rgb.g >= 255)
-		rgb.g = 255;
-	if (rgb.b >= 255)
-		rgb.b = 255;
+	rgb_cap(&rgb);
 	return (rgb_calc(rgb.r, rgb.g, rgb.g));
 }
 
@@ -56,19 +53,18 @@ int			darken_wall(t_var *info, Uint32 color, t_render *render, int i)
 	rgb.b = color & 0xFF;
 	screen_r = ft_fabs(render->ray->cam_x);
 	screen_i = ft_fabs(2.0 * (double)i / (double)WINDOW_W - 0.70);
-	rgb.r = rgb.r / (0.5 * render->wall_dist +
-	(screen_r * screen_r + screen_i * screen_i) * 3);
-	rgb.g = rgb.g / (0.5 * render->wall_dist +
-	(screen_r * screen_r + screen_i * screen_i) * 3);
-	rgb.b = rgb.b / (0.5 * render->wall_dist + (screen_r *
-	screen_r + screen_i * screen_i) * 3);
-	if (rgb.r >= 255)
-		rgb.r = 255;
-	if (rgb.g >= 255)
-		rgb.g = 255;
-	if (rgb.b >= 255)
-		rgb.b = 255;
-	return (rgb_calc(rgb.r, rgb.g, rgb.g));
+	go_to_sector(render->sec_0, info->player->sector_id, render);
+	rgb.r = rgb.r * ((double)render->s->light / (double)100);
+	rgb.g = rgb.g * ((double)render->s->light / (double)100);
+	rgb.b = rgb.b * ((double)render->s->light / (double)100);
+	rgb.r = rgb.r / ((0.5 * render->wall_dist +
+	(screen_r * screen_r + screen_i * screen_i) * 3));
+	rgb.g = rgb.g / ((0.5 * render->wall_dist +
+	(screen_r * screen_r + screen_i * screen_i) * 3));
+	rgb.b = rgb.b / ((0.5 * render->wall_dist + (screen_r *
+	screen_r + screen_i * screen_i) * 3));
+	rgb_cap(&rgb);
+	return (rgb_calc(rgb.r, rgb.g, rgb.b));
 }
 
 void		w_draw_calc(t_render *render, t_var *info, t_w_draw *draw)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 15:39:56 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/07 18:37:41 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -405,11 +405,13 @@ int						rgb_calc(int r, int g, int b);
 int						rain_gen(t_var *info, t_render *render);
 void					shoot_ennemy(t_var *info);
 void					change_weapon(t_var *info);
+void					rgb_cap(t_rgb *rgb);
 
 //algo
 int						raycasting(t_var *info, t_render *render);
 void					put_pixel(Uint32 color, int x,
 							int y, SDL_Surface *image);
+void					go_to_sector(t_sector *sec_0, int id, t_render *render);
 int						xy_in_ab(double x, double y, t_point a, t_point b);
 void					calc_item_wall(t_render *render, t_item *item, t_var *info);
 void					draw_item(t_render *render, t_var *info);
