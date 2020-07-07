@@ -275,10 +275,12 @@ void	draw_item(t_render *render, t_var *info)
 		if (!render->itab[k].name)
 			break;
 		i = -1;
-		while (render->itab[++i].name)
+		while (render->itab[++i].name && i < render->nb_item_to_draw + 1)
+		{
 			if (render->itab[k].dist < render->itab[i].dist
 				&& render->itab[i].name[0] != '-' && render->itab[i].name[1] != '1')
 				k = i;
+		}
 		if (render->itab[k].name[0] != '-' && render->itab[k].name[1] != '1')
 		{
 			put_item(k, render->item_0, render, info);
@@ -315,9 +317,9 @@ static	void	ft_put_weapon(t_var *info, t_render *render)
 
 int			may_weapon(t_item *item)
 {
-	if (item->cap == 2 && item->name[0] == 'a')
+	if (item && item->cap == 2 && item->name[0] == 'a')
 		return (1);
-	else if (item->next_item)
+	else if (item && item->next_item)
 		return(may_weapon(item->next_item));
 	return (0);
 }
