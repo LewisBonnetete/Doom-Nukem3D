@@ -40,7 +40,7 @@ void	tab_path_text(t_render *renderer)
 			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/barrel.png")) == 0)
 				return;
 		if (i == 3)
-			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/dos.png")) == 0)
+			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/slime.png")) == 0)
 				return;
 		if (i == 4)
 			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/heal.png")) == 0)
