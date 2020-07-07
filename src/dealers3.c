@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dealers3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/03 16:10:36 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/07 16:01:40 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_move1(SDL_Event event, t_input *input)
 		else
 			input->up = 0;
 	}
-	if (event.key.keysym.sym == SDLK_a || event.key.keysym.sym == SDLK_q)
+	if (event.key.keysym.sym == SDLK_d || event.key.keysym.sym == SDLK_q)
 	{
 		if (event.key.state == SDL_PRESSED)
 			input->straf_left = 1;
@@ -40,21 +40,21 @@ void	get_move1(SDL_Event event, t_input *input)
 
 void	get_move2(SDL_Event event, t_input *input)
 {
-	if (event.key.keysym.sym == SDLK_d)
+	if (event.key.keysym.sym == SDLK_a)
 	{
 		if (event.key.state == SDL_PRESSED)
 			input->straf_right = 1;
 		else
 			input->straf_right = 0;
 	}
-	if (event.key.keysym.sym == SDLK_LEFT)
+	if (event.key.keysym.sym == SDLK_RIGHT)
 	{
 		if (event.key.state == SDL_PRESSED)
 			input->left = 1;
 		else
 			input->left = 0;
 	}
-	if (event.key.keysym.sym == SDLK_RIGHT)
+	if (event.key.keysym.sym == SDLK_LEFT)
 	{
 		if (event.key.state == SDL_PRESSED)
 			input->right = 1;

@@ -6,7 +6,7 @@
 #    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/07 13:57:19 by atyczyns         ###   ########.fr        #
+#    Updated: 2020/07/07 15:32:34 by lbonnete         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ SRC =	main.c\
 		dealers4.c\
 		rain.c\
 		shoot.c\
-		change_weapon.c
+		change_weapon.c\
+		diag.c
 
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))

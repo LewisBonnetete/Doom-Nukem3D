@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 15:06:55 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/07 15:52:36 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,7 @@ struct					s_rgb
 
 struct					s_input
 {
+	int					tir;
 	int					up;
 	int					down;
 	int					left;
@@ -362,7 +363,7 @@ struct					s_w_draw
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 int						init_win3(t_var *info);
-int						dealer(t_var *info, t_render *render);
+int						dealer(t_var *info);
 void					sprint(t_var *info, SDL_Event event);
 void					straff_and_rot(t_var *info, t_input input);
 void					straff_and_rot2(t_var *info, t_input input);
