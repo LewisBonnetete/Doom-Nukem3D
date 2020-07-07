@@ -29,14 +29,15 @@ void		go_to_sector(t_sector *sec_0, int id, t_render *render)
 		render->s = sec_0;
 }
 
-void		calc_item_wall(t_render *render, t_item *item, t_var *info)
+int			calc_item_wall(t_render *render, t_item *item, t_var *info)
 {
 	if (!(render->wall_item = (t_wall *)ft_memalloc(sizeof(t_wall))))
-		return ;
+		return (0);
 	render->wall_item->a.x = 0.3 * info->player->planex + item->x;
 	render->wall_item->a.y = 0.3 * info->player->planey + item->y;
 	render->wall_item->b.x = item->x - 0.3 * info->player->planex;
 	render->wall_item->b.y = item->y - 0.3 * info->player->planey;
+	return (1);
 }
 
 void		check_intersect(t_var *info, t_render *render, t_item *item)
@@ -45,51 +46,53 @@ void		check_intersect(t_var *info, t_render *render, t_item *item)
 	t_point	w;
 	int	a;
 
-	calc_item_wall(render, item, info);
-	if (intersect(render->ray, render->wall_item) == 1
-		&& item->cap == 0)
+	if (calc_item_wall(render, item, info) == 1)
 	{
-		render->itab[render->k].pv = item->pv;
-		a = 0;
-		p.x = info->player->posx;
-		p.y = info->player->posy;
-		w.x = item->x;
-		w.y = item->y;
-		render->wall_dist = calc_dist(p, w);
-		if (is_in_sector(w, render->s) != is_in_sector(p, render->s))
+		if (intersect(render->ray, render->wall_item) == 1
+			&& item->cap == 0)
 		{
-			render->n = -1;
-			while (++render->n < render->s->nbr_walls)
+			render->itab[render->k].pv = item->pv;
+			a = 0;
+			p.x = info->player->posx;
+			p.y = info->player->posy;
+			w.x = item->x;
+			w.y = item->y;
+			render->wall_dist = calc_dist(p, w);
+			if (is_in_sector(w, render->s) != is_in_sector(p, render->s))
 			{
-				render->wall = &render->s->walls[render->n];
-				if (intersect(render->ray, render->wall) == 1)
-					if (!render->wall->is_portal)
-						a = 1;
+				render->n = -1;
+				while (++render->n < render->s->nbr_walls)
+				{
+					render->wall = &render->s->walls[render->n];
+					if (intersect(render->ray, render->wall) == 1)
+						if (!render->wall->is_portal)
+							a = 1;
+				}
 			}
-		}
-		if (a == 0)
-		{
-			render->nb_item_to_draw++;
-			render->itab[render->k].dist = render->wall_dist;
-			render->itab[render->k].name = ft_strdup(item->name);
-			render->itab[render->k].item_x = item->x;
-			render->itab[render->k].item_y = item->y;
-			render->itab[render->k].start = render->x;
-			render->itab[render->k].h = item->h;
-			render->itab[render->k].w = item->w;
-			render->itab[render->k].text_id = item->text_id;
-			render->itab[render->k].id = item->id;
-			item->cap = 1;
-			render->x++;
-			while (intersect(render->ray, render->wall_item) == 1)
+				if (a == 0)
 			{
-				++render->x;
+				render->nb_item_to_draw++;
+				render->itab[render->k].dist = render->wall_dist;
+				render->itab[render->k].name = ft_strdup(item->name);
+				render->itab[render->k].item_x = item->x;
+				render->itab[render->k].item_y = item->y;
+				render->itab[render->k].start = render->x;
+				render->itab[render->k].h = item->h;
+				render->itab[render->k].w = item->w;
+				render->itab[render->k].text_id = item->text_id;
+				render->itab[render->k].id = item->id;
+				item->cap = 1;
+				render->x++;
+				while (intersect(render->ray, render->wall_item) == 1)
+				{
+					++render->x;
+					update_ray(info, render);
+				}
+				render->itab[render->k].end = render->x;
+				render->x = render->itab[render->k].start;
 				update_ray(info, render);
+				++render->k;
 			}
-			render->itab[render->k].end = render->x;
-			render->x = render->itab[render->k].start;
-			update_ray(info, render);
-			++render->k;
 		}
 	}
 	if (item->next_item)
@@ -272,10 +275,12 @@ void	draw_item(t_render *render, t_var *info)
 		if (!render->itab[k].name)
 			break;
 		i = -1;
-		while (render->itab[++i].name)
+		while (render->itab[++i].name && i < render->nb_item_to_draw + 1)
+		{
 			if (render->itab[k].dist < render->itab[i].dist
 				&& render->itab[i].name[0] != '-' && render->itab[i].name[1] != '1')
 				k = i;
+		}
 		if (render->itab[k].name[0] != '-' && render->itab[k].name[1] != '1')
 		{
 			put_item(k, render->item_0, render, info);
@@ -314,8 +319,6 @@ static	void	ft_put_weapon(t_var *info, t_render *render)
 
 int			may_weapon(t_item *item)
 {
-	ft_putendl("may in?");
-
 	if (item && item->cap == 2 && item->name[0] == 'a')
 		return (1);
 	else if (item && item->next_item)

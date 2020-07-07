@@ -6,9 +6,10 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 18:37:41 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/07 18:47:01 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef DOOM_NUKEM_H
 # define DOOM_NUKEM_H
@@ -29,7 +30,7 @@
 # define GMASK				0
 # define BMASK				0
 # define AMASK				0
-# define WALL_H				175
+# define WALL_H				238
 # define DECALLAGE			0
 # define BLACK				0x000000
 # define SKY_BLUE			0x00BFFF
@@ -295,6 +296,7 @@ struct					s_rgb
 
 struct					s_input
 {
+	int					tir;
 	int					up;
 	int					down;
 	int					left;
@@ -362,7 +364,7 @@ struct					s_w_draw
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 int						init_win3(t_var *info);
-int						dealer(t_var *info, t_render *render);
+int						dealer(t_var *info);
 void					sprint(t_var *info, SDL_Event event);
 void					straff_and_rot(t_var *info, t_input input);
 void					straff_and_rot2(t_var *info, t_input input);
@@ -413,7 +415,7 @@ void					put_pixel(Uint32 color, int x,
 							int y, SDL_Surface *image);
 void					go_to_sector(t_sector *sec_0, int id, t_render *render);
 int						xy_in_ab(double x, double y, t_point a, t_point b);
-void					calc_item_wall(t_render *render, t_item *item, t_var *info);
+int						calc_item_wall(t_render *render, t_item *item, t_var *info);
 void					draw_item(t_render *render, t_var *info);
 double					norm2(double x, double y);
 void					update_ray(t_var *info, t_render *render);
@@ -455,7 +457,7 @@ t_enemy					*rec_enemy(char *the_map, t_map *map);
 // tools
 int						do_trigo(t_var *info, t_wall *wall);
 double					calc_dist(t_point a, t_point b);
-void					tab_path(t_render *renderer);
+int						tab_path(t_render *renderer);
 void					ft_exit(t_var *info, t_render *render);
 void					free_map(t_map *map);
 void					init_tab(int *tab, int n);
@@ -495,7 +497,7 @@ int						pnpoly_float(int nbr_walls, t_wall *walls,
 int						player_sec(t_sector *sector, t_var *info);
 void					init_nb_sec(t_sector *sector, t_render *render);
 void					tex_floor_ciel(t_var *info, t_render *render);
-void					tab_path_text(t_render *renderer);
+int						tab_path_text(t_render *renderer);
 t_render				*cpy_render(t_render *render);
 int						gameplay(t_var *info);
 int						hit_box(t_var *info, t_render *render);

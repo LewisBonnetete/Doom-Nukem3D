@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dealers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 14:27:50 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 15:57:10 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,11 @@ void	sprint(t_var *info, SDL_Event event)
 		else
 			info->player->sprint = 0;
 	}
+	if (event.key.keysym.sym == SDLK_SPACE && event.key.state == SDL_PRESSED)
+ 		shoot_ennemy(info);
 }
 
-/*int		dealer(t_var *info)
+int		dealer(t_var *info)
 {
 	SDL_Event		event;
 	static t_input	input;
@@ -71,6 +73,8 @@ void	sprint(t_var *info, SDL_Event event)
 			return (0);
 		if (event.key.keysym.sym == SDLK_ESCAPE && event.type == SDL_KEYDOWN)
 			return (0);
+		if (event.key.keysym.sym == SDLK_v && event.key.state == SDL_PRESSED)
+ 			change_weapon(info);
 		get_move1(event, &input);
 		get_move2(event, &input);
 		move_diag(&input);
@@ -81,5 +85,5 @@ void	sprint(t_var *info, SDL_Event event)
 	diag(info, input);
 	straff_and_rot(info, input);
 	move(info, input);
-	return (0);
-}*/
+	return (1);
+}

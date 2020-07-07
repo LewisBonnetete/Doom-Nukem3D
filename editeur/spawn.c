@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 14:40:02 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:50:32 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ int		spawn_checks(t_point new, t_map *map)
 	if (!is_in_object(new, map))
 	{
 		ft_putendl("Spawn can't be inside something");
+		return (0);
+	}
+	if (new.x == map->end.x && new.y == map->end.y)
+	{
+		ft_putendl("Spawn can't be on the end");
 		return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 14:40:14 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:29:06 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		validate(t_map *map)
 		ft_putendl("Map is empty");
 		return (0);
 	}
-	if (set_spawn(map) && portals(map) && save(map))
+	if (set_end(map) && set_spawn(map) && portals(map) && save(map) )
 		return (1);
 	return (0);
 }

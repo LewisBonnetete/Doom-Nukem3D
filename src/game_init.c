@@ -3,7 +3,7 @@
 void			ft_init_pour_linstant(t_var *info)
 {
 	info->frametime = 0.03;
-	info->rotspeed = info->frametime * 0.5;
+	info->rotspeed = info->frametime * 1.5;
 	info->d_gun = 0;
 	info->d_gunb = 0;
 	info->clock = 0;

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 16:53:20 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:53:13 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,25 @@ int                main(int ac, char **av)
 	(void)renderer;
 	info.map = &map;
 	if (!(init_win1(&info)))
-		return (0);
+		ft_exit(&info, &renderer);
 	if (!(init_win2(&info)))
-		return (0);
+		ft_exit(&info, &renderer);
 	if (!(init_win3(&info)))
-		return (0);
+		ft_exit(&info, &renderer);
 	//init_artificial_map(&(info.map));
 	if (ac != 2 || info_map(av[1], info.map) == 0)
-		return (0);
+		ft_exit(&info, &renderer);
 	ft_init_pour_linstant(&info);
 	init_player(&player, info.map);
 	//free_map(info.map);
 	info.player = &player;
 	init_render(&info, &renderer, 0, info.player->sector_id);
 	info.render = &renderer;
-	tab_path(&renderer);
-	tab_path_text(&renderer);
+	if (tab_path(&renderer) == 0 || tab_path_text(&renderer) == 0)
+		ft_exit(&info, &renderer);
 	if (WALL_H > 1000 || WALL_H <= 0)
-		return (0);
-	while (dealer(&info, &renderer))
+		ft_exit(&info, &renderer);
+	while (dealer(&info))
 	{
 		if (!(info.texture = SDL_CreateTextureFromSurface(info.renderer, info.image)))
 		{
@@ -59,7 +59,7 @@ int                main(int ac, char **av)
 			ft_putendl(SDL_GetError());
 			SDL_DestroyWindow(info.window);
 			SDL_Quit();
-			return (0);
+			ft_exit(&info, &renderer);
 		}
 		if (SDL_RenderCopy(info.renderer, info.texture, NULL, NULL))
 		{
@@ -67,7 +67,7 @@ int                main(int ac, char **av)
 			ft_putendl(SDL_GetError());
 			SDL_DestroyWindow(info.window);
 			SDL_Quit();
-			return (0);
+			ft_exit(&info, &renderer);
 		}
 		if (raycasting(&info, &renderer) == 0)
 			ft_exit(&info, &renderer);

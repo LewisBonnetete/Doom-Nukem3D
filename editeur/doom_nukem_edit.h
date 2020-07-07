@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 15:00:47 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 16:28:25 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ struct 					s_map
 	SDL_Surface			*text_tab[10];
 	t_point				spawn;
 	int					spawn_sector_id;
+	t_point				end;
 	int					i;
 	t_item				*items;
 	t_prop				*props;
@@ -372,6 +373,7 @@ int			create_wall_edit(t_sector *sector, int *height,
 int i, SDL_Event event);
 int			create_first_wall_edit(t_sector *sector, int *height,
 int i, SDL_Event event);
+int		set_end(t_map *map);
 
 //destroyers
 int		exit_edit(t_var *info, t_map *map);
@@ -384,6 +386,7 @@ void		del_sector(t_var *info, t_map *map);
 int			is_between(float x, float a, float b);
 int			x_coo(SDL_Event *event, t_map *map);
 int			y_coo(SDL_Event *event, t_map *map);
+int		is_in_object(t_point new, t_map *map);
 
 //savemap
 int     creat_fichier(t_map *map, char *name);
