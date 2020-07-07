@@ -6,10 +6,10 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 16:53:39 by atyczyns         ###   ########.fr       */
-/*   Updated: 2020/07/07 16:42:49 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 17:41:04 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef DOOM_NUKEM_H
 # define DOOM_NUKEM_H
@@ -30,7 +30,7 @@
 # define GMASK				0
 # define BMASK				0
 # define AMASK				0
-# define WALL_H				175
+# define WALL_H				238
 # define DECALLAGE			0
 # define BLACK				0x000000
 # define SKY_BLUE			0x00BFFF
