@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 14:42:33 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 14:55:49 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ char		*get_enemy_name(void)
 	int		size;
 
 	ft_putendl("What is your enemy?");
-	size = 0;
+	size = 1;
 	while (size)
 	{
 		get_next_line(0, &line);
 		if (ft_strcmp("creeper", line) == 0 || ft_strcmp("slime", line) == 0)
-			size = 1;
+			size = 0;
 		else
 			ft_putendl("We only got creeper and slime for now");
 	}

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 14:42:39 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 14:56:03 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ char	*get_item_name(void)
 	int		size;
 
 	ft_putendl("What is your item?");
-	size = 0;
+	size = 1;
 	while (size)
 	{
 		get_next_line(0, &line);
 		if (ft_strcmp("ak47", line) == 0 || ft_strcmp("mun", line) == 0 || ft_strcmp("heal", line) == 0)
-			size = 1;
+			size = 0;
 		else
 			ft_putendl("We only got ak47, mun and heal for now");
 	}

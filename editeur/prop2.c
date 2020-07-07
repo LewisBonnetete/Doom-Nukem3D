@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 14:43:33 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 14:55:40 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,16 @@ char	*get_prop_name(void)
 	int		size;
 
 	ft_putendl("What is your prop?");
-	size = 0;
+	size = 1;
 	while (size)
 	{
 		get_next_line(0, &line);
+		ft_putendl(line);
 		if (ft_strcmp("barrel", line) == 0)
-			size = 1;
+			size = 0;
 		else
 			ft_putendl("We only got barrel for now");
+		ft_putendl(line);
 	}
 	return (line);
 }
