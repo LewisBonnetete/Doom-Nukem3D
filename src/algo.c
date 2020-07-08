@@ -328,7 +328,6 @@ int			may_weapon(t_item *item)
 		return (1);
 	else if (item && item->next_item)
 		return(may_weapon(item->next_item));
-//	ft_putendl("out?");
 	return (0);
 }
 
@@ -342,7 +341,8 @@ int			raycasting(t_var *info, t_render *render)
 	if (info->player->sector_id)
 		go_to_sector(render->sec_0, info->player->sector_id, render);
 	init_cast(info, render, &ray);
-	tex_floor_ciel(info, render);
+	if (tex_floor_ciel(info, render) == 0)
+		return (0);
 	if (render->nbr_items > 100)
 		return (0);
 	if (render->nbr_items > 0)

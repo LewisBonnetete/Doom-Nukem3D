@@ -6,43 +6,44 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 16:53:39 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/08 16:21:53 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
-void			tex_floor_ciel(t_var *info, t_render *render)
+int				tex_floor_ciel(t_var *info, t_render *render)
 {
 	t_f_tool tool;
 
 	tool.i = 0;
 	tool.j = 0;
 	tool.k = 0;
-	while (tool.i++ < WINDOW_H)
+//	printf("hey\n");
+	if (render->tab_sdl[render->s->celling.text_id])
 	{
-		init_floor(info, &tool);
-
-		while (tool.j++ < WINDOW_W)
+		while (tool.i++ < WINDOW_H)
 		{
-
-			tool.tx = (int)(render->tab_sdl[render->s->celling.text_id]->w
-			* (tool.floorx - (int)tool.floorx)) &
-			(render->tab_sdl[render->s->celling.text_id]->w - 1);
-			
-			tool.ty = (int)(render->tab_sdl[render->s->celling.text_id]->h *
-			(tool.floory - (int)tool.floory)) &
-			(render->tab_sdl[render->s->celling.text_id]->h - 1);
-			
-			tool.floorx += tool.stepx;
-			tool.floory += tool.stepy;
-
-			put_pixel(darken_floor(&tool, render), tool.j, tool.i, info->image);
-			
-			put_pixel(darken_floor(&tool, render),
-			tool.j, WINDOW_H - tool.i - 1, info->image);
+			init_floor(info, &tool);
+			while (tool.j++ < WINDOW_W)
+			{
+				tool.tx = (int)(render->tab_sdl[render->s->celling.text_id]->w
+				* (tool.floorx - (int)tool.floorx)) &
+				(render->tab_sdl[render->s->celling.text_id]->w - 1);
+				tool.ty = (int)(render->tab_sdl[render->s->celling.text_id]->h *
+				(tool.floory - (int)tool.floory)) &
+				(render->tab_sdl[render->s->celling.text_id]->h - 1);
+				tool.floorx += tool.stepx;
+				tool.floory += tool.stepy;
+				put_pixel(darken_floor(&tool, render), tool.j, tool.i, info->image);
+				put_pixel(darken_floor(&tool, render),
+				tool.j, WINDOW_H - tool.i - 1, info->image);
+			}
 		}
 	}
+	else
+		return (0);
+	return (1);
 }
 
 static	void	ft_put_weapon(t_var *info, t_render *render)

@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 15:37:15 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/08 17:10:09 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@ int                main(int ac, char **av)
 	(void)player;
 	(void)renderer;
 	info.map = &map;
-	if (!(init_win1(&info)))
-		ft_exit(&info, &renderer);
-	if (!(init_win2(&info)))
-		ft_exit(&info, &renderer);
-	if (!(init_win3(&info)))
-		ft_exit(&info, &renderer);
-	//init_artificial_map(&(info.map));
 	if (ac != 2 || info_map(av[1], info.map) == 0)
-		ft_exit(&info, &renderer);
+	{
+		free_map(info.map);
+		return (0);
+	}
+	if (!(init_win1(&info)) || !(init_win2(&info)) || !(init_win3(&info)))
+	{
+		free_info(&info);
+		return (0);
+	}
+	//init_artificial_map(&(info.map));
 	ft_init_pour_linstant(&info);
 	init_player(&player, info.map);
 	//free_map(info.map);
