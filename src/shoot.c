@@ -6,7 +6,7 @@
 /*   By: atyczyns <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:35:50 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/07/07 15:47:22 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/08 12:18:27 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,8 @@ t_item	*check_monster(t_item *item, t_var *info, t_item *item_2)
 	t_point	p;
 	t_point	w;
 
-	if (item->name[0] == 'c' || item->name[0] == 's')
-	{
+	if ((item->name[0] == 'c' && item->pv > 0) || (item->name[0] == 's' && item->pv > 0))
 		return (item);
-		/*info->render->x = WINDOW_W / 2;
-		update_ray(info, info->render);
-		calc_item_wall(info->render, item, info);
-		if (intersect(info->render->ray, info->render->wall_item) == 1)
-		{
-			if (item_2 == NULL)
-				item_2 = item;
-			else
-			{
-				p.x = info->player->posx;
-				p.y = info->player->posy;
-				w.x = item->x;
-				w.y = item->y;
-				dist = calc_dist(p, w);
-				w.x = item_2->x;
-				w.y = item_2->y;
-				dist_2 = calc_dist(p, w);
-				if (dist < dist_2)
-					item_2 = item;
-			}
-		}*/
-	}
 	if (item->next_item)
 		return (check_monster(item->next_item, info, item_2));
 	return (item_2);
