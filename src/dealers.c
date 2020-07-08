@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 17:42:32 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/08 18:11:08 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	straff_and_rot2(t_var *info, t_input input)
 {
-	if (input.straf_left && input.diag == 0)
+	if (input.straf_left)
 	{
 		input.straffer_x = -info->player->dy;
 		input.straffer_y = info->player->dx;
@@ -32,7 +32,7 @@ void	straff_and_rot(t_var *info, t_input input)
 		rot_right(info);
 	else if (input.left)
 		rot_left(info);
-	if (input.straf_right && input.diag == 0)
+	if (input.straf_right)
 	{
 		input.straffer_x = info->player->dy;
 		input.straffer_y = -info->player->dx;
@@ -58,7 +58,7 @@ void	sprint(t_var *info, SDL_Event event)
  		shoot_ennemy(info);
 }
 
-int		dealer(t_var *info, t_render *render)
+int		dealer(t_var *info)
 {
 	SDL_Event		event;
 	static t_input	input;
@@ -77,6 +77,6 @@ int		dealer(t_var *info, t_render *render)
 	}
 	get_speed(info);
 	straff_and_rot(info, input);
-	move(info, input, render);
+	move(info, input);
 	return (1);
 }

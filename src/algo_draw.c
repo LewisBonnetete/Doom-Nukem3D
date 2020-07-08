@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 16:21:53 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/08 18:08:20 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void			draw_texture_wall(t_var *info, t_render *render)
 {
 	t_w_draw draw;
 
-	w_draw_calc(render, info, &draw);
+	w_draw_calc(render, &draw);
 	while (draw.i <= render->wall_y0)
 	{
 		if (draw.i == render->wall_y0 || draw.i == render->wall_y1)

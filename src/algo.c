@@ -214,7 +214,7 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 			{
 				if (item->name[0] == 's')
 				{
-					if (color != -6815608)
+					if (color != (Uint32)-6815608)
 						put_pixel(darken_wall(info, color, render, y),
 						render->x, y, info->image);
 				}
@@ -370,7 +370,7 @@ int			raycasting(t_var *info, t_render *render)
 	if (may_weapon(render->item_0) == 1)
 		ft_put_weapon(info, render);
 	hud(info, info->player, info->map);
-	rain_gen(info, render);
+	rain_gen(info);
 	free(tab);
 	if (render->itab)
 		free(render->itab);

@@ -1,6 +1,6 @@
 #include "doom_nukem.h"
 
-static	void	draw_col(t_var *info, t_render *render, t_point a, int h)
+static	void	draw_col(t_var *info, t_point a, int h)
 {
 	int i;
 
@@ -13,7 +13,7 @@ static	void	draw_col(t_var *info, t_render *render, t_point a, int h)
 	}
 }
 
-int				rain_gen(t_var *info, t_render *render)
+int				rain_gen(t_var *info)
 {
 	int i;
 	int tmp;
@@ -26,7 +26,7 @@ int				rain_gen(t_var *info, t_render *render)
 	{
 		p.x = rand()%(WINDOW_W - 10);
 		p.y = rand()%(WINDOW_H - 10);
-		draw_col(info, render, p, rand()%25 + 5);
+		draw_col(info, p, rand()%25 + 5);
 	}
 	return (0);
 }

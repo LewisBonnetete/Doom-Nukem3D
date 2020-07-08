@@ -112,6 +112,7 @@ void			ft_exit(t_var *info, t_render *render)
 {
 	if (info)
 		free_info(info);
+	(void)render;
 	SDL_Quit();
 	exit (0);
 }

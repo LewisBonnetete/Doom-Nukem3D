@@ -114,6 +114,7 @@ void	init_render(t_var *info, t_render *render, int x0, int sector_id)
 	render->sec_0 = render->s;
 	render->nb_sec = 0;
 	render->nbr_items = 0;
+	(void)x0;
 	if (info->map->items && info->map->items->name[0] != 0)
 	{
 		render->item = init_item(render, info->map->items, 0);

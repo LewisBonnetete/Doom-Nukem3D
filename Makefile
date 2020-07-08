@@ -6,13 +6,13 @@
 #    By: trabut <trabut@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/08 17:40:22 by trabut           ###   ########.fr        #
+#    Updated: 2020/07/08 18:11:46 by trabut           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = doom-nukem
 
-FLAGS       = -O2 -O3
+FLAGS       = -O2 -O3 -Wextra -Werror
 
 SDL			= -lpthread -F ./frameworks/ -framework SDL2 -framework SDL2_image -framework SDL2_ttf
 SDL_HEADER	= -I ./frameworks/SDL2.framework/Headers -I ./frameworks/SDL2_image.framework/Headers -I ./frameworks/SDL2_ttf.framework/Headers
@@ -48,7 +48,6 @@ SRC =	main.c\
 		draw_tools.c\
 		algo_tools.c\
 		math_tools.c\
-		gameplay.c\
 		dealers.c\
 		dealers2.c\
 		dealers3.c\
@@ -56,6 +55,7 @@ SRC =	main.c\
 		shoot.c\
 		tools_draw.c\
 		change_weapon.c\
+		gameplay.c\
 
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
