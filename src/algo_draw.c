@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 16:53:39 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/08 13:37:17 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@ void			tex_floor_ciel(t_var *info, t_render *render)
 	while (tool.i++ < WINDOW_H)
 	{
 		init_floor(info, &tool);
-
 		while (tool.j++ < WINDOW_W)
 		{
-
 			tool.tx = (int)(render->tab_sdl[render->s->celling.text_id]->w
 			* (tool.floorx - (int)tool.floorx)) &
 			(render->tab_sdl[render->s->celling.text_id]->w - 1);
-			
 			tool.ty = (int)(render->tab_sdl[render->s->celling.text_id]->h *
 			(tool.floory - (int)tool.floory)) &
 			(render->tab_sdl[render->s->celling.text_id]->h - 1);

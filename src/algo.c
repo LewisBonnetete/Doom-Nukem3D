@@ -328,7 +328,6 @@ int			may_weapon(t_item *item)
 		return (1);
 	else if (item && item->next_item)
 		return(may_weapon(item->next_item));
-//	ft_putendl("out?");
 	return (0);
 }
 
@@ -338,19 +337,15 @@ int			raycasting(t_var *info, t_render *render)
 	int		*tab;
 	int		i;
 
-//	ft_putendl("ALLO?");
 	info->player->sector_id = player_sec(render->sec_0, info);
 	if (info->player->sector_id)
 		go_to_sector(render->sec_0, info->player->sector_id, render);
-//	ft_putendl("1?");
 	init_cast(info, render, &ray);
-//	ft_putendl("2?");
 	tex_floor_ciel(info, render);
 	if (render->nbr_items > 100)
 		return (0);
 	if (render->nbr_items > 0)
 	{
-//	ft_putendl("3?");
 		if (!(render->itab = (t_itab *)ft_memalloc(sizeof(t_itab) * (render->nbr_items + 1))))
 			return (0);
 		i = -1;
@@ -359,11 +354,9 @@ int			raycasting(t_var *info, t_render *render)
 			render->itab[i].name = 0;
 			render->itab[i].dist = 0;
 		}
-//	ft_putendl("4?");
 	}
 	if (!(tab = (int *)ft_memalloc((sizeof(int) * (render->nb_sec + 1)))))
 		return (0);
-//	ft_putendl("5?");
 	while (render->x < WINDOW_W)
 	{
 		go_to_sector(render->sec_0, info->player->sector_id, render);
@@ -372,16 +365,11 @@ int			raycasting(t_var *info, t_render *render)
 		draw_column(info, render, tab);
 		render->x++;
 	}
-//	ft_putendl("6?");
 	draw_item(render, info);
-//	ft_putendl("6.5?");
 	if (may_weapon(render->item_0) == 1)
 		ft_put_weapon(info, render);
-//	ft_putendl("6.6?");
 	hud(info, info->player, info->map);
-//	ft_putendl("6.7?");
 	rain_gen(info, render);
-//	ft_putendl("7?");
 	free(tab);
 	if (render->itab)
 		free(render->itab);

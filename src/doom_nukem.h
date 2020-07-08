@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 12:07:09 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/08 13:09:56 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ struct					s_map
 	t_box				box;
 	t_sector			*sectors;
 	int					size;
-	SDL_Surface			*text_tab[10];
+//	SDL_Surface			*text_tab[10];
 	t_point				spawn;
 	int					i;
 	t_item				*items;
@@ -479,5 +479,7 @@ int						tab_path_text(t_render *renderer);
 t_render				*cpy_render(t_render *render);
 int						gameplay(t_var *info);
 int						hit_box(t_var *info, t_render *render);
+
+void					free_info(t_var *info);
 
 #endif

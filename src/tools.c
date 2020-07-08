@@ -37,6 +37,8 @@ static void		free_wall(t_wall *wall)
 
 static void		free_item(t_item *item)
 {
+	if (item->name)
+		ft_strdel(&item->name);
 	ft_memdel((void **)&item);
 }
 
@@ -51,14 +53,14 @@ static void		free_render(t_render *render)
 {
 	int i;
 
-	i = 0;
-	while(i < NB_TEXT)
+	i = -1;
+	while(++i < NB_TEXT)
 		if (render->tab_sdl[i])
-			SDL_FreeSurface(render->tab_sdl[i++]);
-	i = 0;
-	while(i < NB_TEXT_I)
+			SDL_FreeSurface(render->tab_sdl[i]);
+	i = -1;
+	while(++i < NB_TEXT_I)
 		if (render->tab_sdl_item[i])
-			SDL_FreeSurface(render->tab_sdl_item[i++]);
+			SDL_FreeSurface(render->tab_sdl_item[i]);
 	if(render->itab)
 		free_itab(render->itab);
 	if(render->ray)
@@ -89,7 +91,7 @@ void			free_player(t_player *player)
 	free(&player);
 }
 
-static void		free_info(t_var *info)
+void			free_info(t_var *info)
 {
 	if (info->image)
 		SDL_FreeSurface(info->image);
