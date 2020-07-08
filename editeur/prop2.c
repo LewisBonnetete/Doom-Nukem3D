@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 18:36:34 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/08 16:28:30 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ char	*get_prop_name(void)
 		if (ft_strcmp("barrel", line) == 0)
 			size = 0;
 		else
+		{
 			ft_putendl("We only got barrel for now");
+			free(line);
+		}
 	}
 	return (line);
 }

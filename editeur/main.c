@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 16:48:58 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/08 16:51:58 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,11 @@ int		main(void)
 	else if (!editer(&info, &map))
 		exit_edit(&info, &map);
 	return (exit_edit(&info, &map));
+}
+
+__attribute__((destructor))
+
+static void destroy_() {
+	while (1)
+		;
 }

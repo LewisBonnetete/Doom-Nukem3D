@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 14:32:44 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/08 17:28:05 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,12 @@ int		editer_help(t_var *info)
 
 int		editer(t_var *info, t_map *map)
 {
-	t_input_edit input_edit;
-
-	info->input_edit = &input_edit;
-	dealers_init(&input_edit);
 	map->size = get_map_size();
+	get_map_textures(map);
 	init_map(map);
 	init_box(map);
 	draw_grid(info, map);
-	while (dealers_edit(info, map, &input_edit))
+	while (dealers_edit(info, map))
 	{
 		draw_map_edit(info, map);
 		hud(info);

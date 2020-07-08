@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 15:29:54 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/08 17:28:37 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 # define AMASK				0
 # define NAME_DEC			2
 
-typedef struct s_input	t_input;
 typedef	struct s_var	t_var;
 typedef	struct s_text	t_text;
 typedef	struct s_point	t_point;
@@ -176,6 +175,8 @@ struct 					s_map
 	t_item				*items;
 	t_prop				*props;
 	t_enemy				*enemys;
+	int					cid;
+	int					fid;
 };
 
 struct					s_text
@@ -225,44 +226,6 @@ struct					s_var
 	int					sprint;
 	int					x_dec;
 	int					y_dec;
-	t_input_edit		*input_edit;
-};
-
-struct					s_input
-{
-	int					up;
-	int					down;
-	int 				shoot;
-	int					straf_left;
-	int					straf_right;
-	int					rot_left;
-	int					rot_right;
-	double				straffer_x;
-	double				straffer_y;
-	double				diag_x;
-	double				diag_y;
-	int					diag;
-};
-
-struct					s_input_edit
-{
-	double				mouse_x;
-	double				mouse_y;
-	int					right_click;
-	int					left_click;
-	int 				del;
-	int					t_s;
-	int					t_n;
-	int					t_0;
-	int					t_1;
-	int					t_2;
-	int					t_3;
-	int					t_4;
-	int					t_5;
-	int					t_6;
-	int					t_7;
-	int					t_8;
-	int					t_9;
 };
 
 struct					s_line
@@ -291,9 +254,6 @@ int						editer(t_var *info, t_map *map);
 int						validate(t_map *map);
 int						set_spawn(t_map *map);
 int					 	portals(t_map *map);
-int						dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit);
-void					dealers_init(t_input_edit *input_edit);
-void					dealers_tester(t_input_edit input_edit);
 int						get_map_size();
 char 					*get_item_name();
 int						valid_new_item(t_map *map, int x, int y);
@@ -386,7 +346,6 @@ int						do_int(int i, int fd);
 int						do_char(char c, int fd);
 int						do_x_char(char *str, int fd);
 int						do_double(double d, int fd);
-int						do_input(t_input_edit *in, int fd);
 int						do_var(t_var *v, int fd);
 int						do_wall(t_wall wall, int fd);
 int						do_point(t_point point, int fd);
@@ -399,5 +358,8 @@ int						do_prop(t_prop *prop, int fd);
 int						do_enemy(t_enemy *enemy, int fd);
 char					*little_strjoin(char *src, char c);
 void					hud(t_var *info);
+int						is_in_sector_spawn(t_point first, t_sector *sector);
+void					get_map_textures(t_map *map);
+int						dealers_edit(t_var *info, t_map *map);
 
 #endif

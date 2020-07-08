@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 14:32:29 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/08 17:19:01 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,6 @@ int		dealers_edit_3(t_map *map, SDL_Event event)
 		}
 	}
 	return (1);
-}
-
-void	dealers_edit_2(t_input_edit *input_edit, SDL_Event event)
-{
-	if (event.type == SDL_MOUSEMOTION)
-	{
-		input_edit->mouse_x = event.button.x;
-		input_edit->mouse_x = event.button.x;
-	}
-	if (event.type == SDL_MOUSEBUTTONDOWN)
-	{
-		if (event.button.button == SDL_BUTTON_LEFT)
-			input_edit->left_click = 1;
-		if (event.button.button == SDL_BUTTON_RIGHT)
-			input_edit->right_click = 1;
-	}
-	if (event.type == SDL_MOUSEBUTTONUP)
-	{
-		if (event.button.button == SDL_BUTTON_LEFT)
-			input_edit->left_click = 0;
-		if (event.button.button == SDL_BUTTON_RIGHT)
-			input_edit->right_click = 0;
-	}
 }
 
 void	dealers_edit_4(SDL_Event event, t_map *map)
@@ -97,7 +74,7 @@ void	dealers_edit_5(SDL_Event event, t_map *map)
 	}
 }
 
-int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit)
+int		dealers_edit(t_var *info, t_map *map)
 {
 	SDL_Event event;
 
@@ -107,7 +84,6 @@ int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit)
 			return (0);
 		if (event.key.keysym.sym == SDLK_ESCAPE && event.type == SDL_KEYDOWN)
 			return (0);
-		dealers_edit_2(input_edit, event);
 		if (event.key.keysym.sym == SDLK_d)
 		{
 			if (event.key.state == SDL_PRESSED)

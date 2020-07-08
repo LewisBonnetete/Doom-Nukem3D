@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 13:49:43 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/08 16:49:31 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,15 @@ int		verif(void)
 		if ((line[0] == 'y' || line[0] == 'n') && line[1] == 0)
 		{
 			if (line[0] == 'y')
+			{
+				free(line);
 				return (1);
+			}
 			if (line[0] == 'n')
+			{
+				free(line);
 				return (0);
+			}
 		}
 		else
 			ft_putendl("What? try something else");
@@ -46,7 +52,10 @@ int		save(t_map *map)
 		get_next_line(0, &line);
 		size = ft_strlen(line);
 		if (size < 3 || size > 15)
+		{
 			ft_putendl("Invalid name");
+			free(line);
+		}
 	}
 	if (!creat_fichier(map, line))
 	{
