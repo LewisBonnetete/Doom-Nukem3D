@@ -102,13 +102,13 @@ void		update_ray_box(t_var *info, t_render *render, int dir, t_point p)
 	}
 	if (dir == 2)
 	{
-		render->ray->dx = -info->player->dx;
-		render->ray->dy = info->player->dy;
+		render->ray->dx = -info->player->dy;
+		render->ray->dy = info->player->dx;
 	}
 	if (dir == 3)
 	{
-		render->ray->dx = info->player->dx;
-		render->ray->dy = -info->player->dy;
+		render->ray->dx = info->player->dy;
+		render->ray->dy = -info->player->dx;
 	}
 	if (render->ray->dx != 0.0)
 	{
@@ -143,36 +143,9 @@ int			hitbox(t_var *info, t_render *render, int dir)
 			r.y = render->ray->y2;
 			if(render->wall->is_portal == 1)
 				return (1);
-			printf("d = %f\n", calc_dist(r,p));
 			if (calc_dist(r, p) <= 0.5)
 				return (0);
 		}
 	}
 	return (1);
 }
-
-// int		hitbox_y(t_var *info, t_render *render, int dir)
-// {
-// 	t_point r;
-// 	t_point p;
-// 	double tmp;
-
-// 	p.x = info->player->posx;
-// 	p.y = info->player->posy;
-// 	update_ray_box(info, render, dir, p);	
-// 	render->n = -1;
-// 	while (++render->n < render->s->nbr_walls)
-// 	{
-// 		render->wall = &render->s->walls[render->n];
-// 		if (intersect(render->ray, render->wall) == 1)
-// 		{
-// 			r.x = render->ray->x2;
-// 			r.y = render->ray->y2;
-// 			if(render->wall->is_portal == 1)
-// 				return (1);
-// 			if (calc_dist(r, p) <= 0.5)
-// 				return (0);
-// 		}
-// 	}
-// 	return (1);
-// }

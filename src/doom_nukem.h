@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 17:10:04 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/08 18:10:54 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,7 +343,7 @@ struct					s_w_draw
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 int						init_win3(t_var *info);
-int						dealer(t_var *info, t_render *render);
+int						dealer(t_var *info);
 void					sprint(t_var *info, SDL_Event event);
 void					straff_and_rot(t_var *info, t_input input);
 void					straff_and_rot2(t_var *info, t_input input);
@@ -352,7 +352,7 @@ void					mouser(t_var *info);
 void					get_speed(t_var *info);
 void					get_move1(SDL_Event event, t_input *input);
 void					get_move2(SDL_Event event, t_input *input);
-int						move(t_var *info, t_input input, t_render *render);
+int						move(t_var *info, t_input input);
 void					move_diag(t_input *input);
 void					diag(t_var *info, t_input input);
 void					diag1(t_var *info, t_input input);
@@ -370,8 +370,7 @@ void					init_render(t_var *info, t_render *render,
 int						init_next_render(t_var *info, t_render *render);
 
 //draw
-void					w_draw_calc(t_render *render,
-							t_var *info, t_w_draw *draw);
+void					w_draw_calc(t_render *render, t_w_draw *draw);
 void					draw_bottop(t_var *info, t_render *render);
 void					draw_tex(t_var *info, t_render *render);
 void					draw_textures(t_var *info, t_render *render);
@@ -383,7 +382,7 @@ int						darken_floor(t_f_tool *tool, t_render *render);
 int						darken_wall(t_var *info, Uint32 color,
 							t_render *render, int i);
 int						rgb_calc(int r, int g, int b);
-int						rain_gen(t_var *info, t_render *render);
+int						rain_gen(t_var *info);
 void					shoot_ennemy(t_var *info);
 void					change_weapon(t_var *info);
 void					rgb_cap(t_rgb *rgb);
@@ -407,11 +406,11 @@ t_item					*go_to_item(t_item *item, char c);
 //hud
 void					hud(t_var *info, t_player *player, t_map *map);
 void					weapon(t_var *info, t_player *player, SDL_Color color);
-void					inventory(t_var *info, t_player *player,
+void					inventory(t_var *info,
 							SDL_Color color);
 void					name(t_var *info, t_map *map, SDL_Color color);
 void					hp(t_var *info, t_player *player, SDL_Color color);
-void					munitions(t_var *info, t_player *player, SDL_Color color);
+void					munitions(t_var *info, SDL_Color color);
 
 //load_map
 int						check_map(char *the_map);
@@ -443,6 +442,7 @@ void					init_tab(int *tab, int n);
 int						hitboxy(t_var *info, t_render *render, double diry);
 int						hitboxx(t_var *info, t_render *render, double dirx);
 int						hitbox(t_var *info, t_render *render, int dir);
+int						hitbox_diag(t_var *info, t_render *render, double diagx, double diagy);
 
 //edit tools
 int						is_new_point_in_sector(t_point new, t_wall *walls);

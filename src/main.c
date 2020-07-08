@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 17:10:09 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/08 18:11:01 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int                main(int ac, char **av)
 		ft_exit(&info, &renderer);
 	if (WALL_H > 1000 || WALL_H <= 0)
 		ft_exit(&info, &renderer);
-	while (dealer(&info, &renderer))
+	while (dealer(&info))
 	{
 		if (!(info.texture = SDL_CreateTextureFromSurface(info.renderer, info.image)))
 		{

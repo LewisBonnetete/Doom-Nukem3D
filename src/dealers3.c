@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/08 16:16:04 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/08 18:05:59 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	get_move2(SDL_Event event, t_input *input)
 	}
 }
 
-int		move(t_var *info, t_input input, t_render *render)
+int		move(t_var *info, t_input input)
 {
-	if (input.up && input.diag == 0)
+	if (input.up)
 	{
 		if(hitbox(info, info->render, 0))
 		{
@@ -73,7 +73,7 @@ int		move(t_var *info, t_input input, t_render *render)
 			info->player->posy += info->player->dy * info->player->movespeed;
 		}
 	}
-	if (input.down && input.diag == 0)
+	if (input.down)
 	{
 		if(hitbox(info, info->render, 1))
 		{

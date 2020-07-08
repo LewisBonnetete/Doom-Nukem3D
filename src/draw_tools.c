@@ -67,7 +67,7 @@ int			darken_wall(t_var *info, Uint32 color, t_render *render, int i)
 	return (rgb_calc(rgb.r, rgb.g, rgb.b));
 }
 
-void		w_draw_calc(t_render *render, t_var *info, t_w_draw *draw)
+void		w_draw_calc(t_render *render, t_w_draw *draw)
 {
 	draw->hit.x = render->ray->x2;
 	draw->hit.y = render->ray->y2;
