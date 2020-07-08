@@ -52,8 +52,11 @@ int		tab_path_text(t_render *renderer)
 		if (i == 6)
 			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/dos_soldier.png")) == 0)
 				return (0);
+		if (i == 7)
+			if ((renderer->tab_sdl_item[i] = IMG_Load("./xpm_textures/portal.png")) == 0)
+				return (0);
 	}
-	renderer->tab_sdl_item[7] = NULL;
+	renderer->tab_sdl_item[8] = NULL;
 	return (1);
 }
 // int	load_text(char **tab, t_render renderer)

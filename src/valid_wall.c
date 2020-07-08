@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/06/30 17:59:25 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/08 11:52:55 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ int		verify_crossing(t_point new, t_point old, t_sector *sector)
 			if(!check_wall_intersections(new, old, current_sector->walls[i]))
 			{
 				ft_putendl("Wall intersection");
-				printf("%i:%i | %i:%i\n",new.x,new.y,old.x,old.y);
-				printf("%i:%i | %i:%i\n",current_sector->walls[i].a.x,current_sector->walls[i].a.y,current_sector->walls[i].b.x,current_sector->walls[i].b.y);
+	//			printf("%i:%i | %i:%i\n",new.x,new.y,old.x,old.y);
+	//			printf("%i:%i | %i:%i\n",current_sector->walls[i].a.x,current_sector->walls[i].a.y,current_sector->walls[i].b.x,current_sector->walls[i].b.y);
 				return (0);
 			}
 			i++;

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 14:39:51 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/07 19:00:46 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,14 @@ char    *little_strjoin(char *src, char c)
 int     do_map(t_map *map, int fd)
 {
     char    c;
+	t_item	*items;
 
+	if (!(items = (t_item *)ft_memalloc(sizeof(t_item))))
+		return (0);
+	items->name = "portal";
+	items->x = map->end.x;
+	items->y = map->end.y;
+	items->next_item = NULL;
     c = 'm';
     if (write(fd, &c, 1) == -1)
         return (0);
@@ -59,6 +66,9 @@ int     do_map(t_map *map, int fd)
 			return (0);
 	if (map->enemys)
 		if (do_enemy(map->enemys, fd) == 0)
+			return (0);
+    if (map->items)
+		if (do_item(items, fd) == 0)
 			return (0);
     return (1);
 }

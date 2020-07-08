@@ -84,6 +84,12 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 		dest->text_id = 3;
 		dest->pv = 40;
 	}
+	else if (dest->name[0] == 'p')
+	{
+		dest->h = 400;
+		dest->w = 400;
+		dest->text_id = 7;
+	}
 	else
 	{
 		render->nbr_items--;
