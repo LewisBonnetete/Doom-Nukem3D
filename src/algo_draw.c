@@ -6,13 +6,13 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 15:17:04 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/08 16:21:53 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
-void			tex_floor_ciel(t_var *info, t_render *render)
+int				tex_floor_ciel(t_var *info, t_render *render)
 {
 	t_f_tool tool;
 
@@ -41,6 +41,9 @@ void			tex_floor_ciel(t_var *info, t_render *render)
 			}
 		}
 	}
+	else
+		return (0);
+	return (1);
 }
 
 static	void	ft_put_weapon(t_var *info, t_render *render)

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 15:29:51 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/08 16:23:10 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -473,7 +473,7 @@ int						pnpoly_float(int nbr_walls, t_wall *walls,
 							float center_x, float center_y);
 int						player_sec(t_sector *sector, t_var *info);
 void					init_nb_sec(t_sector *sector, t_render *render);
-void					tex_floor_ciel(t_var *info, t_render *render);
+int						tex_floor_ciel(t_var *info, t_render *render);
 int						tab_path_text(t_render *renderer);
 t_render				*cpy_render(t_render *render);
 int						gameplay(t_var *info);
