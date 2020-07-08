@@ -6,14 +6,12 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 14:23:24 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/08 15:29:54 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOOM_NUKEM_EDIT_H
 # define DOOM_NUKEM_EDIT_H
-
-//changer gnl pour /dev/zero
 
 # include <SDL.h>
 # include <SDL_image.h>
@@ -40,7 +38,6 @@
 # define NAME_DEC			2
 
 typedef struct s_input	t_input;
-typedef struct s_input_edit	t_input_edit;
 typedef	struct s_var	t_var;
 typedef	struct s_text	t_text;
 typedef	struct s_point	t_point;
@@ -282,149 +279,125 @@ struct					s_line
 	int			e2;
 };
 
-//sdl func
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 int						init_win3(t_var *info);
-
-//calculators
-float		cross_product(t_point a, t_point b, t_point c);
-int			is_both_inferior_x(t_point a, t_point b, t_point c, t_point d);
-int			is_both_superior_x(t_point a, t_point b, t_point c, t_point d);
-int			is_both_inferior_y(t_point a, t_point b, t_point c, t_point d);
-int			is_both_superior_y(t_point a, t_point b, t_point c, t_point d);
-
-//editer
-int		editer(t_var *info, t_map *map);
-int		validate(t_map *map);
-int		set_spawn(t_map *map);
-int 	portals(t_map *map);
-int		dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit);
-void	dealers_init(t_input_edit *input_edit);
-void	dealers_tester(t_input_edit input_edit);
-int		get_map_size();
-
-//items && props && enemy
-char 	*get_item_name();
-int		valid_new_item(t_map *map, int x, int y);
-t_item	*go_to_last_item(t_item *items);
-int		add_item(t_map *map, char *name, int x, int y);
-int		del_item(t_map *map, int x, int y);
-int		item_checks(t_point new, t_map *map);
-int		prop_checks(t_point new, t_map *map);
-int		valid_new_prop(t_map *map, int x, int y);
-void	create_item(t_map *map);
-void	create_prop(t_map *map);
-int		add_prop(t_map *map, char *name, int x, int y);
-int		del_item(t_map *map, int x, int y);
-int		del_prop(t_map *map, int x, int y);
-void	del_item_or_prop(t_map *map);
-char 	*get_prop_name();
-void	create_enemy(t_map *map);
-char 	*get_enemy_name();
-int		valid_new_enemy(t_map *map, int x, int y);
-int		enemy_checks(t_point new, t_map *map);
-t_enemy	*go_to_last_enemy(t_enemy *enemys);
-int		add_enemy(t_map *map, char *name, int x, int y);
-int		del_enemy(t_map *map, int x, int y);
-
-//checkers
-int		is_valid_wall(SDL_Event *event, t_sector *sector, int i);
-int		is_valid_first_wall(SDL_Event *event,t_map *map);
-int		is_valid_last_wall(SDL_Event *event, t_sector *sector, int i);
-int		check_wall_intersections(t_point new, t_point old, t_wall wall);
-int		check_convexity(t_sector *sector);
-int		check_self_intersection(t_sector *sector);
-int		is_in_sectors(t_point first,t_map *map);
-int		is_in_sectors_spawn(t_point first,t_map *map);
-int		is_in_sectors_float(float center_x, float center_y, t_map *map);
-int		is_new_point_in_sector(t_point new, t_wall *walls);
-int		is_same_point(t_point a, t_point b);
-int		check_surrounding(t_sector *sector);
-int		is_in_sector(t_point first,t_sector *sector);;
-int		is_new_point_in_sectors(t_point new, t_map *map);
-int		is_new_point_in_sector(t_point new, t_wall *walls);
-int		center_in_poly(t_point a, t_point b, t_sector *sector);
-int		verify_crossing(t_point new, t_point old, t_sector *sector);
-int		comparator1(t_point new, t_point old, t_point w1, t_point w2);
-int		comparator2(t_point new, t_point old, t_point w1, t_point w2);
-
-//init func
-void	init_box(t_map *map);
-void	init_map(t_map *map);
-void	init_var(t_var *info);
-void	init_walls(t_wall *walls, int nbr_walls);
-void	init_sector(t_sector *sector);
-void	init_wall(t_wall *wall);
-
-//drawers
-void	draw_interactions_edit(t_var *info, t_map *map);
-int		draw_state(t_sector *sector);
-void	draw_wall_edit(t_var *info, t_map *map, t_sector *sector, int wall_id);
-void	draw_portal_edit(t_var *info, t_map *map, t_sector *sector, int wall_id);
-void	draw_sector_wall_edit(t_var *info, t_map *map, t_sector *sector);
-void	draw_sector_portal_edit(t_var *info, t_map *map, t_sector *sector);
-void	draw_sectors_edit(t_var *info, t_map *map);
-void	draw_grid(t_var *info, t_map *map);
-void	draw_map_edit(t_var *info, t_map *map);
-void	draw_cadre(t_var *info);
-void	draw_square(t_var *info, t_point a, t_point b, Uint32 color);
-void	draw_items(t_var *info,t_map *map);
-void	draw_props(t_var *info,t_map *map);
-void	draw_enemys(t_var *info,t_map *map);
-
-void	put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
-int		draw_line(t_var *info, t_line *line, Uint32 color);
-
-//creators
-int		create_sector(t_var *info, t_map *map);
-int		get_walls_sector(t_map *map, t_sector *sector, int *height);
-void	get_textures(t_wall *wall);
-void		get_portal_info(t_wall *wall);
-void		get_nbr_walls_sector_textures(t_sector *sector);
-void		get_height_sector(int *height);
-void		wall_fusion(t_sector *sector, int i);
-int			create_sector(t_var *info, t_map *map);
-void		close_sector(t_sector *sector, int i);
-int			create_wall_edit(t_sector *sector, int *height,
+float					cross_product(t_point a, t_point b, t_point c);
+int						is_both_inferior_x(t_point a, t_point b, t_point c, t_point d);
+int						is_both_superior_x(t_point a, t_point b, t_point c, t_point d);
+int						is_both_inferior_y(t_point a, t_point b, t_point c, t_point d);
+int						is_both_superior_y(t_point a, t_point b, t_point c, t_point d);
+int						editer(t_var *info, t_map *map);
+int						validate(t_map *map);
+int						set_spawn(t_map *map);
+int					 	portals(t_map *map);
+int						dealers_edit(t_var *info, t_map *map, t_input_edit *input_edit);
+void					dealers_init(t_input_edit *input_edit);
+void					dealers_tester(t_input_edit input_edit);
+int						get_map_size();
+char 					*get_item_name();
+int						valid_new_item(t_map *map, int x, int y);
+t_item					*go_to_last_item(t_item *items);
+int						add_item(t_map *map, char *name, int x, int y);
+int						del_item(t_map *map, int x, int y);
+int						item_checks(t_point new, t_map *map);
+int						prop_checks(t_point new, t_map *map);
+int						valid_new_prop(t_map *map, int x, int y);
+void					create_item(t_map *map);
+void					create_prop(t_map *map);
+int						add_prop(t_map *map, char *name, int x, int y);
+int						del_item(t_map *map, int x, int y);
+int						del_prop(t_map *map, int x, int y);
+void					del_item_or_prop(t_map *map);
+char				 	*get_prop_name();
+void					create_enemy(t_map *map);
+char				 	*get_enemy_name();
+int						valid_new_enemy(t_map *map, int x, int y);
+int						enemy_checks(t_point new, t_map *map);
+t_enemy					*go_to_last_enemy(t_enemy *enemys);
+int						add_enemy(t_map *map, char *name, int x, int y);
+int						del_enemy(t_map *map, int x, int y);
+int						is_valid_wall(SDL_Event *event, t_sector *sector, int i);
+int						is_valid_first_wall(SDL_Event *event,t_map *map);
+int						is_valid_last_wall(SDL_Event *event, t_sector *sector, int i);
+int						check_wall_intersections(t_point new, t_point old, t_wall wall);
+int						check_convexity(t_sector *sector);
+int						check_self_intersection(t_sector *sector);
+int						is_in_sectors(t_point first,t_map *map);
+int						is_in_sectors_spawn(t_point first,t_map *map);
+int						is_in_sectors_float(float center_x, float center_y, t_map *map);
+int						is_new_point_in_sector(t_point new, t_wall *walls);
+int						is_same_point(t_point a, t_point b);
+int						check_surrounding(t_sector *sector);
+int						is_in_sector(t_point first,t_sector *sector);;
+int						is_new_point_in_sectors(t_point new, t_map *map);
+int						is_new_point_in_sector(t_point new, t_wall *walls);
+int						center_in_poly(t_point a, t_point b, t_sector *sector);
+int						verify_crossing(t_point new, t_point old, t_sector *sector);
+int						comparator1(t_point new, t_point old, t_point w1, t_point w2);
+int						comparator2(t_point new, t_point old, t_point w1, t_point w2);
+void					init_box(t_map *map);
+void					init_map(t_map *map);
+void					init_var(t_var *info);
+void					init_walls(t_wall *walls, int nbr_walls);
+void					init_sector(t_sector *sector);
+void					init_wall(t_wall *wall);
+void					draw_interactions_edit(t_var *info, t_map *map);
+int						draw_state(t_sector *sector);
+void					draw_wall_edit(t_var *info, t_map *map, t_sector *sector, int wall_id);
+void					draw_portal_edit(t_var *info, t_map *map, t_sector *sector, int wall_id);
+void					draw_sector_wall_edit(t_var *info, t_map *map, t_sector *sector);
+void					draw_sector_portal_edit(t_var *info, t_map *map, t_sector *sector);
+void					draw_sectors_edit(t_var *info, t_map *map);
+void					draw_grid(t_var *info, t_map *map);
+void					draw_map_edit(t_var *info, t_map *map);
+void					draw_cadre(t_var *info);
+void					draw_square(t_var *info, t_point a, t_point b, Uint32 color);
+void					draw_items(t_var *info,t_map *map);
+void					draw_props(t_var *info,t_map *map);
+void					draw_enemys(t_var *info,t_map *map);
+void					put_pixel_to_suface(Uint32 color, int x, int y, SDL_Surface *image);
+int						draw_line(t_var *info, t_line *line, Uint32 color);
+int						create_sector(t_var *info, t_map *map);
+int						get_walls_sector(t_map *map, t_sector *sector, int *height);
+void					get_textures(t_wall *wall);
+void					get_portal_info(t_wall *wall);
+void					get_nbr_walls_sector_textures(t_sector *sector);
+void					get_height_sector(int *height);
+void					wall_fusion(t_sector *sector, int i);
+int						create_sector(t_var *info, t_map *map);
+void					close_sector(t_sector *sector, int i);
+int						create_wall_edit(t_sector *sector, int *height,
 int i, SDL_Event event);
-int			create_first_wall_edit(t_sector *sector, int *height,
+int						create_first_wall_edit(t_sector *sector, int *height,
 int i, SDL_Event event);
-int		set_end(t_map *map);
-
-//destroyers
-int		exit_edit(t_var *info, t_map *map);
-
-//tools
-t_sector	*get_to_last_sector(t_sector *sector);
-int			nbr_of_sectors(t_map *map);
-t_sector	*get_a_sector_by_id(t_map *map, int id);
-void		del_sector(t_var *info, t_map *map);
-int			is_between(float x, float a, float b);
-int			x_coo(SDL_Event *event, t_map *map);
-int			y_coo(SDL_Event *event, t_map *map);
-int		is_in_object(t_point new, t_map *map);
-
-//savemap
-int     creat_fichier(t_map *map, char *name);
-int     do_int(int i, int fd);
-int     do_char(char c, int fd);
-int     do_x_char(char *str, int fd);
-int     do_double(double d, int fd);
-int     do_input(t_input_edit *in, int fd);
-int     do_var(t_var *v, int fd);
-int     do_wall(t_wall wall, int fd);
-int     do_point(t_point point, int fd);
-int     do_x_wall(t_wall *wall, int fd, int g);
-int     do_sectors(t_sector *sectors, int fd);
-int     do_box(t_box box, int fd);
-int     do_map(t_map *map, int fd);
-int		do_item(t_item *tem, int fd);
-int		do_prop(t_prop *prop, int fd);
-int		do_enemy(t_enemy *enemy, int fd);
-char    *little_strjoin(char *src, char c);
-
-//Hud
-void	hud(t_var *info);
+int						set_end(t_map *map);
+int						exit_edit(t_var *info, t_map *map);
+t_sector				*get_to_last_sector(t_sector *sector);
+int						nbr_of_sectors(t_map *map);
+t_sector				*get_a_sector_by_id(t_map *map, int id);
+void					del_sector(t_var *info, t_map *map);
+int						is_between(float x, float a, float b);
+int						x_coo(SDL_Event *event, t_map *map);
+int						y_coo(SDL_Event *event, t_map *map);
+int						is_in_object(t_point new, t_map *map);
+int     				creat_fichier(t_map *map, char *name);
+int						do_int(int i, int fd);
+int						do_char(char c, int fd);
+int						do_x_char(char *str, int fd);
+int						do_double(double d, int fd);
+int						do_input(t_input_edit *in, int fd);
+int						do_var(t_var *v, int fd);
+int						do_wall(t_wall wall, int fd);
+int						do_point(t_point point, int fd);
+int						do_x_wall(t_wall *wall, int fd, int g);
+int						do_sectors(t_sector *sectors, int fd);
+int						do_box(t_box box, int fd);
+int						do_map(t_map *map, int fd);
+int						do_item(t_item *tem, int fd);
+int						do_prop(t_prop *prop, int fd);
+int						do_enemy(t_enemy *enemy, int fd);
+char					*little_strjoin(char *src, char c);
+void					hud(t_var *info);
 
 #endif
