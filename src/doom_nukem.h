@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 17:10:04 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/08 17:29:26 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -443,6 +443,7 @@ void					init_tab(int *tab, int n);
 int						hitboxy(t_var *info, t_render *render, double diry);
 int						hitboxx(t_var *info, t_render *render, double dirx);
 int						hitbox(t_var *info, t_render *render, int dir);
+int						hitbox_diag(t_var *info, t_render *render, double diagx, double diagy);
 
 //edit tools
 int						is_new_point_in_sector(t_point new, t_wall *walls);

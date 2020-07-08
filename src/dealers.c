@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 16:30:59 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/08 17:42:32 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,9 @@ int		dealer(t_var *info, t_render *render)
  			change_weapon(info);
 		get_move1(event, &input);
 		get_move2(event, &input);
-		move_diag(&input);
 		sprint(info, event);
 	}
-	//reset_and_head(info, event);
 	get_speed(info);
-	diag(info, input);
 	straff_and_rot(info, input);
 	move(info, input, render);
 	return (1);
