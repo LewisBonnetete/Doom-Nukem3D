@@ -26,7 +26,14 @@ char    *little_strjoin(char *src, char c)
 int     info_map(char *str, t_map *map)
 {
     char	*the_map;
+	int		i;
 
+	i = 0;
+	while (str[i])
+		++i;
+	if (str[i - 4] != '.' && str[i - 3] != 'm' && str[i - 2] != 'a'
+		&& str[i - 1] != 'p')
+		return (0);
     map->i = 0;
     if (!(the_map = recup_map(str)))
         return (0);
