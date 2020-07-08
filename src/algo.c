@@ -219,12 +219,7 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 						render->x, y, info->image);
 				}
 				else if (item->name[0] == 'p')
-				{
-		//			if (color != -1 && color != -1118482 && color != -65794 && color != -1052689)
-		//			{printf("color = %i\n", color);
 						put_pixel(color, render->x, y, info->image);
-		//			}
-				}
 				else
 					put_pixel(darken_wall(info, color, render, y), render->x, y, info->image);
 			}

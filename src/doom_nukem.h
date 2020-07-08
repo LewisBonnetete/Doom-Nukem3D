@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 18:55:25 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/08 12:07:09 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ typedef struct s_ray		t_ray;
 typedef	struct s_sector		t_sector;
 typedef	struct s_box		t_box;
 typedef	struct s_map		t_map;
-typedef	struct s_enemy		t_enemy;
-typedef	struct s_prop		t_prop;
 typedef struct s_render		t_render;
 typedef struct s_player		t_player;
 typedef struct s_item		t_item;
@@ -80,27 +78,11 @@ struct					s_item
 	t_item			*next_item;
 };
 
-struct					s_enemy
-{
-	char			*name;
-	int				x;
-	int				y;
-	t_enemy			*next_enemy;
-};
-
 struct					s_point
 {
 	float				x;
 	float				y;
 	float				z;
-};
-
-struct					s_prop
-{
-	char			*name;
-	int				x;
-	int				y;
-	t_prop			*next_prop;
 };
 
 struct					s_wall
@@ -158,8 +140,6 @@ struct					s_map
 	t_point				spawn;
 	int					i;
 	t_item				*items;
-	t_prop				*prop;
-	t_enemy				*enemy;
 };
 
 struct					s_text
@@ -451,8 +431,6 @@ char					rec_char(char *the_map, t_map *map);
 char					*recup_map(char *src);
 char					*little_strjoin(char *src, char c);
 t_item					*rec_item(char *the_map, t_map *map);
-t_prop					*rec_prop(char *the_map, t_map *map);
-t_enemy					*rec_enemy(char *the_map, t_map *map);
 
 // tools
 int						do_trigo(t_var *info, t_wall *wall);
