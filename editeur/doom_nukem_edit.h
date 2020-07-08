@@ -6,12 +6,12 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 18:35:03 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/08 14:23:24 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOOM_NUKEM_H
-# define DOOM_NUKEM_H
+#ifndef DOOM_NUKEM_EDIT_H
+# define DOOM_NUKEM_EDIT_H
 
 //changer gnl pour /dev/zero
 
@@ -56,6 +56,16 @@ typedef	struct s_item	t_item;
 typedef struct s_convex t_convex;
 typedef struct s_intersec t_intersec;
 typedef struct s_norm1 t_norm1;
+typedef struct s_gws t_gws;
+
+struct					s_gws
+{
+	t_map		*map;
+	t_sector	*sector;
+	int			*height;
+	SDL_Event	*event;
+	int			i;
+};
 
 struct					s_point
 {

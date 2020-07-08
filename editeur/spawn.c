@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 18:57:31 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/08 13:51:31 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,18 @@ int		is_new_point_in_sectors(t_point new, t_map *map)
 	return (1);
 }
 
+void	init_norm1(t_norm1 *norm1, t_map *map)
+{
+	norm1->item = map->items;
+	norm1->prop = map->props;
+	norm1->enemy = map->enemys;
+}
+
 int		is_in_object(t_point new, t_map *map)
 {
 	t_norm1 norm1;
 
-	norm1.item = map->items;
-	norm1.prop = map->props;
-	norm1.enemy = map->enemys;
+	init_norm1(&norm1, map);
 	while (norm1.item || norm1.prop || norm1.enemy)
 	{
 		if (norm1.item)
