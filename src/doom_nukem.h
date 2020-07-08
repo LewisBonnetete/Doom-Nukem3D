@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 12:07:09 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/08 16:05:56 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,7 +344,7 @@ struct					s_w_draw
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 int						init_win3(t_var *info);
-int						dealer(t_var *info);
+int						dealer(t_var *info, t_render *render);
 void					sprint(t_var *info, SDL_Event event);
 void					straff_and_rot(t_var *info, t_input input);
 void					straff_and_rot2(t_var *info, t_input input);
@@ -353,7 +353,7 @@ void					mouser(t_var *info);
 void					get_speed(t_var *info);
 void					get_move1(SDL_Event event, t_input *input);
 void					get_move2(SDL_Event event, t_input *input);
-int						move(t_var *info, t_input input);
+int						move(t_var *info, t_input input, t_render *render);
 void					move_diag(t_input *input);
 void					diag(t_var *info, t_input input);
 void					diag1(t_var *info, t_input input);
@@ -443,13 +443,13 @@ void					init_tab(int *tab, int n);
 //hitbox
 int						hitboxy(t_var *info, t_render *render, double diry);
 int						hitboxx(t_var *info, t_render *render, double dirx);
+int						hitbox(t_var *info, t_render *render, int dir);
+
 //edit tools
 int						is_new_point_in_sector(t_point new, t_wall *walls);
 int						is_in_sectors_spawn(t_point first, t_map *map);
 int						is_in_sector_float(float center_x, float center_y, t_sector *sector);
 float					ft_fabs(float a);
-//int		draw_line_condition(t_line *line);
-//int		draw_line(t_var *info, t_line *line, Uint32 color);
 t_sector				*get_to_last_sector(t_sector *sectors);
 int						nbr_of_sectors(t_map *map);
 t_sector				*get_a_sector_by_id(t_map *map, int id);

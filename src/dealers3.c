@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dealers3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/07 16:01:40 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/08 16:16:04 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,23 @@ void	get_move2(SDL_Event event, t_input *input)
 	}
 }
 
-int		move(t_var *info, t_input input)
+int		move(t_var *info, t_input input, t_render *render)
 {
 	if (input.up && input.diag == 0)
 	{
-		// if (info->map[(int)(info->posx + info->dirx * info->movespeed)]
-		// [(int)(info->posy)] != '#' && hitboxx(info, info->dirx))
+		if(hitbox(info, info->render, 0))
+		{
 			info->player->posx += info->player->dx * info->player->movespeed;
-		// if (info->map[(int)(info->posx)][(int)(info->posy + info->diry
-		// * info->movespeed)] != '#' && hitboxy(info, info->diry))
 			info->player->posy += info->player->dy * info->player->movespeed;
+		}
 	}
 	if (input.down && input.diag == 0)
 	{
-		// if (info->map[(int)(info->posx - info->dirx * info->movespeed)]
-		// [(int)(info->posy)] != '#' && hitboxx(info, (-1) * info->dirx))
+		if(hitbox(info, info->render, 1))
+		{
 			info->player->posx -= info->player->dx * info->player->movespeed;
-		// if (info->map[(int)(info->posx)][(int)(info->posy - info->diry
-		// * info->movespeed)] != '#' && hitboxy(info, (-1) * info->diry))
 			info->player->posy -= info->player->dy * info->player->movespeed;
+		}
 	}
 	return (1);
 }
