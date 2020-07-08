@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 16:53:13 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/08 12:19:42 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ int                main(int ac, char **av)
 	}
 	SDL_DestroyWindow(info.window);
 	SDL_Quit();
+	ft_exit(&info, &renderer);
 	return (0);
 }

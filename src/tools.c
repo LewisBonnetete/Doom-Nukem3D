@@ -1,53 +1,53 @@
 #include "doom_nukem.h"
 
-double     calc_dist(t_point a, t_point b)
+double			calc_dist(t_point a, t_point b)
 {
-    double res;
+	double res;
 
-    res = (b.x - a.x) * (b.x - a.x) 
-    + (b.y - a.y) * (b.y - a.y);
-    return (sqrt(res));
+	res = (b.x - a.x) * (b.x - a.x) 
+	+ (b.y - a.y) * (b.y - a.y);
+	return (sqrt(res));
 }
-void    init_tab(int *tab, int n)
+void			init_tab(int *tab, int n)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (i <= n + 1)
-    {
-        tab[i] = 0;
-        i++;
-    }
+	i = 0;
+	while (i <= n + 1)
+	{
+		tab[i] = 0;
+		i++;
+	}
 }
 
-static	void		free_itab(t_itab *tab)
+static void		free_itab(t_itab *tab)
 {
 	free(&tab);
 }
 
-static	void		free_ray(t_ray *ray)
+static void		free_ray(t_ray *ray)
 {
 	free(&ray);
 }
 
-static	void	free_wall(t_wall *wall)
+static void		free_wall(t_wall *wall)
 {
 	free(&wall);
 }
 
-static	void	free_item(t_item *item)
+static void		free_item(t_item *item)
 {
-	free(&item);
+	ft_memdel((void **)&item);
 }
 
-static  void        free_sector(t_sector *sector)
+static void		free_sector(t_sector *sector)
 {
 	if (sector->next_sector)
 		free_sector(sector->next_sector);
-	free(&sector);
+	ft_memdel((void **)&sector);
 }
 
-static  void		free_render(t_render *render)
+static void		free_render(t_render *render)
 {
 	int i;
 
@@ -77,7 +77,19 @@ static  void		free_render(t_render *render)
 	free(&render);
 }
 
-static  void        free_info(t_var *info)
+void			free_map(t_map *map)
+{
+    free(&map);
+}
+
+void			free_player(t_player *player)
+{
+	if (player->weapon)
+		free_item(player->weapon);
+	free(&player);
+}
+
+static void		free_info(t_var *info)
 {
 	if (info->image)
 		SDL_FreeSurface(info->image);
@@ -87,18 +99,14 @@ static  void        free_info(t_var *info)
 		SDL_DestroyWindow(info->window);
 	if (info->render)
 		free_render(info->render);
+	if (info->map)
+		free_map(info->map);
+	if (info->player)
+		free_player(info->player);
 	free(&info);
 }
 
-
-void       free_map(t_map *map)
-{
-    if (map->sectors)
-        free(&map->sectors);
-    free(map);
-}
-
-void        ft_exit(t_var *info, t_render *render)
+void			ft_exit(t_var *info, t_render *render)
 {
 	if (info)
 		free_info(info);
