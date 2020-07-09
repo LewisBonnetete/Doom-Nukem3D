@@ -6,7 +6,7 @@
 #    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/09 14:59:54 by lbonnete         ###   ########.fr        #
+#    Updated: 2020/07/09 15:45:50 by lbonnete         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRC =	main.c\
 		algo_intersection.c\
 		algo_draw.c\
 		algo.c\
-		map_init.c\
 		move.c\
 		load_map.c\
 		check_map.c\
@@ -61,6 +60,11 @@ SRC =	main.c\
 		load_map1.c\
 		load_map2.c\
 		png_parser.c
+		tools3.c\
+		tools4.c\
+		valid_wall2.c\
+		check_wall_intersections.c\
+		comparator.c\
 
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))

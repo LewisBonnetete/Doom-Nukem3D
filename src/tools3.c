@@ -1,23 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_tools.c                                       :+:      :+:    :+:   */
+/*   tools3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 14:28:33 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 15:08:12 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
-double	norm2(double x, double y)
+void			init_tab(int *tab, int n)
 {
-	return ((x * x) + (y * y));
+	int i;
+
+	i = 0;
+	while (i <= n + 1)
+	{
+		tab[i] = 0;
+		i++;
+	}
 }
 
-double	scalar(double x1, double y1, double x2, double y2)
+void			free_itab(t_itab *tab)
 {
-	return ((norm2(x1 + x2, y1 + y2) - norm2(x1, y1) - norm2(x2, y2)) / 2);
+	free(&tab);
+}
+
+void			free_ray(t_ray *ray)
+{
+	free(&ray);
+}
+
+void			free_wall(t_wall *wall)
+{
+	free(&wall);
+}
+
+void			free_item(t_item *item)
+{
+	if (item->name)
+		ft_strdel(&item->name);
+	ft_memdel((void **)&item);
 }
