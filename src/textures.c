@@ -21,6 +21,11 @@ int		tab_path(t_render *renderer)
 				return (0);
 	}
 	renderer->tab_sdl[i] = NULL;
+	while (i < 10)
+	{
+		printf("%f ", renderer->tab_sdl[1]->pixels[i]);
+		i++;
+	}
 	return (1);
 }
 

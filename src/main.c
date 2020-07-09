@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 18:11:01 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 12:41:39 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ int                main(int ac, char **av)
 		free_info(&info);
 		return (0);
 	}
-	//init_artificial_map(&(info.map));
 	ft_init_pour_linstant(&info);
 	init_player(&player, info.map);
-	//free_map(info.map);
 	info.player = &player;
 	init_render(&info, &renderer, 0, info.player->sector_id);
 	info.render = &renderer;
