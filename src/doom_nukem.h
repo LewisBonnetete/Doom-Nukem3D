@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 15:45:52 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 16:45:16 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <math.h>
 # include "../libft/libft.h"
 # define RAIN				0
+# define PARSE				0
 # define WINDOW_W			720
 # define WINDOW_H			480
 # define NB_THREADS_MAX		12
@@ -504,7 +505,6 @@ int						pnpoly_float(int nbr_walls, t_wall *walls,
 int						player_sec(t_sector *sector, t_var *info);
 void					init_nb_sec(t_sector *sector, t_render *render);
 int						tex_floor_ciel(t_var *info, t_render *render);
-int						tab_path_text(t_render *renderer);
 t_render				*cpy_render(t_render *render);
 int						gameplay(t_var *info);
 int						hit_box(t_var *info, t_render *render);

@@ -6,13 +6,13 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 15:26:42 by lbonnete          #+#    #+#             */
-/*   Updated: 2018/11/16 16:30:51 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 16:18:33 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *nb)
+long		ft_atoi(const char *nb)
 {
 	int		neg;
 	long	res;

@@ -6,7 +6,7 @@
 #    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/09 15:45:50 by lbonnete         ###   ########.fr        #
+#    Updated: 2020/07/09 16:45:35 by lbonnete         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ SRC =	main.c\
 		load_map.c\
 		check_map.c\
 		tools.c\
-		textures.c\
 		tools2.c\
 		load_map3.c\
 		valid_wall.c\
@@ -59,7 +58,7 @@ SRC =	main.c\
 		item_tool.c\
 		load_map1.c\
 		load_map2.c\
-		png_parser.c
+		png_parser.c\
 		tools3.c\
 		tools4.c\
 		valid_wall2.c\

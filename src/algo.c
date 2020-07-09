@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 11:08:48 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 16:48:08 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,10 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 				item->cap = 0;
 		}
 		if (render->itab[k].text_id == 7)
+		{
+			ft_putendl("SUCCESS!");
 			ft_exit(info, render);
+		}
 	}
 	else
 		item->cap = 0;

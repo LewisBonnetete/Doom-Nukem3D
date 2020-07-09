@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 19:49:14 by lbonnete          #+#    #+#             */
-/*   Updated: 2019/04/25 16:55:59 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 16:19:25 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *ens, const char *x);
 char				*ft_strnstr(const char *ens, const char *x, size_t n);
-int					ft_atoi(const char *nb);
+long				ft_atoi(const char *nb);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
