@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 17:16:06 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 17:48:58 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,23 @@ void			draw_texture_wall(t_var *info, t_render *render)
 	t_w_draw draw;
 
 	w_draw_calc(render, &draw);
-	while (draw.i <= render->wall_y0)
+	if (render->tab_sdl[render->wall->text_id] && render->wall->text_id < NB_TEXT)
 	{
-		if (draw.i == render->wall_y0 || draw.i == render->wall_y1)
+		while (draw.i <= render->wall_y0)
 		{
-			put_pixel(BLACK, render->x, draw.i, info->image);
+			if (draw.i == render->wall_y0 || draw.i == render->wall_y1)
+			{
+				put_pixel(BLACK, render->x, draw.i, info->image);
+			}
+			else
+			{
+				draw.texy += draw.step;
+				draw.color = get_pixel(render->tab_sdl[render->wall->text_id],
+				(int)draw.texy, (int)draw.pos_relative);
+				put_pixel(darken_wall(info, draw.color, render, draw.i),
+				render->x, draw.i, info->image);
+			}
+			draw.i++;
 		}
-		else
-		{
-			draw.texy += draw.step;
-			draw.color = get_pixel(render->tab_sdl[render->wall->text_id],
-			(int)draw.texy, (int)draw.pos_relative);
-			put_pixel(darken_wall(info, draw.color, render, draw.i),
-			render->x, draw.i, info->image);
-		}
-		draw.i++;
 	}
 }
