@@ -6,7 +6,7 @@
 #    By: trabut <trabut@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/08 18:11:46 by trabut           ###   ########.fr        #
+#    Updated: 2020/07/09 12:32:40 by trabut           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC =	main.c\
 		tools.c\
 		textures.c\
 		tools2.c\
+		load_map3.c\
 		valid_wall.c\
 		polygon_checks.c\
 		editer_tools.c\
@@ -56,6 +57,9 @@ SRC =	main.c\
 		tools_draw.c\
 		change_weapon.c\
 		gameplay.c\
+		item_tool.c\
+		load_map1.c\
+		load_map2.c\
 
 INC = doom-nukem.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
