@@ -44,8 +44,6 @@ int		png_parse()
 		i = 0;
 		ft_putnbr_fd(tab[j]->h, fd);
 		ft_putstr_fd(";", fd);
-		ft_putnbr_fd(tab[j]->w, fd);
-		ft_putstr_fd(";", fd);
 		while (i < tab[j]->h * tab[j]->w)
 		{
 			tmp = pixels[i];
@@ -68,4 +66,66 @@ int		png_parse()
 		free(tab[j]);
 	}
 	return (0);
+}
+
+SDL_Surface	*read_text(char *line)
+{
+	SDL_Surface	*text;
+	Uint32		nb;
+	int 		i;
+	int			p;
+	int			debut;
+
+	if (!(text = (SDL_Surface*)ft_memalloc(sizeof(SDL_Surface))))
+		return (0);
+	i = 0;
+	p = 0;
+	while (line[i] != ';')
+		i++;
+	line[i] = '\0';
+	text->h = ft_atoi(line);
+	text->w = text->h;
+	if (!(text->pixels = (Uint32*)ft_memalloc(sizeof(Uint32) * text->w * text->h)))
+		return (0);
+	i++;
+	while(line[i])
+	{
+		debut = i;
+		while (line[i] != ';')
+		{
+			i++;
+		}
+		line[i] = '\0';
+		((Uint32*)(text->pixels))[p] = ft_atoi(&(line[debut]));
+		p++;
+		i++;
+	}
+	return(text);
+}
+
+int			read_core_text(t_render *renderer)
+{
+	int fd;
+	int i;
+	char *line;
+
+	if ((fd = open("core", O_RDWR)) == -1)
+		return (0);
+	i = 0;
+	while(get_next_line(fd, &line) > 0)
+	{
+		if (i < 4)
+		{
+			if (!(renderer->tab_sdl[i] = read_text(line)))
+				return (0);
+		}
+		else
+		{
+			if (!(renderer->tab_sdl_item[i] = read_text(line)))
+				return (0);
+		}
+		i++;
+		free(line);
+	}
+	return (1);
 }

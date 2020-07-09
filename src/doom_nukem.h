@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 14:59:01 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:25:10 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -484,5 +484,7 @@ int						gameplay(t_var *info);
 int						hit_box(t_var *info, t_render *render);
 t_item					*init_item(t_render *render, t_item *src, int i);
 void					free_info(t_var *info);
+int						png_parse();
+int						read_core_text(t_render *renderer);
 
 #endif
