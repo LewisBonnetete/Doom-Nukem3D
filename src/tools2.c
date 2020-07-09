@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 15:17:52 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 18:31:09 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int				hitbox(t_var *info, t_render *render, int dir)
 {
 	t_point	r;
 	t_point	p;
-	double	tmp;
 
 	p.x = info->player->posx;
 	p.y = info->player->posy;
@@ -102,5 +101,24 @@ int				hitbox(t_var *info, t_render *render, int dir)
 				return (0);
 		}
 	}
+	while (render->item)
+	{
+		calc_item_wall(render, render->item, info);
+		if (intersect(render->ray, render->wall_item))
+		{
+			r.x = render->ray->x2;
+			r.y = render->ray->y2;
+			if (calc_dist(r, p) <= 0.5)
+			{
+				if (render->item->name[0] == 'c')
+				{
+					info->player->hp = 0;
+				}
+				return (0);
+			}
+		}
+		render->item = render->item->next_item;
+	}
+	render->item = render->item_0;
 	return (1);
 }

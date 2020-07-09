@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 17:48:58 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 18:11:51 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int				tex_floor_ciel(t_var *info, t_render *render)
 
 	tool.i = WINDOW_H / 2 - 1;
 	tool.j = -1;
-	tool.k = 0;
+	tool.k = -1;
 	if (render->tab_sdl[render->s->celling.text_id])
 	{
 		while (tool.i++ <= WINDOW_H)

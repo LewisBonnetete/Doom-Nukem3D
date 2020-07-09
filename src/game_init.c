@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 15:36:44 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 18:28:04 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void			ft_init_pour_linstant(t_var *info)
 	info->d_gun = 0;
 	info->d_gunb = 0;
 	info->clock = 0;
+	info->y_dec = 0;
 }
 
 void			init_player(t_player *player, t_map *map)
@@ -36,6 +37,7 @@ void			init_player(t_player *player, t_map *map)
 	player->movespeed = player->frametime * 2.5;
 	player->weapon = NULL;
 	player->hp = 100;
+	player->hp_p = 100;
 	player->ammo = 0;
 }
 

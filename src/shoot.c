@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shoot.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:35:50 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/07/09 14:49:03 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 17:20:16 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@ t_item	*go_to_item(t_item *item, char c)
 
 t_item	*check_monster(t_item *item, t_var *info, t_item *item_2)
 {
-	int		dist;
-	int		dist_2;
-	t_point	p;
-	t_point	w;
-
 	if ((item->name[0] == 'c' && item->pv > 0) ||
 		(item->name[0] == 's' && item->pv > 0))
 		return (item);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   item_tool.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 11:59:27 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 17:20:50 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 {
 	t_item	*dest;
 
-	if (!dest)
-		if (!(dest = (t_item *)ft_memalloc(sizeof(t_item))))
-			return (0);
+
+	if (!(dest = (t_item *)ft_memalloc(sizeof(t_item))))
+		return (0);
 	dest->name = ft_strdup(src->name);
 	dest->x = src->x;
 	dest->y = src->y;

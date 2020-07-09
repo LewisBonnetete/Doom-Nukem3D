@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameplay.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 12:00:34 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 18:30:36 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int		gameplay(t_var *info)
 	if (info->clock > 100)
 		info->clock = 0;
 	if (info->clock == 50)
+	{
 		info->player->hp -= DMG * enemys_in_sector(info, info->player);
+	}
 	if (info->player->hp <= 0)
-		return (0);
+		ft_exit(info, info->render);
 	return (1);
 }

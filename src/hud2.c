@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 12:01:33 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 17:18:57 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ void		draw_square(t_var *info, t_point a, t_point b, Uint32 color)
 
 void		hud(t_var *info, t_player *player, t_map *map)
 {
-	SDL_Rect	pos;
-	SDL_Surface	*texte;
 	SDL_Color	color;
 
 	color.a = 255;
@@ -85,5 +83,4 @@ void		hud(t_var *info, t_player *player, t_map *map)
 	inventory(info, color);
 	weapon(info, player, color);
 	munitions(info, color);
-	//il faudra TTF_CloseFont(info->font);dans l'exit
 }

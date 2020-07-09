@@ -65,7 +65,6 @@ int		png_parse()
 SDL_Surface	*read_text(char *line)
 {
 	SDL_Surface	*text;
-	Uint32		nb;
 	int 		i;
 	int			p;
 	int			debut;

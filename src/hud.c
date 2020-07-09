@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 12:01:15 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 18:45:30 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,25 @@ void	hp(t_var *info, t_player *player, SDL_Color color)
 	char		*nb;
 
 	nb = ft_itoa(player->hp);
-	texte = TTF_RenderText_Blended(info->font, nb, color);
 	pos.x = WINDOW_W - 195;
 	pos.y = WINDOW_H - 30;
+	if (info->player->hp < info->player->hp_p)
+	{
+		color.r = (RED >> 16) & 0xFF;
+		color.g = (RED >> 8) & 0xFF;
+		color.b = RED & 0xFF;
+		info->player->hp_p -= 1;
+	}
+	if (info->player->hp > info->player->hp_p)
+	{
+		color.r = (GREEN >> 16) & 0xFF;
+		color.g = (GREEN >> 8) & 0xFF;
+		color.b = GREEN & 0xFF;
+		info->player->hp_p += 1;
+		free(nb);
+		nb = ft_itoa(player->hp_p);
+	}
+	texte = TTF_RenderText_Blended(info->font, nb, color);
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	SDL_FreeSurface(texte);
 	free(nb);

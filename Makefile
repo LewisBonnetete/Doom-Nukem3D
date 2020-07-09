@@ -6,13 +6,13 @@
 #    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/09 16:45:35 by lbonnete         ###   ########.fr        #
+#    Updated: 2020/07/09 17:15:30 by lbonnete         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = doom-nukem
 
-FLAGS       = -O2 -O3 -Wextra -Werror
+FLAGS       = -O3 -Wextra -Werror -W -Wall
 
 SDL			= -lpthread -F ./frameworks/ -framework SDL2 -framework SDL2_image -framework SDL2_ttf
 SDL_HEADER	= -I ./frameworks/SDL2.framework/Headers -I ./frameworks/SDL2_image.framework/Headers -I ./frameworks/SDL2_ttf.framework/Headers

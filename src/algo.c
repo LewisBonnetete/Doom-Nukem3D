@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 16:48:08 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 18:30:49 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void		update_render(t_var *info, t_render *render)
 	render->wall_dist = sqrt(render->wall_sqdist);
 	render->wall_height = WALL_H * (double)render->wall->height
 	/ (double)render->wall_dist;
-	render->wall_y0 = WINDOW_H / 2 - render->wall_height / 2;
-	render->wall_y1 = WINDOW_H / 2 + render->wall_height / 2;
+	render->wall_y0 = WINDOW_H / 2 - render->wall_height / 2 + info->y_dec;
+	render->wall_y1 = WINDOW_H / 2 + render->wall_height / 2 + info->y_dec;
 	if (info->player->posz != render->wall->a.z)
 	{
 		render->wall_y0 += DECALLAGE * (render->wall->a.z - info->player->posz)

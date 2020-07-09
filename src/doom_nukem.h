@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 16:45:16 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 18:40:10 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define GMASK				0
 # define BMASK				0
 # define AMASK				0
+# define RED				0xFF0000
+# define DARK				0x2C2F33
+# define GRAY				0x99AAB5
+# define GREEN				0x32cd32
 # define WALL_H				238
 # define DECALLAGE			0
 # define BLACK				0x000000
@@ -210,6 +214,7 @@ struct					s_player
 	double				movespeed;
 	double				frametime;
 	int					hp;
+	int					hp_p;
 	int					ammo;
 	t_item				*weapon;
 };
@@ -414,7 +419,7 @@ int						is_new_point_in_sector(t_point new, t_wall *walls);
 int						check_wall_intersections(t_point new, t_point old, t_wall wall);
 int						comparator1(t_point new, t_point old, t_point w1, t_point w2);
 int						comparator2(t_point new, t_point old, t_point w1, t_point w2);
-
+void					red_flash(t_var *info);
 //algo
 int						raycasting(t_var *info, t_render *render);
 void					put_pixel(Uint32 color, int x,
