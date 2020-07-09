@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 14:09:46 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 17:16:06 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int				tex_floor_ciel(t_var *info, t_render *render)
 {
 	t_f_tool tool;
 
-	tool.i = -1;
+	tool.i = WINDOW_H / 2 - 1;
 	tool.j = -1;
 	tool.k = 0;
 	if (render->tab_sdl[render->s->celling.text_id])
@@ -48,28 +48,6 @@ int				tex_floor_ciel(t_var *info, t_render *render)
 	else
 		return (0);
 	return (1);
-}
-
-static	void	ft_put_weapon(t_var *info, t_render *render)
-{
-	double		x;
-	double		y;
-	Uint32		color;
-
-	x = 0;
-	while (x < render->tab_sdl[3]->w)
-	{
-		y = 0;
-		while (y < render->tab_sdl[3]->h)
-		{
-			color = get_pixel(render->tab_sdl[3], y, x);
-			if (color != 0)
-				put_pixel(color, (int)x + WINDOW_W / 2 - 45,
-				WINDOW_H + (int)y - 125 + info->d_gun, info->image);
-			y++;
-		}
-		x++;
-	}
 }
 
 void			put_pixel(Uint32 color, int x, int y, SDL_Surface *image)
