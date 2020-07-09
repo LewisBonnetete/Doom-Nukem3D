@@ -6,80 +6,89 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 18:11:01 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 14:07:41 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
-/* void			ft_clock(t_var *info)
+int						main_path(t_render *render, t_var *info)
 {
-	info->oldtime = info->time;
-	info->time = SDL_GetTicks();
-	info->frametime = (info->time - info->oldtime) / 1000.0;
+	if (tab_path(render) == 0 || tab_path_text(render) == 0)
+		ft_exit(info, render);
+	if (WALL_H > 1000 || WALL_H <= 0)
+		ft_exit(info, render);
+	return (1);
 }
-*/
 
-int                main(int ac, char **av)
+int						main_check(int ac, char **av, t_var *info)
 {
-	t_var info;
-	t_map map;
-	t_render renderer;
+	if (ac != 2 || info_map(av[1], info->map) == 0)
+	{
+		free_map(info->map);
+		return (0);
+	}
+	if (!(init_win1(info)) || !(init_win2(info)) || !(init_win3(info)))
+	{
+		free_info(info);
+		return (0);
+	}
+	return (1);
+}
+
+void					main_tool(t_var *info, t_render *render)
+{
+	SDL_RenderPresent(info->renderer);
+	SDL_DestroyTexture(info->texture);
+	if (!gameplay(info))
+		ft_exit(info, render);
+}
+
+void					sdl_main(t_render *render, t_var *info)
+{
+	if (!(info->texture =
+	SDL_CreateTextureFromSurface(info->renderer, info->image)))
+	{
+		ft_putstr("Erreur CreateTextureFromSurface :\n");
+		ft_putendl(SDL_GetError());
+		SDL_DestroyWindow(info->window);
+		SDL_Quit();
+		ft_exit(info, render);
+	}
+	if (SDL_RenderCopy(info->renderer, info->texture, NULL, NULL))
+	{
+		ft_putstr("Erreur RenderCopy :\n");
+		ft_putendl(SDL_GetError());
+		SDL_DestroyWindow(info->window);
+		SDL_Quit();
+		ft_exit(info, render);
+	}
+}
+
+int						main(int ac, char **av)
+{
+	t_var		info;
+	t_map		map;
+	t_render	render;
 	t_player	player;
 
-	(void)ac;
-	(void)av;
-	(void)player;
-	(void)renderer;
 	info.map = &map;
-	if (ac != 2 || info_map(av[1], info.map) == 0)
-	{
-		free_map(info.map);
-		return (0);
-	}
-	if (!(init_win1(&info)) || !(init_win2(&info)) || !(init_win3(&info)))
-	{
-		free_info(&info);
-		return (0);
-	}
-	//init_artificial_map(&(info.map));
+	main_check(ac, av, &info);
 	ft_init_pour_linstant(&info);
 	init_player(&player, info.map);
-	//free_map(info.map);
 	info.player = &player;
-	init_render(&info, &renderer, 0, info.player->sector_id);
-	info.render = &renderer;
-	if (tab_path(&renderer) == 0 || tab_path_text(&renderer) == 0)
-		ft_exit(&info, &renderer);
-	if (WALL_H > 1000 || WALL_H <= 0)
-		ft_exit(&info, &renderer);
+	init_render(&info, &render, 0, info.player->sector_id);
+	info.render = &render;
+	main_path(&render, &info);
 	while (dealer(&info))
 	{
-		if (!(info.texture = SDL_CreateTextureFromSurface(info.renderer, info.image)))
-		{
-			ft_putstr("Erreur CreateTextureFromSurface :\n");
-			ft_putendl(SDL_GetError());
-			SDL_DestroyWindow(info.window);
-			SDL_Quit();
-			ft_exit(&info, &renderer);
-		}
-		if (SDL_RenderCopy(info.renderer, info.texture, NULL, NULL))
-		{
-			ft_putstr("Erreur RenderCopy :\n");
-			ft_putendl(SDL_GetError());
-			SDL_DestroyWindow(info.window);
-			SDL_Quit();
-			ft_exit(&info, &renderer);
-		}
-		if (raycasting(&info, &renderer) == 0)
-			ft_exit(&info, &renderer);
-		SDL_RenderPresent(info.renderer);
-		SDL_DestroyTexture(info.texture);
-		if (!gameplay(&info))
-			ft_exit(&info, &renderer);
+		sdl_main(&render, &info);
+		if (raycasting(&info, &render) == 0)
+			ft_exit(&info, &render);
+		main_tool(&info, &render);
 	}
 	SDL_DestroyWindow(info.window);
 	SDL_Quit();
-	ft_exit(&info, &renderer);
+	ft_exit(&info, &render);
 	return (0);
 }

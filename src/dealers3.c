@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/08 18:05:59 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 11:18:10 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		move(t_var *info, t_input input)
 {
 	if (input.up)
 	{
-		if(hitbox(info, info->render, 0))
+		if (hitbox(info, info->render, 0))
 		{
 			info->player->posx += info->player->dx * info->player->movespeed;
 			info->player->posy += info->player->dy * info->player->movespeed;
@@ -75,7 +75,7 @@ int		move(t_var *info, t_input input)
 	}
 	if (input.down)
 	{
-		if(hitbox(info, info->render, 1))
+		if (hitbox(info, info->render, 1))
 		{
 			info->player->posx -= info->player->dx * info->player->movespeed;
 			info->player->posy -= info->player->dy * info->player->movespeed;
@@ -83,18 +83,3 @@ int		move(t_var *info, t_input input)
 	}
 	return (1);
 }
-
-// void	reset_and_head(t_var *info, SDL_Event event)
-// {
-// 	if (event.key.keysym.sym == SDLK_DELETE && event.key.state == SDL_PRESSED)
-// 	{
-// 		info->posx = info->ori_x;
-// 		info->posy = info->ori_y;
-// 		info->time_reset = info->time;
-// 		ft_init_pour_linstant(info);
-// 	}
-// 	if (event.key.keysym.sym == SDLK_PAGEUP && event.key.state == SDL_PRESSED)
-// 		info->y_dec -= 8;
-// 	if (event.key.keysym.sym == SDLK_PAGEDOWN && event.key.state == SDL_PRESSED)
-// 		info->y_dec += 8;
-// }

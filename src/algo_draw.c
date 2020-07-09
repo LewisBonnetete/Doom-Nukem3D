@@ -6,38 +6,42 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 18:08:20 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 14:09:46 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
+void			floor_tool(t_f_tool *tool, t_var *info, t_render *render)
+{
+	tool->tx = (int)(render->tab_sdl[render->s->celling.text_id]->w
+	* (tool->floorx - (int)tool->floorx)) &
+	(render->tab_sdl[render->s->celling.text_id]->w - 1);
+	tool->ty = (int)(render->tab_sdl[render->s->celling.text_id]->h *
+	(tool->floory - (int)tool->floory)) &
+	(render->tab_sdl[render->s->celling.text_id]->h - 1);
+	tool->floorx += tool->stepx;
+	tool->floory += tool->stepy;
+	put_pixel(darken_floor(tool, render), tool->j, tool->i, info->image);
+	put_pixel(darken_floor(tool, render),
+	tool->j, WINDOW_H - tool->i - 1, info->image);
+}
+
 int				tex_floor_ciel(t_var *info, t_render *render)
 {
 	t_f_tool tool;
 
-	tool.i = 0;
-	tool.j = 0;
+	tool.i = -1;
+	tool.j = -1;
 	tool.k = 0;
-//	printf("hey\n");
 	if (render->tab_sdl[render->s->celling.text_id])
 	{
-		while (tool.i++ < WINDOW_H)
+		while (tool.i++ <= WINDOW_H)
 		{
 			init_floor(info, &tool);
-			while (tool.j++ < WINDOW_W)
+			while (tool.j++ <= WINDOW_W)
 			{
-				tool.tx = (int)(render->tab_sdl[render->s->celling.text_id]->w
-				* (tool.floorx - (int)tool.floorx)) &
-				(render->tab_sdl[render->s->celling.text_id]->w - 1);
-				tool.ty = (int)(render->tab_sdl[render->s->celling.text_id]->h *
-				(tool.floory - (int)tool.floory)) &
-				(render->tab_sdl[render->s->celling.text_id]->h - 1);
-				tool.floorx += tool.stepx;
-				tool.floory += tool.stepy;
-				put_pixel(darken_floor(&tool, render), tool.j, tool.i, info->image);
-				put_pixel(darken_floor(&tool, render),
-				tool.j, WINDOW_H - tool.i - 1, info->image);
+				floor_tool(&tool, info, render);
 			}
 		}
 	}
@@ -75,11 +79,6 @@ void			put_pixel(Uint32 color, int x, int y, SDL_Surface *image)
 	pixels = image->pixels;
 	if (x >= 0 && y >= 0 && x < image->w && y < image->h)
 		pixels[y * image->w + x] = color;
-}
-
-void			draw_textures(t_var *info, t_render *render)
-{
-	draw_texture_wall(info, render);
 }
 
 void			draw_texture_wall(t_var *info, t_render *render)

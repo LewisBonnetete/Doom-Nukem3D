@@ -22,9 +22,9 @@ int				rain_gen(t_var *info)
 
 	i = 0;
 	tmp = rand()%20;
-	while (i++ < tmp)
+	while (i++ < tmp && RAIN)
 	{
-		p.x = rand()%(WINDOW_W - 10);
+		p.x = rand()%(WINDOW_W - 20) + 10;
 		p.y = rand()%(WINDOW_H - 10);
 		draw_col(info, p, rand()%25 + 5);
 	}
