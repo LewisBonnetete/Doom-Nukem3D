@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 18:04:32 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 12:01:15 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ void	hp(t_var *info, t_player *player, SDL_Color color)
 
 void	munitions(t_var *info, SDL_Color color)
 {
-	t_item	*weapon;
+	t_item		*weapon;
 	SDL_Surface	*texte;
 	SDL_Rect	pos;
-	char	*nb;
+	char		*nb;
 
 	if (may_weapon(info->render->item_0))
 	{

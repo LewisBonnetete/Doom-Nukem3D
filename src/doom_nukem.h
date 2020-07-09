@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 14:21:03 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 14:59:01 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "../libft/libft.h"
+# define RAIN				0
 # define WINDOW_W			720
 # define WINDOW_H			480
 # define NB_THREADS_MAX		12
@@ -393,7 +394,8 @@ void					put_pixel(Uint32 color, int x,
 							int y, SDL_Surface *image);
 void					go_to_sector(t_sector *sec_0, int id, t_render *render);
 int						xy_in_ab(double x, double y, t_point a, t_point b);
-int						calc_item_wall(t_render *render, t_item *item, t_var *info);
+int						calc_item_wall(t_render *render,
+						t_item *item, t_var *info);
 void					draw_item(t_render *render, t_var *info);
 double					norm2(double x, double y);
 void					update_ray(t_var *info, t_render *render);
@@ -442,12 +444,14 @@ void					init_tab(int *tab, int n);
 int						hitboxy(t_var *info, t_render *render, double diry);
 int						hitboxx(t_var *info, t_render *render, double dirx);
 int						hitbox(t_var *info, t_render *render, int dir);
-int						hitbox_diag(t_var *info, t_render *render, double diagx, double diagy);
+int						hitbox_diag(t_var *info,
+						t_render *render, double diagx, double diagy);
 
 //edit tools
 int						is_new_point_in_sector(t_point new, t_wall *walls);
 int						is_in_sectors_spawn(t_point first, t_map *map);
-int						is_in_sector_float(float center_x, float center_y, t_sector *sector);
+int						is_in_sector_float(float center_x, float center_y,
+						t_sector *sector);
 float					ft_fabs(float a);
 t_sector				*get_to_last_sector(t_sector *sectors);
 int						nbr_of_sectors(t_map *map);
@@ -478,7 +482,7 @@ int						tab_path_text(t_render *renderer);
 t_render				*cpy_render(t_render *render);
 int						gameplay(t_var *info);
 int						hit_box(t_var *info, t_render *render);
-
+t_item					*init_item(t_render *render, t_item *src, int i);
 void					free_info(t_var *info);
 
 #endif

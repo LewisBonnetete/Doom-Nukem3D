@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
+/*   Updated: 2020/07/09 11:08:48 by trabut           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "doom_nukem.h"
 
 void		update_render(t_var *info, t_render *render)
@@ -126,7 +138,7 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 			else
 			{
 				update_render(info, render);
-				draw_textures(info, render);
+				draw_texture_wall(info, render);
 				break;
 			}
 		}

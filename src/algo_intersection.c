@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_intersection.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
+/*   Updated: 2020/07/09 11:12:40 by trabut           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "doom_nukem.h"
 
 /*
@@ -42,11 +54,18 @@ int		xy_in_ab(double x, double y, t_point a, t_point b)
 	return (0);
 }
 
+int		ret_inter(t_ray *ray, t_wall *wall)
+{
+	if (ray->eq_slope == wall->eq_slope)
+		return (0);
+	if (xy_in_ab(ray->x2, ray->y2, wall->a, wall->b))
+		return (xy_in_frontview(ray->x2, ray->y2, *ray));
+	return (0);
+}
+
 int		intersect(t_ray *ray, t_wall *wall)
 {
 	calc_wall_spec(wall); //a rajouter au moment du parsing* ? plus rapide que pendant le rendering 
-	if (ray->eq_slope == wall->eq_slope)
-		return (0);
 	if (wall->eq_slope == 1111)
 	{
 		ray->x2 = wall->eq_cste;
@@ -69,7 +88,5 @@ int		intersect(t_ray *ray, t_wall *wall)
 		/ (ray->eq_slope - wall->eq_slope);
 		ray->y2 = ray->eq_slope * ray->x2 + ray->eq_cste;
 	}
-	if (xy_in_ab(ray->x2, ray->y2, wall->a, wall->b))
-		return (xy_in_frontview(ray->x2, ray->y2, *ray));
-	return (0);
+	return (ret_inter(ray, wall));
 }

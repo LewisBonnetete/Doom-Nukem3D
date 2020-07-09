@@ -20,7 +20,17 @@ int		tab_path(t_render *renderer)
 			if ((renderer->tab_sdl[i] = IMG_Load("./xpm_textures/Jagpistol.png")) == 0)
 				return (0);
 	}
-	renderer->tab_sdl[i] = NULL;
+	// (char *)renderer->tab_sdl[0]->pixels;
+	// ft_strdel(&(renderer->tab_sdl[0]->pixels));
+	// renderer->tab_sdl[0]->pixels = ft_strdup(renderer->tab_sdl[1]->pixels);
+	// (char *)renderer->tab_sdl[2]->pixels;
+	// ft_strdel(&(renderer->tab_sdl[2]->pixels));
+	// renderer->tab_sdl[2]->pixels = ft_strdup(renderer->tab_sdl[1]->pixels);
+	// (char *)renderer->tab_sdl[3]->pixels;
+	// ft_strdel(&(renderer->tab_sdl[3]->pixels));
+	// renderer->tab_sdl[3]->pixels = ft_strdup(renderer->tab_sdl[1]->pixels);
+	// //printf("%s\n",renderer->tab_sdl[1]->pixels);
+	// renderer->tab_sdl[i] = NULL;
 	return (1);
 }
 

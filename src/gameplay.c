@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameplay.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 15:12:52 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 12:00:34 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		same_sector(t_var *info, t_item *item, int sector_id)
 {
 	t_sector	*sector;
 	t_point		pt;
-	
+
 	sector = get_a_sector_by_id(info->map, sector_id);
 	pt.x = item->x;
 	pt.y = item->y;
@@ -27,9 +27,9 @@ int		same_sector(t_var *info, t_item *item, int sector_id)
 
 int		enemys_in_sector(t_var *info, t_player *player)
 {
-	t_item *item;
-	int i;
-	
+	t_item	*item;
+	int		i;
+
 	i = 0;
 	item = info->render->item_0;
 	while (item)
@@ -43,7 +43,6 @@ int		enemys_in_sector(t_var *info, t_player *player)
 		item = item->next_item;
 	}
 	return (i);
-	
 }
 
 int		gameplay(t_var *info)

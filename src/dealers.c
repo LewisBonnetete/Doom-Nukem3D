@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 18:11:08 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 11:17:26 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	straff_and_rot2(t_var *info, t_input input)
 	{
 		input.straffer_x = -info->player->dy;
 		input.straffer_y = info->player->dx;
-		if(hitbox(info, info->render, 2))
+		if (hitbox(info, info->render, 2))
 		{
 			info->player->posx += input.straffer_x * info->player->movespeed;
-			info->player->posy += input.straffer_y * info->player->movespeed;	
+			info->player->posy += input.straffer_y * info->player->movespeed;
 		}
 	}
 }
@@ -36,11 +36,11 @@ void	straff_and_rot(t_var *info, t_input input)
 	{
 		input.straffer_x = info->player->dy;
 		input.straffer_y = -info->player->dx;
-		if(hitbox(info, info->render, 3))
+		if (hitbox(info, info->render, 3))
 		{
 			info->player->posx += input.straffer_x * info->player->movespeed;
-			info->player->posy += input.straffer_y * info->player->movespeed;	
-		}		
+			info->player->posy += input.straffer_y * info->player->movespeed;
+		}
 	}
 	straff_and_rot2(info, input);
 }
@@ -55,7 +55,7 @@ void	sprint(t_var *info, SDL_Event event)
 			info->player->sprint = 0;
 	}
 	if (event.key.keysym.sym == SDLK_SPACE && event.key.state == SDL_PRESSED)
- 		shoot_ennemy(info);
+		shoot_ennemy(info);
 }
 
 int		dealer(t_var *info)
@@ -70,7 +70,7 @@ int		dealer(t_var *info)
 		if (event.key.keysym.sym == SDLK_ESCAPE && event.type == SDL_KEYDOWN)
 			return (0);
 		if (event.key.keysym.sym == SDLK_v && event.key.state == SDL_PRESSED)
- 			change_weapon(info);
+			change_weapon(info);
 		get_move1(event, &input);
 		get_move2(event, &input);
 		sprint(info, event);
