@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 16:25:04 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 12:02:32 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int		del_item2(int x, int y, t_item *item, t_item *previous)
 		if (item->x == x && item->y == y)
 		{
 			previous->next_item = item->next_item;
-			ft_putstr(item->name);
 			free(item->name);
 			free(item);
 			return (1);
@@ -108,7 +107,6 @@ int		del_item(t_map *map, int x, int y)
 		if (item->x == x && item->y == y)
 		{
 			map->items = map->items->next_item;
-			ft_putstr(item->name);
 			free(item->name);
 			free(item);
 			return (1);

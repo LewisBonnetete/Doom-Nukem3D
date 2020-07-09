@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 16:25:32 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 12:02:09 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int		del_enemy2(t_map *map, int x, int y, t_enemy *enemy)
 		if (enemy->x == x && enemy->y == y)
 		{
 			previous->next_enemy = enemy->next_enemy;
-			ft_putstr(enemy->name);
 			free(enemy->name);
 			free(enemy);
 			return (1);
@@ -89,7 +88,6 @@ int		del_enemy(t_map *map, int x, int y)
 		if (enemy->x == x && enemy->y == y)
 		{
 			map->enemys = map->enemys->next_enemy;
-			ft_putstr(enemy->name);
 			free(enemy->name);
 			free(enemy);
 			return (1);

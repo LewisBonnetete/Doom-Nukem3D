@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 15:26:18 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 12:08:06 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ int		do_map(t_map *map, int fd)
 		return (0);
 	if (do_map2(map, fd) == 0)
 		return (0);
-	if (map->items)
-		if (do_item(items, fd) == 0)
-			return (0);
+	if (do_item(items, fd) == 0)
+		return (0);
+	free(items);
 	return (1);
 }
 
