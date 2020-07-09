@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 16:25:20 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/09 12:02:20 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int		del_prop2(int x, int y, t_prop *prop, t_prop *previous)
 		if (prop->x == x && prop->y == y)
 		{
 			previous->next_prop = prop->next_prop;
-			ft_putstr(prop->name);
 			free(prop->name);
 			free(prop);
 			return (1);
@@ -79,7 +78,6 @@ int		del_prop(t_map *map, int x, int y)
 		if (prop->x == x && prop->y == y)
 		{
 			map->props = map->props->next_prop;
-			ft_putstr(prop->name);
 			free(prop->name);
 			free(prop);
 			return (1);
