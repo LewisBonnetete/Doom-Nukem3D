@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 14:12:38 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 15:33:42 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # define NB_TEXT			4
 # define DMG				1
 
+typedef struct s_intersec	t_intersec;
 typedef struct s_input		t_input;
 typedef	struct s_var		t_var;
 typedef	struct s_text		t_text;
@@ -328,6 +329,16 @@ struct					s_f_tool
 
 };
 
+struct 						s_intersec
+{
+	float					a1;
+	float					a2;
+	float					b1;
+	float					b2;
+	float					x;
+	float					y;
+};
+
 struct					s_w_draw
 {
 	double		pos_relative;
@@ -387,6 +398,21 @@ int						rain_gen(t_var *info);
 void					shoot_ennemy(t_var *info);
 void					change_weapon(t_var *info);
 void					rgb_cap(t_rgb *rgb);
+void					ft_exit(t_var *info, t_render *render);
+void					free_info(t_var *info);
+void					free_player(t_player *player);
+void					free_map(t_map *map);
+void					free_itab(t_itab *tab);
+void					free_ray(t_ray *ray);
+void					free_wall(t_wall *wall);
+void					free_item(t_item *item);
+void					free_render(t_render *render);
+int						verify_crossing(t_point new, t_point old, t_sector *sector);
+int						center_in_poly(t_point a, t_point b, t_sector *sector);
+int						is_new_point_in_sector(t_point new, t_wall *walls);
+int						check_wall_intersections(t_point new, t_point old, t_wall wall);
+int						comparator1(t_point new, t_point old, t_point w1, t_point w2);
+int						comparator2(t_point new, t_point old, t_point w1, t_point w2);
 
 //algo
 int						raycasting(t_var *info, t_render *render);

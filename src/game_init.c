@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 14:13:00 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/09 15:36:44 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			ft_init_pour_linstant(t_var *info)
 	info->clock = 0;
 }
 
-void	init_player(t_player *player, t_map *map)
+void			init_player(t_player *player, t_map *map)
 {
 	player->sector_id = 1;
 	player->posx = (double)map->spawn.x;
@@ -39,7 +39,8 @@ void	init_player(t_player *player, t_map *map)
 	player->ammo = 0;
 }
 
-void	init_render(t_var *info, t_render *render, int x0, int sector_id)
+void			init_render(t_var *info, t_render *render,
+				int x0, int sector_id)
 {
 	render->sector_id = sector_id;
 	render->s = get_a_sector_by_id(info->map, 1);
