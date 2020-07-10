@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 11:15:33 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/10 15:51:48 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	check_map(char *the_map)
 			|| (the_map[i] >= 'A' && the_map[i] <= 'Z'))
 			++i;
 		else
+		{
+			ft_putendl("check_map failed");
 			return (0);
+		}
 	}
 	return (1);
 }

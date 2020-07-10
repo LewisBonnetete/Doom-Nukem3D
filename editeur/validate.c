@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 12:04:22 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 15:36:25 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		save(t_map *map)
 	{
 		get_next_line(0, &line);
 		size = ft_strlen(line);
-		if (size < 3 || size > 15)
+		if (size < 3 || size > 15 || ft_strrchr(line, ';'))
 		{
 			ft_putendl("Invalid name");
 			free(line);
