@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/03 14:33:52 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 15:11:55 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ void		get_textures2(t_wall *wall)
 
 	ft_putendl("Texture id of fill_up?");
 	id = -1;
-	while (id < 0 || id > 10)
+	while (id < 0 || id > 3)
 	{
 		get_next_line(0, &line);
 		id = ft_atoi(line);
-		if (id < 0 || id > 10)
+		if (id < 0 || id > 3)
 			ft_putendl("Wrong id, try something else");
 		free(line);
 	}
 	wall->fill_up = id;
 	ft_putendl("Texture id of fill_down?");
 	id = -1;
-	while (id < 0 || id > 10)
+	while (id < 0 || id > 3)
 	{
 		get_next_line(0, &line);
 		id = ft_atoi(line);
-		if (id < 0 || id > 10)
+		if (id < 0 || id > 3)
 			ft_putendl("Wrong id, try something else");
 		free(line);
 	}
@@ -48,11 +48,11 @@ void		get_textures(t_wall *wall)
 
 	ft_putendl("Texture id of the wall?");
 	id = -1;
-	while (id < 0 || id > 10)
+	while (id < 0 || id > 3)
 	{
 		get_next_line(0, &line);
 		id = ft_atoi(line);
-		if (id < 0 || id > 10)
+		if (id < 0 || id > 3)
 			ft_putendl("Wrong id, try something else");
 		free(line);
 	}

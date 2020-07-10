@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 17:58:27 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 15:12:23 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void		get_nbr_walls_sector_textures(t_sector *sector)
 
 	ft_putendl("How many walls?");
 	size = 0;
-	while (size < 3 || size > 25)
+	while (size < 3 || size > 10)
 	{
 		get_next_line(0, &line);
 		size = ft_atoi(line);
-		if (size < 3 || size > 25)
+		if (size < 3 || size > 10)
 			ft_putendl("Wrong number of walls, try something else");
 		free(line);
 	}
