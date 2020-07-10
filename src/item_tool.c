@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   item_tool.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 17:20:50 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 17:07:29 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int		item_reader(t_item *dest)
 t_item	*init_item(t_render *render, t_item *src, int i)
 {
 	t_item	*dest;
-
 
 	if (!(dest = (t_item *)ft_memalloc(sizeof(t_item))))
 		return (0);
