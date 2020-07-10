@@ -183,7 +183,7 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 				if (!weapon)
 					weapon = go_to_item(render->item_0, 'a');
 				weapon->mun += 25;
-				item->cap = 3;//ici rajouter les munitions
+				item->cap = 3;
 			}
 			else
 				item->cap = 0;
@@ -196,7 +196,7 @@ void	draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 	}
 	else
 		item->cap = 0;
-	if (render->distance <= 0)
+	if (render->distance <= 0.1)
 		render->distance = 0.1;
 	if (is_in_sector(w, render->s) != is_in_sector(p, render->s) && item->name[0] == 'c')
 		return;
