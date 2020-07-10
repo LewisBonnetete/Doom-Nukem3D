@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/10 16:10:24 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 16:18:23 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void					main_tool(t_var *info, t_render *render)
 	SDL_RenderPresent(info->renderer);
 	SDL_DestroyTexture(info->texture);
 	if (!gameplay(info))
-		ft_exit(info, render);
+		ft_exit(info, render);         
 }
-
+ 
 void					sdl_main(t_render *render, t_var *info)
 {
 	if (!(info->texture =

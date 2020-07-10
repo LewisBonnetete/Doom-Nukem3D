@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/10 16:14:15 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 16:18:44 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char			*recup_map(char *src)
 	ft_putendl("Loading map...");
 	if ((fd = open("core", O_RDONLY)) == -1)
 		return (0);
-	while (i++ < 13)
+	while (i++ < 12)
 	{
 		get_next_line(fd, &line);
 		ft_strdel(&line);
