@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 18:30:49 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 13:43:35 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void		draw_column(t_var *info, t_render *render, int *tab)
 		if (intersect(render->ray, render->wall) == 1)
 		{
 			if (render->wall->is_portal == 1
-			&& tab[render->wall->sector_id_it_leads_to] == 0)
+			&& tab[render->wall->sector_id_it_leads_to] == 0 && render->wall->sector_id_it_leads_to != 0)
 			{
 				tab[render->wall->sector_id_it_leads_to] = 1;
 				tab[render->s->sector_id] = 1;
