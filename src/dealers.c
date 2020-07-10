@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 16:59:01 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 13:45:34 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,6 @@ void	sprint(t_var *info, SDL_Event event)
 	}
 	if (event.key.keysym.sym == SDLK_SPACE && event.key.state == SDL_PRESSED)
 		shoot_ennemy(info);
-	if (event.key.keysym.sym == SDLK_PAGEUP && event.key.state == SDL_PRESSED)
-		info->y_dec -= 8;
-	if (event.key.keysym.sym == SDLK_PAGEDOWN && event.key.state == SDL_PRESSED)
-		info->y_dec += 8;
 }
 
 int		dealer(t_var *info)
@@ -71,7 +67,7 @@ int		dealer(t_var *info)
 	{
 		if (event.type == SDL_QUIT)
 			return (0);
-		if (event.key.keysym.sym == SDLK_ESCAPE && event.type == SDL_KEYDOWN)
+		if (event.key.keysym.sym == SDLK_ESCAPE && event.type == SDL_PRESSED)
 			return (0);
 		if (event.key.keysym.sym == SDLK_v && event.key.state == SDL_PRESSED)
 			change_weapon(info);

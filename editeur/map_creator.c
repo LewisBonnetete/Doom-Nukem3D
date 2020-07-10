@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 18:07:29 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 13:28:46 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ int			init_new_sector(t_var *info, t_sector *sector, t_map *map)
 	sector = sector->next_sector;
 	get_height_sector(height);
 	get_nbr_walls_sector_textures(sector);
-	sector->floor.text_id = map->fid;
-	sector->celling.text_id = map->cid;
 	sector->map = map;
 	sector->info = info;
+	sector->floor.text_id = map->fid;
+	sector->celling.text_id = map->cid;
 	sector->next_sector = NULL;
 	sector->sector_id = sector->sector_id;
 	if (!(sector->walls = (t_wall*)malloc(sizeof(t_wall) * sector->nbr_walls)))

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/07 18:53:02 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 13:36:05 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		set_end(t_map *map)
 			new.y = y_coo(&event, map);
 			ok = end_checks(new, map);
 		}
-		else if (event.key.keysym.sym == SDLK_d)
+		else if (event.key.keysym.sym == SDLK_d && event.key.state == SDL_PRESSED)
 		{
 			ft_putendl("Back to creation");
 			return (0);
