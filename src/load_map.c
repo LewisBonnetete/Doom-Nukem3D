@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 12:44:36 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/10 16:18:44 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,35 +75,40 @@ int				rec_int(char *the_map, t_map *map)
 	return (dest);
 }
 
-int				recup_map_tool(char *line, int fd)
-{
-	ft_strdel(&line);
-	close(fd);
-	return (0);
-}
-
 char			*recup_map(char *src)
 {
 	char	*line;
 	int		fd;
 	int		error;
 	char	*map;
+	int 	i;
 
 	map = 0;
-	if ((fd = open(src, O_RDONLY)) == -1)
+	i = 0;
+	ft_putendl("Loading map...");
+	if ((fd = open("core", O_RDONLY)) == -1)
 		return (0);
+	while (i++ < 12)
+	{
+		get_next_line(fd, &line);
+		ft_strdel(&line);
+	}
+	i = 0;
 	while ((error = get_next_line(fd, &line)) > 0)
 	{
-		if (map == 0)
-			map = ft_strdup(line);
-		else if (!line)
+		if (ft_strcmp(src, line) == -59)
 		{
-			map = ft_strcat(map, line);
-			if (!map)
-				recup_map_tool(line, fd);
+			while (line[i++] != ';')
+				;
+			map = ft_strdup(&line[i]);
+			ft_putendl("Map loaded");
+			ft_strdel(&line);
+			close(fd);
+			return (map);
 		}
 		ft_strdel(&line);
 	}
+	ft_putendl("Map not found");
 	close(fd);
-	return (map);
+	return (0);
 }

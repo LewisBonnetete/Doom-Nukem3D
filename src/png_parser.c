@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   png_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/10 13:28:05 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/10 16:00:35 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,9 @@ int			read_core_text(t_render *renderer)
 	if ((fd = open("core", O_RDWR)) == -1)
 		return (0);
 	i = -1;
+	ft_putendl("Loading textures...");
 	while (++i < 12)
 	{
-		ft_putnbr(i + 1);
-		ft_putendl("/12");
 		get_next_line(fd, &line);
 		if (i < 4)
 		{
@@ -149,5 +148,6 @@ int			read_core_text(t_render *renderer)
 		}
 		free(line);
 	}
+	ft_putendl("textures loaded");
 	return (1);
 }

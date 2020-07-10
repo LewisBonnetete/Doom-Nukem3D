@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/10 15:32:27 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/10 17:04:28 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,14 @@ int						main_path(t_render *render, t_var *info)
 
 int						main_check(int ac, char **av, t_var *info)
 {
-	if (ac != 2 || info_map(av[1], info->map) == 0)
+	
+	if (ac != 2)
 	{
-		free_map(info->map);
+		ft_putendl("./doom-nukem [map_name]");
 		return (0);
 	}
+	if (info_map(av[1], info->map) == 0)
+		return (0);
 	if (!(init_win1(info)) || !(init_win2(info)) || !(init_win3(info)))
 	{
 		free_info(info);
@@ -41,9 +44,9 @@ void					main_tool(t_var *info, t_render *render)
 	SDL_RenderPresent(info->renderer);
 	SDL_DestroyTexture(info->texture);
 	if (!gameplay(info))
-		ft_exit(info, render);
+		ft_exit(info, render);         
 }
-
+ 
 void					sdl_main(t_render *render, t_var *info)
 {
 	if (!(info->texture =
@@ -75,7 +78,8 @@ int						main(int ac, char **av)
 	info.map = &map;
 	if (PARSE)
 		png_parse();
-	main_check(ac, av, &info);
+	if (!main_check(ac, av, &info))
+		return (0);
 	ft_init_pour_linstant(&info);
 	init_player(&player, info.map);
 	info.player = &player;
