@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/10 16:15:57 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 16:17:16 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			ft_exit(t_var *info, t_render *render)
 {
 	if (info)
 		free_info(info);
-	free_map(map);
+	free_map(info->map);
 	(void)render;
 	TTF_CloseFont(info->font);
 	SDL_Quit();
