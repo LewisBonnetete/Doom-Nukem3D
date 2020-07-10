@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/10 13:45:34 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 13:55:30 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		dealer(t_var *info)
 	{
 		if (event.type == SDL_QUIT)
 			return (0);
-		if (event.key.keysym.sym == SDLK_ESCAPE && event.type == SDL_PRESSED)
+		if (event.key.keysym.sym == SDLK_ESCAPE && event.type == SDL_KEYDOWN)
 			return (0);
 		if (event.key.keysym.sym == SDLK_v && event.key.state == SDL_PRESSED)
 			change_weapon(info);

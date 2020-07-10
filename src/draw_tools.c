@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 18:37:20 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 13:52:32 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		init_floor(t_var *info, t_f_tool *tool)
 	tool->stepy = tool->dist * (tool->diry1 - tool->diry0) / WINDOW_W;
 	tool->floorx = info->player->posx + tool->dist * tool->dirx0;
 	tool->floory = info->player->posy + tool->dist * tool->diry0;
-	tool->j = 0;
+	tool->j = -1;
 }
 
 int			darken_floor(t_f_tool *tool, t_render *render)
