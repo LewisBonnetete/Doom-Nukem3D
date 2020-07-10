@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 18:31:09 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 17:03:25 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,7 @@ int				hitbox(t_var *info, t_render *render, int dir)
 			if (calc_dist(r, p) <= 0.5)
 			{
 				if (render->item->name[0] == 'c')
-				{
 					info->player->hp = 0;
-				}
 				return (0);
 			}
 		}

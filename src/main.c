@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/10 14:09:16 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 15:32:27 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int						main(int ac, char **av)
 	main_path(&render, &info);
 	while (dealer(&info))
 	{
-		printf("%i\n", player.sector_id);
 		sdl_main(&render, &info);
 		if (raycasting(&info, &render) == 0)
 			ft_exit(&info, &render);
