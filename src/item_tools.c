@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 18:07:12 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/15 18:26:47 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void			draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 		while (++render->n < render->s->nbr_walls)
 		{
 			render->wall = &render->s->walls[render->n];
-			if (is_in_sector(a, render->s) != is_in_sector(b, render->s)
+			if (render->wall->is_portal == 0 && is_in_sector(a, render->s) != is_in_sector(b, render->s)
 				&& intersect(render->ray, render->wall) == 1)
 				i = 1;
 		}

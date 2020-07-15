@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/15 17:58:11 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 18:31:11 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void		draw_i_color(t_var *info, t_render *render,
 			{
 				if (render->x == WINDOW_W / 2 && tool->y == WINDOW_H / 2 && item->pv > 0)
 				{
-					printf("id = %i\n",item->id);
 					info->player->no_scope = item->id;
 				}
 				put_pixel(darken_wall(info, tool->color, render, tool->y),
