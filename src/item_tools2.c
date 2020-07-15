@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   item_tools2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/10 16:37:43 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/15 14:15:43 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void		ft_put_weapon(t_var *info, t_render *render)
 	Uint32		color;
 
 	x = 0;
-	while (x < render->tab_sdl[3]->w)
+	while (x < render->tab_sdl[0]->w)
 	{
 		y = 0;
-		while (y < render->tab_sdl[3]->h)
+		while (y < render->tab_sdl[0]->h)
 		{
-			color = get_pixel(render->tab_sdl[3], y, x);
+			color = get_pixel(render->tab_sdl[0], y, x);
 			if (color != 0)
 				put_pixel(color, (int)x + WINDOW_W / 2 - 45,
 				WINDOW_H + (int)y - 125 + info->d_gun, info->image);

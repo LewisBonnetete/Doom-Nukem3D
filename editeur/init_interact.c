@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 17:09:15 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 14:21:22 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ void	get_map_textures(t_map *map)
 
 	ft_putendl("Texture id of the Floor?");
 	size = -1;
-	while (size < 0 || size > 10)
+	while (size < 1 || size > 3)
 	{
 		get_next_line(0, &line);
 		size = ft_atoi(line);
-		if (size < 0 || size > 10)
+		if (size < 1 || size > 3)
 			ft_putendl("Wrong id, try something else");
 		free(line);
 	}
 	map->fid = size;
 	ft_putendl("Texture id of the Ceilling?");
 	size = -1;
-	while (size < 0 || size > 10)
+	while (size < 1 || size > 3)
 	{
 		get_next_line(0, &line);
 		size = ft_atoi(line);
-		if (size < 0 || size > 10)
+		if (size < 1 || size > 3)
 			ft_putendl("Wrong id, try something else");
 		free(line);
 	}
