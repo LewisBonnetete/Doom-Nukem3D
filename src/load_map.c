@@ -72,6 +72,7 @@ int				rec_int(char *the_map, t_map *map)
 		str[++j] = the_map[map->i++];
 	str[j + 1] = 0;
 	dest = ft_atoi(str);
+	ft_strdel(&str);
 	return (dest);
 }
 

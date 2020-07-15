@@ -33,7 +33,7 @@ int						main_check(int ac, char **av, t_var *info)
 	}
 	if (info_map(str, info->map) == 0)
 		return (0);
-	ft_strdel(&srt);
+	ft_strdel(&str);
 	if (!(init_win1(info)) || !(init_win2(info)) || !(init_win3(info)))
 	{
 		free_info(info);
