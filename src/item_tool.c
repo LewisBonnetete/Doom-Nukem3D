@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   item_tool.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/10 17:07:29 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/15 17:41:25 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 	dest->x = src->x;
 	dest->y = src->y;
 	dest->cap = 0;
-	dest->id = i;
+	dest->id = i++;
 	render->nbr_items++;
 	if (item_reader(dest))
 	{
@@ -123,7 +123,7 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 		return (dest);
 	}
 	if (src->next_item)
-		dest->next_item = init_item(render, src->next_item, i + 1);
+		dest->next_item = init_item(render, src->next_item, i);
 	else
 		dest->next_item = NULL;
 	return (dest);

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/15 16:56:59 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 17:45:01 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void		update_ray(t_var *info, t_render *render)
 
 void		init_cast(t_var *info, t_render *render, t_ray *ray)
 {
-	info->player->no_scopex = 0;
-	info->player->no_scopey = 0;
+	info->player->no_scope = 0;
 	render->sector_id = info->player->sector_id;
 	render->n = -1;
 	render->x = 0;

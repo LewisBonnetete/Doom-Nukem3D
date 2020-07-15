@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 17:26:12 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 18:09:06 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,8 @@ void	hit_ennemy(t_var *info)
 	item = info->render->item_0;
 	while (item)
 	{
-		if (item->x == info->player->no_scopex && item->y == info->player->no_scopey)
+		if (item->id == info->player->no_scope)
 		{
-			printf("x = %i | y = %i\n", item->x, item->y);
 			hitmarker(info);
 			item->pv -= 5;
 		}

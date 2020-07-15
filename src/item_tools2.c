@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/15 17:30:47 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 17:58:11 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,21 @@ void		draw_i_color(t_var *info, t_render *render,
 		{
 			if (tool->color != (Uint32)-6815608)
 			{
-				// if (render->x == WINDOW_W / 2 && tool->y == WINDOW_H / 2 && item->pv > 0)
-				// {
-				// 	info->player->no_scopex = item->x;
-				// 	info->player->no_scopey = item->y;
-				// 	printf(" %i | %i\n", item->x, item->y);
-				// }
+				if (render->x == WINDOW_W / 2 && tool->y == WINDOW_H / 2 && item->pv > 0)
+				{
+					printf("id = %i\n",item->id);
+					info->player->no_scope = item->id;
+				}
 				put_pixel(darken_wall(info, tool->color, render, tool->y),
 				render->x, tool->y, info->image);
 			}
 		}
 		else if (item->name[0] == 'c')
 		{
-			// if (render->x == WINDOW_W / 2 && item->pv > 0)
-			// {
-			// 	info->player->no_scopex = item->x;
-			// 	info->player->no_scopey = item->y;
-			// 	printf(" %i | %i\n", item->x, item->y);
-			// }
+			if (render->x == WINDOW_W / 2 && tool->y == WINDOW_H / 2  && item->pv > 0)
+			{
+				info->player->no_scope = item->id;
+			}
 			put_pixel(darken_wall(info, tool->color, render, tool->y),
 				render->x, tool->y, info->image);
 		}

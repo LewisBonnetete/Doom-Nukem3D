@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:35:50 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/07/15 16:59:56 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 17:45:33 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	shoot_ennemy(t_var *info)
 			weapon = go_to_item(weapon->next_item, 'a');
 		if (!weapon)
 			weapon = go_to_item(info->render->item_0, 'a');
-		if (info->player->no_scopex != 0 && weapon->mun > 0)
+		if (info->player->no_scope != 0 && weapon->mun > 0)
 			hit_ennemy(info);
 		weapon->mun -= 1;
 			if (weapon->mun <= 0)

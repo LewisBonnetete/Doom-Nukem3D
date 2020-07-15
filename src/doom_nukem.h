@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 16:55:44 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 17:42:12 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,8 +231,7 @@ struct					s_player
 	int					hp;
 	int					hp_p;
 	int					ammo;
-	int					no_scopex;
-	int					no_scopey;
+	int					no_scope;
 	t_item				*weapon;
 };
 

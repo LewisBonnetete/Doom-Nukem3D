@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/15 16:55:56 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 17:42:20 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void			init_player(t_player *player, t_map *map)
 	player->hp = 100;
 	player->hp_p = 100;
 	player->ammo = 0;
-	player->no_scopex = 0;
-	player->no_scopey = 0;
+	player->no_scope = 0;
 }
 
 void			init_render(t_var *info, t_render *render,
@@ -55,7 +54,7 @@ void			init_render(t_var *info, t_render *render,
 	(void)x0;
 	if (info->map->items && info->map->items->name[0] != 0)
 	{
-		render->item = init_item(render, info->map->items, 0);
+		render->item = init_item(render, info->map->items, 1);
 		render->item_0 = render->item;
 	}
 	init_nb_sec(render->sec_0, render);

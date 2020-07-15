@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/15 17:30:15 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 17:37:36 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ int				hitbox(t_var *info, t_render *render, int dir)
 		{
 			r.x = render->ray->x2;
 			r.y = render->ray->y2;
-			info->player->no_scopex = render->item->x;
-			info->player->no_scopex = render->item->y;
 			if (calc_dist(r, p) <= 0.5)
 				return (hit_objet(info, render));
 		}
