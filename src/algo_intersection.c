@@ -17,6 +17,8 @@
 ** si le mur est parallele a l'axe des ordonnées,
 ** on met 11111 sur wall->eq_slope
 ** et la valeur de l'abscisse sur wall->eq_cste
+** utiliser cette fonction apres l'init des walls dans
+** le parsing, au lieu de dans la fnc intersct
 */
 
 void	calc_wall_spec(t_wall *wall)
@@ -65,7 +67,7 @@ int		ret_inter(t_ray *ray, t_wall *wall)
 
 int		intersect(t_ray *ray, t_wall *wall)
 {
-	calc_wall_spec(wall); //a rajouter au moment du parsing* ? plus rapide que pendant le rendering 
+	calc_wall_spec(wall);
 	if (wall->eq_slope == 1111)
 	{
 		ray->x2 = wall->eq_cste;

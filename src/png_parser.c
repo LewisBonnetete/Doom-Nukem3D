@@ -12,7 +12,7 @@
 
 #include "doom_nukem.h"
 
-int		tex_loader(SDL_Surface *tab[12])
+int			tex_loader(SDL_Surface *tab[12])
 {
 	if ((tab[0] = IMG_Load("./xpm_textures/Jagpistol.png")) == 0)
 		return (0);
@@ -41,44 +41,33 @@ int		tex_loader(SDL_Surface *tab[12])
 	return (1);
 }
 
-int		png_parse()
+int			png_parse(void)
 {
 	int			i;
 	SDL_Surface	*tab[12];
 	Uint32		*pixels;
-	Uint32		tmp;
 	int			fd;
 	int			j;
 
-	if (!(tex_loader(tab)))
+	if (!(tex_loader(tab)) || (fd = open("core", O_RDWR)) == -1)
 		return (0);
-	if ((fd = open("core", O_RDWR)) == -1)
-		return (0);
-	j =  0;
-	while (j < 12)
-	{
-		pixels = tab[j]->pixels;
-		i = 0;
-		ft_putnbr_fd(tab[j]->h, fd);
-		ft_putstr_fd(";", fd);
-		while (i < tab[j]->h * tab[j]->w)
-		{
-			tmp = pixels[i];
-			ft_putnbr_fd(tmp, fd);
-			ft_putstr_fd(";", fd);
-			i++;
-		}
-		ft_putendl_fd("", fd);
-		j++;
-	}
-	j = 0;
+	j = -1;
 	while (++j < 12)
 	{
+		pixels = tab[j]->pixels;
+		i = -1;
+		ft_putnbr_fd(tab[j]->h, fd);
+		ft_putstr_fd(";", fd);
+		while (++i < tab[j]->h * tab[j]->w)
+		{
+			ft_putnbr_fd(pixels[i], fd);
+			ft_putstr_fd(";", fd);
+		}
+		ft_putendl_fd("", fd);
 		free(tab[j]);
 	}
 	return (0);
 }
-
 
 int			read_text_tool(char *line, SDL_Surface *text, int i)
 {

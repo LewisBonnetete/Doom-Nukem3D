@@ -33,6 +33,7 @@ int						main_check(int ac, char **av, t_var *info)
 	}
 	if (info_map(str, info->map) == 0)
 		return (0);
+	ft_strdel(&srt);
 	if (!(init_win1(info)) || !(init_win2(info)) || !(init_win3(info)))
 	{
 		free_info(info);
@@ -46,9 +47,9 @@ void					main_tool(t_var *info, t_render *render)
 	SDL_RenderPresent(info->renderer);
 	SDL_DestroyTexture(info->texture);
 	if (!gameplay(info))
-		ft_exit(info, render);         
+		ft_exit(info, render);
 }
- 
+
 void					sdl_main(t_render *render, t_var *info)
 {
 	if (!(info->texture =

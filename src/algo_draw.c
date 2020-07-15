@@ -64,14 +64,13 @@ void			draw_texture_wall(t_var *info, t_render *render)
 	t_w_draw draw;
 
 	w_draw_calc(render, &draw);
-	if (render->tab_sdl[render->wall->text_id] && render->wall->text_id < NB_TEXT)
+	if (render->tab_sdl[render->wall->text_id]
+		&& render->wall->text_id < NB_TEXT)
 	{
 		while (draw.i <= render->wall_y0)
 		{
 			if (draw.i == render->wall_y0 || draw.i == render->wall_y1)
-			{
 				put_pixel(BLACK, render->x, draw.i, info->image);
-			}
 			else
 			{
 				draw.texy += draw.step;
