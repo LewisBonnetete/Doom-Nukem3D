@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/10 16:32:50 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/15 14:01:40 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,16 @@ static	void	draw_item_if(t_var *info, t_render *render,
 		else
 			item->cap = 0;
 	}
-}
-
-static	void	draw_i_help(t_var *info, t_render *render,
-				t_i_tool *tool, t_item *item)
-{
 	if (render->itab[tool->k].text_id == 7)
 	{
 		ft_putendl("SUCCESS!");
 		ft_exit(info, render);
 	}
-	else
-		item->cap = 0;
+}
+
+static	void	draw_i_help(t_var *info, t_render *render,
+				t_i_tool *tool, t_item *item)
+{
 	if (render->distance <= 0.1)
 		render->distance = 0.1;
 	if (is_in_sector(tool->w, render->s) !=
@@ -85,9 +83,9 @@ static	void	item_checking(t_var *info,
 	if (render->distance < 0.5 && (render->itab[tool->k].text_id == 0
 	|| render->itab[tool->k].text_id == 4 || render->itab[tool->k].text_id == 5
 	|| render->itab[tool->k].text_id == 7))
-	{
 		draw_item_if(info, render, tool, item);
-	}
+	else
+		item->cap = 0;
 	draw_i_help(info, render, tool, item);
 	if (render->itab[tool->k].start == 0 &&
 		render->widht_item > render->itab[tool->k].end)
