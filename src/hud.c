@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 18:45:30 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 13:55:07 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,8 @@ void	name(t_var *info, t_map *map, SDL_Color color)
 {
 	SDL_Surface	*texte;
 	SDL_Rect	pos;
-	int			i;
 
-	i = 0;
-	while (map->name[i - 1] != '/')
-		i++;
-	texte = TTF_RenderText_Blended(info->font, &map->name[i], color);
+	texte = TTF_RenderText_Blended(info->font, map->name, color);
 	pos.x = 10;
 	pos.y = 5;
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
