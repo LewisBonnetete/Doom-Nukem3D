@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/10 16:17:16 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 16:28:25 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void			free_map(t_map *map)
 {
-	//free plein de truc
-	//free items
 	free(map->name);
 	free(map);
 }
@@ -41,6 +39,7 @@ void			free_info(t_var *info)
 		free_map(info->map);
 	if (info->player)
 		free_player(info->player);
+	TTF_CloseFont(info->font);
 	free(&info);
 }
 
@@ -48,9 +47,7 @@ void			ft_exit(t_var *info, t_render *render)
 {
 	if (info)
 		free_info(info);
-	free_map(info->map);
 	(void)render;
-	TTF_CloseFont(info->font);
 	SDL_Quit();
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/10 16:11:50 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 13:46:26 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int				info_map(char *str, t_map *map)
 	int		i;
 
 	i = 0;
-	map->name = str;
+	map->name = ft_strdup(str);
 	while (str[i])
 		++i;
 	map->i = 0;
