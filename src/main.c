@@ -33,6 +33,10 @@ int						main_check(int ac, char **av, t_var *info)
 	}
 	if (info_map(str, info->map) == 0)
 		return (0);
+<<<<<<< HEAD
+=======
+	ft_strdel(&str);
+>>>>>>> 6ed0eb889f79a4b81d6db739b7cf35329b96455d
 	if (!(init_win1(info)) || !(init_win2(info)) || !(init_win3(info)))
 	{
 		free_info(info);
