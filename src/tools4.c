@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/10 16:28:25 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 16:20:07 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void			free_map(t_map *map)
 {
 	free(map->name);
-	free(map);
+	free(&map);
 }
 
 void			free_player(t_player *player)
