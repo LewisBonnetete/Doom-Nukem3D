@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 12:36:44 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/10 15:53:13 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			rec_wall_tool(char *the_map, t_map *map, t_wall *wall)
 	if (the_map[map->i] == 'i')
 		wall->sector_id = rec_int(the_map, map);
 	if (the_map[map->i] == 'i')
-		wall->sector_id_it_leads_to = rec_int(the_map, map);
+		wall->n_sec_id = rec_int(the_map, map);
 }
 
 double			rec_double(char *the_map, t_map *map)

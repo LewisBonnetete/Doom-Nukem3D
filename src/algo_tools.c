@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 11:13:40 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/10 17:01:55 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ void		init_cast(t_var *info, t_render *render, t_ray *ray)
 	+ info->player->planex * render->ray->cam_x;
 	render->ray->dy = info->player->dy
 	+ info->player->planey * render->ray->cam_x;
+	info->player->sector_id = player_sec(render->sec_0, info);
+	if (info->player->sector_id)
+		go_to_sector(render->sec_0, info->player->sector_id, render);
 }
 
 void		init_nb_sec(t_sector *sector, t_render *render)

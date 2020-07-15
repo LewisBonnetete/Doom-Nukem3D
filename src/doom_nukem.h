@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 18:40:10 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/10 16:38:04 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_line		t_line;
 typedef struct s_f_tool		t_f_tool;
 typedef struct s_rgb		t_rgb;
 typedef struct s_w_draw		t_w_draw;
+typedef struct s_i_tool		t_i_tool;
 
 struct					s_item
 {
@@ -91,6 +92,19 @@ struct					s_point
 	float				z;
 };
 
+struct 					s_i_tool
+{
+	t_point				p;
+	t_point				w;
+	float				ty;
+	int					y;
+	int					i;
+	Uint32				color;
+	t_item				*weapon;
+	int					k;
+};
+
+
 struct					s_wall
 {
 	t_point				a;
@@ -109,7 +123,7 @@ struct					s_wall
 	double				height;
 	double				eq_slope;
 	double				eq_cste;
-	int					sector_id_it_leads_to;
+	int					n_sec_id;
 };
 
 struct					s_sector
@@ -358,6 +372,8 @@ struct					s_w_draw
 };
 
 /*sdl func*/
+void				ft_put_weapon(t_var *info, t_render *render);
+void					draw_i_color(t_var *info, t_render *render, t_i_tool *tool, t_item *item);
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 int						init_win3(t_var *info);
@@ -401,6 +417,8 @@ int						darken_wall(t_var *info, Uint32 color,
 							t_render *render, int i);
 int						rgb_calc(int r, int g, int b);
 int						rain_gen(t_var *info);
+void					update_render(t_var *info, t_render *render);
+void					put_item(int k, t_item *src, t_render *render, t_var *info);
 void					shoot_ennemy(t_var *info);
 void					change_weapon(t_var *info);
 void					rgb_cap(t_rgb *rgb);
@@ -420,6 +438,10 @@ int						check_wall_intersections(t_point new, t_point old, t_wall wall);
 int						comparator1(t_point new, t_point old, t_point w1, t_point w2);
 int						comparator2(t_point new, t_point old, t_point w1, t_point w2);
 void					red_flash(t_var *info);
+void					draw_item_2(t_render *render, t_var *info, int k, t_item *item);
+void	    			check_intersect(t_var *info, t_render *render, t_item *item);
+void					draw_column(t_var *info, t_render *render, int *tab);
+
 //algo
 int						raycasting(t_var *info, t_render *render);
 void					put_pixel(Uint32 color, int x,
