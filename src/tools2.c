@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tools2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/10 17:03:25 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/15 17:30:15 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
-
-int				do_trigo(t_var *info, t_wall *wall)
-{
-	double	i;
-	double	x;
-	double	y;
-	int		a;
-
-	x = info->player->posx;
-	y = info->player->posy;
-	i = 0.0;
-	while (i <= 180.0)
-	{
-		x = info->player->posx + cos(i);
-		y = info->player->posy + sin(i);
-		if ((a = xy_in_ab(x, y, wall->a, wall->b)) != 0)
-			return (1);
-		i += 0.1;
-	}
-	return (0);
-}
 
 static	void	u_r_b_help(t_var *info, t_render *render, int dir)
 {
@@ -79,6 +58,25 @@ void			update_ray_box(t_var *info, t_render *render,
 	}
 }
 
+int			hit_objet(t_var *info, t_render *render)
+{
+	if (render->item->name[0] == 'c' && render->item->pv > 0)
+	{
+		info->player->hp = 0;
+		return (0);
+	}
+	if (render->item->name[0] == 's' && render->item->pv > 0)
+	{
+		info->player->hp -= 5;
+		return (0);
+	}
+	if (render->item->name[0] == 'a' || render->item->name[0] == 'm' || render->item->name[0] == 'h')
+		return (1);
+	if (render->item->name[0] == 'b')
+		return (0);
+	return (1);
+}	
+
 int				hitbox(t_var *info, t_render *render, int dir)
 {
 	t_point	r;
@@ -108,12 +106,10 @@ int				hitbox(t_var *info, t_render *render, int dir)
 		{
 			r.x = render->ray->x2;
 			r.y = render->ray->y2;
+			info->player->no_scopex = render->item->x;
+			info->player->no_scopex = render->item->y;
 			if (calc_dist(r, p) <= 0.5)
-			{
-				if (render->item->name[0] == 'c')
-					info->player->hp = 0;
-				return (0);
-			}
+				return (hit_objet(info, render));
 		}
 		render->item = render->item->next_item;
 	}

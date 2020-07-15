@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:35:50 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/07/09 17:20:16 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 16:59:56 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,9 @@ t_item	*go_to_item(t_item *item, char c)
 	return (NULL);
 }
 
-t_item	*check_monster(t_item *item, t_var *info, t_item *item_2)
-{
-	if ((item->name[0] == 'c' && item->pv > 0) ||
-		(item->name[0] == 's' && item->pv > 0))
-		return (item);
-	if (item->next_item)
-		return (check_monster(item->next_item, info, item_2));
-	return (item_2);
-}
-
 void	shoot_ennemy(t_var *info)
 {
 	t_item	*weapon;
-	t_item	*monster;
 
 	if (may_weapon(info->render->item_0))
 	{
@@ -43,14 +32,11 @@ void	shoot_ennemy(t_var *info)
 			weapon = go_to_item(weapon->next_item, 'a');
 		if (!weapon)
 			weapon = go_to_item(info->render->item_0, 'a');
+		if (info->player->no_scopex != 0 && weapon->mun > 0)
+			hit_ennemy(info);
 		weapon->mun -= 1;
-		if (weapon->mun <= 0)
-			weapon->mun = 0;
-		else
-		{
-			monster = check_monster(info->render->item_0, info, NULL);
-			if (monster != NULL)
-				monster->pv -= 5;
-		}
+			if (weapon->mun <= 0)
+				weapon->mun = 0;
 	}
+	
 }

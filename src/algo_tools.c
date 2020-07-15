@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/10 17:01:55 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/15 16:56:59 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void		update_ray(t_var *info, t_render *render)
 
 void		init_cast(t_var *info, t_render *render, t_ray *ray)
 {
+	info->player->no_scopex = 0;
+	info->player->no_scopey = 0;
 	render->sector_id = info->player->sector_id;
 	render->n = -1;
 	render->x = 0;

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 14:19:47 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 16:55:44 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define DARK				0x2C2F33
 # define GRAY				0x99AAB5
 # define GREEN				0x32cd32
+# define WHITE				0xFFFFFF
 # define WALL_H				238
 # define DECALLAGE			0
 # define BLACK				0x000000
@@ -230,6 +231,8 @@ struct					s_player
 	int					hp;
 	int					hp_p;
 	int					ammo;
+	int					no_scopex;
+	int					no_scopey;
 	t_item				*weapon;
 };
 
@@ -539,5 +542,8 @@ t_item					*init_item(t_render *render, t_item *src, int i);
 void					free_info(t_var *info);
 int						png_parse();
 int						read_core_text(t_render *renderer);
+void					hit_ennemy(t_var *info);
+int			draw_line_condition(t_line *line);
+int			draw_line(t_var *info, t_line *line, Uint32 color);
 
 #endif
