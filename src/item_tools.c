@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 14:04:57 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/15 18:07:12 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,25 +102,45 @@ static	void	item_checking(t_var *info,
 void			draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 {
 	t_i_tool	tool;
+	int			i;
+	t_point		a;
+	t_point		b;
 
 	init_tools(render, info, k, &tool);
 	item_checking(info, render, &tool, item);
 	while (++render->x <= render->widht_item + render->p_0)
 	{
+		a.x = info->player->posx;
+		a.y = info->player->posy;
+		b.x = item->x;
+		b.y = item->y;
+		i = 0;
 		tool.ty = 0;
 		tool.y = WINDOW_H / 2 + WINDOW_H / 2 / render->distance;
 		tool.i = -1;
-		while (++tool.i <= render->height_item)
+		update_ray(info, render);
+		render->n = -1;
+		while (++render->n < render->s->nbr_walls)
 		{
-			tool.color =
-			get_pixel(render->tab_sdl_item[render->itab[k].text_id],
-			render->tab_sdl_item[render->itab[k].text_id]->h -
-			(int)tool.ty, (int)render->tx);
-			tool.ty += render->step_height;
-			render->wall_dist = render->distance;
-			draw_i_color(info, render, &tool, item);
-			--tool.y;
+			render->wall = &render->s->walls[render->n];
+			if (is_in_sector(a, render->s) != is_in_sector(b, render->s)
+				&& intersect(render->ray, render->wall) == 1)
+				i = 1;
 		}
-		render->tx += render->step_width;
+		if (i == 0)
+		{
+			while (++tool.i <= render->height_item)
+			{
+				tool.color =
+				get_pixel(render->tab_sdl_item[render->itab[k].text_id],
+				render->tab_sdl_item[render->itab[k].text_id]->h -
+				(int)tool.ty, (int)render->tx);
+				tool.ty += render->step_height;
+				render->wall_dist = render->distance;
+				draw_i_color(info, render, &tool, item);
+				--tool.y;
+			}
+			render->tx += render->step_width;
+		}
 	}
 }
