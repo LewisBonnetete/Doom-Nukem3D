@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   item_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 14:01:40 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/15 14:04:57 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static	void	draw_item_if(t_var *info, t_render *render,
 	}
 }
 
-static	void	draw_i_help(t_var *info, t_render *render,
+static	void	draw_i_help(t_render *render,
 				t_i_tool *tool, t_item *item)
 {
 	if (render->distance <= 0.1)
@@ -86,7 +86,7 @@ static	void	item_checking(t_var *info,
 		draw_item_if(info, render, tool, item);
 	else
 		item->cap = 0;
-	draw_i_help(info, render, tool, item);
+	draw_i_help(render, tool, item);
 	if (render->itab[tool->k].start == 0 &&
 		render->widht_item > render->itab[tool->k].end)
 	{
