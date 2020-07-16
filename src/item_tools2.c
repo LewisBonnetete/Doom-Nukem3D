@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/15 18:31:11 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 15:41:47 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void		draw_i_color(t_var *info, t_render *render,
 				render->x, tool->y, info->image);
 		}
 		else if (item->name[0] == 'p')
+			put_pixel(tool->color, render->x, tool->y, info->image);
+		else if (item->name[0] == 'a')
 			put_pixel(tool->color, render->x, tool->y, info->image);
 		else
 			put_pixel(darken_wall(info, tool->color, render, tool->y),

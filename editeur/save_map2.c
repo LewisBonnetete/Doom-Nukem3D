@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 15:08:52 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:06:09 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,25 @@ int		do_map2(t_map *map, int fd)
 	return (1);
 }
 
-int		do_map(t_map *map, int fd)
+int		do_map_help(t_map *map, t_item *items)
 {
-	char	c;
-	t_item	*items;
-
 	if (!(items = (t_item *)ft_memalloc(sizeof(t_item))))
 		return (0);
 	items->name = "portal";
 	items->x = map->end.x;
 	items->y = map->end.y;
 	items->next_item = NULL;
+	return (1);
+}
+
+int		do_map(t_map *map, int fd)
+{
+	char	c;
+	t_item	*items;
+
+	items = NULL;
+	if (do_map_help(map, items) == 0)
+		return (0);
 	c = 'm';
 	if (write(fd, &c, 1) == -1)
 		return (0);

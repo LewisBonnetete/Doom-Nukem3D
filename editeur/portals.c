@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 14:29:12 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:04:09 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,6 @@ int			similar_height(t_wall *w1, t_wall *w2)
 		return (1);
 	if (is_between((float)w2->a.z, w1->a.z, w1->d.z)
 	|| is_between((float)w2->d.z, w1->a.z, w1->d.z))
-		return (1);
-	return (0);
-}
-
-int			is_same_wall(t_wall *w1, t_wall *w2)
-{
-	if (is_same_point(w1->a, w2->a) && is_same_point(w1->b, w2->b))
-		return (1);
-	if (is_same_point(w1->a, w2->b) && is_same_point(w1->b, w2->a))
 		return (1);
 	return (0);
 }
@@ -70,6 +61,26 @@ int			find_otherside(t_map *map, t_wall *portal)
 	return (0);
 }
 
+void		portals2(t_map *map)
+{
+	t_sector	*sector;
+	int			i;
+
+	sector = map->sectors;
+	while (sector)
+	{
+		i = 0;
+		while (i < sector->nbr_walls)
+		{
+			if (sector->walls[i].is_portal
+			&& sector->walls[i].sector_id_it_leads_to == 0)
+				sector->walls[i].is_portal = 0;
+			i++;
+		}
+		sector = sector->next_sector;
+	}
+}
+
 int			portals(t_map *map)
 {
 	t_sector	*sector;
@@ -87,18 +98,6 @@ int			portals(t_map *map)
 		}
 		sector = sector->next_sector;
 	}
-	sector = map->sectors;
-	while (sector)
-	{
-		i = 0;
-		while (i < sector->nbr_walls)
-		{
-			if (sector->walls[i].is_portal
-			&& sector->walls[i].sector_id_it_leads_to == 0)
-				sector->walls[i].is_portal = 0;
-			i++;
-		}
-		sector = sector->next_sector;
-	}
+	portals2(map);
 	return (1);
 }
