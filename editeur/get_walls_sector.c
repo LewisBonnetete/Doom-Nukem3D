@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/08 14:45:11 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 15:04:00 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int			get_walls_sector3(t_gws *gws)
 	{
 		ft_putendl("Sorry but your sector surrounds another :(");
 		del_sector(gws->sector->info, gws->map);
-		draw_state(gws->sector);
 		return (1);
 	}
 	return (0);

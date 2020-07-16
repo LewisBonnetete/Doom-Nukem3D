@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 14:23:06 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:43:42 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,25 @@ void		get_textures(t_wall *wall)
 	int		id;
 	char	*line;
 
-	ft_putendl("Texture id of the wall?");
-	id = -1;
-	while (id < 1 || id > 3)
+	if (wall->is_portal == 0)
 	{
-		get_next_line(0, &line);
-		id = ft_atoi(line);
-		if (id < 1 || id > 3)
-			ft_putendl("Wrong id, try something else");
-		free(line);
+		ft_putendl("Texture id of the wall?");
+		id = -1;
+		while (id < 1 || id > 3)
+		{
+			get_next_line(0, &line);
+			id = ft_atoi(line);
+			if (id < 1 || id > 3)
+				ft_putendl("Wrong id, try something else");
+			free(line);
+		}
+		wall->text_id = id;
 	}
-	wall->text_id = id;
-	if (wall->is_portal)
+	else
+	{
+		wall->text_id = 1;
 		get_textures2(wall);
+	}
 }
 
 void		get_portal_info2(t_wall *wall)
