@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 18:26:47 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 12:43:43 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ void			draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 		i = 0;
 		tool.ty = 0;
 		tool.y = WINDOW_H / 2 + WINDOW_H / 2 / render->distance;
+		if (item->name[0] == 'b')
+			tool.y += WINDOW_H / 4 / render->distance;
 		tool.i = -1;
 		update_ray(info, render);
 		render->n = -1;
