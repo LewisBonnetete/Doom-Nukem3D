@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 17:01:03 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 17:22:18 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -410,6 +410,8 @@ void					init_render(t_var *info, t_render *render,
 int						init_next_render(t_var *info, t_render *render);
 
 //draw
+int						same_sector(t_var *info, t_item *item, int sector_id);
+int						enemys_in_sector(t_var *info, t_player *player);
 int						hit_objet(t_var *info, t_render *render);
 void					update_ray_box(t_var *info, t_render *render,
 							int dir, t_point p);
@@ -549,7 +551,7 @@ void					free_info(t_var *info);
 int						png_parse();
 int						read_core_text(t_render *renderer);
 void					hit_ennemy(t_var *info);
-int			draw_line_condition(t_line *line);
-int			draw_line(t_var *info, t_line *line, Uint32 color);
+int						draw_line_condition(t_line *line);
+int						draw_line(t_var *info, t_line *line, Uint32 color);
 
 #endif
