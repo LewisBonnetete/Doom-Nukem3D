@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 15:06:37 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:29:29 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -410,6 +410,9 @@ void					init_render(t_var *info, t_render *render,
 int						init_next_render(t_var *info, t_render *render);
 
 //draw
+int						hit_objet(t_var *info, t_render *render);
+void					update_ray_box(t_var *info, t_render *render,
+							int dir, t_point p);
 void					w_draw_calc(t_render *render, t_w_draw *draw);
 void					draw_bottop(t_var *info, t_render *render);
 void					draw_tex(t_var *info, t_render *render);
