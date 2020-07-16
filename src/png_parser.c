@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/15 14:13:34 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 15:34:08 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			tex_loader(SDL_Surface *tab[12])
 {
-	if ((tab[0] = IMG_Load("./xpm_textures/Jagpistol.png")) == 0)
+	if ((tab[0] = IMG_Load("./xpm_textures/fps.png")) == 0)
 		return (0);
 	if ((tab[1] = IMG_Load("./xpm_textures/dark_wall.png")) == 0)
 		return (0);
@@ -49,6 +49,7 @@ int			png_parse(void)
 	int			fd;
 	int			j;
 
+	ft_putendl("Parsing textures...");
 	if (!(tex_loader(tab)) || (fd = open("core", O_RDWR)) == -1)
 		return (0);
 	j = -1;

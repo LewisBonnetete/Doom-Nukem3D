@@ -6,11 +6,20 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 15:05:21 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:00:04 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem_edit.h"
+
+int		is_same_wall(t_wall *w1, t_wall *w2)
+{
+	if (is_same_point(w1->a, w2->a) && is_same_point(w1->b, w2->b))
+		return (1);
+	if (is_same_point(w1->a, w2->b) && is_same_point(w1->b, w2->a))
+		return (1);
+	return (0);
+}
 
 int		get_map_size(void)
 {

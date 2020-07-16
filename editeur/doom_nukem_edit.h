@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 12:21:41 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:03:02 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,5 +359,6 @@ int							is_in_sector_spawn(t_point first, t_sector *sector);
 void						get_map_textures(t_map *map);
 int							dealers_edit(t_var *info, t_map *map);
 void						del_items_if_in_sector(t_item *items, t_sector *sector);
+int							is_same_wall(t_wall *w1, t_wall *w2);
 
 #endif
