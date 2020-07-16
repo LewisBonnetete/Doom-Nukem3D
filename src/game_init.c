@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/15 17:42:20 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 15:11:52 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void			init_render(t_var *info, t_render *render,
 	render->sec_0 = render->s;
 	render->nb_sec = 0;
 	render->nbr_items = 0;
+	render->cid = info->map->cid;
+	render->fid = info->map->fid;
 	(void)x0;
 	if (info->map->items && info->map->items->name[0] != 0)
 	{
