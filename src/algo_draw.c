@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 18:11:51 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 15:48:11 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,50 @@
 
 void			floor_tool(t_f_tool *tool, t_var *info, t_render *render)
 {
-	tool->tx = (int)(render->tab_sdl[render->s->celling.text_id]->w
+	tool->tx = (int)(render->tab_sdl[render->fid]->w
 	* (tool->floorx - (int)tool->floorx)) &
-	(render->tab_sdl[render->s->celling.text_id]->w - 1);
-	tool->ty = (int)(render->tab_sdl[render->s->celling.text_id]->h *
+	(render->tab_sdl[render->fid]->w - 1);
+	tool->ty = (int)(render->tab_sdl[render->fid]->h *
 	(tool->floory - (int)tool->floory)) &
-	(render->tab_sdl[render->s->celling.text_id]->h - 1);
+	(render->tab_sdl[render->fid]->h - 1);
+	tool->floorx += tool->stepx;
+	tool->floory += tool->stepy;
+	put_pixel(darken_floor(tool, render),
+	tool->j, WINDOW_H - tool->i - 1, info->image);
+}
+
+void			cieling_tool(t_f_tool *tool, t_var *info, t_render *render)
+{
+	tool->tx = (int)(render->tab_sdl[render->cid]->w
+	* (tool->floorx - (int)tool->floorx)) &
+	(render->tab_sdl[render->cid]->w - 1);
+	tool->ty = (int)(render->tab_sdl[render->cid]->h *
+	(tool->floory - (int)tool->floory)) &
+	(render->tab_sdl[render->cid]->h - 1);
 	tool->floorx += tool->stepx;
 	tool->floory += tool->stepy;
 	put_pixel(darken_floor(tool, render), tool->j, tool->i, info->image);
-	put_pixel(darken_floor(tool, render),
-	tool->j, WINDOW_H - tool->i - 1, info->image);
+}
+
+int				tex_floor(t_var *info, t_render *render)
+{
+	t_f_tool tool;
+
+	tool.i = WINDOW_H / 2 - 1;
+	tool.j = -1;
+	tool.k = -1;
+	if (render->tab_sdl[render->cid])
+	{
+		while (tool.i++ <= WINDOW_H)
+		{
+			init_floor(info, &tool);
+			while (tool.j++ <= WINDOW_W)
+				cieling_tool(&tool, info, render);
+		}
+	}
+	else
+		return (0);
+	return (1);
 }
 
 int				tex_floor_ciel(t_var *info, t_render *render)
@@ -34,20 +67,18 @@ int				tex_floor_ciel(t_var *info, t_render *render)
 	tool.i = WINDOW_H / 2 - 1;
 	tool.j = -1;
 	tool.k = -1;
-	if (render->tab_sdl[render->s->celling.text_id])
+	if (render->tab_sdl[render->cid])
 	{
 		while (tool.i++ <= WINDOW_H)
 		{
 			init_floor(info, &tool);
 			while (tool.j++ <= WINDOW_W)
-			{
 				floor_tool(&tool, info, render);
-			}
 		}
 	}
 	else
 		return (0);
-	return (1);
+	return (tex_floor(info, render));
 }
 
 void			put_pixel(Uint32 color, int x, int y, SDL_Surface *image)
