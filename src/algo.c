@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/16 15:25:15 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/16 17:55:08 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ static	int		ray_iter(t_render *render, t_var *info)
 	free(tab);
 	if (render->itab)
 		free(render->itab);
+	// je sais pas ce que c'est mais je l'ai trouvé et c'est jamais free apparement.
+	free(render->wall_item);
 	return (1);
 }
 

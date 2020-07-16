@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/15 16:20:07 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/16 18:11:26 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 void			free_map(t_map *map)
 {
 	free(map->name);
-	free(&map);
 }
 
 void			free_player(t_player *player)
 {
 	if (player->weapon)
 		free_item(player->weapon);
-	free(&player);
 }
 
 void			free_info(t_var *info)
@@ -40,7 +38,6 @@ void			free_info(t_var *info)
 	if (info->player)
 		free_player(info->player);
 	TTF_CloseFont(info->font);
-	free(&info);
 }
 
 void			ft_exit(t_var *info, t_render *render)

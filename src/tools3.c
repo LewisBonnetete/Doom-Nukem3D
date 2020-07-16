@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 15:08:12 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/16 18:11:39 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,18 @@ void			init_tab(int *tab, int n)
 
 void			free_itab(t_itab *tab)
 {
-	free(&tab);
+	free(tab->name);
+	free(tab);
 }
 
 void			free_ray(t_ray *ray)
 {
-	free(&ray);
+	free(ray);
 }
 
 void			free_wall(t_wall *wall)
 {
-	free(&wall);
+	free(wall);
 }
 
 void			free_item(t_item *item)
