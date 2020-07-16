@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 16:06:09 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:40:54 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int		do_map_help(t_map *map, t_item *items)
 {
 	if (!(items = (t_item *)ft_memalloc(sizeof(t_item))))
 		return (0);
-	items->name = "portal";
+	if (!(items->name = ft_strdup("portal")))
+		return (0);
 	items->x = map->end.x;
 	items->y = map->end.y;
 	items->next_item = NULL;
@@ -78,8 +79,11 @@ int		do_map(t_map *map, int fd)
 		return (0);
 	if (do_map2(map, fd) == 0)
 		return (0);
+	ft_putendl("1");
 	if (do_item(items, fd) == 0)
 		return (0);
+	ft_putendl("2");
+	free(items->name);
 	free(items);
 	return (1);
 }

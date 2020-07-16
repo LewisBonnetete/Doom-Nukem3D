@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 15:32:47 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:14:04 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <math.h>
 # include "../libft/libft.h"
 # define RAIN				0
-# define PARSE				1
+# define PARSE				0
 # define WINDOW_W			720
 # define WINDOW_H			480
 # define NB_THREADS_MAX		12
