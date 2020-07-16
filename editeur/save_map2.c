@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/09 12:08:06 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 15:08:52 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int		do_map(t_map *map, int fd)
 	if (map->sectors)
 		if (do_sectors(map->sectors, fd) == 0)
 			return (0);
-	if (do_int(map->size, fd) == 0)
+	if (do_int(map->size, fd) == 0 || do_int(map->cid, fd) == 0
+		|| do_int(map->fid, fd) == 0)
 		return (0);
 	if (do_map2(map, fd) == 0)
 		return (0);

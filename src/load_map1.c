@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 13:49:28 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 15:09:48 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ int				rec_map(char *the_map, t_map *map)
 		map->sectors = rec_sectors(the_map, map);
 	if (the_map[map->i] == 'i')
 		map->size = rec_int(the_map, map);
+	if (the_map[map->i] == 'i')
+		map->cid = rec_int(the_map, map);
+	if (the_map[map->i] == 'i')
+		map->fid = rec_int(the_map, map);
 	if (the_map[map->i] == 'p')
 		map->spawn = rec_point(the_map, map);
 	if (the_map[map->i] == 't')

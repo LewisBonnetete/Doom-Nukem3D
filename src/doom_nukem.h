@@ -6,7 +6,11 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/07/16 15:20:52 by lbonnete         ###   ########.fr       */
+=======
+/*   Updated: 2020/07/16 15:06:37 by atyczyns         ###   ########.fr       */
+>>>>>>> 87f6f10a51f4157eb8360f4951fa652b9ec4d526
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +164,8 @@ struct					s_map
 //	SDL_Surface			*text_tab[10];
 	t_point				spawn;
 	int					i;
+	int					cid;
+	int					fid;
 	t_item				*items;
 };
 
@@ -191,6 +197,8 @@ struct					s_render
 	int					wall_y1;
 	int					nb_sec;
 	int					p_0;
+	int					fid;
+	int					cid;
 	float				distance;
 	float				height_item;
 	float				widht_item;
