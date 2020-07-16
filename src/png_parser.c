@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/16 15:34:08 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 17:17:38 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,12 @@ int			read_core_text(t_render *renderer)
 	if ((fd = open("core", O_RDWR)) == -1)
 		return (0);
 	i = -1;
-	ft_putendl("Loading textures...");
+	system("clear");
 	while (++i < 12)
 	{
+		ft_putendl("Loading textures...");
+		ft_putnbr(i + 1);
+		ft_putendl("/12");
 		get_next_line(fd, &line);
 		if (i < 4)
 		{
@@ -138,7 +141,9 @@ int			read_core_text(t_render *renderer)
 				return (0);
 		}
 		free(line);
+		system("clear");
 	}
-	ft_putendl("textures loaded");
+	ft_putendl("Textures loaded");
+	ft_putendl("Game launched");
 	return (1);
 }
