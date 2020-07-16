@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 18:10:36 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 17:15:38 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int						main(int ac, char **av)
 	t_player	player;
 
 	info.map = &map;
+	system("clear");
 	if (PARSE)
 		png_parse();
 	if (!main_check(ac, av, &info))
