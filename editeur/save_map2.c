@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 16:40:54 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:49:32 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ int		do_map2(t_map *map, int fd)
 	return (1);
 }
 
-int		do_map_help(t_map *map, t_item *items)
+t_item		*do_map_help(t_map *map)
 {
+	t_item *items;
+
 	if (!(items = (t_item *)ft_memalloc(sizeof(t_item))))
 		return (0);
 	if (!(items->name = ft_strdup("portal")))
@@ -55,7 +57,7 @@ int		do_map_help(t_map *map, t_item *items)
 	items->x = map->end.x;
 	items->y = map->end.y;
 	items->next_item = NULL;
-	return (1);
+	return (items);
 }
 
 int		do_map(t_map *map, int fd)
@@ -64,7 +66,7 @@ int		do_map(t_map *map, int fd)
 	t_item	*items;
 
 	items = NULL;
-	if (do_map_help(map, items) == 0)
+	if ((items = do_map_help(map)) == 0)
 		return (0);
 	c = 'm';
 	if (write(fd, &c, 1) == -1)
@@ -79,10 +81,8 @@ int		do_map(t_map *map, int fd)
 		return (0);
 	if (do_map2(map, fd) == 0)
 		return (0);
-	ft_putendl("1");
 	if (do_item(items, fd) == 0)
 		return (0);
-	ft_putendl("2");
 	free(items->name);
 	free(items);
 	return (1);

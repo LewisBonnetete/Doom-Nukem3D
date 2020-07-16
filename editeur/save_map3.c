@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 16:32:55 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:49:48 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,17 @@ int		do_item(t_item *tem, int fd)
 	char	c;
 
 	c = 't';
-	ft_putendl("a");
 	if (write(fd, &c, 1) == -1)
 		return (0);
-	ft_putendl("b");
 	if (tem->name)
-	{
-		ft_putendl("aled");
 		if (do_x_char(tem->name, fd) == 0)
 			return (0);
-	}
-	ft_putendl("c");
 	if (do_int(tem->x, fd) == 0)
 		return (0);
-	ft_putendl("d");
 	if (do_int(tem->y, fd) == 0)
 		return (0);
-	ft_putendl("e");
 	if (tem->next_item)
 		do_item(tem->next_item, fd);
-	ft_putendl("f");
 	return (1);
 }
 
