@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 18:02:03 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/17 12:41:57 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ int						main(int ac, char **av)
 	while (dealer(&info))
 	{
 		sdl_main(&render, &info);
-		// if (raycasting(&info, &render) == 0)
-		// 	ft_exit(&info, &render);
+		if (raycasting(&info, &render) == 0)
+			ft_exit(&info, &render);
 		main_tool(&info, &render);
 	}
 	ft_exit(&info, &render);
