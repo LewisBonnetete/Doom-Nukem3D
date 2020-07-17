@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   item_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 17:38:23 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/17 14:38:00 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,33 +103,13 @@ void			draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 {
 	t_i_tool	tool;
 	int			i;
-	t_point		a;
-	t_point		b;
 
+	i = 0;
 	init_tools(render, info, k, &tool);
 	item_checking(info, render, &tool, item);
 	while (++render->x <= render->widht_item + render->p_0)
 	{
-		a.x = info->player->posx;
-		a.y = info->player->posy;
-		b.x = render->itab[k].item_x;
-		b.y = render->itab[k].item_y;
-		i = 0;
-		tool.ty = 0;
-		tool.y = WINDOW_H / 2 + WINDOW_H / 2 / render->distance;
-		if (render->itab[k].name[0] == 'b')
-			tool.y += WINDOW_H / 4 / render->distance;
-		tool.i = -1;
-		update_ray(info, render);
-		render->n = -1;
-		while (++render->n < render->s->nbr_walls)
-		{
-			render->wall = &render->s->walls[render->n];
-			if (render->wall->is_portal != 1
-				&& is_in_sector(a, render->s) != is_in_sector(b, render->s)
-				&& intersect(render->ray, render->wall) == 1)
-				i = 1;
-		}
+		draw_i2_help(info, render, &tool, k);
 		if (i == 0)
 		{
 			while (++tool.i <= render->height_item)

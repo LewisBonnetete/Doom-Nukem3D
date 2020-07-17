@@ -6,7 +6,7 @@
 #    By: trabut <trabut@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/17 13:22:13 by trabut           ###   ########.fr        #
+#    Updated: 2020/07/17 14:38:20 by trabut           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC =	main.c\
 		move.c\
 		hitbox.c\
 		item_tools2.c\
+		item_tools3.c\
 		algo3.c\
 		algo4.c\
 		item_tools.c\
