@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:35:50 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/07/17 16:27:14 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 16:29:39 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,4 @@ void	shoot_ennemy(t_var *info)
 		if (weapon->mun <= 0)
 			weapon->mun = 0;
 	}
-	
 }
