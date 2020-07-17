@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/15 13:55:07 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/17 13:22:46 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	name(t_var *info, t_map *map, SDL_Color color)
 
 void	hp(t_var *info, t_player *player, SDL_Color color)
 {
-	SDL_Surface	*texte;
 	SDL_Rect	pos;
 	char		*nb;
 
@@ -89,16 +88,13 @@ void	hp(t_var *info, t_player *player, SDL_Color color)
 		free(nb);
 		nb = ft_itoa(player->hp_p);
 	}
-	texte = TTF_RenderText_Blended(info->font, nb, color);
-	SDL_BlitSurface(texte, NULL, info->image, &pos);
-	SDL_FreeSurface(texte);
+	hp_hud_help(info, nb, pos, color);
 	free(nb);
 }
 
 void	munitions(t_var *info, SDL_Color color)
 {
 	t_item		*weapon;
-	SDL_Surface	*texte;
 	SDL_Rect	pos;
 	char		*nb;
 
@@ -118,11 +114,9 @@ void	munitions(t_var *info, SDL_Color color)
 			weapon->hold = 1;
 		}
 		nb = ft_itoa(weapon->mun);
-		texte = TTF_RenderText_Blended(info->font, nb, color);
 		pos.x = 170;
 		pos.y = WINDOW_H - 30;
-		SDL_BlitSurface(texte, NULL, info->image, &pos);
-		SDL_FreeSurface(texte);
+		hp_hud_help(info, nb, pos, color);
 		free(nb);
 	}
 }

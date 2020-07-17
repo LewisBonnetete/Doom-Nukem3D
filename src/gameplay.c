@@ -6,63 +6,11 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 15:10:26 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 13:04:17 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
-
-void 	crosshair(t_var *info)
-{
-	t_line line;
-	Uint32 color;
-	int a;
-
-	a = 8;
-	color = WHITE;
-	line.x1 = WINDOW_W / 2 + a - 1;
-	line.x2 = WINDOW_W / 2 - a;
-	line.y1 = WINDOW_H / 2;
-	line.y2 = WINDOW_H / 2;
-	draw_line(info, &line, color);
-	line.x1 = WINDOW_W / 2;
-	line.x2 = WINDOW_W / 2;
-	line.y1 = WINDOW_H / 2 + a - 1;
-	line.y2 = WINDOW_H / 2 - a;
-	draw_line(info, &line, color);
-}
-
-void	hitmarker(t_var *info)
-{
-	t_line line;
-	Uint32 color;
-	int a;
-	int b;
-
-	a = 5;
-	b = 15;
-	color = WHITE;
-	line.x1 = WINDOW_W / 2 + a;
-	line.x2 = WINDOW_W / 2 + b;
-	line.y1 = WINDOW_H / 2 + a;
-	line.y2 = WINDOW_H / 2 + b;
-	draw_line(info, &line, color);
-	line.x1 = WINDOW_W / 2 - a;
-	line.x2 = WINDOW_W / 2 - b;
-	line.y1 = WINDOW_H / 2 - a;
-	line.y2 = WINDOW_H / 2 - b;
-	draw_line(info, &line, color);
-	line.x1 = WINDOW_W / 2 + a;
-	line.x2 = WINDOW_W / 2 + b;
-	line.y1 = WINDOW_H / 2 - a;
-	line.y2 = WINDOW_H / 2 - b;
-	draw_line(info, &line, color);
-	line.x1 = WINDOW_W / 2 - a;
-	line.x2 = WINDOW_W / 2 - b;
-	line.y1 = WINDOW_H / 2 + a;
-	line.y2 = WINDOW_H / 2 + b;
-	draw_line(info, &line, color);
-}
 
 void	hit_ennemy(t_var *info)
 {

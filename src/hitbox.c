@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/16 16:36:58 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 13:14:56 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,22 +56,18 @@ int				hitbox(t_var *info, t_render *render, int dir)
 {
 	t_point	p;
 
-	render->x = WINDOW_W / 2;
+	render->x = 0;
 	p.x = info->player->posx;
 	p.y = info->player->posy;
-	update_ray_box(info, render, dir, p);
-	if (!ray_hit(render, p))
-		return (0);
-	render->x = WINDOW_W;
-	update_ray_box(info, render, dir, p);
-	if (!ray_hit(render, p))
-		return (0);
-	render->x = 0;
-	update_ray_box(info, render, dir, p);
-	if (!ray_hit(render, p))
-		return (0);
-	if (!hit_item(info, render, p))
-		return (0);
+	while (render->x < WINDOW_W / 2)
+	{
+		update_ray_box(info, render, dir, p);
+		if (!ray_hit(render, p))
+			return (0);
+		if (!hit_item(info, render, p))
+			return (0);
+		render->x++;
+	}
 	render->item = render->item_0;
 	return (1);
 }

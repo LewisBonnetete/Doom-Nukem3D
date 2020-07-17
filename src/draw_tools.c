@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/16 15:48:13 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 13:00:18 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ void		w_draw_calc(t_render *render, t_w_draw *draw)
 	draw->hit.y = render->ray->y2;
 	render->wall->wall_leng = calc_dist(render->wall->a, render->wall->b);
 	draw->pos_relative = calc_dist(draw->hit, render->wall->b);
-	draw->temp2 = (double)render->tab_sdl[render->wall->text_id]->h / (double)WALL_H;
+	draw->temp2 =
+		(double)render->tab_sdl[render->wall->text_id]->h / (double)WALL_H;
 	draw->pos_relative = draw->pos_relative * draw->temp2;
 	draw->temp = (int)draw->pos_relative;
 	draw->pos_relative -= draw->temp;

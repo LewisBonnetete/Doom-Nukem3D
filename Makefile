@@ -6,7 +6,7 @@
 #    By: trabut <trabut@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/16 16:28:11 by trabut           ###   ########.fr        #
+#    Updated: 2020/07/17 13:22:13 by trabut           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRC =	main.c\
 		polygon_checks_float.c\
 		hud.c\
 		hud2.c\
+		hud3.c\
 		draw_tools.c\
 		algo_tools.c\
 		math_tools.c\

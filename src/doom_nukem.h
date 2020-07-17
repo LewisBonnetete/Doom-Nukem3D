@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/17 12:56:37 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 13:23:26 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -442,6 +442,8 @@ int						center_in_poly(t_point a, t_point b, t_sector *sector);
 int						is_new_point_in_sector(t_point new, t_wall *walls);
 int						check_wall_intersections(t_point new,
 							t_point old, t_wall wall);
+void					hitmarker(t_var *info);
+void 					crosshair(t_var *info);
 int						comparator1(t_point new, t_point old,
 							t_point w1, t_point w2);
 int						comparator2(t_point new, t_point old,
@@ -466,6 +468,8 @@ double					scalar(double x1, double y1, double x2, double y2);
 void					init_cast(t_var *info, t_render *render, t_ray *ray);
 void					init_nb_sec(t_sector *sector, t_render *render);
 int						may_weapon(t_item *item);
+void					hp_hud_help(t_var *info, char *nb,
+							SDL_Rect pos, SDL_Color color);
 t_item					*go_to_item(t_item *item, char c);
 void					hud(t_var *info, t_player *player, t_map *map);
 void					weapon(t_var *info, t_player *player, SDL_Color color);
