@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shoot.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 11:35:50 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/07/15 17:45:33 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/17 16:29:39 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	shoot_ennemy(t_var *info)
 		if (info->player->no_scope != 0 && weapon->mun > 0)
 			hit_ennemy(info);
 		weapon->mun -= 1;
-			if (weapon->mun <= 0)
-				weapon->mun = 0;
+		if (weapon->mun <= 0)
+			weapon->mun = 0;
 	}
-	
 }

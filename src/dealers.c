@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dealers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/10 13:55:30 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/17 15:32:57 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	straff_and_rot2(t_var *info, t_input input)
 {
-	if (input.straf_left)
+	if (input.straf_left  && input.up == 0 && input.down == 0)
 	{
 		input.straffer_x = -info->player->dy;
 		input.straffer_y = info->player->dx;
@@ -32,7 +32,7 @@ void	straff_and_rot(t_var *info, t_input input)
 		rot_right(info);
 	else if (input.left)
 		rot_left(info);
-	if (input.straf_right)
+	if (input.straf_right && input.up == 0 && input.down == 0)
 	{
 		input.straffer_x = info->player->dy;
 		input.straffer_y = -info->player->dx;

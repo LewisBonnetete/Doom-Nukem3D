@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 16:24:51 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/08 14:22:22 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 15:25:55 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,30 @@ void	get_speed(t_var *info)
 	}
 }
 
-void	mouser(t_var *info)
-{
-	int y;
+// void	mouser(t_var *info)
+// {
+// 	int y;
 
-	SDL_GetRelativeMouseState(&(info->x_dec), &y);
-	info->y_dec += y;
-	if (info->y_dec > WINDOW_H + 500)
-		info->y_dec = WINDOW_H + 500;
-	else if (info->y_dec < -500)
-		info->y_dec = -500;
-}
+// 	SDL_GetRelativeMouseState(&(info->x_dec), &y);
+// 	info->y_dec += y;
+// 	if (info->y_dec > WINDOW_H + 500)
+// 		info->y_dec = WINDOW_H + 500;
+// 	else if (info->y_dec < -500)
+// 		info->y_dec = -500;
+// }
 
-void	rotate(t_var *info)
-{
-	if (info->mouse_in)
-		mouser(info);
-	if (info->x_dec > 0)
-	{
-		rot_right(info);
-		info->x_dec = 0;
-	}
-	else if (info->x_dec < 0)
-	{
-		rot_left(info);
-		info->x_dec = 0;
-	}
-}
+// void	rotate(t_var *info)
+// {
+// 	if (info->mouse_in)
+// 		mouser(info);
+// 	if (info->x_dec > 0)
+// 	{
+// 		rot_right(info);
+// 		info->x_dec = 0;
+// 	}
+// 	else if (info->x_dec < 0)
+// 	{
+// 		rot_left(info);
+// 		info->x_dec = 0;
+// 	}
+// }

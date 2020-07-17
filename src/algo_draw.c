@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 15:48:11 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 12:58:45 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,6 @@ int				tex_floor_ciel(t_var *info, t_render *render)
 	else
 		return (0);
 	return (tex_floor(info, render));
-}
-
-void			put_pixel(Uint32 color, int x, int y, SDL_Surface *image)
-{
-	Uint32 *pixels;
-
-	pixels = image->pixels;
-	if (x >= 0 && y >= 0 && x < image->w && y < image->h)
-		pixels[y * image->w + x] = color;
 }
 
 void			draw_texture_wall(t_var *info, t_render *render)
