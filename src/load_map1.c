@@ -51,11 +51,17 @@ int				info_map(char *str, t_map *map)
 	if (!(the_map = recup_map(str)))
 		return (0);
 	if (check_map(the_map) == 0)
+	{
+		ft_strdel(&the_map);
 		return (0);
+	}
 	if (the_map[map->i] == 'm')
 	{
 		if (rec_map(the_map, map) == 0)
+		{
+			ft_strdel(&the_map);
 			return (0);
+		}
 	}
 	else
 		return (0);

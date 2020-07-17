@@ -18,7 +18,7 @@ char	*little_strjoin(char *src, char c)
 	char	*dest;
 
 	i = ft_strlen(src);
-	if (!((dest) = (char *)malloc(sizeof(char) * i + 1)))
+	if (!((dest) = (char *)malloc(sizeof(char) * i + 2)))
 		return (0);
 	dest[i + 1] = 0;
 	i = -1;

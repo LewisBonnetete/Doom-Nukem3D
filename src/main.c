@@ -25,14 +25,18 @@ int						main_check(int ac, char **av, t_var *info)
 {
 	char *str;
 
-	str = ft_strdup(av[1]);
 	if (ac != 2)
 	{
 		ft_putendl("./doom-nukem [map_name]");
 		return (0);
 	}
+	str = ft_strdup(av[1]);
 	if (info_map(str, info->map) == 0)
+	{
+		ft_strdel(&str);
 		return (0);
+	}
+	ft_strdel(&str);
 	if (!(init_win1(info)) || !(init_win2(info)) || !(init_win3(info)))
 	{
 		free_info(info);
@@ -89,7 +93,7 @@ int						main(int ac, char **av)
 	init_render(&info, &render, 0, info.player->sector_id);
 	info.render = &render;
 	main_path(&render, &info);
-	
+
 	while (dealer(&info))
 	{
 		sdl_main(&render, &info);
