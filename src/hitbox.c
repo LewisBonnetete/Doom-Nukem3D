@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hitbox.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/16 16:36:58 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 15:01:53 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int				hit_item(t_var *info, t_render *render, t_point p)
 	while (render->item)
 	{
 		calc_item_wall(render, render->item, info);
-		if (intersect(render->ray, render->wall_item))
+		if (intersect(render->ray, &render->wall_item))
 		{
 			r.x = render->ray->x2;
 			r.y = render->ray->y2;

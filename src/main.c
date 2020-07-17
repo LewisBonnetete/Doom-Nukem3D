@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/17 12:41:57 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/17 16:38:20 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@ int						main_check(int ac, char **av, t_var *info)
 	str = ft_strdup(av[1]);
 	if (info_map(str, info->map) == 0)
 	{
-		ft_strdel(&str);
+		ft_exit(info, info->render);
 		return (0);
 	}
-	ft_strdel(&str);
 	if (!(init_win1(info)) || !(init_win2(info)) || !(init_win3(info)))
 	{
-		free_info(info);
+		ft_exit(info, info->render);
 		return (0);
 	}
 	return (1);
@@ -60,16 +59,12 @@ void					sdl_main(t_render *render, t_var *info)
 	{
 		ft_putstr("Erreur CreateTextureFromSurface :\n");
 		ft_putendl(SDL_GetError());
-		SDL_DestroyWindow(info->window);
-		SDL_Quit();
 		ft_exit(info, render);
 	}
 	if (SDL_RenderCopy(info->renderer, info->texture, NULL, NULL))
 	{
 		ft_putstr("Erreur RenderCopy :\n");
 		ft_putendl(SDL_GetError());
-		SDL_DestroyWindow(info->window);
-		SDL_Quit();
 		ft_exit(info, render);
 	}
 }
@@ -90,10 +85,10 @@ int						main(int ac, char **av)
 	ft_init_pour_linstant(&info);
 	init_player(&player, info.map);
 	info.player = &player;
-	init_render(&info, &render, 0, info.player->sector_id);
+	if (!init_render(&info, &render, info.player->sector_id))
+		ft_exit(&info, &render);
 	info.render = &render;
 	main_path(&render, &info);
-
 	while (dealer(&info))
 	{
 		sdl_main(&render, &info);

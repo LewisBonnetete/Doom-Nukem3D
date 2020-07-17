@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 14:47:58 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 13:12:58 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int		init_win1(t_var *info)
 	{
 		ft_putstr("Erreur SDL_CreateWindow :\n");
 		ft_putendl(SDL_GetError());
-		SDL_Quit();
 		return (0);
 	}
 	return (1);
@@ -40,8 +39,6 @@ int		init_win2(t_var *info)
 	{
 		ft_putstr("Erreur SDL_CreateRenderer :\n");
 		ft_putendl(SDL_GetError());
-		SDL_DestroyWindow(info->window);
-		SDL_Quit();
 		return (0);
 	}
 	if (!(info->image = SDL_CreateRGBSurface(0, WINDOW_W,
@@ -49,8 +46,6 @@ int		init_win2(t_var *info)
 	{
 		ft_putstr("Erreur SDL_CreateRGBSurface :\n");
 		ft_putendl(SDL_GetError());
-		SDL_DestroyWindow(info->window);
-		SDL_Quit();
 		return (0);
 	}
 	return (1);
@@ -61,8 +56,6 @@ int		init_win3(t_var *info)
 	if (TTF_Init() == -1)
 	{
 		ft_putstr("Erreur TTF_init :\n");
-		SDL_DestroyWindow(info->window);
-		SDL_Quit();
 		return (0);
 	}
 	info->font = TTF_OpenFont("./frameworks/arial.ttf", 22);

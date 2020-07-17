@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/16 15:11:52 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/17 16:05:18 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,24 @@ void			init_player(t_player *player, t_map *map)
 	player->no_scope = 0;
 }
 
-void			init_render(t_var *info, t_render *render,
-				int x0, int sector_id)
+int				init_render(t_var *info, t_render *render, int sector_id)
 {
 	render->sector_id = sector_id;
 	render->s = get_a_sector_by_id(info->map, 1);
 	render->wall = NULL;
+	if (!(render->tab = (int *)ft_memalloc((sizeof(int) * (render->nb_sec + 1)))))
+		return (0);
+	init_tab(render->tab, render->nb_sec);
 	render->sec_0 = render->s;
 	render->nb_sec = 0;
 	render->nbr_items = 0;
 	render->cid = info->map->cid;
 	render->fid = info->map->fid;
-	(void)x0;
 	if (info->map->items && info->map->items->name[0] != 0)
 	{
 		render->item = init_item(render, info->map->items, 1);
 		render->item_0 = render->item;
 	}
 	init_nb_sec(render->sec_0, render);
+	return (1);
 }

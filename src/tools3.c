@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/16 18:11:39 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/17 16:18:18 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ void			init_tab(int *tab, int n)
 		tab[i] = 0;
 		i++;
 	}
-}
-
-void			free_itab(t_itab *tab)
-{
-	free(tab->name);
-	free(tab);
 }
 
 void			free_ray(t_ray *ray)

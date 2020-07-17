@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 17:22:18 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 16:04:55 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,9 +207,10 @@ struct					s_render
 	t_ray				*ray;
 	t_sector			*s;
 	t_wall				*wall;
-	t_wall				*wall_item;
+	t_wall				wall_item;
 	t_item				*item;
 	t_item				*item_0;
+	int					*tab;
 	int					nbr_items;
 	int					nb_item_to_draw;
 	double				tx;
@@ -280,6 +281,7 @@ struct					s_var
 struct					s_itab
 {
 	float				dist;
+	int					used;
 	char				*name;
 	int					item_x;
 	int					item_y;
@@ -405,8 +407,7 @@ void					rot_right(t_var *info);
 //init func
 void					init_player(t_player *player, t_map *map);
 void					ft_init_pour_linstant(t_var *info);
-void					init_render(t_var *info, t_render *render,
-							int x0, int sector_id);
+int						init_render(t_var *info, t_render *render, int sector_id);
 int						init_next_render(t_var *info, t_render *render);
 
 //draw
@@ -437,7 +438,7 @@ void					ft_exit(t_var *info, t_render *render);
 void					free_info(t_var *info);
 void					free_player(t_player *player);
 void					free_map(t_map *map);
-void					free_itab(t_itab *tab);
+void					free_itab(t_itab	*itab, t_render *render);
 void					free_ray(t_ray *ray);
 void					free_wall(t_wall *wall);
 void					free_item(t_item *item);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/10 15:44:18 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 15:32:58 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static	void	c_i_tool(t_render *render, t_item *item)
 	render->x++;
 }
 
-static	void	c_i_while(t_render *render, t_point p, t_point w, int a)
+static	void	c_i_while(t_render *render, t_point p, t_point w, int *a)
 {
 	if (is_in_sector(w, render->s) != is_in_sector(p, render->s))
 	{
@@ -38,7 +38,7 @@ static	void	c_i_while(t_render *render, t_point p, t_point w, int a)
 			render->wall = &render->s->walls[render->n];
 			if (intersect(render->ray, render->wall) == 1)
 				if (!render->wall->is_portal)
-					a = 1;
+					*a = 1;
 		}
 	}
 }
@@ -46,7 +46,7 @@ static	void	c_i_while(t_render *render, t_point p, t_point w, int a)
 static	void	c_i_test(t_var *info, t_render *render, t_item *item)
 {
 	c_i_tool(render, item);
-	while (intersect(render->ray, render->wall_item) == 1)
+	while (intersect(render->ray, &render->wall_item) == 1)
 	{
 		++render->x;
 		update_ray(info, render);
@@ -65,7 +65,7 @@ void			check_intersect(t_var *info, t_render *render, t_item *item)
 
 	if (calc_item_wall(render, item, info) == 1)
 	{
-		if (intersect(render->ray, render->wall_item) == 1
+		if (intersect(render->ray, &render->wall_item) == 1
 			&& item->cap == 0)
 		{
 			render->itab[render->k].pv = item->pv;
@@ -75,7 +75,7 @@ void			check_intersect(t_var *info, t_render *render, t_item *item)
 			w.x = item->x;
 			w.y = item->y;
 			render->wall_dist = calc_dist(p, w);
-			c_i_while(render, p, w, a);
+			c_i_while(render, p, w, &a);
 			if (a == 0)
 			{
 				c_i_test(info, render, item);

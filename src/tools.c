@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/16 18:11:34 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/17 16:06:40 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,41 +23,50 @@ double			calc_dist(t_point a, t_point b)
 
 void			free_sector(t_sector *sector)
 {
+	int i;
+
+	i = 0;
 	if (sector->next_sector)
 		free_sector(sector->next_sector);
+	while (i < sector->nbr_walls)
+	{
+		free(&sector->walls[i]);
+		i++;
+	}
 	ft_memdel((void **)&sector);
 }
 
 void			free_ren_help(t_render *render)
 {
-	if (render->itab)
-		free_itab(render->itab);
 	if (render->ray)
 		free_ray(render->ray);
-	if (render->s)
-		free_sector(render->s);
-	if (render->wall)
-		free_wall(render->wall);
-	if (render->wall_item)
-		free_wall(render->wall_item);
+}
+
+void			free_text(SDL_Surface *text)
+{
+	free(text->pixels);
+	free(text);
 }
 
 void			free_render(t_render *render)
 {
 	int i;
+	t_item *item;
 
 	i = -1;
 	while (++i < NB_TEXT)
 		if (render->tab_sdl[i])
-			SDL_FreeSurface(render->tab_sdl[i]);
+			free_text(render->tab_sdl[i]);
 	i = -1;
 	while (++i < NB_TEXT_I)
 		if (render->tab_sdl_item[i])
-			SDL_FreeSurface(render->tab_sdl_item[i]);
+			free_text(render->tab_sdl_item[i]);
 	free_ren_help(render);
 	while (render->item_0)
 	{
-		free_item(render->item_0);
+		item = render->item_0;
 		render->item_0 = render->item_0->next_item;
+		free_item(item);
 	}
+	free(render->tab);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/10 15:25:12 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 14:58:58 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,9 @@ void		go_to_sector(t_sector *sec_0, int id, t_render *render)
 
 int			calc_item_wall(t_render *render, t_item *item, t_var *info)
 {
-	if (!(render->wall_item = (t_wall *)ft_memalloc(sizeof(t_wall))))
-		return (0);
-	render->wall_item->a.x = 0.3 * info->player->planex + item->x;
-	render->wall_item->a.y = 0.3 * info->player->planey + item->y;
-	render->wall_item->b.x = item->x - 0.3 * info->player->planex;
-	render->wall_item->b.y = item->y - 0.3 * info->player->planey;
+	render->wall_item.a.x = 0.3 * info->player->planex + item->x;
+	render->wall_item.a.y = 0.3 * info->player->planey + item->y;
+	render->wall_item.b.x = item->x - 0.3 * info->player->planex;
+	render->wall_item.b.y = item->y - 0.3 * info->player->planey;
 	return (1);
 }
