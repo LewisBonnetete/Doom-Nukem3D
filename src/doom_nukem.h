@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 17:22:18 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/17 12:56:37 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ struct					s_point
 	float				z;
 };
 
-struct 					s_i_tool
+struct					s_i_tool
 {
 	t_point				p;
 	t_point				w;
@@ -104,7 +104,6 @@ struct 					s_i_tool
 	t_item				*weapon;
 	int					k;
 };
-
 
 struct					s_wall
 {
@@ -139,7 +138,6 @@ struct					s_sector
 	int					sector_id;
 	t_sector			*next_sector;
 	t_map				*map;
-//	t_var				*info;
 };
 
 struct					s_box
@@ -157,7 +155,6 @@ struct					s_map
 	t_box				box;
 	t_sector			*sectors;
 	int					size;
-//	SDL_Surface			*text_tab[10];
 	t_point				spawn;
 	int					i;
 	int					cid;
@@ -355,7 +352,7 @@ struct					s_f_tool
 
 };
 
-struct 						s_intersec
+struct					s_intersec
 {
 	float					a1;
 	float					a2;
@@ -377,9 +374,9 @@ struct					s_w_draw
 	double		step;
 };
 
-/*sdl func*/
-void				ft_put_weapon(t_var *info, t_render *render);
-void					draw_i_color(t_var *info, t_render *render, t_i_tool *tool, t_item *item);
+void					ft_put_weapon(t_var *info, t_render *render);
+void					draw_i_color(t_var *info, t_render *render,
+							t_i_tool *tool, t_item *item);
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 int						init_win3(t_var *info);
@@ -401,15 +398,11 @@ void					diag3(t_var *info, t_input input);
 void					diag4(t_var *info, t_input input);
 void					rot_left(t_var *info);
 void					rot_right(t_var *info);
-
-//init func
 void					init_player(t_player *player, t_map *map);
 void					ft_init_pour_linstant(t_var *info);
 void					init_render(t_var *info, t_render *render,
 							int x0, int sector_id);
 int						init_next_render(t_var *info, t_render *render);
-
-//draw
 int						same_sector(t_var *info, t_item *item, int sector_id);
 int						enemys_in_sector(t_var *info, t_player *player);
 int						hit_objet(t_var *info, t_render *render);
@@ -429,7 +422,8 @@ int						darken_wall(t_var *info, Uint32 color,
 int						rgb_calc(int r, int g, int b);
 int						rain_gen(t_var *info);
 void					update_render(t_var *info, t_render *render);
-void					put_item(int k, t_item *src, t_render *render, t_var *info);
+void					put_item(int k, t_item *src,
+							t_render *render, t_var *info);
 void					shoot_ennemy(t_var *info);
 void					change_weapon(t_var *info);
 void					rgb_cap(t_rgb *rgb);
@@ -442,18 +436,22 @@ void					free_ray(t_ray *ray);
 void					free_wall(t_wall *wall);
 void					free_item(t_item *item);
 void					free_render(t_render *render);
-int						verify_crossing(t_point new, t_point old, t_sector *sector);
+int						verify_crossing(t_point new,
+							t_point old, t_sector *sector);
 int						center_in_poly(t_point a, t_point b, t_sector *sector);
 int						is_new_point_in_sector(t_point new, t_wall *walls);
-int						check_wall_intersections(t_point new, t_point old, t_wall wall);
-int						comparator1(t_point new, t_point old, t_point w1, t_point w2);
-int						comparator2(t_point new, t_point old, t_point w1, t_point w2);
+int						check_wall_intersections(t_point new,
+							t_point old, t_wall wall);
+int						comparator1(t_point new, t_point old,
+							t_point w1, t_point w2);
+int						comparator2(t_point new, t_point old,
+							t_point w1, t_point w2);
 void					red_flash(t_var *info);
-void					draw_item_2(t_render *render, t_var *info, int k, t_item *item);
-void	    			check_intersect(t_var *info, t_render *render, t_item *item);
+void					draw_item_2(t_render *render,
+							t_var *info, int k, t_item *item);
+void					check_intersect(t_var *info,
+							t_render *render, t_item *item);
 void					draw_column(t_var *info, t_render *render, int *tab);
-
-//algo
 int						raycasting(t_var *info, t_render *render);
 void					put_pixel(Uint32 color, int x,
 							int y, SDL_Surface *image);
@@ -469,8 +467,6 @@ void					init_cast(t_var *info, t_render *render, t_ray *ray);
 void					init_nb_sec(t_sector *sector, t_render *render);
 int						may_weapon(t_item *item);
 t_item					*go_to_item(t_item *item, char c);
-
-//hud
 void					hud(t_var *info, t_player *player, t_map *map);
 void					weapon(t_var *info, t_player *player, SDL_Color color);
 void					inventory(t_var *info,
@@ -478,8 +474,6 @@ void					inventory(t_var *info,
 void					name(t_var *info, t_map *map, SDL_Color color);
 void					hp(t_var *info, t_player *player, SDL_Color color);
 void					munitions(t_var *info, SDL_Color color);
-
-//load_map
 int						check_map(char *the_map);
 int						info_map(char *str, t_map *map);
 int						rec_map(char *the_map, t_map *map);
@@ -496,23 +490,17 @@ char					rec_char(char *the_map, t_map *map);
 char					*recup_map(char *src);
 char					*little_strjoin(char *src, char c);
 t_item					*rec_item(char *the_map, t_map *map);
-
-// tools
 int						do_trigo(t_var *info, t_wall *wall);
 double					calc_dist(t_point a, t_point b);
 int						tab_path(t_render *renderer);
 void					ft_exit(t_var *info, t_render *render);
 void					free_map(t_map *map);
 void					init_tab(int *tab, int n);
-
-//hitbox
 int						hitboxy(t_var *info, t_render *render, double diry);
 int						hitboxx(t_var *info, t_render *render, double dirx);
 int						hitbox(t_var *info, t_render *render, int dir);
 int						hitbox_diag(t_var *info,
 						t_render *render, double diagx, double diagy);
-
-//edit tools
 int						is_new_point_in_sector(t_point new, t_wall *walls);
 int						is_in_sectors_spawn(t_point first, t_map *map);
 int						is_in_sector_float(float center_x, float center_y,
