@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 13:45:04 by atyczyns          #+#    #+#             */
-/*   Updated: 2020/07/16 14:49:26 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/18 17:56:34 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,24 @@ void	change_weapon(t_var *info)
 	if (may_weapon(info->render->item_0))
 	{
 		weapon = go_to_item(info->render->item_0, 'a');
+		printf("debut weapon id = %i\n", weapon->id);
+		printf("debut weapon hold = %i\n", weapon->hold);
 		move_item(weapon);
+		printf("ap weapon id = %i\n", weapon->id);
+		printf("ap weapon hold = %i\n", weapon->hold);
 		if (!weapon)
-		{
 			weapon = go_to_item(info->render->item_0, 'a');
-			weapon->hold = 1;
-		}
 		else
 		{
 			weapon->hold = 0;
 			weapon = weapon->next_item;
-			while (weapon && weapon->hold != 0)
-				weapon = go_to_item(weapon->next_item, 'a');
+			while (weapon != NULL && (weapon->hold != 0 || weapon->cap != 2))
+					weapon = go_to_item(weapon->next_item, 'a');
 			if (!weapon)
 				weapon = go_to_item(info->render->item_0, 'a');
-			weapon->hold = 1;
 		}
+		weapon->hold = 1;
+		printf("after weapon id = %i\n", weapon->id);
+		printf("after weapon hold = %i\n\n", weapon->hold);
 	}
 }
