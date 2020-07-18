@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/17 16:33:52 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/18 16:24:34 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static	int		draw_i_iter(t_render *render, int k)
 
 	tmp = k;
 	i = -1;
-	while (render->itab[++i].used == 0 && i < render->nb_item_to_draw + 1)
+	while (++i < render->nb_item_to_draw)
 	{
 		if (render->itab[k].dist < render->itab[i].dist
-		&& render->itab[k].used == 0)
+		&& render->itab[i].used == 0)
 			tmp = i;
 	}
 	return (tmp);
