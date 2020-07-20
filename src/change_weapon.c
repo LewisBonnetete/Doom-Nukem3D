@@ -12,17 +12,6 @@
 
 #include "doom_nukem.h"
 
-void	move_item(t_item *weapon)
-{
-	while (weapon && weapon->hold != 1)
-	{
-		if (weapon->next_item)
-			weapon = go_to_item(weapon->next_item, 'a');
-		else
-			weapon = NULL;
-	}
-}
-
 void	change_weapon(t_var *info)
 {
 	t_item	*weapon;
@@ -30,11 +19,8 @@ void	change_weapon(t_var *info)
 	if (may_weapon(info->render->item_0))
 	{
 		weapon = go_to_item(info->render->item_0, 'a');
-		printf("debut weapon id = %i\n", weapon->id);
-		printf("debut weapon hold = %i\n", weapon->hold);
-		move_item(weapon);
-		printf("ap weapon id = %i\n", weapon->id);
-		printf("ap weapon hold = %i\n", weapon->hold);
+		while (weapon && weapon->hold != 1)
+			weapon = go_to_item(weapon->next_item, 'a');
 		if (!weapon)
 			weapon = go_to_item(info->render->item_0, 'a');
 		else
@@ -47,7 +33,5 @@ void	change_weapon(t_var *info)
 				weapon = go_to_item(info->render->item_0, 'a');
 		}
 		weapon->hold = 1;
-		printf("after weapon id = %i\n", weapon->id);
-		printf("after weapon hold = %i\n\n", weapon->hold);
 	}
 }
