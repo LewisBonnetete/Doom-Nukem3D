@@ -67,7 +67,7 @@ int				tex_floor_ciel(t_var *info, t_render *render)
 	tool.i = WINDOW_H / 2 - 1;
 	tool.j = -1;
 	tool.k = -1;
-	if (render->tab_sdl[render->cid])
+	if (render->tab_sdl[render->fid])
 	{
 		while (tool.i++ <= WINDOW_H)
 		{

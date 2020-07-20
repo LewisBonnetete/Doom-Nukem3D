@@ -47,8 +47,6 @@ int				init_render(t_var *info, t_render *render, int sector_id)
 	render->sector_id = sector_id;
 	render->s = get_a_sector_by_id(info->map, 1);
 	render->wall = NULL;
-	if (!(render->tab = (int *)ft_memalloc((sizeof(int) * (render->nb_sec + 1)))))
-		return (0);
 	init_tab(render->tab, render->nb_sec);
 	render->sec_0 = render->s;
 	render->nb_sec = 0;
@@ -61,5 +59,7 @@ int				init_render(t_var *info, t_render *render, int sector_id)
 		render->item_0 = render->item;
 	}
 	init_nb_sec(render->sec_0, render);
+	if (!(render->tab = (int *)ft_memalloc((sizeof(int) * (render->nb_sec + 1)))))
+		return (0);
 	return (1);
 }

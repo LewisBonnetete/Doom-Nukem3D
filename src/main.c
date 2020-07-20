@@ -85,6 +85,7 @@ int						main(int ac, char **av)
 	ft_init_pour_linstant(&info);
 	init_player(&player, info.map);
 	info.player = &player;
+	printf("playerr\n");
 	if (!init_render(&info, &render, info.player->sector_id))
 		ft_exit(&info, &render);
 	info.render = &render;

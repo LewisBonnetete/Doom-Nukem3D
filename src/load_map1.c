@@ -80,8 +80,12 @@ int				rec_map(char *the_map, t_map *map)
 		map->size = rec_int(the_map, map);
 	if (the_map[map->i] == 'i')
 		map->cid = rec_int(the_map, map);
+	else
+		map->cid = 0;
 	if (the_map[map->i] == 'i')
 		map->fid = rec_int(the_map, map);
+	else
+		map->fid = 1;
 	if (the_map[map->i] == 'p')
 		map->spawn = rec_point(the_map, map);
 	if (the_map[map->i] == 't')
