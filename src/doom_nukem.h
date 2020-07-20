@@ -471,7 +471,7 @@ double					scalar(double x1, double y1, double x2, double y2);
 void					init_cast(t_var *info, t_render *render, t_ray *ray);
 void					init_nb_sec(t_sector *sector, t_render *render);
 int						may_weapon(t_item *item);
-void					draw_i2_help(t_var *info, t_render *render,
+int					draw_i2_help(t_var *info, t_render *render,
 							t_i_tool *tool, int k);
 void					hp_hud_help(t_var *info, char *nb,
 							SDL_Rect pos, SDL_Color color);

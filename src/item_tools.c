@@ -104,12 +104,11 @@ void			draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 	t_i_tool	tool;
 	int			i;
 
-	i = 0;
 	init_tools(render, info, k, &tool);
 	item_checking(info, render, &tool, item);
 	while (++render->x <= render->widht_item + render->p_0)
 	{
-		draw_i2_help(info, render, &tool, k);
+		i = draw_i2_help(info, render, &tool, k);
 		if (i == 0)
 		{
 			while (++tool.i <= render->height_item)
