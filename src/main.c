@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/22 19:00:10 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/22 19:08:06 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,11 @@ int						main(int ac, char **av)
 		main_tool(&info, &render);
 	}
 	ft_exit(&info, &render);
-	while (1)
-		;
 	return (0);
 }
 
-// __attribute__((destructor))
-// static void destroy_() {
-//     while (1)
-//         ;
-// }
+__attribute__((destructor))
+static void destroy_() {
+    while (1)
+        ;
+}

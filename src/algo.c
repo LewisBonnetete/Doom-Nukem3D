@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/22 18:46:47 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/22 19:19:13 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void			free_itab(t_itab	*itab, t_render *render)
 		free(itab[i].name);
 		i++;
 	}
-	free(&itab);
+	free(itab);
 }
 
 int				raycasting(t_var *info, t_render *render)

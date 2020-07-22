@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/22 16:57:25 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/22 19:03:53 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void			free_render(t_render *render)
 	t_item *item;
 
 	i = -1;
-	while (++i < NB_TEXT)
+	while (++i < NB_TEXT + 1)
 		if (render->tab_sdl[i])
 			free_text(render->tab_sdl[i]);
 	i = -1;
-	while (++i < NB_TEXT_I)
+	while (++i < NB_TEXT_I + 1)
 		if (render->tab_sdl_item[i])
 			free_text(render->tab_sdl_item[i]);
 	free_ren_help(render);
