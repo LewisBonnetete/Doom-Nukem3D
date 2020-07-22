@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/17 16:45:16 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:16:35 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ struct					s_render
 	t_wall				wall_item;
 	t_item				*item;
 	t_item				*item_0;
-	int					*tab;
+	int					tab[10];
 	int					nbr_items;
 	int					nb_item_to_draw;
 	double				tx;

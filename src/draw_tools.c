@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/17 13:00:18 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/22 18:58:03 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,6 @@ Uint32		get_pixel(SDL_Surface *tex, int x, int y)
 	color = 0;
 	pixels = tex->pixels;
 	if (x >= 0 && y >= 0 && x < tex->w && y < tex->h)
-	{
 		color = pixels[tex->h * x + y];
-	}
 	return (color);
 }

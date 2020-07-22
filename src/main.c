@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/18 13:27:02 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/22 19:00:10 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int						main(int ac, char **av)
 	ft_init_pour_linstant(&info);
 	init_player(&player, info.map);
 	info.player = &player;
-	printf("playerr\n");
+	printf("player\n");
 	if (!init_render(&info, &render, info.player->sector_id))
 		ft_exit(&info, &render);
 	info.render = &render;
@@ -98,6 +98,8 @@ int						main(int ac, char **av)
 		main_tool(&info, &render);
 	}
 	ft_exit(&info, &render);
+	while (1)
+		;
 	return (0);
 }
 

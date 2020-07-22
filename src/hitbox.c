@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hitbox.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/18 15:29:46 by atyczyns         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:43:10 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int				hitbox(t_var *info, t_render *render, int dir)
 	p.y = info->player->posy;
 	render->x = WINDOW_W / 2;
 	update_ray_box(info, render, dir, p);
-	//printf("dx = %f| dy = %f\n",render->ray->dx, render->ray->dy);
 	if (!ray_hit(render, p))
 		return (0);
 	if (!hit_item(info, render, p))

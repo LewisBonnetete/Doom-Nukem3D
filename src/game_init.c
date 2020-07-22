@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/17 16:05:18 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:17:38 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int				init_render(t_var *info, t_render *render, int sector_id)
 		render->item_0 = render->item;
 	}
 	init_nb_sec(render->sec_0, render);
-	if (!(render->tab = (int *)ft_memalloc((sizeof(int) * (render->nb_sec + 1)))))
-		return (0);
+	// if (!(render->tab = (int *)ft_memalloc((sizeof(int) * (render->nb_sec + 1)))))
+	// 	return (0);
 	return (1);
 }

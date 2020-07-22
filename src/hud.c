@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/17 13:22:46 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/22 18:34:27 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	inventory(t_var *info, SDL_Color color)
 	SDL_BlitSurface(texte, NULL, info->image, &pos);
 	item = info->render->item_0;
 	pos.y += 10;
+	SDL_FreeSurface(texte);
 	while (item && pos.y < WINDOW_H - 40)
 	{
 		if (item->cap == 2)

@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/17 16:07:28 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/22 16:35:10 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void			u_r_b_helpdir(t_var *info, t_render *render, int dir)
 {
-	if (dir == 3)
+	if (dir == 2)
 	{
 		render->ray->dx = -info->player->dy
 		+ info->player->planex * render->ray->cam_x;
-		render->ray->dy = -info->player->dx
+		render->ray->dy = info->player->dx
 		+ info->player->planey * render->ray->cam_x;
 	}
-	if (dir == 2)
+	if (dir == 3)
 	{
 		render->ray->dx = info->player->dy
 		+ info->player->planex * render->ray->cam_x;
-		render->ray->dy = info->player->dx
+		render->ray->dy = -info->player->dx
 		+ info->player->planey * render->ray->cam_x;
 	}
 }
