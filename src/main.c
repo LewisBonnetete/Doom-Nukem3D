@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/22 19:08:06 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/23 16:50:08 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,16 @@ int						main(int ac, char **av)
 
 	info.map = &map;
 	system("clear");
-	if (PARSE)
-		png_parse();
-	if (!main_check(ac, av, &info))
+	if (init_main(ac, av, &info, &player) == 0)
 		return (0);
-	ft_init_pour_linstant(&info);
-	init_player(&player, info.map);
-	info.player = &player;
-	printf("player\n");
 	if (!init_render(&info, &render, info.player->sector_id))
 		ft_exit(&info, &render);
 	info.render = &render;
 	main_path(&render, &info);
 	while (dealer(&info))
 	{
+		mouse_test(&info);
+		rotate(&info);
 		sdl_main(&render, &info);
 		if (raycasting(&info, &render) == 0)
 			ft_exit(&info, &render);
@@ -99,10 +95,4 @@ int						main(int ac, char **av)
 	}
 	ft_exit(&info, &render);
 	return (0);
-}
-
-__attribute__((destructor))
-static void destroy_() {
-    while (1)
-        ;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/10 16:18:44 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/23 15:58:21 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,24 +76,12 @@ int				rec_int(char *the_map, t_map *map)
 	return (dest);
 }
 
-char			*recup_map(char *src)
+static	char	*map_loader(char *src, int fd, char *map)
 {
-	char	*line;
-	int		fd;
+	int		i;
 	int		error;
-	char	*map;
-	int 	i;
+	char	*line;
 
-	map = 0;
-	i = 0;
-	ft_putendl("Loading map...");
-	if ((fd = open("core", O_RDONLY)) == -1)
-		return (0);
-	while (i++ < 12)
-	{
-		get_next_line(fd, &line);
-		ft_strdel(&line);
-	}
 	i = 0;
 	while ((error = get_next_line(fd, &line)) > 0)
 	{
@@ -109,7 +97,32 @@ char			*recup_map(char *src)
 		}
 		ft_strdel(&line);
 	}
-	ft_putendl("Map not found");
-	close(fd);
 	return (0);
+}
+
+char			*recup_map(char *src)
+{
+	char	*line;
+	int		fd;
+	char	*map;
+	int		i;
+
+	map = 0;
+	i = 0;
+	ft_putendl("Loading map...");
+	if ((fd = open("core", O_RDONLY)) == -1)
+		return (0);
+	while (i++ < 12)
+	{
+		get_next_line(fd, &line);
+		ft_strdel(&line);
+	}
+	if (!(map = map_loader(src, fd, map)))
+	{
+		ft_putendl("Map not found");
+		close(fd);
+		return (0);
+	}
+	close(fd);
+	return (map);
 }

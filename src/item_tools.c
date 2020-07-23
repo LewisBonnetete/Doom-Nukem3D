@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/17 14:38:00 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/23 15:47:25 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,7 @@ static	void	draw_item_if(t_var *info, t_render *render,
 		else
 			item->cap = 0;
 	}
-	if (render->itab[tool->k].text_id == 7)
-	{
-		ft_putendl("SUCCESS!");
-		ft_exit(info, render);
-	}
+	you_win(info, render, tool);
 }
 
 static	void	draw_i_help(t_render *render,

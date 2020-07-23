@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/17 15:32:57 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/23 15:36:30 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	straff_and_rot2(t_var *info, t_input input)
 {
-	if (input.straf_left  && input.up == 0 && input.down == 0)
+	if (input.straf_left && input.up == 0 && input.down == 0)
 	{
 		input.straffer_x = -info->player->dy;
 		input.straffer_y = info->player->dx;
@@ -71,6 +71,7 @@ int		dealer(t_var *info)
 			return (0);
 		if (event.key.keysym.sym == SDLK_v && event.key.state == SDL_PRESSED)
 			change_weapon(info);
+		mouse_cap(info, event);
 		get_move1(event, &input);
 		get_move2(event, &input);
 		sprint(info, event);

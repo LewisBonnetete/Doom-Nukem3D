@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/17 13:04:17 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/23 15:38:48 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	hit_ennemy(t_var *info)
 		{
 			hitmarker(info);
 			item->pv -= 5;
-			printf("id = %i\n",item->id);
+			//printf("id = %i\n",item->id);
 		}
 		item = item->next_item;
 	}

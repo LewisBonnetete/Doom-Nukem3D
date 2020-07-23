@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/22 16:16:35 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/23 17:00:28 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -394,15 +394,27 @@ void					get_move2(SDL_Event event, t_input *input);
 int						move(t_var *info, t_input input);
 void					move_diag(t_input *input);
 void					diag(t_var *info, t_input input);
+int						main_check(int ac, char **av, t_var *info);
+int						png_parser_iter(t_render *render,
+							int i, int fd);
 void					diag1(t_var *info, t_input input);
 void					diag2(t_var *info, t_input input);
 void					diag3(t_var *info, t_input input);
 void					diag4(t_var *info, t_input input);
 void					rot_left(t_var *info);
 void					rot_right(t_var *info);
+SDL_Surface				*read_text(char *line);
+void					dealer_iter(t_var *info, t_render *render);
+void					sdl_main(t_render *render, t_var *info);
+void					main_tool(t_var *info, t_render *render);
+int						load_exit(char *the_map);
+int						init_main(int ac, char **av,
+							t_var *info, t_player *player);
 void					init_player(t_player *player, t_map *map);
 void					ft_init_pour_linstant(t_var *info);
-int						init_render(t_var *info, t_render *render, int sector_id);
+void					you_win(t_var *info, t_render *render, t_i_tool *tool);
+int						init_render(t_var *info, t_render *render,
+							int sector_id);
 int						init_next_render(t_var *info, t_render *render);
 int						same_sector(t_var *info, t_item *item, int sector_id);
 int						enemys_in_sector(t_var *info, t_player *player);
@@ -434,7 +446,7 @@ void					ft_exit(t_var *info, t_render *render);
 void					free_info(t_var *info);
 void					free_player(t_player *player);
 void					free_map(t_map *map);
-void					free_itab(t_itab	*itab, t_render *render);
+void					free_itab(t_itab *itab, t_render *render);
 void					free_ray(t_ray *ray);
 void					free_wall(t_wall *wall);
 void					free_item(t_item *item);
@@ -471,8 +483,12 @@ double					scalar(double x1, double y1, double x2, double y2);
 void					init_cast(t_var *info, t_render *render, t_ray *ray);
 void					init_nb_sec(t_sector *sector, t_render *render);
 int						may_weapon(t_item *item);
-int					draw_i2_help(t_var *info, t_render *render,
+int						draw_i2_help(t_var *info, t_render *render,
 							t_i_tool *tool, int k);
+int						mouse_test(t_var *info);
+void					rotate(t_var *info);
+void					mouse_cap(t_var *info, SDL_Event event);
+void					mouser(t_var *info);
 void					hp_hud_help(t_var *info, char *nb,
 							SDL_Rect pos, SDL_Color color);
 t_item					*go_to_item(t_item *item, char c);

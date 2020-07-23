@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/17 13:14:26 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/23 16:02:34 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,11 @@ int				info_map(char *str, t_map *map)
 	if (!(the_map = recup_map(str)))
 		return (0);
 	if (check_map(the_map) == 0)
-	{
-		ft_strdel(&the_map);
-		return (0);
-	}
+		return (load_exit(the_map));
 	if (the_map[map->i] == 'm')
 	{
 		if (rec_map(the_map, map) == 0)
-		{
-			ft_strdel(&the_map);
-			return (0);
-		}
+			return (load_exit(the_map));
 	}
 	else
 		return (0);

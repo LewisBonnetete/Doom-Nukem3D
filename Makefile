@@ -6,13 +6,13 @@
 #    By: trabut <trabut@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/17 14:38:20 by trabut           ###   ########.fr        #
+#    Updated: 2020/07/23 16:02:01 by trabut           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = doom-nukem
 
-FLAGS       = -O3 -Wextra -Werror -W -Wall
+FLAGS       = -O2 -Wextra -Werror -W -Wall
 
 SDL			= -lpthread -F ./frameworks/ -framework SDL2 -framework SDL2_image -framework SDL2_ttf
 SDL_HEADER	= -I ./frameworks/SDL2.framework/Headers -I ./frameworks/SDL2_image.framework/Headers -I ./frameworks/SDL2_ttf.framework/Headers
@@ -44,6 +44,7 @@ SRC =	main.c\
 		tools.c\
 		tools2.c\
 		load_map3.c\
+		load_map4.c\
 		valid_wall.c\
 		polygon_checks.c\
 		editer_tools.c\

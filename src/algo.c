@@ -6,66 +6,31 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/22 19:19:13 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/23 15:02:41 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
-static	void	draw_i_calc(t_render *render)
+void			ft_put_weapon(t_var *info, t_render *render)
 {
-	int i;
+	double		x;
+	double		y;
+	Uint32		color;
 
-	if (!render->itab)
-		return ;
-	if (render->nb_item_to_draw <= 0)
-		return ;
-	i = -1;
-	while (++i < render->nb_item_to_draw + 1)
-		if (render->itab[i].name == NULL)
-		{
-			render->itab[i].dist = -1;
-			render->itab[i].used = 1;
-		}
-}
-
-static	int		draw_i_iter(t_render *render, int k)
-{
-	int i;
-	int tmp;
-
-	tmp = k;
-	i = -1;
-	while (++i < render->nb_item_to_draw)
+	x = 0;
+	while (x < render->tab_sdl[0]->w)
 	{
-		if (render->itab[k].dist < render->itab[i].dist
-		&& render->itab[i].used == 0)
-			tmp = i;
-	}
-	return (tmp);
-}
-
-void			draw_item(t_render *render, t_var *info)
-{
-	int		j;
-	int		k;
-
-	draw_i_calc(render);
-	j = -1;
-	while (++j < render->nb_item_to_draw)
-	{
-		k = 0;
-		while (render->itab[k].used != 0)
-			++k;
-		if (!render->itab[k].name)
-			break ;
-		k = draw_i_iter(render, k);
-		if (render->itab[k].used != 1)
+		y = 0;
+		while (y < render->tab_sdl[0]->h)
 		{
-			put_item(k, render->item_0, render, info);
-			render->itab[k].used = 1;
-			render->itab[k].dist = -1;
+			color = get_pixel(render->tab_sdl[0], y, x);
+			if (color != 0)
+				put_pixel(color, (int)x + WINDOW_W / 2 - 45,
+				WINDOW_H + (int)y - 125 + info->d_gun, info->image);
+			y++;
 		}
+		x++;
 	}
 }
 
@@ -87,7 +52,7 @@ static	int		ray_iter(t_render *render, t_var *info)
 	return (1);
 }
 
-void			free_itab(t_itab	*itab, t_render *render)
+void			free_itab(t_itab *itab, t_render *render)
 {
 	int i;
 
@@ -106,9 +71,7 @@ int				raycasting(t_var *info, t_render *render)
 	int		i;
 
 	init_cast(info, render, &ray);
-	if (tex_floor_ciel(info, render) == 0)
-		return (0);
-	if (render->nbr_items > 100)
+	if (tex_floor_ciel(info, render) == 0 || render->nbr_items > 100)
 		return (0);
 	if (render->nbr_items > 0)
 	{

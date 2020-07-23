@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/22 19:03:53 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/23 17:03:59 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void			free_text(SDL_Surface *text)
 
 void			free_render(t_render *render)
 {
-	int i;
-	t_item *item;
+	int		i;
+	t_item	*item;
 
 	i = -1;
 	while (++i < NB_TEXT + 1)

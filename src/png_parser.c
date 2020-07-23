@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   png_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/16 17:17:38 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/23 17:01:04 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ int			read_core_text(t_render *renderer)
 {
 	int		fd;
 	int		i;
-	char	*line;
 
 	if ((fd = open("core", O_RDWR)) == -1)
 		return (0);
@@ -126,22 +125,8 @@ int			read_core_text(t_render *renderer)
 	system("clear");
 	while (++i < 12)
 	{
-		ft_putendl("Loading textures...");
-		ft_putnbr(i + 1);
-		ft_putendl("/12");
-		get_next_line(fd, &line);
-		if (i < 4)
-		{
-			if (!(renderer->tab_sdl[i] = read_text(line)))
-				return (0);
-		}
-		else
-		{
-			if (!(renderer->tab_sdl_item[i - 4] = read_text(line)))
-				return (0);
-		}
-		free(line);
-		system("clear");
+		if (!(png_parser_iter(renderer, i, fd)))
+			return (0);
 	}
 	ft_putendl("Textures loaded");
 	ft_putendl("Game launched");

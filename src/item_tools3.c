@@ -6,11 +6,12 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/17 14:50:33 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/23 15:50:38 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
+
 int			check_sec(t_sector *sec, t_point a, t_point b,
 		t_render *render)
 {
@@ -49,7 +50,7 @@ int			draw_i2_help(t_var *info, t_render *render,
 	return (check_sec(render->sec_0, a, b, render));
 }
 
-void			i_color_set(t_var *info, t_render *render,
+void		i_color_set(t_var *info, t_render *render,
 					t_i_tool *tool, t_item *item)
 {
 	if (tool->color != (Uint32) - 6815608)
@@ -59,5 +60,14 @@ void			i_color_set(t_var *info, t_render *render,
 			info->player->no_scope = item->id;
 		put_pixel(darken_wall(info, tool->color, render, tool->y),
 		render->x, tool->y, info->image);
+	}
+}
+
+void		you_win(t_var *info, t_render *render, t_i_tool *tool)
+{
+	if (render->itab[tool->k].text_id == 7)
+	{
+		ft_putendl("SUCCESS!");
+		ft_exit(info, render);
 	}
 }

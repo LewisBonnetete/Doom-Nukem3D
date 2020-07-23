@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 16:24:51 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/17 15:25:55 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/23 15:36:15 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,45 @@ void	get_speed(t_var *info)
 	}
 }
 
-// void	mouser(t_var *info)
-// {
-// 	int y;
+void	mouser(t_var *info)
+{
+	int y;
 
-// 	SDL_GetRelativeMouseState(&(info->x_dec), &y);
-// 	info->y_dec += y;
-// 	if (info->y_dec > WINDOW_H + 500)
-// 		info->y_dec = WINDOW_H + 500;
-// 	else if (info->y_dec < -500)
-// 		info->y_dec = -500;
-// }
+	SDL_GetRelativeMouseState(&(info->x_dec), &y);
+}
 
-// void	rotate(t_var *info)
-// {
-// 	if (info->mouse_in)
-// 		mouser(info);
-// 	if (info->x_dec > 0)
-// 	{
-// 		rot_right(info);
-// 		info->x_dec = 0;
-// 	}
-// 	else if (info->x_dec < 0)
-// 	{
-// 		rot_left(info);
-// 		info->x_dec = 0;
-// 	}
-// }
+void	rotate(t_var *info)
+{
+	if (info->mouse_in)
+		mouser(info);
+	if (info->x_dec > 0)
+	{
+		rot_left(info);
+		info->x_dec = 0;
+	}
+	else if (info->x_dec < 0)
+	{
+		rot_right(info);
+		info->x_dec = 0;
+	}
+}
+
+void	mouse_cap(t_var *info, SDL_Event event)
+{
+	if (event.key.keysym.sym == SDLK_m && event.key.state == SDL_PRESSED)
+	{
+		if (info->mouse_in == 0)
+			info->mouse_in = 1;
+		else
+			info->mouse_in = 0;
+	}
+}
+
+int		mouse_test(t_var *info)
+{
+	if (info->mouse_in)
+		SDL_SetRelativeMouseMode(SDL_TRUE);
+	else
+		SDL_SetRelativeMouseMode(SDL_FALSE);
+	return (1);
+}

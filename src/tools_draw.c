@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/22 18:58:10 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/23 17:04:17 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			put_pixel(Uint32 color, int x, int y, SDL_Surface *image)
 		pixels[y * image->w + x] = color;
 }
 
-void 			crosshair(t_var *info)
+void			crosshair(t_var *info)
 {
 	t_line		line;
 	Uint32		color;
