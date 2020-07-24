@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_creator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/10 13:28:46 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/23 17:13:34 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ int			create_sector(t_var *info, t_map *map)
 	if (sector)
 	{
 		sector = get_to_last_sector(map->sectors);
+		if (sector->sector_id >= 10)
+		{
+			ft_putendl("map cannot have more than 10 sectors");
+			return (0);
+		}
 		if (!(sector->next_sector = (t_sector*)malloc(sizeof(t_sector)))
 		|| (!init_new_sector(info, sector, map)))
 			return (exit_edit(info, map));
