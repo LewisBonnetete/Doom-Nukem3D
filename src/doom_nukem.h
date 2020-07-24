@@ -378,7 +378,7 @@ struct					s_w_draw
 
 void					ft_put_weapon(t_var *info, t_render *render);
 void					draw_i_color(t_var *info, t_render *render,
-							t_i_tool *tool, t_item *item);
+						t_i_tool *tool, t_item *item, int k);
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 int						init_win3(t_var *info);
@@ -431,7 +431,7 @@ int						intersect(t_ray *ray, t_wall *wall);
 void					init_floor(t_var *info, t_f_tool *tool);
 int						darken_floor(t_f_tool *tool, t_render *render);
 void					i_color_set(t_var *info, t_render *render,
-							t_i_tool *tool, t_item *item);
+							t_i_tool *tool, t_item *item, int k);
 int						darken_wall(t_var *info, Uint32 color,
 							t_render *render, int i);
 int						rgb_calc(int r, int g, int b);

@@ -111,7 +111,7 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 	dest->x = src->x;
 	dest->y = src->y;
 	dest->cap = 0;
-	dest->id = i++;
+	dest->id = i;
 	render->nbr_items++;
 	if (item_reader(dest))
 	{
@@ -123,7 +123,7 @@ t_item	*init_item(t_render *render, t_item *src, int i)
 		return (dest);
 	}
 	if (src->next_item)
-		dest->next_item = init_item(render, src->next_item, i);
+		dest->next_item = init_item(render, src->next_item, i + 1);
 	else
 		dest->next_item = NULL;
 	return (dest);

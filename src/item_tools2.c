@@ -13,17 +13,17 @@
 #include "doom_nukem.h"
 
 void			draw_i_color(t_var *info, t_render *render,
-			t_i_tool *tool, t_item *item)
+			t_i_tool *tool, t_item *item, int k)
 {
 	if (tool->color != 0)
 	{
 		if (item->name[0] == 's')
-			i_color_set(info, render, tool, item);
+			i_color_set(info, render, tool, item, k);
 		else if (item->name[0] == 'c')
 		{
 			if (render->x == WINDOW_W / 2 &&
 				tool->y == WINDOW_H / 2 && item->pv > 0)
-				info->player->no_scope = item->id;
+				info->player->no_scope = render->itab[k].id;
 			put_pixel(darken_wall(info, tool->color, render, tool->y),
 				render->x, tool->y, info->image);
 		}

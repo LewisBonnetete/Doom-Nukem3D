@@ -54,11 +54,11 @@ void			free_render(t_render *render)
 	t_item	*item;
 
 	i = -1;
-	while (++i < NB_TEXT + 1)
+	while (++i < NB_TEXT)
 		if (render->tab_sdl[i])
 			free_text(render->tab_sdl[i]);
 	i = -1;
-	while (++i < NB_TEXT_I + 1)
+	while (++i < NB_TEXT_I)
 		if (render->tab_sdl_item[i])
 			free_text(render->tab_sdl_item[i]);
 	free_ren_help(render);

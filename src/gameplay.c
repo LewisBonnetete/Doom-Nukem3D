@@ -23,7 +23,6 @@ void	hit_ennemy(t_var *info)
 		{
 			hitmarker(info);
 			item->pv -= 5;
-			//printf("id = %i\n",item->id);
 		}
 		item = item->next_item;
 	}
