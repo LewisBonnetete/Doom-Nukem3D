@@ -37,7 +37,6 @@ int		init_main(int ac, char **av, t_var *info, t_player *player)
 	ft_init_pour_linstant(info);
 	init_player(player, info->map);
 	info->player = player;
-	printf("player\n");
 	return (1);
 }
 
