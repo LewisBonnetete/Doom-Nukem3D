@@ -51,13 +51,13 @@ int			draw_i2_help(t_var *info, t_render *render,
 }
 
 void		i_color_set(t_var *info, t_render *render,
-					t_i_tool *tool, t_item *item)
+				t_i_tool *tool, t_item *item, int k)
 {
+	if (render->x == WINDOW_W / 2 && tool->y ==
+		WINDOW_H / 2 && item->pv > 0)
+		info->player->no_scope = render->itab[k].id;
 	if (tool->color != (Uint32) - 6815608)
 	{
-		if (render->x == WINDOW_W / 2 && tool->y ==
-			WINDOW_H / 2 && item->pv > 0)
-			info->player->no_scope = item->id;
 		put_pixel(darken_wall(info, tool->color, render, tool->y),
 		render->x, tool->y, info->image);
 	}

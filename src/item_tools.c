@@ -115,7 +115,7 @@ void			draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 				(int)tool.ty, (int)render->tx);
 				tool.ty += render->step_height;
 				render->wall_dist = render->distance;
-				draw_i_color(info, render, &tool, item);
+				draw_i_color(info, render, &tool, item, k);
 				--tool.y;
 			}
 			render->tx += render->step_width;
