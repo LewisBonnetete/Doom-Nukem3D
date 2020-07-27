@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/27 15:13:04 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:02:28 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,6 @@ void		init_floor(t_var *info, t_f_tool *tool)
 	tool->diry1 = info->player->dy + info->player->planey;
 	tool->posz = 0.5 * (WINDOW_H - info->y_dec);
 	tool->p = tool->i - (WINDOW_H / 2 - info->y_dec);
-	tool->dist = tool->posz / tool->p;
-	tool->stepx = tool->dist * (tool->dirx1 - tool->dirx0) / WINDOW_W;
-	tool->stepy = tool->dist * (tool->diry1 - tool->diry0) / WINDOW_W;
-	tool->floorx = info->player->posx + tool->dist * tool->dirx0;
-	tool->floory = info->player->posy + tool->dist * tool->diry0;
-	tool->j = -1;
-}
-
-void		init_ceilling(t_var *info, t_f_tool *tool)
-{
-	tool->dirx0 = info->player->dx - info->player->planex;
-	tool->diry0 = info->player->dy - info->player->planey;
-	tool->dirx1 = info->player->dx + info->player->planex;
-	tool->diry1 = info->player->dy + info->player->planey;
-	tool->posz = 0.5 * (WINDOW_H + info->y_dec);
-	tool->p = tool->i - (WINDOW_H / 2 + info->y_dec);
 	tool->dist = tool->posz / tool->p;
 	tool->stepx = tool->dist * (tool->dirx1 - tool->dirx0) / WINDOW_W;
 	tool->stepy = tool->dist * (tool->diry1 - tool->diry0) / WINDOW_W;

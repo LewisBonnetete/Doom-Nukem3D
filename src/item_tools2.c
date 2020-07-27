@@ -6,24 +6,24 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/23 15:43:03 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 18:15:58 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
 
 void			draw_i_color(t_var *info, t_render *render,
-			t_i_tool *tool, t_item *item, int k)
+			t_i_tool *tool, t_item *item)
 {
 	if (tool->color != 0)
 	{
 		if (item->name[0] == 's')
-			i_color_set(info, render, tool, item, k);
+			i_color_set(info, render, tool, item);
 		else if (item->name[0] == 'c')
 		{
 			if (render->x == WINDOW_W / 2 &&
 				tool->y == WINDOW_H / 2 && item->pv > 0)
-				info->player->no_scope = render->itab[k].id;
+				info->player->no_scope = render->itab[tool->k].id;
 			put_pixel(darken_wall(info, tool->color, render, tool->y),
 				render->x, tool->y, info->image);
 		}

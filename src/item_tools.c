@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   item_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/27 16:35:01 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:21:36 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,19 +108,10 @@ void			draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 		{
 			while (++tool.i <= render->height_item)
 			{
-				if ((render->itab[k].name[0] == 'c' || render->itab[k].name[0] == 's') &&  render->itab[k].pv <= 5)
-				{
-					tool.pls = 100 / render->itab[k].dist;
-					tool.color = get_pixel(render->tab_sdl_item[render->itab[k].text_id],
-					(int)render->tx, render->tab_sdl_item[render->itab[k].text_id]->h - (int)tool.ty);
-				
-				}
-				else
-					tool.color = get_pixel(render->tab_sdl_item[render->itab[k].text_id],
-					render->tab_sdl_item[render->itab[k].text_id]->h - (int)tool.ty, (int)render->tx);
+				pls_ennemy(render, &tool, k);
 				tool.ty += render->step_height;
 				render->wall_dist = render->distance;
-				draw_i_color(info, render, &tool, item, k);
+				draw_i_color(info, render, &tool, item);
 				--tool.y;
 			}
 			render->tx += render->step_width;

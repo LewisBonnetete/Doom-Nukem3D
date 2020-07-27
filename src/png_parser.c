@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   png_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/27 15:59:14 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 17:48:30 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,16 +130,13 @@ int			read_core_text(t_render *renderer)
 	}
 	ft_putendl("Textures loaded");
 	ft_putendl("Game launched");
-	ft_putendl("");
-	ft_putendl("WASD to move");
-	ft_putendl("Arrows to look around");
+	ft_putendl("Arrows to look around\nWASD to move");
 	ft_putendl("Mouse or Space to shoot");
-	ft_putendl("Shift to sprint");
+	ft_putendl("Shift to sprint\nM to set mouse in/out");
 	ft_putendl("V to switch between weapons");
-	ft_putendl("M to set mouse in/out");
-	ft_putendl("P to enable rain");
-	ft_putendl("Esc to quit");
+	ft_putendl("P to enable rain\nEsc to quit");
+	ft_putstr("Try to reach the portal ");
+	ft_putstr("to escape the maze before they take you!");
 	ft_putendl("");
-	ft_putendl("Try to reach the portal to escape the maze before they take you!");
 	return (1);
 }

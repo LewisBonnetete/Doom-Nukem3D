@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/27 16:29:44 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:21:02 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ struct					s_render
 	int					nb_item_to_draw;
 	double				tx;
 	int					k;
+	int					item_k;
 };
 
 struct					s_player
@@ -273,7 +274,7 @@ struct					s_var
 	int					d_gun;
 	int					d_gunb;
 	int					clock;
-	int 				rain;
+	int					rain;
 };
 
 struct					s_itab
@@ -381,7 +382,7 @@ struct					s_w_draw
 
 void					ft_put_weapon(t_var *info, t_render *render);
 void					draw_i_color(t_var *info, t_render *render,
-						t_i_tool *tool, t_item *item, int k);
+						t_i_tool *tool, t_item *item);
 int						init_win1(t_var *info);
 int						init_win2(t_var *info);
 int						init_win3(t_var *info);
@@ -434,11 +435,12 @@ int						intersect(t_ray *ray, t_wall *wall);
 void					init_floor(t_var *info, t_f_tool *tool);
 int						darken_floor(t_f_tool *tool, t_render *render);
 void					i_color_set(t_var *info, t_render *render,
-							t_i_tool *tool, t_item *item, int k);
+							t_i_tool *tool, t_item *item);
 int						darken_wall(t_var *info, Uint32 color,
 							t_render *render, int i);
 int						rgb_calc(int r, int g, int b);
 int						rain_gen(t_var *info);
+void					pls_ennemy(t_render *render, t_i_tool *tool, int k);
 void					update_render(t_var *info, t_render *render);
 void					put_item(int k, t_item *src,
 							t_render *render, t_var *info);
@@ -559,6 +561,7 @@ int						pnpoly_float(int nbr_walls, t_wall *walls,
 int						player_sec(t_sector *sector, t_var *info);
 void					init_nb_sec(t_sector *sector, t_render *render);
 int						tex_floor_ciel(t_var *info, t_render *render);
+void					init_ceilling(t_var *info, t_f_tool *tool);
 t_render				*cpy_render(t_render *render);
 int						gameplay(t_var *info);
 int						hit_box(t_var *info, t_render *render);

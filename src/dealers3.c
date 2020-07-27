@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   dealers3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/27 15:36:18 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 18:00:04 by trabut           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "doom_nukem.h"
+
+void	get_move_y(SDL_Event event, t_input *input)
+{
+	if (event.key.keysym.sym == SDLK_UP)
+	{
+		if (event.key.state == SDL_PRESSED)
+			input->headup = 1;
+		else
+			input->headup = 0;
+	}
+	if (event.key.keysym.sym == SDLK_DOWN)
+	{
+		if (event.key.state == SDL_PRESSED)
+			input->headdown = 1;
+		else
+			input->headdown = 0;
+	}
+}
 
 void	get_move1(SDL_Event event, t_input *input)
 {
@@ -36,20 +54,7 @@ void	get_move1(SDL_Event event, t_input *input)
 		else
 			input->down = 0;
 	}
-	if (event.key.keysym.sym == SDLK_UP)
-	{
-		if (event.key.state == SDL_PRESSED)
-			input->headup = 1;
-		else
-			input->headup = 0;
-	}
-	if (event.key.keysym.sym == SDLK_DOWN)
-	{
-		if (event.key.state == SDL_PRESSED)
-			input->headdown = 1;
-		else
-			input->headdown = 0;
-	}
+	get_move_y(event, input);
 }
 
 void	get_move2(SDL_Event event, t_input *input)
