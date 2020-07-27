@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/23 16:50:08 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 13:15:53 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int						main_check(int ac, char **av, t_var *info)
 		ft_putendl("./doom-nukem [map_name]");
 		return (0);
 	}
+	system("clear");
 	str = ft_strdup(av[1]);
 	if (info_map(str, info->map) == 0)
 	{
@@ -77,7 +78,6 @@ int						main(int ac, char **av)
 	t_player	player;
 
 	info.map = &map;
-	system("clear");
 	if (init_main(ac, av, &info, &player) == 0)
 		return (0);
 	if (!init_render(&info, &render, info.player->sector_id))
