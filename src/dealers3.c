@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dealers3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/23 16:43:36 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 15:36:18 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	get_move1(SDL_Event event, t_input *input)
 {
-	if (event.key.keysym.sym == SDLK_w || event.key.keysym.sym == SDLK_UP
+	if (event.key.keysym.sym == SDLK_w
 	|| event.key.keysym.sym == SDLK_z)
 	{
 		if (event.key.state == SDL_PRESSED)
@@ -29,12 +29,26 @@ void	get_move1(SDL_Event event, t_input *input)
 		else
 			input->straf_left = 0;
 	}
-	if (event.key.keysym.sym == SDLK_s || event.key.keysym.sym == SDLK_DOWN)
+	if (event.key.keysym.sym == SDLK_s)
 	{
 		if (event.key.state == SDL_PRESSED)
 			input->down = 1;
 		else
 			input->down = 0;
+	}
+	if (event.key.keysym.sym == SDLK_UP)
+	{
+		if (event.key.state == SDL_PRESSED)
+			input->headup = 1;
+		else
+			input->headup = 0;
+	}
+	if (event.key.keysym.sym == SDLK_DOWN)
+	{
+		if (event.key.state == SDL_PRESSED)
+			input->headdown = 1;
+		else
+			input->headdown = 0;
 	}
 }
 
@@ -65,6 +79,10 @@ void	get_move2(SDL_Event event, t_input *input)
 
 int		move(t_var *info, t_input input)
 {
+	if (input.headup && info->y_dec <= 50)
+		info->y_dec += 5;
+	if (input.headdown && info->y_dec >= -50)
+		info->y_dec -= 5;
 	if (input.up)
 	{
 		if (hitbox(info, info->render, 0))

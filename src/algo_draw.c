@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/22 18:57:38 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 15:29:02 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ int				tex_floor(t_var *info, t_render *render)
 {
 	t_f_tool tool;
 
-	tool.i = WINDOW_H / 2 - 1;
+	tool.i = WINDOW_H / 2 - 1 - info->y_dec;
 	tool.j = -1;
 	tool.k = -1;
-	if (render->tab_sdl[render->cid])
+	if (render->tab_sdl[render->fid])
 	{
 		while (tool.i++ <= WINDOW_H)
 		{
 			init_floor(info, &tool);
 			while (tool.j++ <= WINDOW_W)
-				cieling_tool(&tool, info, render);
+				floor_tool(&tool, info, render);
 		}
 	}
 	else
@@ -64,16 +64,16 @@ int				tex_floor_ciel(t_var *info, t_render *render)
 {
 	t_f_tool tool;
 
-	tool.i = WINDOW_H / 2 - 1;
+	tool.i = WINDOW_H / 2 - 1 + info->y_dec;
 	tool.j = -1;
 	tool.k = -1;
-	if (render->tab_sdl[render->fid])
+	if (render->tab_sdl[render->cid])
 	{
 		while (tool.i++ <= WINDOW_H)
 		{
-			init_floor(info, &tool);
+			init_ceilling(info, &tool);
 			while (tool.j++ <= WINDOW_W)
-				floor_tool(&tool, info, render);
+				cieling_tool(&tool, info, render);
 		}
 	}
 	else

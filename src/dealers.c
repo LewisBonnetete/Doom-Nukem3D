@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dealers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/23 15:36:30 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 15:42:17 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	sprint(t_var *info, SDL_Event event)
 		else
 			info->player->sprint = 0;
 	}
-	if (event.key.keysym.sym == SDLK_SPACE && event.key.state == SDL_PRESSED)
+	if ((event.key.keysym.sym == SDLK_SPACE && event.key.state == SDL_PRESSED) || (event.type == SDL_MOUSEBUTTONDOWN))
 		shoot_ennemy(info);
 }
 

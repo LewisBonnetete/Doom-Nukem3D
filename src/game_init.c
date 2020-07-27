@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/23 15:37:45 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 15:44:16 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void			ft_init_pour_linstant(t_var *info)
 {
 	info->frametime = 0.03;
-	info->rotspeed = info->frametime * 1.5;
+	info->rotspeed = info->frametime * 1;
 	info->d_gun = 0;
 	info->d_gunb = 0;
 	info->clock = 0;

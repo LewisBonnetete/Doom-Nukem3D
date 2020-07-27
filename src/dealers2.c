@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dealers2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 16:24:51 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/23 15:36:15 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 15:48:46 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,16 @@ void	mouser(t_var *info)
 	int y;
 
 	SDL_GetRelativeMouseState(&(info->x_dec), &y);
+	info->y_dec += -y;
+	if (info->y_dec > 50)
+		info->y_dec = 50;
+	else if (info->y_dec < -50)
+		info->y_dec = -50;
 }
 
 void	rotate(t_var *info)
 {
-	if (info->mouse_in)
+	if (!info->mouse_in)
 		mouser(info);
 	if (info->x_dec > 0)
 	{
@@ -64,7 +69,7 @@ void	mouse_cap(t_var *info, SDL_Event event)
 
 int		mouse_test(t_var *info)
 {
-	if (info->mouse_in)
+	if (!info->mouse_in)
 		SDL_SetRelativeMouseMode(SDL_TRUE);
 	else
 		SDL_SetRelativeMouseMode(SDL_FALSE);

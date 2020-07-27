@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/23 17:00:28 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 15:11:58 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,6 +317,8 @@ struct					s_input
 	double				diag_x;
 	double				diag_y;
 	int					diag;
+	int					headup;
+	int					headdown;
 };
 
 struct					s_line
@@ -566,5 +568,6 @@ int						read_core_text(t_render *renderer);
 void					hit_ennemy(t_var *info);
 int						draw_line_condition(t_line *line);
 int						draw_line(t_var *info, t_line *line, Uint32 color);
+void					init_ceilling(t_var *info, t_f_tool *tool);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   item_tools3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/23 15:50:38 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 15:33:55 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			draw_i2_help(t_var *info, t_render *render,
 	b.x = render->itab[k].item_x;
 	b.y = render->itab[k].item_y;
 	tool->ty = 0;
-	tool->y = WINDOW_H / 2 + WINDOW_H / 2 / render->distance;
+	tool->y = WINDOW_H / 2 + WINDOW_H / 2 / render->distance + info->y_dec;
 	if (render->itab[k].name[0] == 'b')
 		tool->y += WINDOW_H / 4 / render->distance;
 	tool->i = -1;
