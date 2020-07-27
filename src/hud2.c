@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hud2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/22 18:38:12 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 14:02:39 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,12 @@ void		hud(t_var *info, t_player *player, t_map *map)
 	color.r = 255;
 	color.g = 255;
 	color.b = 255;
-	hp(info, player, color);
-	name(info, map, color);
-	inventory(info, color);
-	weapon(info, player, color);
-	munitions(info, color);
+	if (info->font)
+	{
+		hp(info, player, color);
+		name(info, map, color);
+		inventory(info, color);
+		weapon(info, player, color);
+		munitions(info, color);
+	}
 }
