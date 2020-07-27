@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 16:24:51 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/27 15:48:46 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 15:57:33 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ void	mouse_cap(t_var *info, SDL_Event event)
 			info->mouse_in = 1;
 		else
 			info->mouse_in = 0;
+	}
+	if (event.key.keysym.sym == SDLK_p && event.key.state == SDL_PRESSED)
+	{
+		if (info->rain == 0)
+			info->rain = 1;
+		else
+			info->rain = 0;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/27 15:52:07 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 15:59:14 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,8 @@ int			read_core_text(t_render *renderer)
 	ft_putendl("Mouse or Space to shoot");
 	ft_putendl("Shift to sprint");
 	ft_putendl("V to switch between weapons");
-	ft_putendl("M set mouse in/out");
+	ft_putendl("M to set mouse in/out");
+	ft_putendl("P to enable rain");
 	ft_putendl("Esc to quit");
 	ft_putendl("");
 	ft_putendl("Try to reach the portal to escape the maze before they take you!");

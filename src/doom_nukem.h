@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/27 15:11:58 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 15:56:26 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <fcntl.h>
 # include <math.h>
 # include "../libft/libft.h"
-# define RAIN				0
 # define PARSE				0
 # define WINDOW_W			720
 # define WINDOW_H			480
@@ -273,6 +272,7 @@ struct					s_var
 	int					d_gun;
 	int					d_gunb;
 	int					clock;
+	int 				rain;
 };
 
 struct					s_itab

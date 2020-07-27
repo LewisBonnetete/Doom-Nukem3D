@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rain.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 17:04:28 by lewis             #+#    #+#             */
-/*   Updated: 2020/07/09 14:47:02 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 16:03:49 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int				rain_gen(t_var *info)
 	t_point		p;
 
 	i = 0;
-	tmp = rand() % 20;
-	while (i++ < tmp && RAIN)
+	tmp = rand() % 2;
+	while (i++ < tmp && info->rain)
 	{
 		p.x = rand() % (WINDOW_W - 20) + 10;
 		p.y = rand() % (WINDOW_H - 10);
