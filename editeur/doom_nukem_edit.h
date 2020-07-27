@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/16 16:03:02 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:40:40 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "../libft/libft.h"
 # define WINDOW_W			1280
 # define WINDOW_H			720
-# define NB_THREADS_MAX		12
 # define BLACK				0x23272a
 # define WHITE				0xFFFFFF
 # define BLUE				0x7289DA

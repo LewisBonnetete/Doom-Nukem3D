@@ -6,13 +6,13 @@
 #    By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/18 15:34:09 by trabut            #+#    #+#              #
-#    Updated: 2020/07/08 15:12:41 by lbonnete         ###   ########.fr        #
+#    Updated: 2020/07/27 13:40:22 by lbonnete         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = editeur
 
-FLAGS       = -Wall -Wextra -Werror -O3
+FLAGS		= -Wall -Wextra -Werror -O3
 
 SDL			= -lpthread -F ../frameworks/ -framework SDL2 -framework SDL2_image -framework SDL2_ttf 
 SDL_HEADER	= -I ../frameworks/SDL2.framework/Headers -I ../frameworks/SDL2_image.framework/Headers -I ../frameworks/SDL2_ttf.framework/Headers
@@ -69,7 +69,7 @@ SRC =	main.c\
 		comparator.c\
 		end.c
 
-INC = doom-nukem_edit.h
+INC = doom_nukem_edit.h
 OBJ	= $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
 
 $(shell mkdir -p $(OBJ_DIR))

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/27 13:15:53 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:37:26 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int						main_check(int ac, char **av, t_var *info)
 	if (ac != 2)
 	{
 		ft_putendl("./doom-nukem [map_name]");
+		ft_putendl("gigaga || 002");
 		return (0);
 	}
 	system("clear");
