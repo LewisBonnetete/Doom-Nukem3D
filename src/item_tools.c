@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:51:41 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/27 15:32:08 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 16:35:01 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static	void	init_tools(t_render *render, t_var *info, int k, t_i_tool *tool)
 	tool->w.y = render->itab[k].item_y;
 	render->distance = calc_dist(tool->p, tool->w);
 	tool->k = k;
+	tool->pls = 0;
 }
 
 static	void	draw_item_if(t_var *info, t_render *render,
@@ -98,21 +99,25 @@ static	void	item_checking(t_var *info,
 void			draw_item_2(t_render *render, t_var *info, int k, t_item *item)
 {
 	t_i_tool	tool;
-	int			i;
 
 	init_tools(render, info, k, &tool);
 	item_checking(info, render, &tool, item);
 	while (++render->x <= render->widht_item + render->p_0)
 	{
-		i = draw_i2_help(info, render, &tool, k);
-		if (i == 0)
+		if (!draw_i2_help(info, render, &tool, k))
 		{
 			while (++tool.i <= render->height_item)
 			{
-				tool.color =
-				get_pixel(render->tab_sdl_item[render->itab[k].text_id],
-				render->tab_sdl_item[render->itab[k].text_id]->h -
-				(int)tool.ty, (int)render->tx);
+				if ((render->itab[k].name[0] == 'c' || render->itab[k].name[0] == 's') &&  render->itab[k].pv <= 5)
+				{
+					tool.pls = 100 / render->itab[k].dist;
+					tool.color = get_pixel(render->tab_sdl_item[render->itab[k].text_id],
+					(int)render->tx, render->tab_sdl_item[render->itab[k].text_id]->h - (int)tool.ty);
+				
+				}
+				else
+					tool.color = get_pixel(render->tab_sdl_item[render->itab[k].text_id],
+					render->tab_sdl_item[render->itab[k].text_id]->h - (int)tool.ty, (int)render->tx);
 				tool.ty += render->step_height;
 				render->wall_dist = render->distance;
 				draw_i_color(info, render, &tool, item, k);

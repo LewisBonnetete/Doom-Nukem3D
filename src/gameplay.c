@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameplay.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/23 15:38:48 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/27 16:39:07 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ int		enemys_in_sector(t_var *info, t_player *player)
 	while (item)
 	{
 		if (item->name[0] == 'c' && same_sector(info, item, player->sector_id)
-			&& item->cap != 3)
+			&& item->cap != 3 && item->pv > 5)
 			i += 2;
 		if (item->name[0] == 's' && same_sector(info, item, player->sector_id)
-			&& item->cap != 3)
+			&& item->cap != 3 && item->pv > 5)
 			i += 1;
 		item = item->next_item;
 	}

@@ -6,7 +6,7 @@
 /*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/27 15:56:26 by lbonnete         ###   ########.fr       */
+/*   Updated: 2020/07/27 16:29:44 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ struct					s_i_tool
 	Uint32				color;
 	t_item				*weapon;
 	int					k;
+	int					pls;
 };
 
 struct					s_wall
