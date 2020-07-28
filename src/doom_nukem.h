@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doom_nukem.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lbonnete <lbonnete@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 14:27:51 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/27 18:21:02 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/28 14:26:53 by lbonnete         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define GRAY				0x99AAB5
 # define GREEN				0x32cd32
 # define WHITE				0xFFFFFF
-# define WALL_H				238
+# define WALL_H				240
 # define DECALLAGE			0
 # define BLACK				0x000000
 # define SKY_BLUE			0x00BFFF
