@@ -6,7 +6,7 @@
 /*   By: trabut <trabut@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 14:47:46 by lbonnete          #+#    #+#             */
-/*   Updated: 2020/07/27 18:22:44 by trabut           ###   ########.fr       */
+/*   Updated: 2020/07/28 15:16:45 by atyczyns         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			check_sec(t_sector *sec, t_point a, t_point b,
 		render->wall = &sec->walls[render->n];
 		if (render->wall->is_portal != 1
 		&& intersect(render->ray, render->wall) == 1)
-			if (calc_dist(a, b) > calc_dist(a, render->wall->a))
+			if (xy_in_ab(render->ray->x2, render->ray->y2, a, b) == 1)
 				return (1);
 	}
 	if (sec->next_sector)
